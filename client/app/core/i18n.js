@@ -28,7 +28,7 @@
             suffix: '.json'
         });
 
-        $translateProvider.preferredLanguage('en');
+        $translateProvider.preferredLanguage('zh');
         $translateProvider.useSanitizeValueStrategy(null);
     }
 
@@ -62,4 +62,4 @@
         };
     }
 
-})(); 
+})();

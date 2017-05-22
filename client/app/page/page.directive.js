@@ -35,6 +35,8 @@
                         return $element.addClass('body-wide body-auth');
                     case '/page/lock-screen':
                         return $element.addClass('body-wide body-lock');
+                    case '/water':
+                        return $element.addClass('body-wide body-water');
                 }
             };
 
@@ -46,9 +48,9 @@
                 }
                 return addBg($location.path());
             });
-        }        
+        }
     }
- 
-})(); 
+
+})();
 
 

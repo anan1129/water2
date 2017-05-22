@@ -1,0 +1,57 @@
+<div ng-controller="AddStaffCtrl">
+    <div class="page page-form-ele">
+        <div class="row ui-section">
+            <div class="col-md-12">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <div layout="column" ng-cloak class="md-inline-form inputdemoBasicUsage">
+                            <div layout-padding>
+                                <form name="addGroup" class="form-horizontal">
+                                    <h2 class="section-header">添加人员:</h2>
+                                    <div class="form-group">
+                                        <label for="label-name" class="col-sm-2">人员姓名:</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control" ng-model="formObj.name" id="label-name">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2">所属组织:</label>
+                                        <div class="col-sm-5">
+                                            <select class="form-control" name="" ng-model="formObj.group1" >
+                                                <option value="0">
+                                                    以及组织
+                                                </option>
+                                            </select>
+                                        </div>
+                                        <div class="col-sm-5">
+                                            <select class="form-control" name="" ng-model="formObj.group2">
+                                                <option value="0">
+                                                    二级组织
+                                                </option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label  class="col-sm-2">员工级别:</label>
+                                        <div class="col-sm-10">
+                                            <md-checkbox ng-model="formObj.cb1" aria-label="Checkbox 1">处理员</md-checkbox>
+                                            <md-checkbox ng-model="formObj.cb2" aria-label="Checkbox 2">一级河长</md-checkbox>
+                                            <md-checkbox ng-model="formObj.cb3" aria-label="Checkbox 3">二级河长</md-checkbox>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="label-tel" class="col-sm-2">手机号码:</label>
+                                        <div class="col-sm-10">
+                                            <input type="number" min="0" class="form-control" ng-model="formObj.tel" id="label-tel">
+                                        </div>
+                                    </div>
+                                    <button type="submit" ui-wave class="btn btn-primary btn-w-md pull-right" style="margin-top:50px;">添加人员</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -22,7 +22,7 @@
                 wf.async = 'true';
                 var s = document.getElementsByTagName('script')[0];
                 s.parentNode.insertBefore(wf, s);
-            })(); 
+            })();
         </script>
 
 
@@ -32,21 +32,22 @@
         <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css">
         <!-- end Needs images -->
 
-            
+
             <!-- build:css({.tmp,client}) styles/main.css -->
             <link rel="stylesheet" href="bower_components/angular-material/angular-material.min.css">
             <link rel="stylesheet" href="styles/bootstrap.css">
             <link rel="stylesheet" href="styles/ui.css">
             <link rel="stylesheet" href="styles/app.css">
             <!-- endbuild -->
+        <link rel="stylesheet" href="styles/water.scss">
 
     </head>
     <body data-ng-app="app"
           id="app"
           class="app"
-          data-custom-page 
+          data-custom-page
           data-ng-controller="AppCtrl"
-          data-ng-class=" { 'layout-boxed': main.layout === 'boxed', 
+          data-ng-class=" { 'layout-boxed': main.layout === 'boxed',
                             'nav-collapsed-min': main.isMenuCollapsed
           } ">
         <!--[if lt IE 9]>
@@ -75,7 +76,7 @@
              data-ng-class="{ 'app-nav-horizontal': main.menu === 'horizontal' }">
             <aside data-ng-include=" 'app/layout/sidebar.html' "
                    id="nav-container"
-                   class="nav-container"  
+                   class="nav-container"
                    data-ng-class="{ 'nav-fixed': main.fixedSidebar,
                                     'nav-horizontal': main.menu === 'horizontal',
                                     'nav-vertical': main.menu === 'vertical',
@@ -116,7 +117,7 @@
         <script src="bower_components/angular-scroll/angular-scroll.min.js"></script>
         <script src="bower_components/jquery.slimscroll/jquery.slimscroll.min.js"></script>
 
-        <script src="vendors/echarts.js"></script>        
+        <script src="vendors/echarts.js"></script>
         <script src="vendors/ngecharts.js"></script>
 
         <script src="bower_components/angular-material-data-table/dist/md-data-table.min.js"></script>
@@ -127,6 +128,10 @@
         <!-- build:js scripts/app.js -->
         <!-- inject:js -->
         <script src="app/app.module.js"></script>
+        <script src="app/addGroup/addGroup.module.js"></script>
+        <script src="app/addStaff/addStaff.module.js"></script>
+        <script src="app/addTask/addTask.module.js"></script>
+        <script src="app/baiduMap/map.module.js"></script>
         <script src="app/chart/chart.module.js"></script>
         <script src="app/core/core.module.js"></script>
         <script src="app/form/form.module.js"></script>
@@ -134,8 +139,20 @@
         <script src="app/layout/layout.module.js"></script>
         <script src="app/page/page.module.js"></script>
         <script src="app/table/table.module.js"></script>
+        <script src="app/taskDetails/taskDetails.module.js"></script>
+        <script src="app/taskList/taskList.module.js"></script>
         <script src="app/ui/ui.module.js"></script>
         <script src="app/user/user.module.js"></script>
+        <script src="app/water/water.module.js"></script>
+        <script src="app/waterInfo/waterInfo.module.js"></script>
+        <script src="app/addGroup/addGroup.controller.js"></script>
+        <script src="app/addGroup/addGroup.state.js"></script>
+        <script src="app/addStaff/addStaff.controller.js"></script>
+        <script src="app/addStaff/addStaff.state.js"></script>
+        <script src="app/addTask/addTask.controller.js"></script>
+        <script src="app/addTask/addTask.state.js"></script>
+        <script src="app/baiduMap/map.controller.js"></script>
+        <script src="app/baiduMap/map.directive.js"></script>
         <script src="app/chart/echarts.controller.js"></script>
         <script src="app/core/app.config.js"></script>
         <script src="app/core/app.controller.js"></script>
@@ -153,13 +170,24 @@
         <script src="app/page/page.controller.js"></script>
         <script src="app/page/page.directive.js"></script>
         <script src="app/table/table.controller.js"></script>
+        <script src="app/taskDetails/taskDetails.controller.js"></script>
+        <script src="app/taskDetails/taskDetails.state.js"></script>
+        <script src="app/taskList/taskList.controller.js"></script>
+        <script src="app/taskList/taskList.state.js"></script>
         <script src="app/ui/material.controller.js"></script>
         <script src="app/ui/ui.controller.js"></script>
         <script src="app/ui/ui.directive.js"></script>
         <script src="app/user/user.controller.js"></script>
         <script src="app/user/user.service.js"></script>
         <script src="app/user/user.state.js"></script>
+        <script src="app/water/water.controller.js"></script>
+        <script src="app/water/water.directive.js"></script>
+        <script src="app/water/water.state.js"></script>
+        <script src="app/waterInfo/waterInfo.controller.js"></script>
+        <script src="app/waterInfo/waterInfo.state.js"></script>
         <!-- endinject -->
         <!-- endbuild -->
+
+        <!--<script src="http://api.map.baidu.com/api?v=2.0&ak=daGGpUQFoA5uW36vmK0xMhCVu38YrXtO&s=1" type="text/javascript" charset="utf-8"></script>-->
     </body>
 </html>

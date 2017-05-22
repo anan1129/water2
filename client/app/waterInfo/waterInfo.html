@@ -1,0 +1,90 @@
+<div ng-controller="WaterInfoCtrl">
+    <div class="page page-form-ele">
+        <div class="row ui-section">
+            <div class="col-md-12">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <div layout="column" ng-cloak class="md-inline-form inputdemoBasicUsage">
+                            <div layout-padding>
+                                <form name="waterInfo">
+                                    <h2 class="section-header">河道信息</h2>
+                                    <div layout layout-sm="column">
+                                        <md-input-container flex>
+                                            <label>河道名称</label>
+                                            <input ng-model="formObj.name">
+                                        </md-input-container>
+                                        <md-input-container flex>
+                                            <label>管理级别</label>
+                                            <input ng-model="formObj.manageLevel">
+                                        </md-input-container>
+                                    </div>
+                                    <div layout layout-sm="column">
+                                        <md-input-container flex>
+                                            <label>河道长度</label>
+                                            <input ng-model="formObj.length">
+                                        </md-input-container>
+                                        <md-input-container flex>
+                                            <label>常水位</label>
+                                            <input ng-model="formObj.waterLevel">
+                                        </md-input-container>
+                                    </div>
+                                    <div layout layout-sm="column">
+                                        <md-input-container flex>
+                                            <label>最高控制水位</label>
+                                            <input ng-model="formObj.maxWaterLevel">
+                                        </md-input-container>
+                                        <md-input-container flex>
+                                            <label>河口最小面宽</label>
+                                            <input ng-model="formObj.minWidth">
+                                        </md-input-container>
+                                    </div>
+                                    <div layout layout-sm="column">
+                                        <md-input-container flex>
+                                            <label>河口最大面宽</label>
+                                            <input ng-model="formObj.maxWidth">
+                                        </md-input-container>
+                                        <md-input-container flex>
+                                            <label>河口面积</label>
+                                            <input ng-model="formObj.area">
+                                        </md-input-container>
+                                    </div>
+                                    <div layout layout-sm="column">
+                                        <md-input-container flex>
+                                            <label>起点</label>
+                                            <input ng-model="formObj.start">
+                                        </md-input-container>
+                                        <md-input-container flex>
+                                            <label>终点</label>
+                                            <input ng-model="formObj.end">
+                                        </md-input-container>
+                                    </div>
+                                    <!--多选-->
+                                    <div class="divider divider-dashed divider-lg pull-in"></div>
+                                    <h2 class="section-header">负责人</h2>
+                                    <div layout layout-sm="column">
+                                        <md-input-container flex>
+                                            <label>组织结构</label>
+                                            <md-select ng-model="formObj.group">
+                                                <md-option ng-repeat="group in groups" value="{{group}}">
+                                                    {{group}}
+                                                </md-option>
+                                            </md-select>
+                                        </md-input-container>
+                                        <md-input-container flex>
+                                            <label>河长</label>
+                                            <md-select ng-model="formObj.admin">
+                                                <md-option ng-repeat="admin in admins" value="{{admin}}">
+                                                    {{admin}}
+                                                </md-option>
+                                            </md-select>
+                                        </md-input-container>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
