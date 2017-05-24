@@ -1,4 +1,4 @@
-<div ng-controller="AddTaskCtrl">
+<div ng-controller="AddGroupCtrl">
     <div class="page page-form-ele">
         <div class="row ui-section">
             <div class="col-md-12">
@@ -19,7 +19,7 @@
                                         </div>
                                         <div class="col-sm-5">
                                             <select class="form-control" name="" ng-model="formObj.nextGroup"
-                                                    ng-value="二级节点">
+                                                    ng-value="1">
                                                 <option value="0">
                                                     二级节点
                                                 </option>
@@ -30,7 +30,7 @@
                                     <div class="form-group">
                                         <label for="label-group-name" class="col-sm-2">组织名称</label>
                                         <div class="col-sm-5">
-                                            <input type="text" class="form-control" ng-model="formObj.groupName"
+                                            <input type="text" class="form-control" ng-model="formObj.name"
                                                    id="label-group-name">
                                         </div>
                                     </div>
@@ -38,17 +38,17 @@
                                         <label for="label-person" class="col-sm-2">添加员工</label>
                                         <div class="col-sm-5">
                                             <input type="text" class="form-control" id="label-person"
-                                                   ng-model="formObj.person">
+                                                   ng-model="formObj.keyword">
                                             <span class="material-icons form-control-feedback">search</span>
                                         </div>
                                     </div>
 
                                     <div class="col-md-10 col-md-offset-2">
-                                        <md-chips ng-model="formObj.persons"></md-chips>
+                                        <md-chips ng-model="formObj.users" ></md-chips>
                                     </div>
 
                                     <button type="submit" ui-wave class="btn btn-primary btn-w-md pull-right"
-                                            style="margin-top:50px;">添加组织
+                                            style="margin-top:50px;" ng-click="save()">添加组织
                                     </button>
                                 </form>
                             </div>

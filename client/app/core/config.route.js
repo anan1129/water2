@@ -60,14 +60,14 @@
                     })
                     .state('map/maps', {
                         url: '/map/maps',
-                        templateUrl: "app/map/maps.html",
-                        resolve: {
-                            deps: ['$ocLazyLoad', function($ocLazyLoad) {
-                                return $ocLazyLoad.load([
-                                    'googlemap',
-                                ]);
-                            }]
-                        }
+                        templateUrl: "app/baiduMap/map.html",
+                        // resolve: {
+                        //     deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                        //         return $ocLazyLoad.load([
+                        //             'googlemap',
+                        //         ]);
+                        //     }]
+                        // }
                     });
 
                 $urlRouterProvider

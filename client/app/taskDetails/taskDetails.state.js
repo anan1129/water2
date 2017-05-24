@@ -8,7 +8,7 @@
         .config(['$stateProvider',function($stateProvider){
             $stateProvider
                 .state('task-details',{
-                    url:'/task-details',
+                    url:'/task-details/:name/:status/:users/:id/:content/:jobBack',
                     templateUrl:'app/taskDetails/taskDetails.html'
                 })
         }])

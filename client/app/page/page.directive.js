@@ -35,7 +35,23 @@
                         return $element.addClass('body-wide body-auth');
                     case '/page/lock-screen':
                         return $element.addClass('body-wide body-lock');
-                    case '/water':
+                    case '/water/01-1':
+                    case '/water/01-2-1':
+                    case '/water/01-2-2':
+                    case '/water/01-3':
+                    case '/water/02-1':
+                    case '/water/02-2':
+                    case '/water/02-3':
+                    case '/water/03-2':
+                    case '/water/03-1':
+                    case '/water/04-1':
+                    case '/water/04-2':
+                    case '/water/05-1':
+                    case '/water/06-1':
+                    case '/water/07-1':
+                    case '/water/07-2':
+                    case '/water/08-1':
+                    case '/water/09-1':
                         return $element.addClass('body-wide body-water');
                 }
             };
@@ -48,6 +64,8 @@
                 }
                 return addBg($location.path());
             });
+
+
         }
     }
 
