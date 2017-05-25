@@ -34,8 +34,9 @@
     }
 
     .map {
-        background: url('assets/images/qj01.jpg') no-repeat;
+        background: url('assets/images/water/01-1.jpg') no-repeat 0 0;
         height: 280px;
+        background-size:100% auto;
         position: relative;
         margin-bottom: 5px;
     }
@@ -59,58 +60,29 @@
 <div ng-controller="WaterCtrl" class="water">
     <div class="row ui-section">
         <div class="col-md-12">
-            <div class="map">
+            <div class="map" >
+                <div id="baiduMap" baidu-map style="height:100%;"></div>
                 <button class="btn btn-success">投诉建议</button>
             </div>
             <div class="container">
                 <div class="row">
                     <div class="col-xs-3"><h5>一级河长</h5></div>
-                    <div class="col-xs-3">李跃旗</div>
-                    <div class="col-xs-6">杨浦区区委书记</div>
+                    <div class="col-xs-3">{{dataObj.l1.name}}</div>
+                    <div class="col-xs-6">{{dataObj.l1.pos}}</div>
                 </div>
                 <div class="row">
                     <div class="col-xs-12">
-                        <div class="row">
-                            <div class="col-xs-3"><h5>二级河长</h5></div>
-                            <div class="col-xs-3">倪来娣<span></span></div>
-                            <div class="col-xs-6">五角场镇党委书记</div>
-                        </div>
-                        <div class="row">
-                            <div class="col-xs-3"></div>
-                            <div class="col-xs-3">徐庆俊</div>
-                            <div class="col-xs-6">五角场镇镇长</div>
-                        </div>
-                        <div class="row">
-                            <div class="col-xs-3"></div>
-                            <div class="col-xs-3">李正明</div>
-                            <div class="col-xs-6">五角场镇街道党工委书籍</div>
-                        </div>
-                        <div class="row">
-                            <div class="col-xs-3"></div>
-                            <div class="col-xs-3">秦刚</div>
-                            <div class="col-xs-6">五角场镇街道办事处主任</div>
-                        </div>
-                        <div class="row">
-                            <div class="col-xs-3"></div>
-                            <div class="col-xs-3">陈捷</div>
-                            <div class="col-xs-6">长白街道党工委书籍</div>
-                        </div>
-                        <div class="row">
-                            <div class="col-xs-3"></div>
-                            <div class="col-xs-3">潘炜</div>
-                            <div class="col-xs-6">长白街道街道办事处主任</div>
+                        <div class="row" ng-repeat="data in dataObj.l2">
+                            <div class="col-xs-3"><h5 ng-show="$first">二级河长</h5></div>
+                            <div class="col-xs-3">{{data.name}}<span></span></div>
+                            <div class="col-xs-6">{{data.pos}}</div>
                         </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-xs-12">
                         <h5>基本信息</h5>
-                        <p class="text-content">
-                            杨浦区位于上海中心城区东北部，地处黄浦江下游西北岸，与浦东新区隔江相望，西临虹口区，北与宝山接壤。杨浦区名称来源也是与境内河道名称有关。杨浦区原名杨树浦区，杨树浦则是纵贯于地境中部的一条主要河流——杨树浦港。1869年英租界筑路至杨树浦，以此为路名。随着工业的发展，最终形成了杨浦区名。</p>
-                        <p class="text-content">
-水是生命之源、生产之要、生态之基。水在我们这座城市无所不在，杨浦更是与“水”渊源颇深——“杨树浦港”纵贯区境南北，“杨浦”也以此演变得名；杨浦地处黄浦江下游西北岸，拥有中心城区里最长的15.5公里白金滨江岸线；杨浦河流纵横交错，目前境内共有18条河流，总长约56.19公里。特别是杨树浦港、东走马塘、虬江历史悠久，构成覆盖全区70%地域的水系。而新江湾城更是水资源丰富，它前身是江湾机场，随着近年发展，俨然成为上海市区唯一一块自然生态“绿宝石”。</p>
-                        <p class="text-content">
-                        杨浦区共有18条河道，总长度约56.19km。河网密度为0.93km/km2，河口面积5.55km2，按河湖总面积计算的河面率为9.63%（含黄浦江），不含黄浦江为2.4%，河面率为9个中心城区（含闸北）第三位，仅次于浦东新区、普陀区；河道槽蓄量298.84 万m3，居于中心城区第二位。其中市管河道3条，分别为虬江、杨树浦港和黄浦江，总长26.37km，河口面积4.65km2；区管河道7条，分别为嫩江河、中原河、小吉浦、复兴岛运河、东走马塘、钱家浜、随塘河，总长16.24 km，河口面积0.45km2。</p>
+                        <p class="text-content">{{dataObj.content}}</p>
                     </div>
                 </div>
             </div>

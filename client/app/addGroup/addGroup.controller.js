@@ -5,14 +5,35 @@
     'use strict';
 
     angular.module('app.addGroup.controller',[])
-        .controller('AddGroupCtrl',['$scope',AddGroupCtrl])
+        .controller('AddGroupCtrl',['$scope','GlobalData','$filter',AddGroupCtrl])
     ;
 
-    function AddGroupCtrl($scope){
-        $scope.title='add group';
-
+    function AddGroupCtrl($scope,GlobalData,$filter){
+        var users=[];
         $scope.formObj={
-            persons:['张三','李四']
+            users:[]
         };
+
+        angular.forEach(GlobalData.users,function(val){
+            users.push(val.name);
+        });
+
+        $scope.save=function(){
+            console.log($scope.formObj);
+            GlobalData.groups.push($scope.formObj);
+            $scope.formObj={
+                users:[]
+            }
+        }
+
+        $scope.$watch('formObj.keyword',function(n,o){
+            if(angular.equals(n,o)) return;
+            console.log(n);
+            if(!$scope.formObj.keyword){
+                $scope.formObj.users=[];
+                return;
+            }
+            $scope.formObj.users=$filter('filter')(users,n);
+        })
     }
 })();

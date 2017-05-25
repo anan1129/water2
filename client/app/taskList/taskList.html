@@ -6,7 +6,12 @@
                     <div class="panel-body">
                         <div layout="column" ng-cloak class="md-inline-form inputdemoBasicUsage">
                             <div layout-padding class="table-responsive">
-                                <h2 class="section-header">任务列表 <span class="fa fa-plus-square pull-right"></span></h2>
+                                <h2 class="section-header">
+                                    任务列表
+                                    <a href="#!/add-task">
+                                        <span class="fa fa-plus-square pull-right"></span>
+                                    </a>
+                                </h2>
                                 <table class="table no-margin">
                                     <thead>
                                     <tr>
@@ -18,34 +23,18 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>平凉路渡口轻微污染</td>
-                                        <td><span class="text-success">已上报</span></td>
-                                        <td class="td-person"><span>张三</span><span>李四</span><span>王五</span></td>
+                                    <tr ng-repeat="list in listObj.data">
+                                        <td>{{list.id}}</td>
+                                        <td>{{list.name}}</td>
                                         <td>
-                                            <span class="fa fa-eye text-primary"></span>
-                                            <span class="fa fa-trash" style="color:rgb(229,57,53);margin-left:5px;" ></span>
+                                            <span ng-class="{'text-primary':list.status=='已上报','text-info':list.status=='正在处理','text-success':list.status=='处理完成'}">{{list.status}}</span>
                                         </td>
-                                    </tr>
-                                    <tr>
-                                        <td>2</td>
-                                        <td>杨浦滨江段水有漂浮物</td>
-                                        <td><span class="text-info">正在处理</span></td>
-                                        <td class="td-person"><span>张三</span><span>李四</span><span>王五</span></td>
                                         <td>
-                                            <span class="fa fa-eye text-primary"></span>
-                                            <span class="fa fa-trash" style="color:rgb(229,57,53);margin-left:5px;" ></span>
+                                            <span ng-repeat="user in list.users" style="margin:0 3px;">{{user}}</span>
                                         </td>
-                                    </tr>
-                                    <tr>
-                                        <td>3</td>
-                                        <td>翔殷路段水里有漂浮物</td>
-                                        <td><span class="text-default" style="color:#009688">处理完成</span></td>
-                                        <td class="td-person"><span>张三</span><span>李四</span><span>王五</span></td>
                                         <td>
-                                            <span class="fa fa-eye text-primary"></span>
-                                            <span class="fa fa-trash" style="color:rgb(229,57,53);margin-left:5px;" ></span>
+                                            <span class="fa fa-eye text-primary" ng-click="toTaskDetails(list)"></span>
+                                            <span class="fa fa-trash" style="color:rgb(229,57,53);margin-left:5px;" ng-click="listObj.del($index)"></span>
                                         </td>
                                     </tr>
                                     </tbody>

@@ -5,11 +5,11 @@
     'use strict';
 
     angular.module('app.taskDetails.controller',[])
-        .controller('TaskDetailsCtrl',['$scope',TaskDetailsCtrl])
+        .controller('TaskDetailsCtrl',['$scope','$stateParams',TaskDetailsCtrl])
     ;
 
-    function TaskDetailsCtrl($scope){
-        $scope.title='add group';
-
+    function TaskDetailsCtrl($scope,$stateParams){
+        $scope.stateParams=$stateParams;
+        console.log($stateParams.users);
     }
 })();

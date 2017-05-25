@@ -6,16 +6,16 @@
                     <div class="panel-body">
                         <div layout="column" ng-cloak class="md-inline-form inputdemoBasicUsage">
                             <div layout-padding>
-                                <form name="waterInfo">
+                                <form name="waterInfo" ng-submit="save()">
                                     <h2 class="section-header">河道信息</h2>
                                     <div layout layout-sm="column">
                                         <md-input-container flex>
                                             <label>河道名称</label>
-                                            <input ng-model="formObj.name">
+                                            <input ng-model="formObj.riverName">
                                         </md-input-container>
                                         <md-input-container flex>
                                             <label>管理级别</label>
-                                            <input ng-model="formObj.manageLevel">
+                                            <input ng-model="formObj.managementLevel">
                                         </md-input-container>
                                     </div>
                                     <div layout layout-sm="column">
@@ -35,27 +35,27 @@
                                         </md-input-container>
                                         <md-input-container flex>
                                             <label>河口最小面宽</label>
-                                            <input ng-model="formObj.minWidth">
+                                            <input ng-model="formObj.minRiverWidth">
                                         </md-input-container>
                                     </div>
                                     <div layout layout-sm="column">
                                         <md-input-container flex>
                                             <label>河口最大面宽</label>
-                                            <input ng-model="formObj.maxWidth">
+                                            <input ng-model="formObj.maxRiverWidth">
                                         </md-input-container>
                                         <md-input-container flex>
                                             <label>河口面积</label>
-                                            <input ng-model="formObj.area">
+                                            <input ng-model="formObj.riverAcreage">
                                         </md-input-container>
                                     </div>
                                     <div layout layout-sm="column">
                                         <md-input-container flex>
                                             <label>起点</label>
-                                            <input ng-model="formObj.start">
+                                            <input ng-model="formObj.startAddress">
                                         </md-input-container>
                                         <md-input-container flex>
                                             <label>终点</label>
-                                            <input ng-model="formObj.end">
+                                            <input ng-model="formObj.endAddress">
                                         </md-input-container>
                                     </div>
                                     <!--多选-->
@@ -64,7 +64,7 @@
                                     <div layout layout-sm="column">
                                         <md-input-container flex>
                                             <label>组织结构</label>
-                                            <md-select ng-model="formObj.group">
+                                            <md-select ng-model="formObj.department">
                                                 <md-option ng-repeat="group in groups" value="{{group}}">
                                                     {{group}}
                                                 </md-option>
@@ -72,13 +72,15 @@
                                         </md-input-container>
                                         <md-input-container flex>
                                             <label>河长</label>
-                                            <md-select ng-model="formObj.admin">
-                                                <md-option ng-repeat="admin in admins" value="{{admin}}">
-                                                    {{admin}}
+                                            <md-select ng-model="formObj.manager">
+                                                <md-option ng-repeat="users in users" value="{{users.name}}">
+                                                    {{users.name}}
                                                 </md-option>
                                             </md-select>
                                         </md-input-container>
                                     </div>
+                                    <button type="submit" ui-wave="" class="btn btn-primary btn-w-md pull-right ui-wave" style="margin-top:50px;">提交
+                                    </button>
                                 </form>
                             </div>
                         </div>

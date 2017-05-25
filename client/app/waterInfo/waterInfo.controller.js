@@ -5,12 +5,17 @@
     'use strict';
 
     angular.module('app.waterInfo.controller',[])
-        .controller('WaterInfoCtrl',['$scope',WaterInfoCtrl])
+        .controller('WaterInfoCtrl',['$scope','GlobalData',WaterInfoCtrl])
     ;
 
-    function WaterInfoCtrl($scope){
+    function WaterInfoCtrl($scope,GlobalData){
         $scope.title='water info';
+        $scope.users=GlobalData.users;
 
-        $scope.formObj={};
+        $scope.formObj={ };
+
+        $scope.save=function(){
+            console.log($scope.formObj);
+        }
     }
 })();

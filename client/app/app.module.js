@@ -20,6 +20,7 @@
         ,'app.addGroup'
         ,'app.addStaff'
         ,'app.taskDetails'
+        ,'app.data.service'
 
         // 3rd party feature modules
         ,'restangular'

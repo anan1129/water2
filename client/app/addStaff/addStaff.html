@@ -17,10 +17,8 @@
                                     <div class="form-group">
                                         <label class="col-sm-2">所属组织:</label>
                                         <div class="col-sm-5">
-                                            <select class="form-control" name="" ng-model="formObj.group1" >
-                                                <option value="0">
-                                                    以及组织
-                                                </option>
+                                            <select class="form-control" name="" ng-model="formObj.group" >
+                                                <option value="{{group.name}}" ng-repeat="group in groups">{{group.name}}</option>
                                             </select>
                                         </div>
                                         <div class="col-sm-5">
@@ -34,9 +32,16 @@
                                     <div class="form-group">
                                         <label  class="col-sm-2">员工级别:</label>
                                         <div class="col-sm-10">
-                                            <md-checkbox ng-model="formObj.cb1" aria-label="Checkbox 1">处理员</md-checkbox>
-                                            <md-checkbox ng-model="formObj.cb2" aria-label="Checkbox 2">一级河长</md-checkbox>
-                                            <md-checkbox ng-model="formObj.cb3" aria-label="Checkbox 3">二级河长</md-checkbox>
+                                            <!--<md-checkbox ng-model="formObj.cb1" aria-label="Checkbox 1">处理员</md-checkbox>-->
+                                            <!--<md-checkbox ng-model="formObj.cb2" aria-label="Checkbox 2">一级河长</md-checkbox>-->
+                                            <!--<md-checkbox ng-model="formObj.cb3" aria-label="Checkbox 3">二级河长</md-checkbox>-->
+
+                                            <md-radio-group class="ui-md-radio-group-inline" ng-model="formObj.level">
+                                                <md-radio-button value="处理员">处理员</md-radio-button>
+                                                <md-radio-button value="一级河长">一级河长</md-radio-button>
+                                                <md-radio-button value="二级河长">二级河长</md-radio-button>
+                                            </md-radio-group>
+                                            <!--<md-radio-button></md-radio-button>-->
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -45,7 +50,7 @@
                                             <input type="number" min="0" class="form-control" ng-model="formObj.tel" id="label-tel">
                                         </div>
                                     </div>
-                                    <button type="submit" ui-wave class="btn btn-primary btn-w-md pull-right" style="margin-top:50px;">添加人员</button>
+                                    <button type="submit" ui-wave class="btn btn-primary btn-w-md pull-right" style="margin-top:50px;" ng-click="save()">添加人员</button>
                                 </form>
                             </div>
                         </div>
