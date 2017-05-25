@@ -25,9 +25,7 @@
         ,'restangular'
         ,'md.data.table'
         , 'app.user'
-    ]).run(function(Restangular){
-        Restangular.setBaseUrl('http://localhost:8080/api');
-    });
+    ]);
 
 })();
 
