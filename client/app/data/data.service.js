@@ -51,7 +51,9 @@
                     "content": "平凉路渡口轻微污染,水上有漂浮物",
                     "status": "已上报",
                     "jobBack": "漂浮物已清理",
+                    "origin":"市民",
                     "users": ["处理员1","处理员2"],
+                    "river":'河道1',
                     "executes": [
                         {
                             "user": "处理员1",
@@ -70,6 +72,8 @@
                     "status": "正在处理",
                     "jobBack": "漂浮物已清理",
                     "users": ["处理员1","处理员2"],
+                    "origin":"河长",
+                    "river":'河道2',
                     "executes": [
                         {
                             "user": "处理员1",
@@ -87,6 +91,8 @@
                     "content": "翔殷路段水里有漂浮物",
                     "status": "处理完成",
                     "jobBack": "漂浮物已清理",
+                    "river":'河道3',
+                    "origin":"市民",
                     "users": ["处理员1","处理员2"],
                     "executes": [
                         {

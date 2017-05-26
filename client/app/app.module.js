@@ -21,6 +21,10 @@
         ,'app.addStaff'
         ,'app.taskDetails'
         ,'app.data.service'
+        ,'app.dynamicInfo'
+        ,'app.addInfo'
+        ,'app.editInfo'
+        ,'app.compControl'
 
         // 3rd party feature modules
         ,'restangular'

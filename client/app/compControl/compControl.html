@@ -1,0 +1,91 @@
+<style>
+    body {
+        color: #3D4051;
+        line-height: 1.65em;
+    }
+    .body-water .customizer-toggle {
+        display: none;
+    }
+
+    .body-water #quickview-customizer {
+        display: none;
+    }
+
+    .app.body-water > .main-container > .content-container {
+        margin-left: 0;
+        background: #fff;
+    }
+
+    .water {
+    }
+    .body-water .water .container  .row>div:nth-child(2){
+        text-align-last:justify;/* ie9*/
+        text-align:justify;
+        /*text-justify:inter-ideograph;*/
+    }
+    .water h5 {
+        font-weight: bold;
+        margin-top: 3px;
+    }
+
+    .water p.text-content {
+        margin-top: 10px;
+        text-indent: 2em;
+    }
+
+    .map {
+        background: url('assets/images/water/01-1.jpg') no-repeat 0 0;
+        height: 280px;
+        background-size:100% auto;
+        position: relative;
+        margin-bottom: 5px;
+    }
+
+    .map button {
+        position: absolute;
+        top: 5px;
+        right: 5px;
+        border-radius: 20px;
+    }
+
+    .body-water .water .container > .row {
+        padding: 10px 0;
+    }
+
+    .body-water .water .container > .row:nth-child(2) {
+        border-top: 1px solid rgba(0,0,0,0.12);
+        border-bottom: 1px solid rgba(0,0,0,0.12);
+    }
+</style>
+<div ng-controller="CompControlCtrl" class="water">
+    <div class="row ui-section">
+        <div class="col-md-12">
+            <div class="map" >
+                <div id="baiduMap" baidu-map style="height:100%;"></div>
+                <button class="btn btn-success">投诉建议</button>
+            </div>
+            <ul class="list-group">
+                <li class="list-group-item" ng-repeat="data in dataObj.data" style="position:relative;">
+                    <div class="row">
+                        <div class="col-xs-4">{{data.id}}</div>
+                        <div class="col-xs-4">{{data.addr}}</div>
+                        <div class="col-xs-4"><span class="text-success pull-right">{{data.status}}</span></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-4">
+                            <img src="{{data.pic}}" style="width:100%;" alt="">
+                        </div>
+                        <div class="col-xs-8">
+                            <div class="row">
+                                <div class="">{{data.content}}</div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <span style="position:absolute;right:15px;bottom:10px;">{{data.date}}</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
