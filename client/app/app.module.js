@@ -25,6 +25,7 @@
         ,'app.addInfo'
         ,'app.editInfo'
         ,'app.compControl'
+        ,'app.editTask'
 
         // 3rd party feature modules
         ,'restangular'

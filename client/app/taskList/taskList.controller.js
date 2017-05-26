@@ -23,6 +23,7 @@
             data:GlobalData.jobs
         };
         $scope.toTaskDetails = toTaskDetails;
+        $scope.editTask = editTask;
 
         function del(index) {
             if(!toast){
@@ -43,6 +44,9 @@
 
         function toTaskDetails(obj) {
             $state.go('task-details', obj);
+        }
+        function editTask(obj){
+            $state.go('edit-task', obj);
         }
     }
 })();
