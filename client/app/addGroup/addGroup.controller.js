@@ -5,10 +5,10 @@
     'use strict';
 
     angular.module('app.addGroup.controller',[])
-        .controller('AddGroupCtrl',['$scope','GlobalData','$filter',AddGroupCtrl])
+        .controller('AddGroupCtrl',['$scope','GlobalData','$filter','RestangularService',AddGroupCtrl])
     ;
 
-    function AddGroupCtrl($scope,GlobalData,$filter){
+    function AddGroupCtrl($scope,GlobalData,$filter,RestangularService){
         var users=[];
         $scope.formObj={
             users:[]
@@ -19,8 +19,12 @@
         });
 
         $scope.save=function(){
-            console.log($scope.formObj);
+            console.log(RestangularService);
             GlobalData.groups.push($scope.formObj);
+            // RestangularService.all('api/groups').customGET().then(function(result){
+            //
+            // })
+
             $scope.formObj={
                 users:[]
             }

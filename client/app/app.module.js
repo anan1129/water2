@@ -26,7 +26,13 @@
         ,'restangular'
         ,'md.data.table'
         , 'app.user'
-    ]);
+    ])
+        .service('RestangularService',function(Restangular){
+            return Restangular.withConfig(function (RestangularConfigurer) {
+                RestangularConfigurer.setFullResponse(true).setBaseUrl('');
+            });
+        })
+    ;
 
 })();
 
