@@ -21,6 +21,11 @@
         ,'app.addStaff'
         ,'app.taskDetails'
         ,'app.data.service'
+        ,'app.dynamicInfo'
+        ,'app.addInfo'
+        ,'app.editInfo'
+        ,'app.compControl'
+        ,'app.editTask'
 
         // 3rd party feature modules
         ,'restangular'
@@ -29,7 +34,7 @@
     ])
         .service('RestangularService',function(Restangular){
             return Restangular.withConfig(function (RestangularConfigurer) {
-                RestangularConfigurer.setFullResponse(true).setBaseUrl('');
+                RestangularConfigurer.setFullResponse(true).setBaseUrl('http://106.15.48.81:8080');
             });
         })
     ;

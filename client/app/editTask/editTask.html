@@ -1,0 +1,47 @@
+<div ng-controller="EditTaskCtrl">
+    <div class="page page-form-ele">
+        <div class="row ui-section">
+            <div class="col-md-12">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <div layout="column" ng-cloak class="md-inline-form inputdemoBasicUsage">
+                            <div layout-padding>
+                                <h2 class="section-header">
+                                    任务详情
+                                    <a href="#!/add-task">
+                                        <span class="fa fa-plus-square pull-right"></span>
+                                    </a>
+                                </h2>
+                                <div class="row">
+                                    <div class="col-xs-4">任务标题:</div>
+                                    <div class="col-xs-8">{{stateParams.name}}</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-4">任务内容:</div>
+                                    <div class="col-xs-8">{{stateParams.content}},水上有漂浮物</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-4">处理员:</div>
+                                    <div class="col-xs-8">{{stateParams.users}}</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-4">处理进度:</div>
+                                    <div class="col-xs-8">{{stateParams.status}}</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-4">任务反馈:</div>
+                                    <div class="col-xs-8">{{stateParams.jobBack}}</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-8 col-xs-offset-4">
+                                        <img src="../assets/images/water/01-1.jpg" width="100%" alt="">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

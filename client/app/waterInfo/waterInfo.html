@@ -58,22 +58,42 @@
                                             <input ng-model="formObj.endAddress">
                                         </md-input-container>
                                     </div>
+                                    <md-input-container md-no-float class="md-block">
+                                        <input ng-model="formObj.content" placeholder="河道描述">
+                                    </md-input-container>
+
                                     <!--多选-->
                                     <div class="divider divider-dashed divider-lg pull-in"></div>
                                     <h2 class="section-header">负责人</h2>
                                     <div layout layout-sm="column">
                                         <md-input-container flex>
-                                            <label>组织结构</label>
-                                            <md-select ng-model="formObj.department">
-                                                <md-option ng-repeat="group in groups" value="{{group}}">
-                                                    {{group}}
+                                            <label>上级组织</label>
+                                            <md-select ng-model="group">
+                                                <md-option ng-repeat="group in groups" value="{{group.id}}">
+                                                    {{group.name}}
                                                 </md-option>
                                             </md-select>
                                         </md-input-container>
                                         <md-input-container flex>
-                                            <label>河长</label>
+                                            <label>下级组织</label>
+                                            <md-select ng-model="subGroup" ng-change="getSubGroups(group.id)">
+                                                <md-option ng-repeat="group in subGroups" value="{{group.id}}">
+                                                    {{group.name}}
+                                                </md-option>
+                                            </md-select>
+                                        </md-input-container>
+                                        <md-input-container flex>
+                                            <label>一级河长</label>
                                             <md-select ng-model="formObj.manager">
-                                                <md-option ng-repeat="users in users" value="{{users.name}}">
+                                                <md-option ng-repeat="users in managers" value="{{users.name}}">
+                                                    {{users.name}}
+                                                </md-option>
+                                            </md-select>
+                                        </md-input-container>
+                                        <md-input-container flex>
+                                            <label>二级河长</label>
+                                            <md-select ng-model="formObj.secondManagers">
+                                                <md-option ng-repeat="users in secondManagers" value="{{users.name}}">
                                                     {{users.name}}
                                                 </md-option>
                                             </md-select>

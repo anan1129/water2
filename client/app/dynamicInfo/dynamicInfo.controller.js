@@ -4,11 +4,11 @@
 (function () {
     'use strict';
 
-    angular.module('app.taskList.controller', [])
-        .controller('TaskListCtrl', ['$scope', '$state', '$mdToast','GlobalData', TaskListCtrl])
+    angular.module('app.dynamicInfo.controller', [])
+        .controller('DynamicInfoCtrl', ['$scope', '$state', '$mdToast','GlobalData', DynamicInfoCtrl])
     ;
 
-    function TaskListCtrl($scope, $state, $mdToast,GlobalData) {
+    function DynamicInfoCtrl($scope, $state, $mdToast,GlobalData) {
         var toast;
         // $scope.listObj = {
         //     del: del,
@@ -20,10 +20,14 @@
         // }
         $scope.listObj = {
             del: del,
-            data:GlobalData.jobs
+            data:[
+                {id:1,name:'信息标题',content:'信息内容',river:"河道"},
+                {id:2,name:'信息标题',content:'信息内容',river:"河道"},
+                {id:3,name:'信息标题',content:'信息内容',river:"河道"},
+            ],
+            types:['新闻动态','通知','公告','一河一档','一河一策']
         };
-        $scope.toTaskDetails = toTaskDetails;
-        $scope.editTask = editTask;
+        $scope.editInfo = editInfo;
 
         function del(index) {
             if(!toast){
@@ -42,11 +46,8 @@
             }
         }
 
-        function toTaskDetails(obj) {
-            $state.go('task-details', obj);
-        }
-        function editTask(obj){
-            $state.go('edit-task', obj);
+        function editInfo(obj) {
+            $state.go('edit-info', obj);
         }
     }
 })();

@@ -5,39 +5,57 @@
     'use strict';
 
     angular.module('app.addGroup.controller',[])
-        .controller('AddGroupCtrl',['$scope','GlobalData','$filter','RestangularService',AddGroupCtrl])
+        .controller('AddGroupCtrl',['$scope','$mdToast','$filter','RestangularService',AddGroupCtrl])
     ;
 
-    function AddGroupCtrl($scope,GlobalData,$filter,RestangularService){
-        var users=[];
-        $scope.formObj={
-            users:[]
-        };
+    function AddGroupCtrl($scope,$mdToast,$filter,RestangularService){
 
-        angular.forEach(GlobalData.users,function(val){
-            users.push(val.name);
-        });
-
-        $scope.save=function(){
-            console.log(RestangularService);
-            GlobalData.groups.push($scope.formObj);
-            // RestangularService.all('api/groups').customGET().then(function(result){
-            //
-            // })
-
-            $scope.formObj={
-                users:[]
-            }
+        $scope.getSubGroups=getSubGroups;
+        initData();
+        function initData(){
+            $scope.formObj={};
+            getGroups();
         }
 
-        $scope.$watch('formObj.keyword',function(n,o){
-            if(angular.equals(n,o)) return;
-            console.log(n);
-            if(!$scope.formObj.keyword){
-                $scope.formObj.users=[];
-                return;
-            }
-            $scope.formObj.users=$filter('filter')(users,n);
-        })
+        function getGroups(){
+            RestangularService.all('api/groups').customGET().then(function(result){
+                if(result.status==200){
+                    $scope.groups=result.data;
+                }
+            })
+        }
+
+        function getSubGroups(id){
+            RestangularService.all('api/groups').customGET(id).then(function(result){
+                if(result.status==200){
+                    $scope.longPid=result.data;
+                }
+            });
+        }
+
+        $scope.save=function(){
+           console.log($scope.formObj);
+            var data=$scope.formObj;
+            RestangularService.all('api/groups').customPOST(data).then(function(result){
+                console.log(result);
+                if(result.status==201){
+                    $mdToast.show(
+                        $mdToast.simple()
+                            .content('添加成功！')
+                            .position('top right')
+                            .hideDelay(2000)
+                    );
+                    initData();
+                }else{
+                    $mdToast.show(
+                        $mdToast.simple()
+                            .content('添加失败！')
+                            .position('top right')
+                            .hideDelay(2000)
+                    );
+                }
+            })
+
+        }
     }
 })();
