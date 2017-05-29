@@ -28,6 +28,7 @@
         ,'app.editTask'
         ,'app.waterList'
         ,'app.home'
+        ,'app.news'
 
         // 3rd party feature modules
         ,'restangular'

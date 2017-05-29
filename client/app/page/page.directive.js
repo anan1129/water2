@@ -55,6 +55,7 @@
                     case '/comp-control':
                     case '/water-list':
                     case '/home':
+                    case '/news':
                         return $element.addClass('body-wide body-water');
                 }
             };
