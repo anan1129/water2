@@ -53,6 +53,8 @@
                     case '/water/08-1':
                     case '/water/09-1':
                     case '/comp-control':
+                    case '/water-list':
+                    case '/home':
                         return $element.addClass('body-wide body-water');
                 }
             };

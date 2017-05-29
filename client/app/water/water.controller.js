@@ -10,6 +10,7 @@
 
     function WaterCtrl($scope,$stateParams,GlobalData){
         $scope.name=$stateParams.name;
+        console.log($scope.name);
         $scope.dataObj;
         switch($scope.name){
             case '01-1':

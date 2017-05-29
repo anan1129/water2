@@ -25,8 +25,6 @@
                         if (point) {
                             map.centerAndZoom(point, 16);
                             map.addOverlay(new BMap.Marker(point));
-                        }else{
-                            alert("您选择地址没有解析到结果!");
                         }
                     }, "北京市");
                 }

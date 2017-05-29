@@ -26,6 +26,8 @@
         ,'app.editInfo'
         ,'app.compControl'
         ,'app.editTask'
+        ,'app.waterList'
+        ,'app.home'
 
         // 3rd party feature modules
         ,'restangular'
