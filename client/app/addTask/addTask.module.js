@@ -4,6 +4,6 @@
 (function(){
     'use strict';
 
-    angular.module('app.addTask',['app.addTask.controller','app.addTask.state'])
+    angular.module('app.addTask',['app.addTask.controller','app.addTask.state','angularFileUpload'])
     ;
 })();

@@ -5,12 +5,16 @@
     'use strict';
 
     angular.module('app.addStaff.controller',[])
-        .controller('AddStaffCtrl',['$scope','RestangularService',AddStaffCtrl])
+        .controller('AddStaffCtrl',['$scope','RestangularService','$mdToast',AddStaffCtrl])
     ;
 
-    function AddStaffCtrl($scope,RestangularService){
+    function AddStaffCtrl($scope,RestangularService,$mdToast){
         $scope.getSubGroups=getSubGroups;
         initData();
+
+        // var uploader = $scope.uploader = new FileUploader({
+        //     url: 'http://upload.qiniu.com/'
+        // });
 
         function initData(){
             $scope.formObj={};
@@ -55,7 +59,6 @@
                     );
                 }
             })
-
         }
     }
 })();

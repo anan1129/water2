@@ -12,14 +12,14 @@
                                         <span class="fa fa-plus-square pull-right"></span>
                                     </a>
                                 </h2>
-                                <md-input-container flex>
-                                    <label>信息类型</label>
-                                    <md-select ng-model="formObj.type">
-                                        <md-option ng-repeat="type in listObj.types" value="{{type}}">
-                                            {{type}}
-                                        </md-option>
-                                    </md-select>
-                                </md-input-container>
+                                <!--<md-input-container flex>-->
+                                    <!--<label>信息类型</label>-->
+                                    <!--<md-select ng-model="formObj.type" ng-change="getListData(formObj.type)">-->
+                                        <!--<md-option ng-repeat="type in listObj.types" value="{{type.id}}">-->
+                                            <!--{{type.name}}-->
+                                        <!--</md-option>-->
+                                    <!--</md-select>-->
+                                <!--</md-input-container>-->
                                 <table class="table no-margin">
                                     <thead>
                                     <tr>
@@ -27,15 +27,17 @@
                                         <th>信息标题</th>
                                         <th>内容</th>
                                         <th>河道</th>
+                                        <th>栏目</th>
                                         <th>操作</th>
                                     </tr>
                                     </thead>
                                     <tbody>
                                     <tr ng-repeat="list in listObj.data">
                                         <td>{{list.id}}</td>
-                                        <td>{{list.name}}</td>
+                                        <td>{{list.title}}</td>
                                         <td>{{list.content}}</td>
-                                        <td>{{list.river}}</td>
+                                        <td>{{list.riverId}}</td>
+                                        <td>{{list.newsTypeId}}</td>
                                         <td>
                                             <span class="fa fa-edit text-info" ng-click="editInfo(list)"></span>
                                             <span class="fa fa-trash" style="color:rgb(229,57,53);margin-left:5px;" ng-click="listObj.del($index)"></span>

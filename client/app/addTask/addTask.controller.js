@@ -5,17 +5,20 @@
     'use strict';
 
     angular.module('app.addTask.controller', [])
-        .controller('AddTaskCtrl', ['$scope', 'RestangularService', '$filter', AddTaskCtrl])
+        .controller('AddTaskCtrl', ['$scope', 'RestangularService', '$filter','$mdToast', AddTaskCtrl])
     ;
 
-    function AddTaskCtrl($scope, RestangularService, $filter) {
-        $scope.users = [];
+    function AddTaskCtrl($scope, RestangularService, $filter,$mdToast) {
+        var users = [],resultData;
+
         initData();
 
         function initData(){
             $scope.formObj = {
                 users:[]
             };
+            $scope.filterUsers=[];
+            users=[];
             getUsers();
         }
 
@@ -23,6 +26,11 @@
             RestangularService.all('api/users').customGET().then(function(result){
                if(result.status==200){
                    console.log(result);
+                   resultData=result.data;
+                   angular.forEach(result.data,function(val){
+                       users.push(val.firstName);
+                   })
+
                }
             });
         }
@@ -30,6 +38,15 @@
         $scope.save = function () {
             console.log($scope.formObj);
             var data=$scope.formObj;
+            angular.forEach($scope.filterUsers,function(val1){
+               angular.forEach(resultData,function(val2){
+                   if(val2.firstName==val1){
+                        console.log(val1);
+                       $scope.formObj.users.push({user:val2.login});
+                       console.log($scope.formObj.users);
+                   }
+               })
+            });
             // data.mangeuser=localStorage.mangeuser||'';
             // data.status="已上报";
             // data.source=""
@@ -56,12 +73,13 @@
 
         $scope.$watch('formObj.keyword', function (n, o) {
             if (angular.equals(n, o)) return;
-            console.log(n);
+
             if (!$scope.formObj.keyword) {
                 $scope.formObj.users = [];
                 return;
             }
-            $scope.formObj.users = $filter('filter')(users, n);
+            $scope.filterUsers = $filter('filter')(users, n);
+            console.log(n, $scope.filterUsers);
         })
     }
 })();

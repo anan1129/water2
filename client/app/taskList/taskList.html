@@ -32,14 +32,14 @@
                                             <span ng-class="{'text-primary':list.status=='已上报','text-info':list.status=='正在处理','text-success':list.status=='处理完成'}">{{list.status}}</span>
                                         </td>
                                         <td>
-                                            <span ng-repeat="user in list.users" style="margin:0 3px;">{{user}}</span>
+                                            <span ng-repeat="user in list.users" style="margin:0 3px;">{{user.user}}</span>
                                         </td>
                                         <td>{{list.origin}}</td>
                                         <td>{{list.river}}</td>
                                         <td>
                                             <span class="fa fa-eye text-primary" ng-click="toTaskDetails(list)"></span>
-                                            <span class="fa fa-edit text-info" ng-click="editTask(list)"></span>
-                                            <span class="fa fa-trash" style="color:rgb(229,57,53);margin-left:5px;" ng-click="listObj.del($index)"></span>
+                                            <!--<span class="fa fa-edit text-info" ng-click="editTask(list)"></span>-->
+                                            <span class="fa fa-trash" style="color:rgb(229,57,53);margin-left:5px;" ng-click="listObj.del(list)"></span>
                                         </td>
                                     </tr>
                                     </tbody>

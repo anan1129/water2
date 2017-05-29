@@ -8,7 +8,7 @@
         .config(['$stateProvider',function($stateProvider){
             $stateProvider
                 .state('edit-info',{
-                    url:'/edit-info',
+                    url:'/edit-info/:id',
                     templateUrl:'app/editInfo/editInfo.html'
                 })
         }])

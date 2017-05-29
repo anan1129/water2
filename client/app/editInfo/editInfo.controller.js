@@ -5,24 +5,56 @@
     'use strict';
 
     angular.module('app.editInfo.controller',[])
-        .controller('EditInfoCtrl',['$scope','GlobalData','$state',EditInfoCtrl])
+        .controller('EditInfoCtrl',['$scope','$stateParams','$state','RestangularService',EditInfoCtrl])
     ;
 
-    function EditInfoCtrl($scope,GlobalData,$state){
-        console.log(GlobalData);
+    function EditInfoCtrl($scope,$stateParams,$state,RestangularService){
+        console.log($stateParams);
         var users=[];
-
         $scope.formObj={
-            types:['新闻动态','通知','公告','一河一档','一河一策'],
+            type:'',
         };
+        initData();
+
+        function initData(){
+            getNews();
+            // getNewsTypes();
+        }
+
+        function getNews(){
+            RestangularService.all('/api/news').customGET($stateParams.id).then(function(result){
+                if(result.status==200){
+                    $scope.formObj=result.data;
+                    console.log($scope.formObj);
+                }
+            }).then(getNewsTypes).then(getRivers);
+        }
+
+        function getNewsTypes(){
+            RestangularService.all('api/news-types').customGET().then(function(result){
+                if(result.status==200){
+                    $scope.types=result.data;
+                }
+            });
+        }
+
+        function getRivers(){
+            RestangularService.all('api/rivers').customGET().then(function(result){
+                if(result.status==200){
+                    $scope.rivers=result.data;
+                }
+            })
+        }
+
+
 
         $scope.save=function(){
             $state.go('dynamic-info');
         }
 
-        angular.forEach(GlobalData.users,function(val){
-            users.push(val.name);
-        });
+        // angular.forEach(GlobalData.users,function(val){
+        //     users.push(val.name);
+        // });
 
     }
 })();
