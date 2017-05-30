@@ -4,6 +4,6 @@
 (function(){
     'use strict';
 
-    angular.module('app.addInfo',['app.addInfo.controller','app.addInfo.state'])
+    angular.module('app.addInfo',['app.addInfo.controller','app.addInfo.state','angularFileUpload'])
     ;
 })();
