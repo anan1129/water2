@@ -12,11 +12,12 @@
         var stateParams=$scope.stateParams=$stateParams;
         $scope.riverName='';
         console.log(stateParams);
-        $scope.dataObj={
-            riverName:''
-        }
+        $scope.dataObj={};
+        $scope.news=[
+            {title:'一河一档',content:null},
+            {title:'一河一策',content:null},
+        ];
         initData();
-        $scope.color="005bac";
 
         function initData(){
             getRivers();
@@ -64,14 +65,23 @@
                             $scope.src='assets/images/water/yspg.png';
                             break;
                     }
-
-                    // $(".map").css('background-image','url('+$scope.src+')');
-                    // console.log( 'url('+$scope.src+')');
                 }
+            }).then(function(){
+                getNewsType('一河一档');
+                getNewsType('一河一策');
             })
         }
-        function getNewsType(){
-            RestangularService.all('api/news-show-top?newsType')
+        function getNewsType(newsType){
+            RestangularService.all('api/news-show-top?newsType='+newsType+'&riverId='+stateParams.id).customGET().then(function(result){
+                if(result.status==200){
+                    console.log(result.data);
+                    if(newsType=='一河一档'){
+                        $scope.news[0].content=result.data;
+                    }else{
+                        $scope.news[1].content=result.data;
+                    }
+                }
+            })
         }
 
         $scope.dataObj;

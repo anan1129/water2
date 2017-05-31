@@ -4,24 +4,19 @@
 (function(){
     'use strict';
 
-    angular.module('app.addGroup.controller',[])
-        .controller('AddGroupCtrl',['$scope','$mdToast','$filter','RestangularService',AddGroupCtrl])
+    angular.module('app.editRiver.controller',[])
+        .controller('EditRiverCtrl',['$scope','$mdToast','$filter','RestangularService',EditRiverCtrl])
     ;
 
-    function AddGroupCtrl($scope,$mdToast,$filter,RestangularService){
+    function EditRiverCtrl($scope,$mdToast,$filter,RestangularService){
 
         $scope.getSubGroups=getSubGroups;
-        $scope.pidArr=[];
         $scope.users=[];
-        $scope.groups=[];
         initData();
         function initData(){
             $scope.formObj={
                 users:[]
             };
-            $scope.pidArr=[];
-            $scope.users=[];
-            $scope.groups=[];
             getGroups();
             getMaxL();
             getUsers();
@@ -40,24 +35,23 @@
         }
 
         function getGroups(){
-            RestangularService.all('api/groups-level/1').customGET().then(function(result){
+            RestangularService.all('api/groups').customGET().then(function(result){
                 if(result.status==200){
-                    $scope.groups.push(result.data);
+                    $scope.groups=result.data;
                 }
-            });
+            })
         }
 
-        function getSubGroups(id,index){
-            console.log(id);
-            if(id){
-                RestangularService.all('api/groups-childs').customGET(id).then(function(result){
+        function getSubGroups(level){
+
+            if(level){
+                RestangularService.all('api/groups-level').customGET(level).then(function(result){
                     if(result.status==200){
-                        console.log(result.data);
-                        if(result.data.length>0){
-                            $scope.groups[index+1]=result.data;
-                        }
+                        $scope.groups=result.data;
                     }
                 });
+            }else{
+                getGroups();
             }
 
         }
@@ -76,7 +70,7 @@
         $scope.save=function(){
 
             var data=$scope.formObj;
-            data.pid=$scope.pidArr[$scope.pidArr.length-1];
+            data.pid=data.pid?data.pid:$scope.level;
             // data.users=angular.fromJson(data.users);
             angular.forEach(data.users,function(val,key){
                 data.users[key]=angular.fromJson(val);

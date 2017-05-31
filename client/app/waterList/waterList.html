@@ -73,35 +73,35 @@
                             <span class="col-xs-6">黄浦江（杨浦段）</span>
                             <span class="col-xs-6">主干河道</span>
                         </li>
-                        <li class="list-group-item row" >
-                            <span class="col-xs-6">虬江</span>
-                            <span class="col-xs-6">主干河道</span>
+                        <li class="list-group-item row" ng-repeat="river in rivers">
+                            <span class="col-xs-6">{{river.riverName}}</span>
+                            <span class="col-xs-6">{{(river.riverName=='复兴岛运河'||river.riverName=='东走马塘'||river.riverName=='随塘河'||river.riverName=='经一河')?'主干河道':'次干河道'}}</span>
                         </li>
-                        <li class="list-group-item row" >
-                            <span class="col-xs-6">复兴到运河</span>
-                            <span class="col-xs-6">主干河道</span>
-                        </li>
-                        <li class="list-group-item row" >
-                            <span class="col-xs-6">杨树浦港</span>
-                            <span class="col-xs-6">主干河道</span>
-                        </li>
-                        <li class="list-group-item row" >
-                            <span class="col-xs-6">经一河</span>
-                            <span class="col-xs-6">主干河道</span>
-                        </li>
+                        <!--<li class="list-group-item row" >-->
+                            <!--<span class="col-xs-6">复兴到运河</span>-->
+                            <!--<span class="col-xs-6">主干河道</span>-->
+                        <!--</li>-->
+                        <!--<li class="list-group-item row" >-->
+                            <!--<span class="col-xs-6">杨树浦港</span>-->
+                            <!--<span class="col-xs-6">主干河道</span>-->
+                        <!--</li>-->
+                        <!--<li class="list-group-item row" >-->
+                            <!--<span class="col-xs-6">经一河</span>-->
+                            <!--<span class="col-xs-6">主干河道</span>-->
+                        <!--</li>-->
 
-                        <li class="list-group-item row" >
-                            <span class="col-xs-6">经六河</span>
-                            <span class="col-xs-6">次干河道</span>
-                        </li>
-                        <li class="list-group-item row" >
-                            <span class="col-xs-6">走马塘河</span>
-                            <span class="col-xs-6">次干河道</span>
-                        </li>
-                        <li class="list-group-item row" >
-                            <span class="col-xs-6">小吉普</span>
-                            <span class="col-xs-6">次干河道</span>
-                        </li>
+                        <!--<li class="list-group-item row" >-->
+                            <!--<span class="col-xs-6">经六河</span>-->
+                            <!--<span class="col-xs-6">次干河道</span>-->
+                        <!--</li>-->
+                        <!--<li class="list-group-item row" >-->
+                            <!--<span class="col-xs-6">走马塘河</span>-->
+                            <!--<span class="col-xs-6">次干河道</span>-->
+                        <!--</li>-->
+                        <!--<li class="list-group-item row" >-->
+                            <!--<span class="col-xs-6">小吉普</span>-->
+                            <!--<span class="col-xs-6">次干河道</span>-->
+                        <!--</li>-->
                     </ul>
                 </div>
             </div>

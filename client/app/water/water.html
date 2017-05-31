@@ -62,7 +62,7 @@
     }
 </style>
 <div class="water" ng-controller="WaterCtrl">
-    <md-tabs  md-dynamic-height md-swipe-content >
+    <md-tabs  md-dynamic-height >
         <md-tab>
             <md-tab-label>基础信息</md-tab-label>
             <md-tab-body>
@@ -108,12 +108,25 @@
             <md-tab-label>综合治理</md-tab-label>
             <md-tab-body>
                 <md-tabs>
-                    <md-tab>
-                        <md-tab-label>一河一档</md-tab-label>
-                        <md-tab-body>一河一档内容</md-tab-body>
+                    <md-tab ng-repeat="new in news">
+                        <md-tab-label>{{new.title}}</md-tab-label>
+                        <md-tab-body>
+                            <ul class="list-group">
+                                <li class="list-group-item" ng-repeat="content in new.content.content">
+                                    <h5>{{content.title}}</h5>
+                                    <p style="text-indent:2em;">{{content.content}}</p>
+                                    <div class="row">
+                                        <div class="col-xs-12">
+                                            <span class="pull-right text-info">{{content.createdDate}}</span>
+                                        </div>
+
+                                    </div>
+                                </li>
+                            </ul>
+                        </md-tab-body>
                     </md-tab>
                     <md-tab>
-                        <md-tab-label>一河一策</md-tab-label>
+                        <md-tab-label>{{new.title}}</md-tab-label>
                         <md-tab-body>一河一策内容</md-tab-body>
                     </md-tab>
                 </md-tabs>
