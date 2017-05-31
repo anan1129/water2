@@ -69,15 +69,15 @@
                 <div  >
                     <div class="row ui-section">
                         <div class="col-md-12">
-                            <div class="map" >
-                                <div id="baiduMap" baidu-map style="height:100%;"></div>
+                            <div class="map" style="background:url({{src}}) no-repeat 0 0;background-size:100% 100%" >
+                                <!--<div id="baiduMap" baidu-map style="height:100%;"></div>-->
                                 <button class="btn btn-success">投诉建议</button>
                             </div>
                             <div class="container">
                                 <div class="row">
                                     <div class="col-xs-3"><h5>一级河长</h5></div>
-                                    <div class="col-xs-3">{{dataObj.l1.name}}</div>
-                                    <div class="col-xs-6">{{dataObj.l1.pos}}</div>
+                                    <div class="col-xs-3">{{dataObj.name}}</div>
+                                    <div class="col-xs-6">{{dataObj.pos}}</div>
                                 </div>
                                 <div class="row">
                                     <div class="col-xs-12">

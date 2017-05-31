@@ -19,6 +19,7 @@
         function initData(){
             $scope.formObj={};
             getGroups();
+            getMaxL();
         }
 
         function getGroups(){
@@ -29,12 +30,29 @@
             })
         }
 
-        function getSubGroups(id){
-            RestangularService.all('api/groups').customGET(id).then(function(result){
+        function getSubGroups(level){
+
+            if(level){
+                RestangularService.all('api/groups-level').customGET(level).then(function(result){
+                    if(result.status==200){
+                        $scope.groups=result.data;
+                    }
+                });
+            }else{
+                getGroups();
+            }
+
+        }
+
+        function getMaxL(){
+            RestangularService.all('api/groups-maxLevel').customGET().then(function(result){
                 if(result.status==200){
-                    $scope.longPid=result.data;
+                    console.log(result.data);
+                    $scope.levelArr=[];
+                    $scope.levelArr.length=result.data;
+                    console.log($scope.levelArr);
                 }
-            });
+            })
         }
 
         $scope.save=function(){

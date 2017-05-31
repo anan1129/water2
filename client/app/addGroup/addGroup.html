@@ -11,16 +11,16 @@
                                     <div class="form-group">
                                         <label class="col-sm-2">上级组织</label>
                                         <div class="col-sm-5">
-                                            <select class="form-control" name="" ng-model="formObj.group" ng-change="getSubGroups(formObj.group.id)">
-                                                <option ng-hide="formObj.groups.length>0" value="">
-                                                    无顶级节点
+                                            <select class="form-control" name="" ng-model="level" ng-change="getSubGroups(level)">
+                                                <option  value="">
+                                                    1级节点
                                                 </option>
-                                                <option value="{{group.name}}" ng-repeat="group in groups" >{{group.name}}</option>
+                                                <option value="{{$index+1}}" ng-hide="$first" ng-repeat="l in levelArr track by $index" >{{$index+1}}级节点</option>
                                             </select>
                                         </div>
                                         <div class="col-sm-5">
                                             <select class="form-control" name="" ng-model="formObj.pid"
-                                                    ng-value="1">
+                                                    ng-value="">
                                                 <option value="{{group.id}}" ng-repeat="group in groups">
                                                     {{group.name}}
                                                 </option>
@@ -35,17 +35,26 @@
                                                    id="label-group-name">
                                         </div>
                                     </div>
-                                    <!--<div class="form-group has-feedback">-->
-                                        <!--<label for="label-person" class="col-sm-2">添加员工</label>-->
-                                        <!--<div class="col-sm-5">-->
+                                    <div class="form-group has-feedback">
+                                        <label  class="col-sm-2">添加人员</label>
+                                        <div class="col-sm-5">
                                             <!--<input type="text" class="form-control" id="label-person"-->
-                                                   <!--ng-model="formObj.keyword">-->
+                                                   <!--ng-model="keyword">-->
                                             <!--<span class="material-icons form-control-feedback">search</span>-->
-                                        <!--</div>-->
-                                    <!--</div>-->
+                                            <select multiple class="form-control" ng-model="formObj.users">
+                                                <option value="">
+                                                    不添加人员
+                                                </option>
+                                                <option ng-repeat="user in users " value="{{user}}">{{user.userName}}</option>
+                                            </select>
+                                        </div>
+                                    </div>
 
                                     <!--<div class="col-md-10 col-md-offset-2">-->
-                                        <!--<md-chips ng-model="formObj.users" ></md-chips>-->
+                                        <!--&lt;!&ndash;<md-chips ng-model="formObj.users" ></md-chips>&ndash;&gt;-->
+                                        <!--<select multiple class="form-control" ng-model="formObj.users">-->
+                                            <!--<option ng-repeat="user in users ">{{user.firstName}}</option>-->
+                                        <!--</select>-->
                                     <!--</div>-->
 
                                     <button type="submit" ui-wave class="btn btn-primary btn-w-md pull-right"

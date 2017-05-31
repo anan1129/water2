@@ -9,33 +9,65 @@
     ;
 
     function WaterInfoCtrl($scope,RestangularService,$mdToast){
-        $scope.getSubGroups=getSubGroups;
-        $scope.getUser=getUser;
+        $scope.getLevel=getLevel;
+        $scope.getUsers=getUsers;
         initData();
 
         function initData(){
             $scope.formObj={};
-            getGroups();
+            getMaxL();
+            getUsers();
         }
 
-        function getGroups(){
-            RestangularService.all('api/groups').customGET().then(function(result){
+        function getMaxL(){
+            RestangularService.all('api/groups-maxLevel').customGET().then(function(result){
                 if(result.status==200){
-                    $scope.groups=result.data;
+                    console.log(result.data);
+                    $scope.levelArr=[];
+                    $scope.levelArr.length=result.data;
+                    console.log($scope.levelArr);
                 }
             })
         }
 
-        function getSubGroups(id){
-            RestangularService.all('api/groups').customGET(id).then(function(result){
-                if(result.status==200){
-                    $scope.longPid=result.data;
-                }
-            });
+        function getLevel(level){
+            console.log(level);
+            if(level){
+                RestangularService.all('api/groups-level').customGET(level).then(function(result){
+                    if(result.status==200){
+                        $scope.groups=result.data;
+
+                    }
+                });
+            }else{
+                getGroups();
+            }
         }
 
-        function getUser(id){
-            RestangularService.all('api/groups/users').get(id).then(function(result){
+        function getUsers(id){
+            console.log(id);
+            if(id){
+                RestangularService.all('api/groups').customGET(id).then(function(result){
+                    if(result.status==200){
+                        $scope.users=result.data.users;
+                        console.log($scope.users);
+                    }
+                })
+            }else{
+                RestangularService.all('api/users').customGET().then(function(result){
+                    if(result.status==200){
+                        $scope.users=result.data;
+                    }
+                })
+            }
+            console.log($scope.users);
+
+        }
+
+
+
+        function getUser(){
+            RestangularService.all('api/groups/users').get().then(function(result){
                 console.log(result);
             })
         }
@@ -43,6 +75,25 @@
         $scope.save=function(){
             console.log($scope.formObj);
             var data=$scope.formObj;
+            angular.forEach(data.secondManagers,function(val,key){
+                if(val){
+                    var json=angular.fromJson(val)
+                    console.log(json);
+                    data.secondManagers[key]={
+                        user:json.login,
+                        // id:json.id,
+                        // userName:json.firstName,
+                        // department:json.department
+                    };
+                }
+            });
+            data.manager={
+                user:angular.fromJson(data.manager).login,
+                // id:angular.fromJson(data.manager).id,
+                // userName:angular.fromJson(data.manager).firstName,
+                // department:angular.fromJson(data.manager).department
+            }
+            console.log(data);
             RestangularService.all('api/rivers').customPOST(data).then(function(result){
                 console.log(result);
                 if(result.status==201){

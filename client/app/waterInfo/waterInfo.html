@@ -68,16 +68,16 @@
                                     <div layout layout-sm="column">
                                         <md-input-container flex>
                                             <label>上级组织</label>
-                                            <md-select ng-model="group">
-                                                <md-option ng-repeat="group in groups" value="{{group.id}}">
-                                                    {{group.name}}
+                                            <md-select ng-model="level"  ng-change="getLevel(level)">
+                                                <md-option   value="{{$index+1}}" ng-hide="$first"  ng-repeat="l in levelArr track by $index">
+                                                    {{$index}}
                                                 </md-option>
                                             </md-select>
                                         </md-input-container>
                                         <md-input-container flex>
                                             <label>下级组织</label>
-                                            <md-select ng-model="subGroup" ng-change="getSubGroups(group.id)">
-                                                <md-option ng-repeat="group in subGroups" value="{{group.id}}">
+                                            <md-select ng-model="pid" ng-change="getUsers(pid)">
+                                                <md-option ng-repeat="group in groups" ng-value="group.id" >
                                                     {{group.name}}
                                                 </md-option>
                                             </md-select>
@@ -85,19 +85,28 @@
                                         <md-input-container flex>
                                             <label>一级河长</label>
                                             <md-select ng-model="formObj.manager">
-                                                <md-option ng-repeat="users in managers" value="{{users.name}}">
-                                                    {{users.name}}
+                                                <md-option ng-repeat="user in users" value="{{user}}">
+                                                    {{user.userName||user.firstName}}
                                                 </md-option>
                                             </md-select>
                                         </md-input-container>
-                                        <md-input-container flex>
-                                            <label>二级河长</label>
-                                            <md-select ng-model="formObj.secondManagers">
-                                                <md-option ng-repeat="users in secondManagers" value="{{users.name}}">
-                                                    {{users.name}}
-                                                </md-option>
-                                            </md-select>
-                                        </md-input-container>
+                                        <!--<md-input-container flex>-->
+                                            <!--<label>二级河长</label>-->
+                                            <!--&lt;!&ndash;<md-select ng-model="formObj.secondManagers">&ndash;&gt;-->
+                                                <!--&lt;!&ndash;<md-option ng-repeat="user in users" value="{{user.user}}">&ndash;&gt;-->
+                                                    <!--&lt;!&ndash;{{user.userName}}&ndash;&gt;-->
+                                                <!--&lt;!&ndash;</md-option>&ndash;&gt;-->
+                                            <!--&lt;!&ndash;</md-select>&ndash;&gt;-->
+                                            <!---->
+                                        <!--</md-input-container>-->
+
+                                    </div>
+                                    <div class="form-group">
+                                        <label>二级河长</label>
+                                        <select ng-model="formObj.secondManagers" class="form-control" multiple>
+                                            <option value="{{user}}" ng-repeat="user in users" >
+                                                {{user.userName||user.firstName}}</option>
+                                        </select>
                                     </div>
                                     <button type="submit" ui-wave="" class="btn btn-primary btn-w-md pull-right ui-wave" style="margin-top:50px;">提交
                                     </button>
