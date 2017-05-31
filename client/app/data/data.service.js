@@ -8,6 +8,8 @@
         .factory('GlobalData', [GlobalData])
     ;
 
+
+
     function GlobalData() {
         return {
             groups: [

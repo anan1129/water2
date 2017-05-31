@@ -36,18 +36,23 @@
                     switch($scope.dataObj.riverName){
                         case '吉浦河' :
                             $scope.src='assets/images/water/xjp.png';
+                            $scope.img='assets/images/water/05-1.jpg';
                             break;
                         case '东走马塘' :
                             $scope.src='assets/images/water/dzmt.png';
+                            $scope.img='assets/images/water/02-1.jpg';
                             break;
                         case '复兴岛运河' :
                             $scope.src='assets/images/water/fxdyh.png';
+                            $scope.img='assets/images/water/04-1.jpg';
                             break;
                         case '虬江' :
                             $scope.src='assets/images/water/qj.png';
+                            $scope.img='assets/images/water/01-1.jpg';
                             break;
                         case '钱家浜' :
                             $scope.src='assets/images/water/qjb.png';
+                            $scope.img='assets/images/water/06-1.jpg';
                             break;
                         case '纬一河' :
                         case '纬二河' :
@@ -60,12 +65,15 @@
                         case '经二河' :
                         case '经三河' :
                             $scope.src='assets/images/water/xjwcsx.png';
+                            $scope.img='assets/images/water/08-1.jpg';
                             break;
                         case '杨浦滨江' :
                             $scope.src='assets/images/water/ypbj.png';
+                            $scope.img='assets/images/water/03-2.jpg';
                             break;
                         case '杨树浦港' :
                             $scope.src='assets/images/water/yspg.png';
+                            $scope.img='assets/images/water/07-1.jpg';
                             break;
                     }
                 }

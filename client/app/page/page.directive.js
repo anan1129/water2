@@ -59,7 +59,7 @@
                     case '/news':
                         return $element.addClass('body-wide body-water');
                 }
-                if(path.indexOf('water/')>0){
+                if(path.indexOf('water/')>0||path.indexOf('new-detail')>0){
                     return $element.addClass('body-wide body-water');
                 }
             };

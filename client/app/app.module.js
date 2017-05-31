@@ -30,6 +30,7 @@
         ,'app.home'
         ,'app.news'
         ,'app.editRiver'
+        ,'app.newDetail'
 
         // 3rd party feature modules
         ,'restangular'

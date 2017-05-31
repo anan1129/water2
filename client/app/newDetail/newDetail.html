@@ -1,0 +1,57 @@
+<style>
+    body {
+        color: #3D4051;
+        line-height: 1.65em;
+    }
+    .body-water .customizer-toggle {
+        display: none;
+    }
+
+    .body-water #quickview-customizer {
+        display: none;
+    }
+
+    .app.body-water > .main-container > .content-container {
+        margin-left: 0;
+        background: #fff;
+    }
+
+    .water {
+    }
+    .body-water .water .container  .row>div:nth-child(2){
+        text-align-last:justify;/* ie9*/
+        text-align:justify;
+        /*text-justify:inter-ideograph;*/
+    }
+    .water h5 {
+        font-weight: bold;
+        margin-top: 3px;
+    }
+
+    .water .content {
+        text-indent:2em;
+    }
+    .md-tab{
+        padding:0;
+    }
+    .md-tab>.custom-tab{
+        padding:12px 24px;
+    }
+
+
+</style>
+<div ng-controller="NewDetailCtrl" class="water">
+    <div class="row ui-section">
+        <div class="col-xs-12">
+            <div class="row" style="padding:10px;">
+                <div class="col-xs-12">
+                    <img ng-src="assets/images/news/zb{{stateParams.index}}.jpg" width="100%" alt="">
+                    <h5>{{data.title}} </h5>
+                    <div style="text-align:right;"><span class="text-info">{{data.createdDate|editDate}}</span></div>
+                    <p style="text-indent:2em;">{{data.content}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

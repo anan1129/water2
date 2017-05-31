@@ -4,6 +4,6 @@
 (function(){
     'use strict';
 
-    angular.module('app.news',['app.news.controller','app.news.state'])
+    angular.module('app.news',['app.news.controller','app.news.state','app.news.filter'])
     ;
 })();

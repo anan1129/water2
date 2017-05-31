@@ -17,6 +17,8 @@
             type:null
         };
         $scope.getListData=getListData;
+        $scope.dataInfo=dataInfo;
+
         initData();
 
         function initData(){
@@ -81,6 +83,12 @@
 
         function editInfo(obj) {
             $state.go('edit-info', obj);
+        }
+
+        function dataInfo(data,index){
+            console.log(data);
+            data.index=index;
+            $state.go('new-detail',data);
         }
     }
 })();
