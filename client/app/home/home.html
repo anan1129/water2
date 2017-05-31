@@ -164,7 +164,7 @@
     <!--<a class="jyh">经一河</a>-->
     <!--<a class="jeh">经二河</a>-->
     <!--<a class="jsh">经三河</a>-->
-    <a href="#!/water/{{river.id}}" ng-repeat="river in riverData" ng-class="{
+    <a ng-click="toDetail(river)" ng-repeat="river in riverData" ng-class="{
         'fxdyh':river.riverName=='复兴岛运河',
         'qj':river.riverName=='虬江',
         'njh':river.riverName=='嫩江河',
