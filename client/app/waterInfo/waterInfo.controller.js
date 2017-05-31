@@ -93,8 +93,6 @@
 
         }
 
-
-
         function getUser(){
             RestangularService.all('api/groups/users').get().then(function(result){
                 console.log(result);
@@ -110,9 +108,6 @@
                     console.log(json);
                     data.secondManagers[key]={
                         user:json.login,
-                        // id:json.id,
-                        // userName:json.firstName,
-                        // department:json.department
                     };
                 }
             });

@@ -79,9 +79,8 @@
 
         $scope.$watch('formObj.keyword', function (n, o) {
             if (angular.equals(n, o)) return;
-
-            if (!$scope.formObj.keyword) {
-                $scope.formObj.users = [];
+            if (!n) {
+                $scope.filterUsers = [];
                 return;
             }
             $scope.filterUsers = $filter('filter')(users, n);

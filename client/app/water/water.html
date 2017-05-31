@@ -41,7 +41,7 @@
         margin-bottom: 5px;
     }
 
-    .map button {
+    .map a.btn {
         position: absolute;
         top: 5px;
         right: 5px;
@@ -60,18 +60,24 @@
         display:flex;
         display:-webkit-flex;
     }
+    .md-tab{
+        padding:0;
+    }
+    .md-tab>.custom-tab{
+        padding:12px 24px;
+    }
 </style>
 <div class="water" ng-controller="WaterCtrl">
     <md-tabs  md-dynamic-height >
         <md-tab>
-            <md-tab-label>基础信息</md-tab-label>
+            <md-tab-label><div class="custom-tab">基础信息</div></md-tab-label>
             <md-tab-body>
                 <div  >
                     <div class="row ui-section">
                         <div class="col-md-12">
                             <div class="map" ng-style="{'background':'url('+src+') no-repeat 0 0','background-size':'100% 100%' }" >
                                 <!--<div id="baiduMap" baidu-map style="height:100%;"></div>-->
-                                <button class="btn btn-success">投诉建议</button>
+                                <a class="btn btn-success">投诉建议</a>
                             </div>
                             <div class="container">
                                 <div class="row">
@@ -101,15 +107,17 @@
             </md-tab-body>
         </md-tab>
         <md-tab>
-            <md-tab-label>水质数据</md-tab-label>
+            <md-tab-label><div class="custom-tab">水质数据</div></md-tab-label>
             <md-tab-body>水质数据内容</md-tab-body>
         </md-tab>
         <md-tab>
-            <md-tab-label>综合治理</md-tab-label>
+            <md-tab-label><div class="custom-tab">综合治理</div></md-tab-label>
             <md-tab-body>
                 <md-tabs>
                     <md-tab ng-repeat="new in news">
-                        <md-tab-label>{{new.title}}</md-tab-label>
+                        <md-tab-label>
+                            <div class="custom-tab">{{new.title}}</div>
+                        </md-tab-label>
                         <md-tab-body>
                             <ul class="list-group">
                                 <li class="list-group-item" ng-repeat="content in new.content.content">
@@ -125,15 +133,11 @@
                             </ul>
                         </md-tab-body>
                     </md-tab>
-                    <md-tab>
-                        <md-tab-label>{{new.title}}</md-tab-label>
-                        <md-tab-body>一河一策内容</md-tab-body>
-                    </md-tab>
                 </md-tabs>
             </md-tab-body>
         </md-tab>
         <md-tab>
-            <md-tab-label>巡河记录</md-tab-label>
+            <md-tab-label><div class="custom-tab">巡河记录</div></md-tab-label>
             <md-tab-body>巡河记录内容</md-tab-body>
         </md-tab>
 

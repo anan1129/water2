@@ -5,11 +5,14 @@
     'use strict';
 
     angular.module('app.water.controller',[])
-        .controller('WaterCtrl',['$scope','$stateParams','RestangularService',WaterCtrl])
+        .controller('WaterCtrl',['$scope','$stateParams','RestangularService','$state',WaterCtrl])
     ;
 
-    function WaterCtrl($scope,$stateParams,RestangularService){
+    function WaterCtrl($scope,$stateParams,RestangularService,$state){
         var stateParams=$scope.stateParams=$stateParams;
+        if(stateParams.id=="01-1"){
+            $state.go('home');
+        }
         $scope.riverName='';
         console.log(stateParams);
         $scope.dataObj={};

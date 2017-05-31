@@ -31,6 +31,12 @@
     .water .content {
         text-indent:2em;
     }
+    .md-tab{
+        padding:0;
+    }
+    .md-tab>.custom-tab{
+        padding:12px 24px;
+    }
 
 
 </style>
@@ -40,7 +46,7 @@
         <md-tabs md-dynamic-height >
             <md-tab ng-repeat="type in listObj.types">
                 <md-tab-label>
-                    <div ng-click="getData(type.name,$index)">{{type.name}}</div>
+                    <div class="custom-tab" ng-click="getData(type.name,$index)">{{type.name}}</div>
                 </md-tab-label>
                 <md-tab-body>
                     <ul class="list-group">
