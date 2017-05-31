@@ -39,7 +39,7 @@
         left:56%;
     }
     .hpj{
-        top:34%;
+        top:29%;
         width:5px;
         left:93%;
     }
@@ -131,30 +131,58 @@
         top:40%;
         left:16%;
     }
+    .sth{
+        top:34%;
+        left:72%;
+        width:5px;
+        line-height:15px;
+    }
 
 
 
 </style>
 <div ng-controller="HomeCtrl" class="water" >
-    <a href="#!/water/133" class="qj">虬江</a>
+    <!--<a href="#!/water/133" class="qj">虬江</a>-->
     <a class="hpj">黄浦江</a>
-    <a  class="fxdyh">复兴岛运河</a>
-    <a  class="njh">嫩江河</a>
-    <a href="#!/water/135" class="yspg">杨树浦港</a>
-    <a href="#!/water/132" class="dzmt">东走马塘</a>
-    <a class="sth">隋唐河</a>
-    <a class="zyh">中原河</a>
-    <a class="qjb">钱家浜</a>
-    <a class="wqh">纬七河</a>
-    <a class="wlh">纬六河</a>
-    <a class="wwh">纬五河</a>
-    <a class="wsh">纬四河</a>
-    <a class="wsanh">纬三河</a>
-    <a class="weh">纬二河</a>
-    <a class="wyh">纬一河</a>
-    <a class="jyh">经一河</a>
-    <a class="jeh">经二河</a>
-    <a class="jsh">经三河</a>
-    <a href="#!/water/134" class="xjp">小吉普</a>
+    <!--<a  class="fxdyh">复兴岛运河</a>-->
+    <!--<a  class="njh">嫩江河</a>-->
+    <!--<a href="#!/water/135" class="yspg">杨树浦港</a>-->
+    <!--<a href="#!/water/132" class="dzmt">东走马塘</a>-->
+    <!--<a class="sth">隋唐河</a>-->
+    <!--<a class="zyh">中原河</a>-->
+    <!--<a class="qjb">钱家浜</a>-->
+    <!--<a class="wqh">纬七河</a>-->
+    <!--<a class="wlh">纬六河</a>-->
+    <!--<a class="wwh">纬五河</a>-->
+    <!--<a class="wsh">纬四河</a>-->
+    <!--<a class="wsanh">纬三河</a>-->
+    <!--<a class="weh">纬二河</a>-->
+    <!--<a class="wyh">纬一河</a>-->
+    <!--<a class="jyh">经一河</a>-->
+    <!--<a class="jeh">经二河</a>-->
+    <!--<a class="jsh">经三河</a>-->
+    <a href="#!/water/{{river.id}}" ng-repeat="river in riverData" ng-class="{
+        'fxdyh':river.riverName=='复兴岛运河',
+        'qj':river.riverName=='虬江',
+        'njh':river.riverName=='嫩江河',
+        'yspg':river.riverName=='杨树浦港',
+        'dzmt':river.riverName=='东走马塘',
+        'sth':river.riverName=='隋唐河',
+        'zyh':river.riverName=='中原河',
+        'qjb':river.riverName=='钱家浜',
+        'wqh':river.riverName=='纬七河',
+        'wlh':river.riverName=='纬六河',
+        'wwh':river.riverName=='纬五河',
+        'wsh':river.riverName=='纬四河',
+        'wsanh':river.riverName=='纬三河',
+        'weh':river.riverName=='纬二河',
+        'wyh':river.riverName=='纬一河',
+        'jyh':river.riverName=='经一河',
+        'jeh':river.riverName=='经二河',
+        'jsh':river.riverName=='经三河',
+        'sth':river.riverName=='随塘河',
+        'xjp':river.riverName=='吉浦河',
+
+    }">{{river.riverName}}</a>
 </div>
 

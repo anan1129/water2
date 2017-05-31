@@ -264,7 +264,7 @@
                      ]
                 },
                 {
-                    "riverName": "经一河*",
+                    "riverName": "经一河",
                     "managementLevel": "村",
                     "length": "2.02",
                     "waterLevel": "2.5",
@@ -328,7 +328,7 @@
 
 
                 {
-                    "riverName": "经二河*",
+                    "riverName": "经二河",
                     "managementLevel": "村",
                     "length": "1.13",
                     "waterLevel": "2.8",
@@ -343,7 +343,7 @@
                     "content": ""
                 },
                 {
-                    "riverName": "经三河*",
+                    "riverName": "经三河",
                     "managementLevel": "村",
                     "length": "3.45",
                     "waterLevel": "2.8",
@@ -358,7 +358,7 @@
                     "content": ""
                 },
                 {
-                    "riverName": "纬三河*",
+                    "riverName": "纬三河",
                     "managementLevel": "村",
                     "length": "1.65",
                     "waterLevel": "2.8",
@@ -373,7 +373,7 @@
                     "content": ""
                 },
                 {
-                    "riverName": "纬四河*",
+                    "riverName": "纬四河",
                     "managementLevel": "村",
                     "length": "0.67",
                     "waterLevel": "2.8",
@@ -388,7 +388,7 @@
                     "content": ""
                 },
                 {
-                    "riverName": "纬五河*",
+                    "riverName": "纬五河",
                     "managementLevel": "村",
                     "length": "2.22",
                     "waterLevel": "2.8",
@@ -403,7 +403,7 @@
                     "content": ""
                 },
                 {
-                    "riverName": "纬六河*",
+                    "riverName": "纬六河",
                     "managementLevel": "村",
                     "length": "1.87",
                     "waterLevel": "2.5",

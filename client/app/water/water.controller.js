@@ -16,10 +16,12 @@
             riverName:''
         }
         initData();
+        $scope.color="005bac";
 
         function initData(){
             getRivers();
         }
+        // $scope.src='assets/images/water/xjp.png';
 
         function getRivers(){
             RestangularService.all('api/rivers').customGET(stateParams.id).then(function(result){
@@ -27,21 +29,21 @@
                     console.log(result.data);
                     $scope.dataObj=result.data;
                     $scope.$broadcast('map');
-                    switch($scope.dataObj){
-                        case '小吉普' :
-                            $scope.src='../assets/images/water/xjp.png';
+                    switch($scope.dataObj.riverName){
+                        case '吉浦河' :
+                            $scope.src='assets/images/water/xjp.png';
                             break;
                         case '东走马塘' :
-                            $scope.src='../assets/images/water/dzmt.png';
+                            $scope.src='assets/images/water/dzmt.png';
                             break;
                         case '复兴岛运河' :
-                            $scope.src='../assets/images/water/fxdyh.png';
+                            $scope.src='assets/images/water/fxdyh.png';
                             break;
                         case '虬江' :
-                            $scope.src='../assets/images/water/qj.png';
+                            $scope.src='assets/images/water/qj.png';
                             break;
                         case '钱家浜' :
-                            $scope.src='../assets/images/water/qjb.png';
+                            $scope.src='assets/images/water/qjb.png';
                             break;
                         case '纬一河' :
                         case '纬二河' :
@@ -53,15 +55,18 @@
                         case '经一河' :
                         case '经二河' :
                         case '经三河' :
-                            $scope.src='../assets/images/water/xjwcsx.png';
+                            $scope.src='assets/images/water/xjwcsx.png';
                             break;
                         case '杨浦滨江' :
-                            $scope.src='../assets/images/water/ypbj.png';
+                            $scope.src='assets/images/water/ypbj.png';
                             break;
                         case '杨树浦港' :
-                            $scope.src='../assets/images/water/yspg.png';
+                            $scope.src='assets/images/water/yspg.png';
                             break;
                     }
+
+                    // $(".map").css('background-image','url('+$scope.src+')');
+                    // console.log( 'url('+$scope.src+')');
                 }
             })
         }
