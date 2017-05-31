@@ -21,6 +21,7 @@
             // getNewsTypes();
         }
 
+
         function getNews(){
             RestangularService.all('/api/news').customGET($stateParams.id).then(function(result){
                 if(result.status==200){
@@ -49,7 +50,16 @@
 
 
         $scope.save=function(){
-            $state.go('dynamic-info');
+            console.log($scope.formObj.id);
+            var data=$scope.formObj;
+            console.log(data);
+
+            RestangularService.all('api/news').customPOST(data).then(function(result){
+                if(result.status==201){
+                    $state.go('dynamic-info');
+                }
+            })
+
         }
 
         // angular.forEach(GlobalData.users,function(val){

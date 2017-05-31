@@ -43,7 +43,7 @@
         }
         $scope.editInfo = editInfo;
 
-        function del(index) {
+        function del(id) {
             if(!toast){
                 toast = $mdToast.simple()
                     .content('确定要删除该任务？')
@@ -53,7 +53,11 @@
                 $mdToast.show(toast).then(function (response) {
                     console.log(response);
                     if(response=='ok'){
-                        $scope.listObj.data.splice(index,1);
+                        RestangularService.all('api/news').customDELETE(id).then(function(result){
+                            if(result.status==200){
+                                getListData();
+                            }
+                        })
                     }
                     toast=null;
                 });

@@ -5,10 +5,10 @@
     'use strict';
 
     angular.module('app.home.controller',[])
-        .controller('HomeCtrl',['$scope',HomeCtrl])
+        .controller('HomeCtrl',['$scope','RestangularService',HomeCtrl])
     ;
 
-    function HomeCtrl($scope){
+    function HomeCtrl($scope,RestangularService){
 
     }
 })();

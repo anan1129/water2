@@ -56,37 +56,75 @@
         border-top: 1px solid rgba(0,0,0,0.12);
         border-bottom: 1px solid rgba(0,0,0,0.12);
     }
+    md-pagination-wrapper{
+        display:flex;
+        display:-webkit-flex;
+    }
 </style>
-<div ng-controller="WaterCtrl" class="water">
-    <div class="row ui-section">
-        <div class="col-md-12">
-            <div class="map" >
-                <div id="baiduMap" baidu-map style="height:100%;"></div>
-                <button class="btn btn-success">投诉建议</button>
-            </div>
-            <div class="container">
-                <div class="row">
-                    <div class="col-xs-3"><h5>一级河长</h5></div>
-                    <div class="col-xs-3">{{dataObj.l1.name}}</div>
-                    <div class="col-xs-6">{{dataObj.l1.pos}}</div>
-                </div>
-                <div class="row">
-                    <div class="col-xs-12">
-                        <div class="row" ng-repeat="data in dataObj.l2">
-                            <div class="col-xs-3"><h5 ng-show="$first">二级河长</h5></div>
-                            <div class="col-xs-3">{{data.name}}<span></span></div>
-                            <div class="col-xs-6">{{data.pos}}</div>
+<div class="water" ng-controller="WaterCtrl">
+    <md-tabs  md-dynamic-height md-swipe-content >
+        <md-tab>
+            <md-tab-label>基础信息</md-tab-label>
+            <md-tab-body>
+                <div  >
+                    <div class="row ui-section">
+                        <div class="col-md-12">
+                            <div class="map" >
+                                <div id="baiduMap" baidu-map style="height:100%;"></div>
+                                <button class="btn btn-success">投诉建议</button>
+                            </div>
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-xs-3"><h5>一级河长</h5></div>
+                                    <div class="col-xs-3">{{dataObj.l1.name}}</div>
+                                    <div class="col-xs-6">{{dataObj.l1.pos}}</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <div class="row" ng-repeat="data in dataObj.l2">
+                                            <div class="col-xs-3"><h5 ng-show="$first">二级河长</h5></div>
+                                            <div class="col-xs-3">{{data.name}}<span></span></div>
+                                            <div class="col-xs-6">{{data.pos}}</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <h5>基本信息</h5>
+                                        <p class="text-content">{{dataObj.content}}</p>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-xs-12">
-                        <h5>基本信息</h5>
-                        <p class="text-content">{{dataObj.content}}</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+            </md-tab-body>
+        </md-tab>
+        <md-tab>
+            <md-tab-label>水质数据</md-tab-label>
+            <md-tab-body>水质数据内容</md-tab-body>
+        </md-tab>
+        <md-tab>
+            <md-tab-label>综合治理</md-tab-label>
+            <md-tab-body>
+                <md-tabs>
+                    <md-tab>
+                        <md-tab-label>一河一档</md-tab-label>
+                        <md-tab-body>一河一档内容</md-tab-body>
+                    </md-tab>
+                    <md-tab>
+                        <md-tab-label>一河一策</md-tab-label>
+                        <md-tab-body>一河一策内容</md-tab-body>
+                    </md-tab>
+                </md-tabs>
+            </md-tab-body>
+        </md-tab>
+        <md-tab>
+            <md-tab-label>巡河记录</md-tab-label>
+            <md-tab-body>巡河记录内容</md-tab-body>
+        </md-tab>
+
+    </md-tabs>
+
 </div>
 

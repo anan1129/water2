@@ -52,6 +52,7 @@
                     case '/water/07-2':
                     case '/water/08-1':
                     case '/water/09-1':
+                    case '/water/132':
                     case '/comp-control':
                     case '/water-list':
                     case '/home':

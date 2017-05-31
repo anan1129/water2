@@ -17,54 +17,144 @@
     }
 
     .water {
-    }
-    .body-water .water .container  .row>div:nth-child(2){
-        text-align-last:justify;/* ie9*/
-        text-align:justify;
-        /*text-justify:inter-ideograph;*/
-    }
-    .water h5 {
-        font-weight: bold;
-        margin-top: 3px;
-    }
-
-    .water p.text-content {
-        margin-top: 10px;
-        text-indent: 2em;
-    }
-
-    .map {
-        background: url('assets/images/water/01-1.jpg') no-repeat 0 0;
-        min-height: 600px;
-        background-size:100% auto;
-        position: relative;
-        margin-bottom: 5px;
-    }
-
-    .map button {
+        background: url('assets/images/water/home-bg2.jpg') no-repeat 0 0;
+        background-size:auto 100%;
         position: absolute;
-        top: 5px;
-        right: 5px;
-        border-radius: 20px;
+        left:0;
+        top:0;
+        right:0;
+        bottom:0;
+    }
+    span{
+        color:#fff;
+        position:absolute;
+        left:0;
+        top:0;
+        font-size:0.1em;
+        -webkit-text-stroke: 0px #ccc;
+        -webkit-text-fill-color:#fff;
+    }
+    .qj{
+        top:42%;
+        left:56%;
+    }
+    .hpj{
+        top:34%;
+        width:5px;
+        left:93%;
+    }
+    .fxdyh{
+        width:5px;
+        top:52%;
+        left:84%;
+        font-size:12px;
+        line-height:15px;
+    }
+    .njh{
+        top:41%;
+        left:82%;
+
+    }
+    .yspg{
+        top:68%;
+        left:56%;
+        font-size:12px;
+    }
+    .dzmt{
+        top:54%;
+        left:50%;
+    }
+    .sth{
+        top:34%;
+        left:72%;
+        width:5px;
+        line-height:15px;
+    }
+    .zyh{
+        top:27%;
+        left:58%;
+    }
+    .qjb{
+        top:20%;
+        left:58%;
+    }
+    .wqh{
+        top:15%;
+        left:40%;
+    }
+    .wlh{
+        top:21%;
+        left:40%;
+    }
+    .wwh{
+        top:23%;
+        left:34%;
+    }
+    .wsh{
+        top:25%;
+        left:28%;
+    }
+    .wsanh{
+        top:29%;
+        left:28%;
+    }
+    .weh{
+        top:34%;
+        left:31%;
+    }
+    .wyh{
+        top:40%;
+        left:28%;
     }
 
-    .body-water .water .container > .row {
-        padding: 10px 0;
+    .jyh{
+        top:22%;
+        left:24%;
+        width:5px;
+        line-height:15px;
+        transform: rotate(25deg);
+    }
+    .jeh{
+        top:26%;
+        left:44%;
+        width:5px;
+        line-height:15px;
+    }
+    .jsh{
+        top:26%;
+        left:53%;
+        width:5px;
+        line-height:15px;
+        transform: rotate(25deg);
+    }
+    .xjp{
+        top:40%;
+        left:16%;
     }
 
-    .body-water .water .container > .row:nth-child(2) {
-        border-top: 1px solid rgba(0,0,0,0.12);
-        border-bottom: 1px solid rgba(0,0,0,0.12);
-    }
+
+
 </style>
-<div ng-controller="HomeCtrl" class="water">
-    <div class="row ui-section">
-        <div class="col-md-12">
-            <div class="map" >
-                <div id="baiduMap" home-baidu-map style="min-height:600px;"></div>
-
-            </div>
-        </div>
-    </div>
+<div ng-controller="HomeCtrl" class="water" >
+    <span class="qj">虬江</span>
+    <span class="hpj">黄浦江</span>
+    <span class="fxdyh">复兴岛运河</span>
+    <span class="njh">嫩江河</span>
+    <span class="yspg">杨树浦港</span>
+    <span class="dzmt">东走马塘</span>
+    <span class="sth">隋唐河</span>
+    <span class="zyh">中原河</span>
+    <span class="qjb">钱家浜</span>
+    <span class="wqh">纬七河</span>
+    <span class="wlh">纬六河</span>
+    <span class="wwh">纬五河</span>
+    <span class="wsh">纬四河</span>
+    <span class="wsanh">纬三河</span>
+    <span class="weh">纬二河</span>
+    <span class="wyh">纬一河</span>
+    <span class="jyh">经一河</span>
+    <span class="jeh">经二河</span>
+    <span class="jsh">经三河</span>
+    <span class="xjp">小吉普</span>
 </div>
 

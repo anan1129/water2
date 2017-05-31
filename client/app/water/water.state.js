@@ -8,7 +8,7 @@
         .config(['$stateProvider',function($stateProvider){
             $stateProvider
                 .state('water',{
-                    url:'/water/:name',
+                    url:'/water/:id',
                     templateUrl:'app/water/water.html'
                 })
         }])

@@ -28,150 +28,31 @@
         margin-top: 3px;
     }
 
-    .water p.text-content {
-        margin-top: 10px;
-        text-indent: 2em;
+    .water .content {
+        text-indent:2em;
     }
 
-    .map {
-        background: url('assets/images/water/01-1.jpg') no-repeat 0 0;
-        min-height: 600px;
-        background-size:100% auto;
-        position: relative;
-        margin-bottom: 5px;
-    }
 
-    .map button {
-        position: absolute;
-        top: 5px;
-        right: 5px;
-        border-radius: 20px;
-    }
-
-    .body-water .water .container > .row {
-        padding: 10px 0;
-    }
-
-    .body-water .water .container > .row:nth-child(2) {
-        border-top: 1px solid rgba(0,0,0,0.12);
-        border-bottom: 1px solid rgba(0,0,0,0.12);
-    }
 </style>
 <div ng-controller="NewsCtrl" class="water">
     <div class="row ui-section">
         <div class="col-md-12">
-            <ul class="list-group">
-                <li class="list-group-item"  style="position:relative;">
-                    <div class="row">
-                        <div class="col-xs-4">
-                            <img src="../assets/images/water/01-1.jpg" style="width:100%;"  alt="">
-                        </div>
-                        <div class="col-xs-7">
-
-                            <div class="row">
-                                <div style="font-size:15px;font-weight:bold;">新闻1</div>
-                                <div class="" style="color:#e01222;font-size:12px;">新闻内容</div>
-                            </div>
-                        </div>
-                    </div>
-                    <span style="position:absolute;right:15px;bottom:10px;">05-30</span>
-                </li>
-                <li class="list-group-item"  style="position:relative;">
-                    <div class="row">
-                        <div class="col-xs-4">
-                            <img src="../assets/images/water/01-1.jpg" style="width:100%;"  alt="">
-                        </div>
-                        <div class="col-xs-7">
-
-                            <div class="row">
-                                <div style="font-size:15px;font-weight:bold;">新闻1</div>
-                                <div class="" style="color:#e01222;font-size:12px;">新闻内容</div>
-                            </div>
-                        </div>
-                    </div>
-                    <span style="position:absolute;right:15px;bottom:10px;">05-30</span>
-                </li>
-                <li class="list-group-item"  style="position:relative;">
-                    <div class="row">
-                        <div class="col-xs-4">
-                            <img src="../assets/images/water/01-1.jpg" style="width:100%;"  alt="">
-                        </div>
-                        <div class="col-xs-7">
-
-                            <div class="row">
-                                <div style="font-size:15px;font-weight:bold;">新闻1</div>
-                                <div class="" style="color:#e01222;font-size:12px;">新闻内容</div>
-                            </div>
-                        </div>
-                    </div>
-                    <span style="position:absolute;right:15px;bottom:10px;">05-30</span>
-                </li>
-                <li class="list-group-item"  style="position:relative;">
-                    <div class="row">
-                        <div class="col-xs-4">
-                            <img src="../assets/images/water/01-1.jpg" style="width:100%;"  alt="">
-                        </div>
-                        <div class="col-xs-7">
-
-                            <div class="row">
-                                <div style="font-size:15px;font-weight:bold;">新闻1</div>
-                                <div class="" style="color:#e01222;font-size:12px;">新闻内容</div>
-                            </div>
-                        </div>
-                    </div>
-                    <span style="position:absolute;right:15px;bottom:10px;">05-30</span>
-                </li>
-                <li class="list-group-item"  style="position:relative;">
-                    <div class="row">
-                        <div class="col-xs-4">
-                            <img src="../assets/images/water/01-1.jpg" style="width:100%;"  alt="">
-                        </div>
-                        <div class="col-xs-7">
-
-                            <div class="row">
-                                <div style="font-size:15px;font-weight:bold;">新闻1</div>
-                                <div class="" style="color:#e01222;font-size:12px;">新闻内容</div>
-                            </div>
-                        </div>
-                    </div>
-                    <span style="position:absolute;right:15px;bottom:10px;">05-30</span>
-                </li>
-                <li class="list-group-item"  style="position:relative;">
-                    <div class="row">
-                        <div class="col-xs-4">
-                            <img src="../assets/images/water/01-1.jpg" style="width:100%;"  alt="">
-                        </div>
-                        <div class="col-xs-7">
-
-                            <div class="row">
-                                <div style="font-size:15px;font-weight:bold;">新闻1</div>
-                                <div class="" style="color:#e01222;font-size:12px;">新闻内容</div>
-                            </div>
-                        </div>
-                    </div>
-                    <span style="position:absolute;right:15px;bottom:10px;">05-30</span>
-                </li>
-
-                <li class="list-group-item" ng-repeat="data in dataObj.data" style="position:relative;">
-                    <div class="row">
-                        <div class="col-xs-4">{{data.id}}</div>
-                        <div class="col-xs-4">{{data.addr}}</div>
-                        <div class="col-xs-4"><span class="text-success pull-right">{{data.status}}</span></div>
-                    </div>
-                    <div class="row">
-                        <div class="col-xs-4">
-                            <img src="{{data.pic}}" style="width:100%;" alt="">
-                        </div>
-                        <div class="col-xs-8">
-                            <div class="row">
-                                <div class="">{{data.content}}</div>
-                            </div>
-
-                        </div>
-                    </div>
-                    <span style="position:absolute;right:15px;bottom:10px;">{{data.date}}</span>
-                </li>
-            </ul>
+        <md-tabs md-dynamic-height md-swipe-content >
+            <md-tab ng-repeat="type in listObj.types">
+                <md-tab-label>
+                    <div ng-click="getData(type.name,$index)">{{type.name}}</div>
+                </md-tab-label>
+                <md-tab-body>
+                    <ul class="list-group">
+                        <li class="list-group-item" ng-repeat="body in type.body.content"  ng-click="dataInfo(body.id)">
+                            <h5>{{body.title}}</h5>
+                            <p class="content">{{body.content}}</p>
+                            <p><span class="text-danger">发布人：{{body.createdBy}}</span>  <span class="pull-right">{{body.createdDate}}</span></p>
+                        </li>
+                    </ul>
+                </md-tab-body>
+            </md-tab>
+        </md-tabs>
         </div>
     </div>
 </div>

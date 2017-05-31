@@ -35,11 +35,11 @@
         ,'md.data.table'
         , 'app.user'
     ])
-        .service('RestangularService',function(Restangular){
+        .service('RestangularService',['Restangular',function(Restangular){
             return Restangular.withConfig(function (RestangularConfigurer) {
                 RestangularConfigurer.setFullResponse(true).setBaseUrl('http://106.15.48.81:8080');
             });
-        })
+        }])
     ;
 
 })();

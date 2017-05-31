@@ -18,11 +18,11 @@
                                                 <option value="{{group.name}}" ng-repeat="group in groups" >{{group.name}}</option>
                                             </select>
                                         </div>
-                                        <div class="col-sm-5" ng-show="longPid.length>0">
-                                            <select class="form-control" name="" ng-model="formObj.longPid"
+                                        <div class="col-sm-5">
+                                            <select class="form-control" name="" ng-model="formObj.pid"
                                                     ng-value="1">
-                                                <option value="{{pid.name}}" ng-repeat="pid in longPid">
-                                                    {{pid.name}}
+                                                <option value="{{group.id}}" ng-repeat="group in groups">
+                                                    {{group.name}}
                                                 </option>
                                             </select>
                                         </div>
@@ -44,9 +44,9 @@
                                         <!--</div>-->
                                     <!--</div>-->
 
-                                    <div class="col-md-10 col-md-offset-2">
-                                        <md-chips ng-model="formObj.users" ></md-chips>
-                                    </div>
+                                    <!--<div class="col-md-10 col-md-offset-2">-->
+                                        <!--<md-chips ng-model="formObj.users" ></md-chips>-->
+                                    <!--</div>-->
 
                                     <button type="submit" ui-wave class="btn btn-primary btn-w-md pull-right"
                                             style="margin-top:50px;" >添加组织

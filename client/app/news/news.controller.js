@@ -26,12 +26,31 @@
 
         function getNewsTypes(){
             RestangularService.all('api/news-types').customGET().then(function(result){
+                console.log(result);
                 if(result.status==200){
                     $scope.listObj.types=result.data;
-                    return  $scope.listObj.types;
                 }
-            });
+            }).then(function(){
+                RestangularService.all('api/news-show-top?newsType=新闻动态&newsType2='+$scope.listObj.types[0].name).customGET().then(function(result){
+                    if(result.status==200){
+                        console.log( $scope.listObj.types);
+                        $scope.listObj.types[0].body=result.data;
+                    }
+                })
+            })
         }
+
+        $scope.getData=function(name,index){
+            console.log(name);
+            RestangularService.all('api/news-show-top?newsType=新闻动态&newsType2='+name).customGET().then(function(result){
+                if(result.status==200){
+                    console.log( $scope.listObj.types);
+                    $scope.listObj.types[index].body=result.data;
+                }
+            })
+        }
+
+
 
         function getListData(id){
             console.log(id);
