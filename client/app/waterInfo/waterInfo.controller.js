@@ -11,12 +11,17 @@
     function WaterInfoCtrl($scope,RestangularService,$mdToast){
         $scope.getLevel=getLevel;
         $scope.getUsers=getUsers;
+        $scope.getGroups=getGroups;
+        $scope.getSubGroups=getSubGroups;
         initData();
 
         function initData(){
             $scope.formObj={};
             getMaxL();
             getUsers();
+            $scope.pidArr=[];
+            $scope.groups=[];
+            getGroups();
         }
 
         function getMaxL(){
@@ -61,6 +66,30 @@
                 })
             }
             console.log($scope.users);
+
+        }
+
+        function getGroups(){
+            RestangularService.all('api/groups-level/1').customGET().then(function(result){
+                if(result.status==200){
+                    $scope.groups.push(result.data);
+                }
+            });
+        }
+
+        function getSubGroups(id,index){
+            console.log(id);
+            if(id){
+                RestangularService.all('api/groups-childs').customGET(id).then(function(result){
+                    if(result.status==200){
+                        console.log(result.data);
+                        if(result.data.length>0){
+                            $scope.groups=$scope.groups.slice(0,index+1);
+                            $scope.groups[index+1]=result.data;
+                        }
+                    }
+                });
+            }
 
         }
 

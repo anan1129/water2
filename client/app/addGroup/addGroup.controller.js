@@ -54,6 +54,7 @@
                     if(result.status==200){
                         console.log(result.data);
                         if(result.data.length>0){
+                            $scope.groups=$scope.groups.slice(0,index+1);
                             $scope.groups[index+1]=result.data;
                         }
                     }

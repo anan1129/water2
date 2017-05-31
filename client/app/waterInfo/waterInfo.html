@@ -66,22 +66,22 @@
                                     <div class="divider divider-dashed divider-lg pull-in"></div>
                                     <h2 class="section-header">负责人</h2>
                                     <div layout layout-sm="column">
-                                        <md-input-container flex>
-                                            <label>上级组织</label>
-                                            <md-select ng-model="level"  ng-change="getLevel(level)">
-                                                <md-option   value="{{$index+1}}" ng-hide="$first"  ng-repeat="l in levelArr track by $index">
-                                                    {{$index}}
+                                        <md-input-container flex ng-repeat="group in groups">
+                                            <label>选择组</label>
+                                            <md-select ng-model="pidArr[$index]"  ng-change="getSubGroups(pidArr[$index],$index)">
+                                                <md-option   value="{{l.id}}"  ng-repeat="l in group">
+                                                    {{l.name}}
                                                 </md-option>
                                             </md-select>
                                         </md-input-container>
-                                        <md-input-container flex>
-                                            <label>下级组织</label>
-                                            <md-select ng-model="pid" ng-change="getUsers(pid)">
-                                                <md-option ng-repeat="group in groups" ng-value="group.id" >
-                                                    {{group.name}}
-                                                </md-option>
-                                            </md-select>
-                                        </md-input-container>
+                                        <!--<md-input-container flex>-->
+                                            <!--<label>选择组</label>-->
+                                            <!--<md-select ng-model="pid" ng-change="getUsers(pid)">-->
+                                                <!--<md-option ng-repeat="group in groups" ng-value="group.id" >-->
+                                                    <!--{{group.name}}-->
+                                                <!--</md-option>-->
+                                            <!--</md-select>-->
+                                        <!--</md-input-container>-->
                                         <md-input-container flex>
                                             <label>一级河长</label>
                                             <md-select ng-model="formObj.manager">
