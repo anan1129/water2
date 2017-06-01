@@ -70,8 +70,8 @@
         width:100%;
     }
 </style>
-<div class="water" ng-controller="WaterCtrl">
-    <md-tabs  md-dynamic-height >
+<div class="water" ng-controller="WaterCtrl" ng-cloak>
+    <md-tabs  style="position: absolute;top: 0;bottom: 0; width: 100vw;" >
         <md-tab>
             <md-tab-label><div class="custom-tab">基础信息</div></md-tab-label>
             <md-tab-body>
@@ -117,7 +117,7 @@
         <md-tab>
             <md-tab-label><div class="custom-tab">综合治理</div></md-tab-label>
             <md-tab-body>
-                <md-tabs>
+                <md-tabs md-dynamic-height>
                     <md-tab ng-repeat="new in news">
                         <md-tab-label>
                             <div class="custom-tab">{{new.title}}</div>
@@ -126,12 +126,11 @@
                             <ul class="list-group">
                                 <li class="list-group-item" ng-repeat="content in new.content.content">
                                     <h5>{{content.title}}</h5>
-                                    <p style="text-indent:2em;" aaa ng-bind-html="content.content">{{content.content}}</p>
+                                    <p style="text-indent:2em;"  ng-bind-html="content.content">{{content.content}}</p>
                                     <div class="row">
                                         <div class="col-xs-12">
-                                            <span class="pull-right text-info">{{content.createdDate}}</span>
+                                            <span class="pull-right text-info">{{content.createdDate|editDate}}</span>
                                         </div>
-
                                     </div>
                                 </li>
                             </ul>
