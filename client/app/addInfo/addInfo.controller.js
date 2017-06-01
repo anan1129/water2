@@ -149,7 +149,7 @@
         uploader.onSuccessItem = function (fileItem, response, status, headers) {
             $scope.filePath=$scope.fileOrigin+response.path;
             console.log($scope.filePath);
-            // $scope.formObj.attachments=$scope.filePath;
+            // $scope.formObj.imageUrl=$scope.filePath;
             console.log(fileItem);
             console.log(response);
             fileItem.filePath = response.filePath;

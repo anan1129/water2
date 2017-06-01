@@ -35,6 +35,7 @@
                     $scope.$broadcast('map');
                     switch($scope.dataObj.riverName){
                         case '吉浦河' :
+                        case '小吉浦' :
                             $scope.src='assets/images/water/xjp.png';
                             $scope.img='assets/images/water/05-1.jpg';
                             break;
@@ -88,8 +89,16 @@
                     console.log(result.data);
                     if(newsType=='一河一档'){
                         $scope.news[0].content=result.data;
+
                     }else{
                         $scope.news[1].content=result.data;
+                        // console.log($scope.news[1].content.content);
+                        // angular.forEach($scope.news[1].content.content,function(val){
+                        //     if(val.content){
+                        //         console.log(val.content);
+                        //         $scope.$broadcast('showContent',val.content);
+                        //     }
+                        // })
                     }
                 }
             })

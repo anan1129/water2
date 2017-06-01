@@ -35,4 +35,31 @@
                 }
             }
         })
+        .directive('aaa',function(){
+            return {
+                restrict:'A',
+                scope:{
+                    content:'='
+                },
+                link:function(scope,ele,attr){
+                    // ele.append(scope.content);
+                    // var imgs=ele.find('img');
+                    //
+                    // // angular.forEach(imgs,function(val){
+                    // //
+                    // //     $(val).css('width','100%');
+                    // // });
+                    console.log(ele);
+                    var imgs=ele.find('img');
+
+                    angular.forEach(imgs,function(val){
+
+                        $(val).css('width','100%');
+                    });
+                    scope.$apply();
+                }
+            }
+        })
+
+    ;
 })();

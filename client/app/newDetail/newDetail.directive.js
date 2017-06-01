@@ -10,6 +10,7 @@
                 restrict:'A',
                 link:function(scope,ele,attr){
                     scope.$on('showContent',function(e,data){
+                        console.log(data);
                         ele.append(data);
                         var imgs=ele.find('img');
 
@@ -22,5 +23,6 @@
                 }
             }
         })
+
     ;
 })();
