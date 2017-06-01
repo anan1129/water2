@@ -4,6 +4,6 @@
 (function(){
     'use strict';
 
-    angular.module('app.editInfo',['app.editInfo.controller','app.editInfo.state'])
+    angular.module('app.editInfo',['app.editInfo.controller','app.editInfo.state','textAngular'])
     ;
 })();

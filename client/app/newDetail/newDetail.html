@@ -48,7 +48,9 @@
                     <img ng-src="assets/images/news/zb{{stateParams.index}}.jpg" width="100%" alt="">
                     <h5>{{data.title}} </h5>
                     <div style="text-align:right;"><span class="text-info">{{data.createdDate|editDate}}</span></div>
-                    <p style="text-indent:2em;">{{data.content}}</p>
+                    <!--<p style="text-indent:2em;">{{data.content}}</p>-->
+                    <!--<text-angular ng-model="data.content"></text-angular>-->
+                    <p show-html ></p>
                 </div>
             </div>
         </div>

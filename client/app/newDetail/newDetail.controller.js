@@ -24,6 +24,7 @@
                 if(result.status==200){
                     console.log(result.data);
                     $scope.data=result.data;
+                    $scope.$broadcast('showContent',$scope.data.content);
                 }
             })
         }

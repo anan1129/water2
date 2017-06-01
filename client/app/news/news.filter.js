@@ -7,8 +7,11 @@
     angular.module('app.news.filter', [])
         .filter('editDate', [function(){
             return function(input){
-                var str=input.split('T').join(' ');
-                str=str.split('Z').join('');
+                var str;
+                if(input){
+                    str=input.split('T').join(' ');
+                    str=str.split('Z').join('');
+                }
                 return str;
             }
         }])

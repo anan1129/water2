@@ -12,11 +12,16 @@
         var users = [];
         $scope.infoTypes = ['新闻动态', '一河一档', '一河一策'];
         $scope.title = 'add group';
+        $scope.fileOrigin="http://106.15.48.81:8080/api/file-show/path?filepath=";
+        $scope.filePath;
 
         $scope.formObj = {
             attachments: []
         };
         initData();
+
+        console.log($scope.htmlVariable);
+        console.log($scope.htmlcontent);
 
         function initData() {
             $scope.formObj = {
@@ -26,6 +31,7 @@
             getRivers();
             if (uploader) uploader.clearQueue();
             $scope.addTypes = false;
+            $scope.htmlVariable='';
         }
 
         function getInfoTypes() {
@@ -54,6 +60,8 @@
             });
             var data = $scope.formObj;
             if (angular.isArray(data.newsType2)) data.newsType2 = data.newsType2.join(',');
+            data.content=$scope.htmlVariable;
+            console.log(data);
             RestangularService.all('api/news').customPOST(data).then(function (result) {
                 if (result.status == 201) {
                     $mdToast.show(
@@ -139,9 +147,11 @@
         // };
         console.log(uploader);
         uploader.onSuccessItem = function (fileItem, response, status, headers) {
-
+            $scope.filePath=$scope.fileOrigin+response.path;
+            console.log($scope.filePath);
+            // $scope.formObj.attachments=$scope.filePath;
+            console.log(fileItem);
             console.log(response);
-            console.log(fileItem._file.name);
             fileItem.filePath = response.filePath;
             fileItem.fileName = response.fileName;
             // $scope.formObj.attachments.push({filePath:response.filePath,fileName:response.fileName});

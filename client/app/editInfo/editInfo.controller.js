@@ -18,6 +18,9 @@
 
         function initData(){
             getNews();
+            $scope.formObj={
+                type:'',
+            };
             // getNewsTypes();
         }
 
