@@ -31,6 +31,8 @@
     .water p.text-content {
         margin-top: 10px;
         text-indent: 2em;
+        font-size:14px;
+        line-height:1.6;
     }
 
     .map {
@@ -68,6 +70,9 @@
     }
     img{
         width:100%;
+    }
+    .text{
+        /*font-size:14px !important;*/
     }
 </style>
 <div class="water" ng-controller="WaterCtrl" ng-cloak>
@@ -126,7 +131,7 @@
                             <ul class="list-group">
                                 <li class="list-group-item" ng-repeat="content in new.content.content">
                                     <h5>{{content.title}}</h5>
-                                    <p style="text-indent:2em;"  ng-bind-html="content.content">{{content.content}}</p>
+                                    <p  class="text" ng-bind-html="content.content">{{content.content}}</p>
                                     <div class="row">
                                         <div class="col-xs-12">
                                             <span class="pull-right text-info">{{content.createdDate|editDate}}</span>

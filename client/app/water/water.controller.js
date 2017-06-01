@@ -17,8 +17,9 @@
         console.log(stateParams);
         $scope.dataObj={};
         $scope.news=[
-            {title:'一河一档',content:null},
             {title:'一河一策',content:null},
+            {title:'一河一档',content:null},
+
         ];
         initData();
 
@@ -79,15 +80,15 @@
                     }
                 }
             }).then(function(){
-                getNewsType('一河一档');
                 getNewsType('一河一策');
+                getNewsType('一河一档');
             })
         }
         function getNewsType(newsType){
             RestangularService.all('api/news-show-top?newsType='+newsType+'&riverId='+stateParams.id).customGET().then(function(result){
                 if(result.status==200){
                     console.log(result.data);
-                    if(newsType=='一河一档'){
+                    if(newsType=='一河一策'){
                         $scope.news[0].content=result.data;
 
                     }else{
