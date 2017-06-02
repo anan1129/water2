@@ -37,6 +37,15 @@
     .md-tab>.custom-tab{
         padding:12px 24px;
     }
+    .list-group-item>div.row{
+        position:relative;
+
+    }
+    .list-group-item>div.row .date{
+        position:absolute;
+        bottom:0;
+        right:10px;
+    }
 
 
 </style>
@@ -44,21 +53,41 @@
     <div class="row ui-section">
         <div class="col-md-12">
         <md-tabs md-dynamic-height >
-            <!--<md-tab ng-repeat="type in listObj.types">-->
+            <md-tab ng-repeat="type in listObj.types">
+                <md-tab-label>
+                    <div class="custom-tab" ng-click="getData(type.name,$index)">{{type.name}}</div>
+                </md-tab-label>
+                <md-tab-body>
+                    <ul class="list-group">
+                        <li class="list-group-item" ng-repeat="body in type.body.content"  ng-click="dataInfo(body,$index)">
+                            <div class="row">
+                                <div class="col-xs-4">
+                                    <img ng-src="{{body.imageUrl}}" width="100%" alt="">
+                                </div>
+                                <div class="col-xs-8">
+                                    <h5>{{body.title}}</h5>
+
+                                </div>
+                                <span class="date ">{{body.createdDate|editDate}}</span>
+                            </div>
+                        </li>
+                    </ul>
+                </md-tab-body>
+            </md-tab>
+            <!--<md-tab >-->
                 <!--<md-tab-label>-->
-                    <!--<div class="custom-tab" ng-click="getData(type.name,$index)">{{type.name}}</div>-->
+                    <!--<div class="custom-tab" ng-click="getData(listObj.types[0].name,$index)">专报</div>-->
                 <!--</md-tab-label>-->
                 <!--<md-tab-body>-->
                     <!--<ul class="list-group">-->
-                        <!--<li class="list-group-item" ng-repeat="body in type.body.content"  ng-click="dataInfo(body,$index)">-->
+                        <!--<li class="list-group-item" ng-repeat="body in listObj.types[0].body.content"  ng-click="dataInfo(body,$index)">-->
                             <!--<div class="row">-->
-                                <!--<div class="col-xs-4">-->
-                                    <!--<img ng-src="assets/images/news/zb{{$index}}.jpg" width="100%" alt="">-->
+                                <!--<div class="col-xs-4" ng-show="body.imageUrl">-->
+                                    <!--<img ng-src="{{body.imageUrl}}" width="100%" alt="">-->
                                 <!--</div>-->
                                 <!--<div class="col-xs-8">-->
                                     <!--<h5>{{body.title}}</h5>-->
                                     <!--<p>-->
-                                        <!--<span class="text-danger">发布人：{{body.createdBy}}</span>-->
                                         <!--<span class="pull-right">{{body.createdDate|editDate}}</span>-->
                                     <!--</p>-->
                                 <!--</div>-->
@@ -67,28 +96,6 @@
                     <!--</ul>-->
                 <!--</md-tab-body>-->
             <!--</md-tab>-->
-            <md-tab >
-                <md-tab-label>
-                    <div class="custom-tab" ng-click="getData(listObj.types[0].name,$index)">专报</div>
-                </md-tab-label>
-                <md-tab-body>
-                    <ul class="list-group">
-                        <li class="list-group-item" ng-repeat="body in listObj.types[0].body.content"  ng-click="dataInfo(body,$index)">
-                            <div class="row">
-                                <div class="col-xs-4" ng-show="body.imageUrl">
-                                    <img ng-src="{{body.imageUrl}}" width="100%" alt="">
-                                </div>
-                                <div class="col-xs-8">
-                                    <h5>{{body.title}}</h5>
-                                    <p>
-                                        <span class="pull-right">{{body.createdDate|editDate}}</span>
-                                    </p>
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
-                </md-tab-body>
-            </md-tab>
         </md-tabs>
         </div>
     </div>

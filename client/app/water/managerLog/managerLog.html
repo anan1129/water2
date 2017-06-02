@@ -1,0 +1,32 @@
+<style>
+    .managerLog .list-group-item>div.row{
+        position:relative;
+    }
+    .managerLog .list-group-item>div.row .date{
+        position:absolute;
+        bottom:0;
+        right:10px;
+    }
+</style>
+<div class="water" ng-controller="ManagerLogCtrl" class="managerLog" ng-cloak>
+    <div class="row ui-section">
+        <div class="col-xs-12">
+            <ul class="list-group">
+                <li class="list-group-item" ng-repeat="body in data.content"  ng-click="logDetail(body.id)" >
+                    <div class="row" style="position:relative;">
+                        <div class="col-xs-4">
+                            <img ng-src="{{body.imageUrl}}" width="100%" alt="">
+                        </div>
+                        <div class="col-xs-8">
+                            <h5>{{body.title}}</h5>
+                        </div>
+                        <span class="date" style="position:absolute;bottom:0;right:10px;">{{body.createdDate|editDate}}</span>
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+    </div>
+
+</div>
+

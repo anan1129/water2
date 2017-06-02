@@ -128,7 +128,7 @@
                             <div class="custom-tab">{{new.title}}</div>
                         </md-tab-label>
                         <md-tab-body>
-                            <ul class="list-group">
+                            <ul class="list-group" ng-hide="new.title=='一河一档'">
                                 <li class="list-group-item" ng-repeat="content in new.content.content">
                                     <h5>{{content.title}}</h5>
                                     <p  class="text" ng-bind-html="content.content">{{content.content}}</p>
@@ -137,6 +137,20 @@
                                             <span class="pull-right text-info">{{content.createdDate|editDate}}</span>
                                         </div>
                                     </div>
+                                </li>
+                            </ul>
+                            <ul class="list-group" ng-show="new.title=='一河一档'">
+                                <li class="list-group-item" ng-repeat="new in new.content.content"  ng-click="logDetail(new.id)" >
+                                    <div class="row" style="position:relative;">
+                                        <div class="col-xs-4">
+                                            <img ng-src="{{new.imageUrl}}" width="100%" alt="">
+                                        </div>
+                                        <div class="col-xs-8">
+                                            <h5>{{new.title}}</h5>
+                                        </div>
+                                        <span class="date" style="position:absolute;bottom:0;right:10px;">{{new.createdDate|editDate}}</span>
+                                    </div>
+
                                 </li>
                             </ul>
                         </md-tab-body>
@@ -148,6 +162,12 @@
             <!--<md-tab-label><div class="custom-tab">巡河记录</div></md-tab-label>-->
             <!--<md-tab-body>巡河记录内容</md-tab-body>-->
         <!--</md-tab>-->
+        <md-tab>
+            <md-tab-label><div class="custom-tab">河长日志</div></md-tab-label>
+            <md-tab-body>
+                <div ng-include="'app/water/managerLog/managerLog.html'"></div>
+            </md-tab-body>
+        </md-tab>
 
     </md-tabs>
 

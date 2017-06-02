@@ -1,0 +1,12 @@
+
+.managerLog .list-group-item>div.row{
+        position:relative;
+
+    }
+.managerLog .list-group-item>div.row .date{
+        position:absolute;
+        bottom:0;
+        right:10px;
+    }
+
+

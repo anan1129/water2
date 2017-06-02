@@ -37,7 +37,9 @@
     .md-tab>.custom-tab{
         padding:12px 24px;
     }
-
+    img{
+        width:100%;
+    }
 
 </style>
 <div ng-controller="NewDetailCtrl" class="water" ng-cloak>
@@ -50,7 +52,7 @@
                     <div style="text-align:right;"><span class="text-info">{{data.createdDate|editDate}}</span></div>
                     <!--<p style="text-indent:2em;">{{data.content}}</p>-->
                     <!--<text-angular ng-model="data.content"></text-angular>-->
-                    <p show-html ></p>
+                    <p ng-bind-html="data.content" ></p>
                 </div>
             </div>
         </div>

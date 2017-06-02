@@ -13,6 +13,7 @@
         if(stateParams.id=="01-1"){
             $state.go('home');
         }
+        $scope.logDetail=logDetail;
         $scope.riverName='';
         console.log(stateParams);
         $scope.dataObj={};
@@ -106,6 +107,9 @@
         }
 
         $scope.dataObj;
+        function logDetail(id){
+            $state.go('log-detail',{id:id});
+        }
         // switch($scope.name){
         //     case '01-1':
         //     case '01-2-1':

@@ -1,0 +1,19 @@
+<style>
+    .log-detail .page.page-default{
+        background:#fff;
+    }
+    .log-detail img {
+        width: 100%;
+    }
+</style>
+<div ng-controller="LogDetailCtrl" class="log-detail">
+    <div class="page page-default">
+        <h5>{{data.title}}</h5>
+        <p class="text" ng-bind-html="data.content">{{data.content}}</p>
+        <div class="row">
+            <div class="col-xs-12">
+                <span class="pull-right text-info">{{data.createdDate|editDate}}</span>
+            </div>
+        </div>
+    </div>
+</div>

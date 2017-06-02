@@ -33,18 +33,22 @@
                     $scope.listObj.types=result.data;
                 }
             }).then(function(){
-                RestangularService.all('api/news-show-top?newsType=新闻动态&newsType2='+$scope.listObj.types[0].name).customGET().then(function(result){
-                    if(result.status==200){
-                        console.log( $scope.listObj.types);
-                        $scope.listObj.types[0].body=result.data;
-                    }
+                // RestangularService.all('api/news-show-top?newsType=新闻动态&newsType2='+$scope.listObj.types[0].name).customGET().then(function(result){
+                //     if(result.status==200){
+                //         console.log( $scope.listObj.types);
+                //         $scope.listObj.types[0].body=result.data;
+                //     }
+                // })
+                angular.forEach($scope.listObj.types,function(val,key){
+                    console.log(val);
+                    $scope.getData(val.name,key);
                 })
             })
         }
 
         $scope.getData=function(name,index){
             console.log(name);
-            RestangularService.all('api/news-show-top?newsType=新闻动态&newsType2='+name).customGET().then(function(result){
+            RestangularService.all('api/news-show-second?newsType=新闻动态&newsType2='+name).customGET().then(function(result){
                 if(result.status==200){
                     console.log( $scope.listObj.types);
                     $scope.listObj.types[index].body=result.data;
