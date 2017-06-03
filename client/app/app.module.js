@@ -43,11 +43,35 @@
                 RestangularConfigurer.setFullResponse(true).setBaseUrl('http://106.15.48.81:8080');
             });
         }])
-        .run(['$rootScope',
-            function ($rootScope) {
-                // $rootScope.loginObj={
-                //     admin:"admin"
-                // }
+        .run(['$rootScope','$window','$state','$location',
+            function ($rootScope,$window,$state,$location) {
+                // if($window.localStorage.id_token) localStorage.removeItem('id_token');
+                // if($window.localStorage.username) localStorage.removeItem('username');
+                // if($window.localStorage.password) localStorage.removeItem('password');
+
+                $rootScope.$on('$stateChangeStart',function (event, toState, toParams, fromState, fromParams, options){
+
+                    if(toState.name=='login'||toState.name=='home'){
+
+                    }else{
+                        console.log(toState.name);
+                        console.log(!$window.sessionStorage.id_token);
+                        if(!$window.sessionStorage.id_token){
+                            // event.preventDefault();
+                            $location.path('/login');
+                        }
+                    }
+
+                    // if(toState.name!='home'||toState.name!='login'){
+                    //     console.log(toState.name);
+                    //     if(!$window.sessionStorage.id_token){
+                    //         console.log(111);
+                    //         $state.go('login');
+                    //     }else{
+                    //         event.preventDefault();
+                    //     }
+                    // }
+                })
 
                 // Restangular.setErrorInterceptor(function (response, deferred, responseHandler) {
                 //     // if (response.status === 403) {

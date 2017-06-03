@@ -5,10 +5,12 @@
     'use strict';
 
     angular.module('app.home.controller',[])
-        .controller('HomeCtrl',['$scope','RestangularService','$state',HomeCtrl])
+        .controller('HomeCtrl',['$scope','RestangularService','$state','$window',HomeCtrl])
     ;
 
-    function HomeCtrl($scope,RestangularService,$state){
+    function HomeCtrl($scope,RestangularService,$state,$window){
+        // console.log($window.localStorage);
+        // $scope.username=
         $scope.toDetail=toDetail;
         $scope.login=login;
         initData();

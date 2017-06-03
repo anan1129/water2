@@ -16,15 +16,22 @@
             RestangularService.all('api/authenticate').customPOST($scope.user).then(function(result){
                console.log(result);
                 if(result.status==200){
-                    $window.localStorage.id_token=result.data.id_token;
-                    $window.localStorage.username=$scope.user.username;
-                    $window.localStorage.password=$scope.user.password;
+                    // $window.localStorage.id_token=result.data.id_token;
+                    // $window.localStorage.username=$scope.user.username;
+                    // $window.localStorage.password=$scope.user.password;
+                    localStorage.removeItem('id_token');
+                    localStorage.removeItem('username');
+                    localStorage.removeItem('password');
+
+                    $window.sessionStorage.id_token=result.data.id_token;
+                    $window.sessionStorage.username=$scope.user.username;
+                    $window.sessionStorage.password=$scope.user.password;
                     $scope.success=true;
                         $scope.err=false;
                         $rootScope.user={
-                            username:$window.localStorage.username,
-                            password:$window.localStorage.password,
-                            id_token:$window.localStorage.id_token,
+                            username:$window.sessionStorage.username,
+                            password:$window.sessionStorage.password,
+                            id_token:$window.sessionStorage.id_token,
                         };
                         $state.go('home');
                 }
