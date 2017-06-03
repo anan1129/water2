@@ -147,5 +147,6 @@
         //         $scope.dataObj=GlobalData.rivers[8];
         //         break;
         // }
+
     }
 })();
