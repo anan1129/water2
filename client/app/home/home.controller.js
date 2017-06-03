@@ -10,7 +10,8 @@
 
     function HomeCtrl($scope,RestangularService,$state,$window){
         // console.log($window.localStorage);
-        // $scope.username=
+        $scope.username=$window.sessionStorage.username;
+        console.log($scope.username);
         $scope.toDetail=toDetail;
         $scope.login=login;
         initData();

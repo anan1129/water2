@@ -28,7 +28,6 @@
 
         function getNewsTypes(){
             RestangularService.all('api/news-types').customGET().then(function(result){
-                console.log(result);
                 if(result.status==200){
                     $scope.listObj.types=result.data;
                 }
@@ -40,17 +39,14 @@
                 //     }
                 // })
                 angular.forEach($scope.listObj.types,function(val,key){
-                    console.log(val);
                     $scope.getData(val.name,key);
                 })
             })
         }
 
         $scope.getData=function(name,index){
-            console.log(name);
             RestangularService.all('api/news-show-second?newsType=新闻动态&newsType2='+name).customGET().then(function(result){
                 if(result.status==200){
-                    console.log( $scope.listObj.types);
                     $scope.listObj.types[index].body=result.data;
                 }
             })
@@ -59,7 +55,6 @@
 
 
         function getListData(id){
-            console.log(id);
             RestangularService.all('api/news').customGET(id?id:'').then(function(result){
                if(result.status==200){
                    $scope.listObj.data=result.data;
@@ -76,7 +71,6 @@
                     .highlightAction(true)
                     .position('top right');
                 $mdToast.show(toast).then(function (response) {
-                    console.log(response);
                     if(response=='ok'){
                         $scope.listObj.data.splice(index,1);
                     }
@@ -90,7 +84,6 @@
         }
 
         function dataInfo(data,index){
-            console.log(data);
             data.index=index;
             $state.go('new-detail',data);
         }

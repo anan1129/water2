@@ -11,6 +11,17 @@
     function LoginCtrl($scope,$rootScope,$state,RestangularService,$window) {
         $scope.user={};
         $scope.login=login;
+        var isPC = isPCFun();
+        function isPCFun(){
+            var userAgentInfo = navigator.userAgent;
+            var Agents = new Array("Android", "iPhone", "SymbianOS", "Windows Phone", "iPad", "iPod");
+            var flag=true;
+            for (var v = 0; v < Agents.length; v++) {
+                if (userAgentInfo.indexOf(Agents[v]) > 0) { flag = false; break; }
+            }
+            return flag;
+        }
+        console.log(isPC);
 
         function login(){
             RestangularService.all('api/authenticate').customPOST($scope.user).then(function(result){
@@ -21,19 +32,20 @@
                     // $window.localStorage.password=$scope.user.password;
                     localStorage.removeItem('id_token');
                     localStorage.removeItem('username');
-                    localStorage.removeItem('password');
 
                     $window.sessionStorage.id_token=result.data.id_token;
                     $window.sessionStorage.username=$scope.user.username;
-                    $window.sessionStorage.password=$scope.user.password;
                     $scope.success=true;
                         $scope.err=false;
                         $rootScope.user={
                             username:$window.sessionStorage.username,
-                            password:$window.sessionStorage.password,
                             id_token:$window.sessionStorage.id_token,
                         };
-                        $state.go('home');
+                        if(isPC){
+                            $state.go('dynamic-info');
+                        }else{
+                            $state.go('news');
+                        }
                 }
             },function(result){
                 $scope.err=true;

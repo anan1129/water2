@@ -45,12 +45,10 @@
         }])
         .run(['$rootScope','$window','$state','$location',
             function ($rootScope,$window,$state,$location) {
-
-                $rootScope.$on('$stateChangeSuccess',function (event, toState, toParams, fromState, fromParams, options){
-
-                    if(toState.name!='login'&&toState.name!='home'){
-                        console.log(toState.name);
-                        console.log(!$window.sessionStorage.id_token);
+                $rootScope.$on('$stateChangeStart',function (event, toState, toParams, fromState, fromParams, options){
+                    console.log(fromState.name);
+                    console.log(toState.name);
+                    if(toState.name!='login'){
                         if(!$window.sessionStorage.id_token){
                             $location.path('/login');
                         }
