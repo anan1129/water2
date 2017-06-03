@@ -35,6 +35,9 @@
         -webkit-text-stroke: 0px #ccc;
         -webkit-text-fill-color:#fff;
     }
+    a:active,a:hover{
+        cursor:pointer;
+    }
     .qj{
         /*top:42%;*/
         /*left:56%;*/
@@ -140,11 +143,41 @@
         width:5px;
         line-height:15px;
     }
+    header{
+        color:#fff;
+        height:50px;
+        background:#35a6ff;
+        padding:0 10px;
+        position:fixed;
+        top:0;
+        left:0;
+        right:0;
+        z-index:9999;
+    }
+    header .title{
+        margin:0;
+        line-height:48px;
+        font-size:15px;
+    }
+    header .title>i{
+        line-height:48px;
+    }
+
 
 
 
 </style>
 <div ng-controller="HomeCtrl" class="water" >
+    <header>
+        <h3 class="title">
+            上海杨浦
+            <i class="fa fa-user-o pull-right" ng-click="login()">
+                {{logined.login}}
+            </i>
+        </h3>
+
+
+    </header>
     <!--<a href="#!/water/133" class="qj">虬江</a>-->
     <a class="hpj">黄浦江</a>
     <!--<a  class="fxdyh">复兴岛运河</a>-->

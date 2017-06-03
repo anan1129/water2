@@ -10,6 +10,7 @@
 
     function HomeCtrl($scope,RestangularService,$state){
         $scope.toDetail=toDetail;
+        $scope.login=login;
         initData();
 
         function initData(){
@@ -38,6 +39,10 @@
                 $state.go('water',river);
             }
 
+        }
+
+        function login(){
+            $state.go('login');
         }
     }
 })();

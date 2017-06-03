@@ -57,6 +57,7 @@
                     case '/water-list':
                     case '/home':
                     case '/news':
+                    case '/login':
                         return $element.addClass('body-wide body-water');
                 }
                 if(path.indexOf('water/')>0||path.indexOf('new-detail')>0){

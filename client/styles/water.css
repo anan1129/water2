@@ -8,5 +8,43 @@
         bottom:0;
         right:10px;
     }
+.water-header{
+    height:50px;
+    background:#35a6ff;
+    color:#fff;
+    font-size:15px;
+    line-height:48px;
+    text-align: center;
+    padding:0 10px;
+}
+.water-header i{
+    line-height:48px;
+}
+.login{
+    position:absolute;
+    top:50%;
+    left:50%;
+    -webkit-transform: translate(-50%,-50%);
+    -moz-transform: translate(-50%,-50%);
+    -ms-transform: translate(-50%,-50%);
+    -o-transform: translate(-50%,-50%);
+    transform: translate(-50%,-50%);
+    width:100%;
+    padding:10px;
+}
+@media (min-width:768px){
+    .login{
+        margin-left:-110px;
+    }
+}
+.login .wrapper{
+    width:80%;
+    margin:0 auto;
+}
+.login .logo a{
+    color:#00635a;
+}
+
+
 
 

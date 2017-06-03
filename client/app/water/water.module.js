@@ -4,5 +4,5 @@
 (function(){
 'use strict';
 
-angular.module('app.water',['app.water.controller','app.water.state','app.water.directive','water.managerLog','water.logDetail']);
+angular.module('app.water',['app.water.controller','app.water.state','app.water.directive','water.managerLog','water.logDetail','water.header']);
 })();

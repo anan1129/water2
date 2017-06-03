@@ -1,0 +1,51 @@
+
+<div ng-controller="LoginCtrl" class="login" ng-cloak>
+    <div class="wrapper">
+        <div class="main-body">
+            <div class="body-inner">
+                <div class="card bg-white">
+                    <div class="card-content">
+
+                        <section class="logo text-center">
+                            <h4><a href="#!/home"  class="text-primary">欢迎登陆</a></h4>
+                        </section>
+
+                        <form class="form-horizontal" ng-submit="login()">
+                            <fieldset>
+                                <div class="form-group">
+                                    <div class="ui-input-group">
+                                        <input type="text" required class="form-control" ng-model="user.login">
+                                        <span class="input-bar"></span>
+                                        <label>用户名</label>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="ui-input-group">
+                                        <input type="password" required class="form-control" ng-model="user.pwd">
+                                        <!--<span class="input-bar"></span>-->
+                                        <label>密码</label>
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <div ng-show="err" class="text-danger pull-left">用户名或密码不正确</div>
+                            <div class="card-action no-border text-right">
+                                <button class="btn btn-primary">登陆</button>
+                            </div>
+
+                        </form>
+                    </div>
+
+                </div>
+
+                <!--<div class="additional-info">-->
+                    <!--<a href="#!/page/signup">Register</a>-->
+                    <!--<span class="divider-h"></span>-->
+                    <!--<a href="#!/page/forgot-password">Forgot your password?</a>-->
+                <!--</div>-->
+
+            </div>
+        </div>
+
+    </div>
+</div>
+

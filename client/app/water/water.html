@@ -76,7 +76,8 @@
     }
 </style>
 <div class="water" ng-controller="WaterCtrl" ng-cloak>
-    <md-tabs  style="position: absolute;top: 0;bottom: 0; width: 100vw;" >
+    <div ng-include="'app/water/header/header.html'"></div>
+    <md-tabs  style="position: absolute;top: 50px;bottom: 0; width: 100vw;" >
         <md-tab>
             <md-tab-label><div class="custom-tab">基础信息</div></md-tab-label>
             <md-tab-body>
