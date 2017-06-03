@@ -45,9 +45,9 @@
         }])
         .run(['$rootScope',
             function ($rootScope) {
-                $rootScope.loginObj={
-                    admin:"admin"
-                }
+                // $rootScope.loginObj={
+                //     admin:"admin"
+                // }
 
                 // Restangular.setErrorInterceptor(function (response, deferred, responseHandler) {
                 //     // if (response.status === 403) {
