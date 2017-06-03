@@ -30,6 +30,7 @@
             RestangularService.all('api/news-types').customGET().then(function(result){
                 if(result.status==200){
                     $scope.listObj.types=result.data;
+                    $scope.listObj.types=$scope.listObj.types.reverse();
                 }
             }).then(function(){
                 // RestangularService.all('api/news-show-top?newsType=新闻动态&newsType2='+$scope.listObj.types[0].name).customGET().then(function(result){
