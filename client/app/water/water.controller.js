@@ -10,9 +10,9 @@
 
     function WaterCtrl($scope,$stateParams,RestangularService,$state){
         var stateParams=$scope.stateParams=$stateParams;
-        if(stateParams.id=="01-1"){
-            $state.go('home');
-        }
+        // if(stateParams.id=="01-1"){
+        //     $state.go('home');
+        // }
         $scope.logDetail=logDetail;
         $scope.riverName='';
         console.log(stateParams);

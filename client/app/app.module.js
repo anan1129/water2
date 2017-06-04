@@ -43,18 +43,18 @@
                 RestangularConfigurer.setFullResponse(true).setBaseUrl('http://106.15.48.81:8080');
             });
         }])
-        .run(['$rootScope','$window','$state','$location',
-            function ($rootScope,$window,$state,$location) {
-                $rootScope.$on('$stateChangeStart',function (event, toState, toParams, fromState, fromParams, options){
-                    console.log(fromState.name);
-                    console.log(toState.name);
-                    if(toState.name!='login'){
-                        if(!$window.sessionStorage.id_token){
-                            $location.path('/login');
-                        }
-                    }
-                })
-            }])
+        // .run(['$rootScope','$window','$state','$location',
+        //     function ($rootScope,$window,$state,$location) {
+        //         $rootScope.$on('$stateChangeSuccess',function (event, toState, toParams, fromState, fromParams, options){
+        //             console.log(fromState.name);
+        //             console.log(toState.name);
+        //             if(toState.name!='login'&&toState.name!='home'){
+        //                 if(!$window.sessionStorage.id_token){
+        //                     $location.path('/login');
+        //                 }
+        //             }
+        //         })
+        //     }])
     ;
 
 })();

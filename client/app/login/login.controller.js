@@ -44,7 +44,7 @@
                         if(isPC){
                             $state.go('dynamic-info');
                         }else{
-                            $state.go('news');
+                            $state.go('home');
                         }
                 }
             },function(result){
