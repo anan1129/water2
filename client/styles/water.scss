@@ -44,6 +44,14 @@
 .login .logo a{
     color:#00635a;
 }
+.water{
+    .news-title{
+        white-space:nowrap;
+        -ms-text-overflow: ellipsis;
+        text-overflow: ellipsis;
+        overflow:hidden;
+    }
+}
 
 
 

@@ -48,6 +48,7 @@
     }
 
 
+
 </style>
 <div ng-controller="NewsCtrl" class="water">
     <div class="row ui-section">
@@ -65,7 +66,7 @@
                                     <img ng-src="{{body.imageUrl}}" width="100%" alt="">
                                 </div>
                                 <div class="col-xs-8">
-                                    <h5>{{body.title}}</h5>
+                                    <h5 class="news-title">{{body.title}}</h5>
 
                                 </div>
                                 <span class="date ">{{body.createdDate|editDate}}</span>
