@@ -11,6 +11,7 @@
     function LoginCtrl($scope,$rootScope,$state,RestangularService,$window) {
         $scope.user={};
         $scope.login=login;
+        $scope.cancel=cancel;
         var isPC = isPCFun();
         function isPCFun(){
             var userAgentInfo = navigator.userAgent;
@@ -51,19 +52,10 @@
                 $scope.err=true;
                 $scope.success=false;
             });
-            // if($rootScope.loginObj[$scope.user.login]==$scope.user.pwd){
-            //     console.log('yes');
-            //     $scope.success=true;
-            //     $scope.err=false;
-            //     $rootScope.logined={
-            //       login:$scope.user.login
-            //     };
-            //     $state.go('home');
-            // }else{
-            //     console.log('no');
-            //     $scope.err=true;
-            //     $scope.success=false;
-            // }
+        }
+
+        function cancel(){
+            $window.history.go(-1);
         }
     }
 })();

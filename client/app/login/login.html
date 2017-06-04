@@ -28,13 +28,15 @@
                                 </div>
                             </fieldset>
                             <div ng-show="err" class="text-danger pull-left">用户名或密码不正确</div>
-                            <div class="card-action no-border text-right">
-                                <button class="btn btn-primary">登陆</button>
-                            </div>
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <button class="btn btn-primary pull-right">登陆</button>
+                                    <button class="btn btn-default pull-left" ng-click="cancel()">取消</button>
+                                </div>
 
+                            </div>
                         </form>
                     </div>
-
                 </div>
 
                 <!--<div class="additional-info">-->
