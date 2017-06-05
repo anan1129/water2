@@ -1,0 +1,54 @@
+<div ng-controller="WaterTableCtrl">
+    <div class="page page-form-ele">
+        <div class="row ui-section">
+            <div class="col-md-12">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <div layout="column" ng-cloak class="md-inline-form inputdemoBasicUsage">
+                            <div layout-padding class="table-responsive">
+                                <h2 class="section-header">
+                                    河道列表
+                                    <a href="#!/add-task">
+                                        <span class="fa fa-plus-square pull-right"></span>
+                                    </a>
+                                </h2>
+                                <table class="table no-margin">
+                                    <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>河道名称</th>
+                                        <th style="width:30%;">河道描述</th>
+                                        <th>开始位置</th>
+                                        <th>结束位置</th>
+                                        <th>一级河长</th>
+                                        <th>操作</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr ng-repeat="list in listObj.data">
+                                        <td>{{list.id}}</td>
+                                        <td>{{list.riverName}}</td>
+                                        <td>
+                                            {{list.content}}
+                                        </td>
+                                        <td>
+                                            {{list.startAddress}}
+                                        </td>
+                                        <td>{{list.endAddress}}</td>
+                                        <td>{{list.manager.userName}}</td>
+                                        <td>
+                                            <span class="fa fa-edit text-primary" ng-click="toWaterDetails(list)"></span>
+                                            <!--<span class="fa fa-edit text-info" ng-click="editTask(list)"></span>-->
+                                            <span class="fa fa-trash" style="color:rgb(229,57,53);margin-left:5px;" ng-click="listObj.del(list)"></span>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

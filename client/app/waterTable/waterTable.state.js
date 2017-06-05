@@ -4,12 +4,12 @@
 (function(){
     'use strict';
 
-    angular.module('app.editRiver.state',[])
+    angular.module('app.waterTable.state',[])
         .config(['$stateProvider',function($stateProvider){
             $stateProvider
-                .state('edit-river',{
-                    url:'/edit-river',
-                    templateUrl:'app/editRiver/editRiver.html'
+                .state('water-table',{
+                    url:'/water-table',
+                    templateUrl:'app/waterTable/waterTable.html'
                 })
         }])
 })();

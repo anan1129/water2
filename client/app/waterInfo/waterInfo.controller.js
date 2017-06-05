@@ -5,15 +5,25 @@
     'use strict';
 
     angular.module('app.waterInfo.controller',[])
-        .controller('WaterInfoCtrl',['$scope','RestangularService','$mdToast',WaterInfoCtrl])
+        .controller('WaterInfoCtrl',['$scope','RestangularService','$mdToast','$stateParams',WaterInfoCtrl])
     ;
 
-    function WaterInfoCtrl($scope,RestangularService,$mdToast){
+    function WaterInfoCtrl($scope,RestangularService,$mdToast,$stateParams){
+
         $scope.getLevel=getLevel;
         $scope.getUsers=getUsers;
         $scope.getGroups=getGroups;
         $scope.getSubGroups=getSubGroups;
         initData();
+        if($stateParams.id){
+            $scope.stateParams=$stateParams;
+            RestangularService.all('api/rivers').customGET($scope.stateParams.id).then(function(result){
+                console.log(result.data);
+                if(result.status==200){
+                    $scope.formObj=result.data;
+                }
+            })
+        }
 
         function initData(){
             $scope.formObj={};
@@ -102,21 +112,26 @@
         $scope.save=function(){
             console.log($scope.formObj);
             var data=$scope.formObj;
-            angular.forEach(data.secondManagers,function(val,key){
-                if(val){
-                    var json=angular.fromJson(val)
-                    console.log(json);
-                    data.secondManagers[key]={
-                        user:json.login,
-                    };
+            // if(!$scope.stateParams.id){
+                angular.forEach(data.secondManagers,function(val,key){
+                    if(val&&angular.isString(val)){
+                        var json=angular.fromJson(val)
+                        console.log(json);
+                        data.secondManagers[key]={
+                            user:json.login,
+                        };
+                    }
+                });
+            if(angular.isString(data.manager)){
+                data.manager={
+                    user:angular.fromJson(data.manager).login,
+                    // id:angular.fromJson(data.manager).id,
+                    // userName:angular.fromJson(data.manager).firstName,
+                    // department:angular.fromJson(data.manager).department
                 }
-            });
-            data.manager={
-                user:angular.fromJson(data.manager).login,
-                // id:angular.fromJson(data.manager).id,
-                // userName:angular.fromJson(data.manager).firstName,
-                // department:angular.fromJson(data.manager).department
             }
+
+            // }
             console.log(data);
             RestangularService.all('api/rivers').customPOST(data).then(function(result){
                 console.log(result);

@@ -29,9 +29,10 @@
         , 'app.waterList'
         , 'app.home'
         , 'app.news'
-        , 'app.editRiver'
+        // , 'app.editRiver'
         , 'app.newDetail'
         , 'app.login'
+        , 'app.waterTable'
 
         // 3rd party feature modules
         , 'restangular'

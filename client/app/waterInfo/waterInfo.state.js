@@ -11,5 +11,10 @@
                     url:'/water-info',
                     templateUrl:'app/waterInfo/waterInfo.html'
                 })
+                .state('edit-river',{
+                    url:'/edit-river/:id',
+                    templateUrl:'app/waterInfo/waterInfo.html'
+                })
+            ;
         }])
 })();
