@@ -44,18 +44,37 @@
                 RestangularConfigurer.setFullResponse(true).setBaseUrl('http://106.15.48.81:8080');
             });
         }])
-        // .run(['$rootScope','$window','$state','$location',
-        //     function ($rootScope,$window,$state,$location) {
-        //         $rootScope.$on('$stateChangeSuccess',function (event, toState, toParams, fromState, fromParams, options){
-        //             console.log(fromState.name);
-        //             console.log(toState.name);
-        //             if(toState.name!='login'&&toState.name!='home'){
-        //                 if(!$window.sessionStorage.id_token){
-        //                     $location.path('/login');
-        //                 }
-        //             }
-        //         })
-        //     }])
+        .run(['$rootScope','$window','$state','$location',
+            function ($rootScope,$window,$state,$location) {
+                $rootScope.isPC=isPCFun();
+
+                function isPCFun(){
+                    var userAgentInfo = navigator.userAgent;
+                    var Agents = new Array("Android", "iPhone", "SymbianOS", "Windows Phone", "iPad", "iPod");
+                    var flag=true;
+                    for (var v = 0; v < Agents.length; v++) {
+                        if (userAgentInfo.indexOf(Agents[v]) > 0) { flag = false; break; }
+                    }
+                    return flag;
+                }
+                $rootScope.$on('$stateChangeSuccess',function (event, toState, toParams, fromState, fromParams, options){
+                    console.log($rootScope.isPC,navigator.userAgent);
+                    if($rootScope.isPC){
+                        if(toState.name!='login'){
+                            if(!$window.sessionStorage.id_token){
+                                $location.path('/login');
+                            }
+                        }
+                    }
+                    // console.log(fromState.name);
+                    // console.log(toState.name);
+                    // if(toState.name!='login'&&toState.name!='home'){
+                    //     if(!$window.sessionStorage.id_token){
+                    //         $location.path('/login');
+                    //     }
+                    // }
+                })
+            }])
     ;
 
 })();

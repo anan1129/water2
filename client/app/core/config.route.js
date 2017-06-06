@@ -72,7 +72,7 @@
 
                 $urlRouterProvider
                     .when('/', '/page/signin')
-                    .otherwise('/dashboard');
+                    .otherwise('/login');
             }
         ]);
 

@@ -31,8 +31,8 @@
                     // $window.localStorage.id_token=result.data.id_token;
                     // $window.localStorage.username=$scope.user.username;
                     // $window.localStorage.password=$scope.user.password;
-                    localStorage.removeItem('id_token');
-                    localStorage.removeItem('username');
+                    // localStorage.removeItem('id_token');
+                    // localStorage.removeItem('username');
 
                     $window.sessionStorage.id_token=result.data.id_token;
                     $window.sessionStorage.username=$scope.user.username;
