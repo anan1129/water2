@@ -43,7 +43,8 @@
                             id_token:$window.sessionStorage.id_token,
                         };
                         if(isPC){
-                            $state.go('dynamic-info');
+                            // $state.go('dynamic-info');
+                            $state.go('dashboard');
                         }else{
                             $state.go('home');
                         }
