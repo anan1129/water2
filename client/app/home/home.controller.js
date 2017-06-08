@@ -5,15 +5,16 @@
     'use strict';
 
     angular.module('app.home.controller',[])
-        .controller('HomeCtrl',['$scope','RestangularService','$state','$window',HomeCtrl])
+        .controller('HomeCtrl',['$scope','RestangularService','$state','$window','$rootScope',HomeCtrl])
     ;
 
-    function HomeCtrl($scope,RestangularService,$state,$window){
+    function HomeCtrl($scope,RestangularService,$state,$window,$rootScope){
         // console.log($window.localStorage);
         $scope.username=$window.sessionStorage.username;
         console.log($scope.username);
         $scope.toDetail=toDetail;
         $scope.login=login;
+        $scope.logout=logout;
         initData();
 
         function initData(){
@@ -46,6 +47,12 @@
 
         function login(){
             $state.go('login');
+        }
+
+        function logout(){
+            $window.sessionStorage.removeItem('username');
+            $window.sessionStorage.removeItem('id_token');
+            $rootScope.user={};
         }
     }
 })();

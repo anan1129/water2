@@ -41,11 +41,11 @@
         position:relative;
 
     }
-    .list-group-item>div.row .date{
-        position:absolute;
-        bottom:0;
-        right:10px;
-    }
+    /*.list-group-item>div.row .date{*/
+        /*position:absolute;*/
+        /*bottom:0;*/
+        /*right:10px;*/
+    /*}*/
 
 
 
@@ -63,13 +63,13 @@
                         <li class="list-group-item" ng-repeat="body in type.body.content"  ng-click="dataInfo(body,$index)">
                             <div class="row">
                                 <div class="col-xs-4">
-                                    <img ng-src="{{body.imageUrl}}" width="100%" alt="">
+                                    <img ng-src="{{body.imageUrl}}" class="news-img" width="100%" alt="">
                                 </div>
                                 <div class="col-xs-8">
                                     <h5 class="news-title">{{body.title}}</h5>
 
                                 </div>
-                                <span class="date ">{{body.createdDate|editDate}}</span>
+                                <div class="news-date text-right">{{body.createdDate|editDate}}</div>
                             </div>
                         </li>
                     </ul>

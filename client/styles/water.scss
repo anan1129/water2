@@ -46,11 +46,56 @@
 }
 .water{
     .news-title{
-        white-space:nowrap;
-        -ms-text-overflow: ellipsis;
-        text-overflow: ellipsis;
-        overflow:hidden;
-        padding:3px 0;
+       font-weight:normal;
+    }
+    .list-group-item>div.row .news-date{
+        //position:absolute;
+        //bottom:0;
+        //right:10px;
+        font-size:12px;
+        padding-right:10px;
+    }
+    .news-img{
+        border-radius:5px;
+    }
+}
+
+.home{
+    header{
+        .btn-group,.btn-group.open{
+            button.btn{
+                background:none;
+                border:none;
+                i{
+                    color:#fff;
+                    font-size:16px;
+                    line-height:28px;
+                }
+            }
+            .dropdown-menu{
+                text-align:center;
+                min-width:auto;
+            }
+        }
+
+        button.btn{
+            background:none;
+            border:none;
+            i{
+                color:#fff;
+                font-size:16px;
+                line-height:28px;
+            }
+        }
+    }
+
+    .warm{
+        color:#fff;
+        font-size:10px;
+        position:absolute;
+        top:50px;
+        left:0px;
+        right:0px;
     }
 }
 

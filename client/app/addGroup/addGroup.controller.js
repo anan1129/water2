@@ -23,18 +23,18 @@
             $scope.users=[];
             $scope.groups=[];
             getGroups();
-            getMaxL();
+            // getMaxL();
             getUsers();
         }
 
         function getUsers(){
-            RestangularService.all('api/users').customGET().then(function(result){
+            RestangularService.all('api/users?size=999999').customGET().then(function(result){
                 if(result.status==200){
                     console.log(result);
                     angular.forEach(result.data,function(val){
                         $scope.users.push({user:val.login,userName:val.firstName});
                     })
-                    console.log($scope.users);
+                    console.log($scope.users.length);
                 }
             })
         }
@@ -43,6 +43,7 @@
             RestangularService.all('api/groups-level/1').customGET().then(function(result){
                 if(result.status==200){
                     $scope.groups.push(result.data);
+                    // getSubGroups(result.data[0].id,0);
                 }
             });
         }
@@ -63,16 +64,16 @@
 
         }
 
-        function getMaxL(){
-            RestangularService.all('api/groups-maxLevel').customGET().then(function(result){
-                if(result.status==200){
-                    console.log(result.data);
-                    $scope.levelArr=[];
-                    $scope.levelArr.length=result.data;
-                    console.log($scope.levelArr);
-                }
-            })
-        }
+        // function getMaxL(){
+        //     RestangularService.all('api/groups-maxLevel').customGET().then(function(result){
+        //         if(result.status==200){
+        //             console.log(result.data);
+        //             $scope.levelArr=[];
+        //             $scope.levelArr.length=result.data;
+        //             console.log($scope.levelArr);
+        //         }
+        //     })
+        // }
 
         $scope.save=function(){
 

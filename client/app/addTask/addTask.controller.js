@@ -24,7 +24,7 @@
         }
 
         function getUsers(){
-            RestangularService.all('api/users').customGET().then(function(result){
+            RestangularService.all('api/users?size=99999').customGET().then(function(result){
                if(result.status==200){
                    resultData=result.data;
                    angular.forEach(result.data,function(val){

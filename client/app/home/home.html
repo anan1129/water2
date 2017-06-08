@@ -26,7 +26,7 @@
         bottom:0;
         font-size:12px;
     }
-    a{
+    .river{
         color:#fff;
         position:fixed;
         left:0;
@@ -35,7 +35,7 @@
         -webkit-text-stroke: 0px #ccc;
         -webkit-text-fill-color:#fff;
     }
-    a:active,a:hover{
+    .river:active,.river:hover{
         cursor:pointer;
     }
     .qj{
@@ -167,19 +167,39 @@
 
 
 </style>
-<div ng-controller="HomeCtrl" class="water" >
+<div ng-controller="HomeCtrl" class="water home" >
     <header>
         <h3 class="title">
-            上海杨浦
-            <i class="fa fa-user-o pull-right" ng-click="login()">
+            上海杨浦河长制
+            <i class="fa fa-user-o pull-right" ng-hide="username" ng-click="login()">
                 {{username}}
             </i>
+            <div class="btn-group pull-right" ng-show="username">
+                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                    <i class="fa fa-bars"></i>
+                    <!--<span class="caret"></span>-->
+                </button>
+                <ul class="dropdown-menu" role="menu">
+                    <li><a href="">任务处置</a></li>
+                    <li><a href="">信息发布</a></li>
+                    <li><a href="">数据统计</a></li>
+                    <!--<li class="divider"></li>-->
+                    <li><a href="#" ng-click="logout()">退出登录</a></li>
+                    <!--<li class="divider"></li>-->
+                </ul>
+            </div>
+
         </h3>
 
 
     </header>
     <!--<a href="#!/water/133" class="qj">虬江</a>-->
-    <a class="hpj">黄浦江</a>
+    <h6 class="text-center warm">
+        <div>点击河道名称可查看河道相关讯息</div>
+
+        <div><i class="fa fa-angle-double-down"></i></div>
+    </h6>
+    <a class="river hpj">黄浦江</a>
     <!--<a  class="fxdyh">复兴岛运河</a>-->
     <!--<a  class="njh">嫩江河</a>-->
     <!--<a href="#!/water/135" class="yspg">杨树浦港</a>-->
@@ -197,7 +217,7 @@
     <!--<a class="jyh">经一河</a>-->
     <!--<a class="jeh">经二河</a>-->
     <!--<a class="jsh">经三河</a>-->
-    <a ng-click="toDetail(river)" ng-repeat="river in riverData" ng-class="{
+    <a class="river" ng-click="toDetail(river)" ng-repeat="river in riverData" ng-class="{
         'fxdyh':river.riverName=='复兴岛运河',
         'qj':river.riverName=='虬江',
         'njh':river.riverName=='嫩江河',
