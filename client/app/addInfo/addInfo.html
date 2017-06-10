@@ -1,3 +1,56 @@
+<style>
+
+
+    .btn-blue {
+        /*background-color: #6acaff;*/
+        /*color:#fff;*/
+        /*border-color: #4c7889;*/
+    }
+
+    .btn-blue:hover,
+    .btn-blue:focus,
+    .btn-blue.focus,
+    .btn-blue:active,
+    .btn-blue.active,
+    .open > .dropdown-toggle.btn-blue {
+        border-color: #33505b;
+    }
+
+    .btn-blue:active,
+    .btn-blue.active,
+    .open > .dropdown-toggle.btn-blue {
+        background-image: none;
+    }
+
+    .btn-blue.disabled,
+    .btn-blue[disabled],
+    fieldset[disabled] .btn-blue,
+    .btn-blue.disabled:hover,
+    .btn-blue[disabled]:hover,
+    fieldset[disabled] .btn-blue:hover,
+    .btn-blue.disabled:focus,
+    .btn-blue[disabled]:focus,
+    fieldset[disabled] .btn-blue:focus,
+    .btn-blue.disabled.focus,
+    .btn-blue[disabled].focus,
+    fieldset[disabled] .btn-blue.focus,
+    .btn-blue.disabled:active,
+    .btn-blue[disabled]:active,
+    fieldset[disabled] .btn-blue:active,
+    .btn-blue.disabled.active,
+    .btn-blue[disabled].active,
+    fieldset[disabled] .btn-blue.active {
+        border-color: #4c7889;
+    }
+
+
+    [ta-button] {
+        height: 44px;
+        margin-bottom: 5px;
+    }
+
+    .red{ color: red; }
+</style>
 <div ng-controller="AddInfoCtrl">
     <div class="page page-form-ele">
         <div class="row ui-section">
@@ -71,7 +124,7 @@
                                             <!--<input type="text" class="form-control" ng-model="formObj.taskContent">-->
                                             <!--<textarea name="infoContent" class="form-control" cols="30" rows="10"-->
                                                       <!--ng-model="formObj.content" id="label-task-content"></textarea>-->
-                                            <div text-angular ng-model="htmlVariable"></div>
+                                            <div text-angular ng-model="htmlVariable" ></div>
                                         </div>
 
                                     </div>

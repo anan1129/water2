@@ -4,12 +4,12 @@
 (function(){
     'use strict';
 
-    angular.module('app.addStaff.state',[])
+    angular.module('app.editTask.state',[])
         .config(['$stateProvider',function($stateProvider){
             $stateProvider
-                .state('add-staff',{
-                    url:'/add-staff/:login',
-                    templateUrl:'app/addStaff/addStaff.html'
+                .state('edit-task',{
+                    url:'/edit-task/:id',
+                    templateUrl:'app/taskList/editTask/editTask.html'
                 })
         }])
 })();

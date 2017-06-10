@@ -29,10 +29,11 @@
         , 'app.waterList'
         , 'app.home'
         , 'app.news'
-        // , 'app.editRiver'
         , 'app.newDetail'
         , 'app.login'
         , 'app.waterTable'
+        , 'app.userList'
+        , 'app.editTask'
 
         // 3rd party feature modules
         , 'restangular'
@@ -58,7 +59,6 @@
                     return flag;
                 }
                 $rootScope.$on('$stateChangeSuccess',function (event, toState, toParams, fromState, fromParams, options){
-                    console.log($rootScope.isPC,navigator.userAgent);
                     if($rootScope.isPC){
                         if(toState.name!='login'){
                             if(!$window.sessionStorage.id_token){

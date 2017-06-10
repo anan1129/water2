@@ -15,7 +15,7 @@
                                 <table class="table no-margin">
                                     <thead>
                                     <tr>
-                                        <th>#</th>
+                                        <!--<th>#</th>-->
                                         <th>任务标题</th>
                                         <th>处理进度</th>
                                         <th>处理员</th>
@@ -26,10 +26,10 @@
                                     </thead>
                                     <tbody>
                                     <tr ng-repeat="list in listObj.data">
-                                        <td>{{list.id}}</td>
+                                        <!--<td>{{list.id}}</td>-->
                                         <td>{{list.name}}</td>
-                                        <td>
-                                            <span ng-class="{'text-primary':list.status=='已上报','text-info':list.status=='正在处理','text-success':list.status=='处理完成'}">{{list.status}}</span>
+                                        <td>{{list.status}}
+                                            <!--<span ng-class="{'text-primary':list.status=='已上报','text-info':list.status=='正在处理','text-success':list.status=='处理完成'}">{{list.status}}</span>-->
                                         </td>
                                         <td>
                                             <span ng-repeat="user in list.users" style="margin:0 3px;">{{user.user}}</span>
@@ -39,7 +39,8 @@
                                         <td>
                                             <span class="fa fa-eye text-primary" ng-click="toTaskDetails(list)"></span>
                                             <!--<span class="fa fa-edit text-info" ng-click="editTask(list)"></span>-->
-                                            <span class="fa fa-trash" style="color:rgb(229,57,53);margin-left:5px;" ng-click="listObj.del(list)"></span>
+                                            <span class="fa fa-trash text-danger" ng-click="listObj.del(list)"></span>
+                                            <span class="fa fa-user text-success" ng-click="edit(list)"></span>
                                         </td>
                                     </tr>
                                     </tbody>

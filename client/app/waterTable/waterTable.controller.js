@@ -10,6 +10,7 @@
 
     function WaterTableCtrl($scope, $state, $mdToast,RestangularService) {
         var toast;
+        $scope.toRiverInfo=toRiverInfo;
         $scope.listObj = {
             del: del,
             data:[]
@@ -60,6 +61,10 @@
         }
         function editTask(obj){
             $state.go('edit-task', obj);
+        }
+
+        function toRiverInfo(list){
+            $state.go('water',list);
         }
     }
 })();

@@ -1,0 +1,44 @@
+<div ng-controller="EditTaskCtrl">
+    <div class="page page-form-ele">
+        <div class="row ui-section">
+            <div class="col-md-12">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <div layout="column" ng-cloak class="md-inline-form inputdemoBasicUsage">
+                            <div layout-padding class="table-responsive">
+                                <h2 class="section-header">
+                                    指派人员
+                                    <a class="btn btn-primary pull-right" href="#!/task-list">
+                                        返回列表
+                                    </a>
+                                </h2>
+                                <form  class="form-horizontal">
+                                    <div class="form-group">
+                                        <label class="col-sm-2">选择组织</label>
+                                        <div class="col-sm-10">
+                                            <div class="row">
+                                                <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12"  ng-repeat="group in groups">
+                                                    <select class="form-control" ng-model="pidArr[$index]" ng-change="getSubGroups(pidArr[$index],$index)">
+                                                        <option ng-repeat="g in group" value="{{g.id}}">{{g.name}}</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label  class="col-sm-2">选择人员</label>
+                                        <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                                            <select  class="form-control" ng-model="user">
+                                                <option value="" ng-repeat="user in users">user</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

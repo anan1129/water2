@@ -1,4 +1,4 @@
-<div ng-controller="WaterTableCtrl">
+<div ng-controller="UserListCtrl">
     <div class="page page-form-ele">
         <div class="row ui-section">
             <div class="col-md-12">
@@ -7,8 +7,8 @@
                         <div layout="column" ng-cloak class="md-inline-form inputdemoBasicUsage">
                             <div layout-padding class="table-responsive">
                                 <h2 class="section-header">
-                                    河道列表
-                                    <a href="#!/add-task">
+                                    人员列表
+                                    <a href="#!/add-staff/">
                                         <span class="fa fa-plus-square pull-right"></span>
                                     </a>
                                 </h2>
@@ -16,31 +16,28 @@
                                     <thead>
                                     <tr>
                                         <!--<th>#</th>-->
-                                        <th>河道名称</th>
-                                        <!--<th style="width:30%;">河道描述</th>-->
-                                        <th>开始位置</th>
-                                        <th>结束位置</th>
-                                        <th>一级河长</th>
+                                        <th>账号</th>
+                                        <th>姓名</th>
+                                        <th>手机</th>
+                                        <!--<th>邮箱</th>-->
+                                        <th>职位</th>
+                                        <th>组织</th>
                                         <th>操作</th>
                                     </tr>
                                     </thead>
                                     <tbody>
                                     <tr ng-repeat="list in listObj.data">
                                         <!--<td>{{list.id}}</td>-->
-                                        <td>{{list.riverName}}</td>
-                                        <!--<td>{{list.content}}</td>-->
+                                        <td>{{list.login}}</td>
+                                        <td>{{list.firstName}}</td>
+                                        <td>{{list.phoneNumber}}</td>
+                                        <!--<td>{{list.email}} </td>-->
+                                        <td>{{list.level}}</td>
+                                        <td>{{list.groupName}}</td>
                                         <td>
-                                            {{list.startAddress}}
-                                        </td>
-                                        <td>{{list.endAddress}}</td>
-                                        <td>{{list.manager.userName}}</td>
-                                        <td>
-                                            <span class="fa fa-edit text-primary" ng-click="toWaterDetails(list)"></span>
-                                            <!--<span class="fa fa-edit text-info" ng-click="editTask(list)"></span>-->
-                                            <span class="fa fa-trash text-danger"  ng-click="listObj.del(list)"></span>
-
-                                            <span class="fa fa-eye text-info" ng-click="toRiverInfo(list)"></span>
-
+                                            <!--<span class="fa fa-eye text-primary" ng-click="toTaskDetails(list)"></span>-->
+                                            <span class="fa fa-edit text-info" ng-click="editTask(list)"></span>
+                                            <!--<span class="fa fa-trash" style="color:rgb(229,57,53);margin-left:5px;" ng-click="listObj.del(list.login)"></span>-->
                                         </td>
                                     </tr>
                                     </tbody>

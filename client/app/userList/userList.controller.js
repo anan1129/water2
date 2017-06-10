@@ -4,15 +4,12 @@
 (function () {
     'use strict';
 
-    angular.module('app.taskList.controller', [])
-        .controller('TaskListCtrl', ['$scope', '$state', '$mdToast','RestangularService', TaskListCtrl])
+    angular.module('app.userList.controller', [])
+        .controller('UserListCtrl', ['$scope', '$state', '$mdToast','RestangularService', UserListCtrl])
     ;
 
-    function TaskListCtrl($scope, $state, $mdToast,RestangularService) {
+    function UserListCtrl($scope, $state, $mdToast,RestangularService) {
         var toast;
-        $scope.toTaskDetails = toTaskDetails;
-        $scope.editTask = editTask;
-        $scope.edit = edit;
         $scope.listObj = {
             del: del,
             data:[]
@@ -25,14 +22,14 @@
         }
 
         function getJobs(){
-            RestangularService.all('api/jobs').customGET().then(function(result){
+            RestangularService.all('api/users').customGET().then(function(result){
                 if(result.status==200){
-                    console.log(result);
                     $scope.listObj.data=result.data;
                 }
             });
         }
-
+        $scope.toTaskDetails = toTaskDetails;
+        $scope.editTask = editTask;
 
         function del(obj) {
             if(!toast){
@@ -45,7 +42,7 @@
                     console.log(response);
                     if(response=='ok'){
                         console.log(obj);
-                        RestangularService.all('api/jobs').customDELETE(obj.id).then(function(result){
+                        RestangularService.all('api/users?size=9999').customDELETE(obj.id).then(function(result){
                            if(result.status==200){
                                initData();
                                toast=null;
@@ -58,14 +55,10 @@
         }
 
         function toTaskDetails(obj) {
-            $state.go('task-details', obj);
+            $state.go('add-staff', obj);
         }
         function editTask(obj){
-            $state.go('edit-task', obj);
-        }
-
-        function edit(list){
-            $state.go('edit-task',list);
+            $state.go('add-staff', obj);
         }
     }
 })();

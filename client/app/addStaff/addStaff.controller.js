@@ -5,10 +5,11 @@
     'use strict';
 
     angular.module('app.addStaff.controller',[])
-        .controller('AddStaffCtrl',['$scope','RestangularService','$mdToast',AddStaffCtrl])
+        .controller('AddStaffCtrl',['$scope','RestangularService','$mdToast','$stateParams',AddStaffCtrl])
     ;
 
-    function AddStaffCtrl($scope,RestangularService,$mdToast){
+    function AddStaffCtrl($scope,RestangularService,$mdToast,$stateParams){
+        var stateParams=$scope.stateParams=$stateParams;
         $scope.getSubGroups=getSubGroups;
         initData();
 
@@ -20,6 +21,15 @@
             $scope.formObj={};
             getGroups();
             getMaxL();
+            getUsers(stateParams.login);
+        }
+
+        function getUsers(login){
+            RestangularService.all('api/users/'+stateParams.login).customGET().then(function(result){
+                if(result.status==200){
+                    $scope.formObj=result.data;
+                }
+            })
         }
 
         function getGroups(){
@@ -47,7 +57,6 @@
         function getMaxL(){
             RestangularService.all('api/groups-maxLevel').customGET().then(function(result){
                 if(result.status==200){
-                    console.log(result.data);
                     $scope.levelArr=[];
                     $scope.levelArr.length=result.data;
                     console.log($scope.levelArr);
