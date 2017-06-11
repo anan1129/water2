@@ -21,6 +21,7 @@
                                         <th>开始位置</th>
                                         <th>结束位置</th>
                                         <th>一级河长</th>
+                                        <th>二级河长</th>
                                         <th>操作</th>
                                     </tr>
                                     </thead>
@@ -34,6 +35,12 @@
                                         </td>
                                         <td>{{list.endAddress}}</td>
                                         <td>{{list.manager.userName}}</td>
+                                        <td style="width:40%">
+                                            <span ng-repeat="user in list.secondManagers">
+                                                {{user.userName}}
+                                                <span ng-hide="$last">,</span>
+                                            </span>
+                                        </td>
                                         <td>
                                             <span class="fa fa-edit text-primary" ng-click="toWaterDetails(list)"></span>
                                             <!--<span class="fa fa-edit text-info" ng-click="editTask(list)"></span>-->
