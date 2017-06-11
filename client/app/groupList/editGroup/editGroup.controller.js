@@ -4,40 +4,25 @@
 (function(){
     'use strict';
 
-    angular.module('app.addGroup.controller',[])
-        .controller('AddGroupCtrl',['$scope','$mdToast','$filter','RestangularService',AddGroupCtrl])
+    angular.module('app.editGroup.controller',[])
+        .controller('EditGroupCtrl',['$scope','$mdToast','$filter','RestangularService','$stateParams',EditGroupCtrl])
     ;
 
-    function AddGroupCtrl($scope,$mdToast,$filter,RestangularService){
-
+    function EditGroupCtrl($scope,$mdToast,$filter,RestangularService,$stateParams){
+        var statePararms=$scope.stateParams=$stateParams;
         $scope.getSubGroups=getSubGroups;
         $scope.pidArr=[];
         $scope.users=[];
         $scope.groups=[];
         initData();
         function initData(){
-            $scope.formObj={
-                users:[]
-            };
+            $scope.formObj={};
             $scope.pidArr=[];
             $scope.users=[];
             $scope.groups=[];
             getGroups();
-            // getMaxL();
-            getUsers();
         }
 
-        function getUsers(){
-            RestangularService.all('api/users?size=999999').customGET().then(function(result){
-                if(result.status==200){
-                    console.log(result);
-                    angular.forEach(result.data,function(val){
-                        $scope.users.push({user:val.login,userName:val.firstName});
-                    })
-                    console.log($scope.users.length);
-                }
-            })
-        }
 
         function getGroups(){
             RestangularService.all('api/groups-level/1').customGET().then(function(result){
@@ -46,6 +31,11 @@
                     // getSubGroups(result.data[0].id,0);
                 }
             });
+            RestangularService.all('api/groups').customGET(statePararms.id).then(function(result){
+                if(result.status==200){
+                    $scope.formObj=result.data;
+                }
+            })
         }
 
         function getSubGroups(id,index){

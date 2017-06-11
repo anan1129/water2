@@ -1,0 +1,47 @@
+<div ng-controller="GroupListCtrl" class="group-list">
+    <div class="page page-form-ele">
+        <div class="row ui-section">
+            <div class="col-md-12">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <div layout="column" ng-cloak class="md-inline-form inputdemoBasicUsage">
+                            <div layout-padding>
+                                <h2 class="section-header">
+                                    组织结构列表
+                                    <a href="#!/add-group" class="btn btn-primary pull-right"><i class="fa fa-plus"></i></a>
+                                </h2>
+                                <div class="table-responsive">
+                                    <table class="table no-margin">
+                                        <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>组织名称</th>
+                                            <th>上级节点id</th>
+                                            <th>组织结构路径</th>
+                                            <th>操作</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr ng-repeat="list in listArr">
+                                            <td>{{list.id}}</td>
+                                            <td>{{list.name}}</td>
+                                            <td>{{list.longPid}}</td>
+                                            <td>{{list.longPname}}</td>
+                                            <td>
+                                                <!--<a class="fa fa-eye text-primary"></a>-->
+                                                <a class="fa fa-remove text-danger"  ng-click="del(list)"></a>
+                                                <a class="fa fa-edit text-success" href="#!/edit-group/{{list.id}}"></a>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

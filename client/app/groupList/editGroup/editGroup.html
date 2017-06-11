@@ -1,4 +1,4 @@
-<div ng-controller="AddGroupCtrl">
+<div ng-controller="EditGroupCtrl">
     <div class="page page-form-ele">
         <div class="row ui-section">
             <div class="col-md-12">
@@ -7,9 +7,18 @@
                         <div layout="column" ng-cloak class="md-inline-form inputdemoBasicUsage">
                             <div layout-padding>
                                 <form name="addGroup" class="form-horizontal" ng-submit="save()">
-                                    <h2 class="section-header">添加组织结构</h2>
+                                    <h2 class="section-header">修改组织结构</h2>
                                     <div class="form-group">
-                                        <label class="col-sm-2">上级组织</label>
+                                        <label class="col-xs-2">
+                                            目前组织结构
+                                        </label>
+                                        <div class="col-xs-5">
+                                            <input type="text" class="form-control" ng-model="formObj.longPname" disabled>
+                                        </div>
+
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2">修改组织</label>
                                         <div class="col-xs-10">
                                             <div class="row">
                                                 <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12"  ng-repeat="group in groups">
@@ -50,7 +59,7 @@
                                     <!--</div>-->
 
                                     <button type="submit" ui-wave class="btn btn-primary btn-w-md pull-right"
-                                            style="margin-top:50px;" >添加组织
+                                            style="margin-top:50px;" >修改
                                     </button>
                                 </form>
                             </div>

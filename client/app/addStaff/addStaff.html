@@ -26,53 +26,45 @@
                                             <input type="text" class="form-control" ng-model="formObj.firstName" id="label-firstName">
                                         </div>
                                     </div>
-                                    <!--<div class="form-group">-->
-                                        <!--<label class="col-sm-2">上级组织</label>-->
-                                        <!--<div class="col-sm-5">-->
-                                            <!--<select class="form-control" name="" ng-model="level" ng-change="getSubGroups(level)">-->
-                                                <!--<option  value="">-->
-                                                    <!--1级节点-->
-                                                <!--</option>-->
-                                                <!--<option value="{{$index+1}}" ng-hide="$first" ng-repeat="l in levelArr track by $index" >{{$index+1}}级节点</option>-->
-                                            <!--</select>-->
-                                        <!--</div>-->
-                                        <!--<div class="col-sm-5">-->
-                                            <!--<select class="form-control" name="" ng-model="formObj.pid"-->
-                                                    <!--ng-value="">-->
-                                                <!--<option value="{{group.id}}" ng-repeat="group in groups">-->
-                                                    <!--{{group.name}}-->
-                                                <!--</option>-->
-                                            <!--</select>-->
-                                        <!--</div>-->
-
-                                    <!--</div>-->
+                                    <div class="form-group">
+                                        <label class="col-sm-2">选择组织</label>
+                                        <div class="col-xs-10">
+                                            <div class="row">
+                                                <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12"  ng-repeat="group in groups">
+                                                    <select class="form-control" ng-model="pidArr[$index]" ng-change="getSubGroups(pidArr[$index],$index)">
+                                                        <option ng-repeat="g in group" value="{{g}}" >{{g.name}}</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                     <div class="form-group">
                                         <label for="label-email" class="col-sm-2">邮箱:</label>
                                         <div class="col-sm-10">
-                                            <input type="email" class="form-control" ng-model="formObj.groupName" id="label-email">
+                                            <input type="email" class="form-control" ng-model="formObj.email" id="label-email">
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="col-sm-2">所属组织:</label>
+                                        <label class="col-sm-2">职位:</label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" ng-model="formObj.groupName" id="label-groupName">
+                                            <input type="text" class="form-control" ng-model="formObj.department" id="label-department">
                                         </div>
                                     </div>
-                                    <div class="form-group">
-                                        <label  class="col-sm-2">级别:</label>
-                                        <div class="col-sm-10">
-                                            <!--<md-checkbox ng-model="formObj.cb1" aria-label="Checkbox 1">处理员</md-checkbox>-->
-                                            <!--<md-checkbox ng-model="formObj.cb2" aria-label="Checkbox 2">一级河长</md-checkbox>-->
-                                            <!--<md-checkbox ng-model="formObj.cb3" aria-label="Checkbox 3">二级河长</md-checkbox>-->
+                                    <!--<div class="form-group">-->
+                                        <!--<label  class="col-sm-2">级别:</label>-->
+                                        <!--<div class="col-sm-10">-->
+                                            <!--&lt;!&ndash;<md-checkbox ng-model="formObj.cb1" aria-label="Checkbox 1">处理员</md-checkbox>&ndash;&gt;-->
+                                            <!--&lt;!&ndash;<md-checkbox ng-model="formObj.cb2" aria-label="Checkbox 2">一级河长</md-checkbox>&ndash;&gt;-->
+                                            <!--&lt;!&ndash;<md-checkbox ng-model="formObj.cb3" aria-label="Checkbox 3">二级河长</md-checkbox>&ndash;&gt;-->
 
-                                            <md-radio-group class="ui-md-radio-group-inline" ng-model="formObj.level">
-                                                <md-radio-button value="处理员">处理员</md-radio-button>
-                                                <md-radio-button value="一级河长">一级河长</md-radio-button>
-                                                <md-radio-button value="二级河长">二级河长</md-radio-button>
-                                            </md-radio-group>
-                                            <!--<md-radio-button></md-radio-button>-->
-                                        </div>
-                                    </div>
+                                            <!--<md-radio-group class="ui-md-radio-group-inline" ng-model="formObj.level">-->
+                                                <!--<md-radio-button value="处理员">处理员</md-radio-button>-->
+                                                <!--<md-radio-button value="一级河长">一级河长</md-radio-button>-->
+                                                <!--<md-radio-button value="二级河长">二级河长</md-radio-button>-->
+                                            <!--</md-radio-group>-->
+                                            <!--&lt;!&ndash;<md-radio-button></md-radio-button>&ndash;&gt;-->
+                                        <!--</div>-->
+                                    <!--</div>-->
                                     <div class="form-group">
                                         <label for="label-tel" class="col-sm-2">手机号码:</label>
                                         <div class="col-sm-10">

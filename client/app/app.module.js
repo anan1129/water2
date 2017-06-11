@@ -34,6 +34,8 @@
         , 'app.waterTable'
         , 'app.userList'
         , 'app.editTask'
+        , 'app.groupList'
+        , 'app.editGroup'
 
         // 3rd party feature modules
         , 'restangular'
