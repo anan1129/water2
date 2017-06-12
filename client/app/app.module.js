@@ -33,7 +33,6 @@
         , 'app.login'
         , 'app.waterTable'
         , 'app.userList'
-        , 'app.editTask'
         , 'app.groupList'
         , 'app.editGroup'
 
