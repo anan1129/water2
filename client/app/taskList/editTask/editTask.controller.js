@@ -11,6 +11,7 @@
     function EditTaskCtrl($scope, $stateParams, $mdToast,RestangularService) {
         var stateParams=$scope.stateParams=$stateParams;
         $scope.getSubGroups=getSubGroups;
+        $scope.save=save;
         $scope.data;
 
         initData();
@@ -18,6 +19,7 @@
             $scope.groups=[];
             $scope.pidArr=[];
             getData(stateParams.id);
+            getJob(stateParams.id);
             getGroups();
         }
 
@@ -38,6 +40,15 @@
             });
         }
 
+        function getUsers(id){
+            RestangularService.all('api/users/byGroup/'+id+'?size=10000').customGET(id).then(function(result){
+                if(result.status==200){
+                    console.log(result.data);
+                    $scope.users=result.data;
+                }
+            })
+        }
+
         function getSubGroups(id,index){
             if(id){
                 RestangularService.all('api/groups-childs').customGET(id).then(function(result){
@@ -47,17 +58,30 @@
                             $scope.groups[index+1]=result.data;
                         }else{
                             console.log($scope.pidArr);
-                            RestangularService.all('api/groups').customGET(id).then(function(result){
-                                if(result.status==200){
-                                    console.log(result.data);
-                                    $scope.users=result.data.users;
-                                }
-                            })
+                            $scope.groups.length=index+1;
+                            getUsers(id);
                         }
                     }
                 });
             }
+        }
 
+        function getJob(id){
+            RestangularService.all('api/jobs').customGET(id).then(function(result){
+                if(result.status==200){
+                    $scope.formObj=result.data;
+                }
+            })
+        }
+
+        function save(){
+            $scope.user=angular.fromJson($scope.user);
+            var data=$scope.formObj;
+            data.users.push({user:$scope.user.login});
+            console.log(data);
+            RestangularService.all('api/jobs').customPUT(data).then(function(result){
+
+            })
         }
     }
 })();
