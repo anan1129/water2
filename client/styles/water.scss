@@ -93,9 +93,12 @@
         color:#fff;
         font-size:10px;
         position:absolute;
-        bottom:15px;
+        bottom:27px;
         left:0px;
         right:0px;
+        -webkit-text-stroke: 0px #005bac;
+        /*-webkit-text-fill-color:#fff;*/
+        text-shadow: 0 0 2px blue;
     }
 
 }

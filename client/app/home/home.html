@@ -17,7 +17,7 @@
     }
 
     .water {
-        background: url('assets/images/water/home-bg2.jpg') no-repeat 0 0;
+        background: url('assets/images/water/home-bg3.jpg') no-repeat 0 0;
         background-size:100% 100%;
         position: absolute;
         left:0;
@@ -32,11 +32,13 @@
         left:0;
         top:0;
         font-size:0.8em;
-        -webkit-text-stroke: 0px #ccc;
-        -webkit-text-fill-color:#fff;
+        -webkit-text-stroke: 0px #005bac;
+        /*-webkit-text-fill-color:#fff;*/
+        text-shadow: 0 0 2px blue;
     }
     .river:active,.river:hover{
         cursor:pointer;
+
     }
     .qj{
         /*top:42%;*/
@@ -134,8 +136,12 @@
         transform: rotate(25deg);
     }
     .xjp{
-        top:40%;
-        left:16%;
+        top:45%;
+        left:5%;
+    }
+    .xjp2{
+        top:33%;
+        left:11%;
     }
     .sth{
         top:34%;
@@ -158,10 +164,12 @@
         margin:0;
         line-height:48px;
         font-size:15px;
+
     }
     header .title>i{
         line-height:48px;
     }
+
 
 
 
@@ -240,6 +248,11 @@
         'sth':river.riverName=='随塘河',
         'xjp':river.riverName=='小吉浦',
 
+    }">{{river.riverName}}</a>
+
+    <!--小吉普2-->
+    <a class="river" ng-show="river.riverName=='小吉浦'" ng-click="toDetail(river)" ng-repeat="river in riverData" ng-class="{
+        'xjp2':river.riverName=='小吉浦',
     }">{{river.riverName}}</a>
 </div>
 

@@ -52,6 +52,22 @@
                         map.addOverlay(polyline);
 
                     }
+
+                    //
+                    // map.setMapStyle({
+                    //     styleJson:[
+                    //         {
+                    //             "featureType": "background",
+                    //             "elementType": "all",
+                    //             "stylers": {
+                    //                 "color": "#cccccc",
+                    //                 "hue": "#cccccc",
+                    //                 "visibility": "on"
+                    //             }
+                    //         }
+                    //     ]
+                    // })
+
                 }
             }
         })

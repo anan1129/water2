@@ -33,7 +33,7 @@
                                         <td>{{list.phoneNumber}}</td>
                                         <!--<td>{{list.email}} </td>-->
                                         <td>{{list.department}}</td>
-                                        <td>{{list.groupName}}</td>
+                                        <td>{{list.groupName|filterGroupName}}</td>
                                         <td>
                                             <!--<span class="fa fa-eye text-primary" ng-click="toTaskDetails(list)"></span>-->
                                             <span class="fa fa-edit text-info" ng-click="editTask(list)"></span>

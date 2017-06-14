@@ -4,6 +4,6 @@
 (function(){
     'use strict';
 
-    angular.module('app.userList',['app.userList.controller','app.userList.state'])
+    angular.module('app.userList',['app.userList.controller','app.userList.state','app.userList.filter'])
     ;
 })();
