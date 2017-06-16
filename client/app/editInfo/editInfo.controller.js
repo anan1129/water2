@@ -11,6 +11,7 @@
     function EditInfoCtrl($scope,$stateParams,$state,RestangularService,FileUploader){
         console.log($stateParams);
         var users=[];
+        $scope.infoTypes = ['新闻动态', '一河一档', '一河一策','河长日志'];
         $scope.fileOrigin="http://106.15.48.81:8080/api/file-show/path?filepath=";
         $scope.formObj={
             type:'',
@@ -22,7 +23,6 @@
             $scope.formObj={
                 type:'',
             };
-            // getNewsTypes();
         }
 
 
@@ -38,7 +38,7 @@
         function getNewsTypes(){
             RestangularService.all('api/news-types').customGET().then(function(result){
                 if(result.status==200){
-                    $scope.types=result.data;
+                    $scope.newsTypes=result.data;
                 }
             });
         }
@@ -51,8 +51,6 @@
             })
         }
 
-
-
         $scope.save=function(){
             console.log($scope.formObj.id);
             var data=$scope.formObj;
@@ -63,7 +61,6 @@
                     $state.go('dynamic-info');
                 }
             })
-
         }
 
         // angular.forEach(GlobalData.users,function(val){

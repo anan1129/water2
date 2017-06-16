@@ -5,11 +5,14 @@
     'use strict';
 
     angular.module('app.waterTable.controller', [])
-        .controller('WaterTableCtrl', ['$scope', '$state', '$mdToast','RestangularService', WaterTableCtrl])
+        .controller('WaterTableCtrl', ['$scope', '$state', '$mdToast','RestangularService','$filter', WaterTableCtrl])
     ;
 
-    function WaterTableCtrl($scope, $state, $mdToast,RestangularService) {
+    function WaterTableCtrl($scope, $state, $mdToast,RestangularService,$filter) {
         var toast;
+        $scope.toWaterDetails = toWaterDetails;
+        $scope.editTask = editTask;
+        $scope.orderBy = orderBy;
         $scope.toRiverInfo=toRiverInfo;
         $scope.listObj = {
             del: del,
@@ -30,8 +33,12 @@
                 }
             });
         }
-        $scope.toWaterDetails = toWaterDetails;
-        $scope.editTask = editTask;
+
+        function orderBy(name){
+            console.log(name);
+            $scope.row=name;
+            $scope.listObj.data=$filter('orderBy')($scope.listObj.data,name);
+        }
 
         function del(obj) {
             // if(!toast){

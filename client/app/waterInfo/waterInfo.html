@@ -66,14 +66,14 @@
                                     <div class="divider divider-dashed divider-lg pull-in"></div>
                                     <h2 class="section-header">负责人</h2>
                                     <div layout layout-sm="column">
-                                        <md-input-container flex ng-repeat="group in groups">
-                                            <label>选择组</label>
-                                            <md-select ng-model="pidArr[$index]"  ng-change="getSubGroups(pidArr[$index],$index)">
-                                                <md-option   value="{{l.id}}"  ng-repeat="l in group">
-                                                    {{l.name}}
-                                                </md-option>
-                                            </md-select>
-                                        </md-input-container>
+                                        <!--<md-input-container flex ng-repeat="group in groups">-->
+                                            <!--<label>选择组</label>-->
+                                            <!--<md-select ng-model="pidArr[$index]"  ng-change="getSubGroups(pidArr[$index],$index)">-->
+                                                <!--<md-option   value="{{l.id}}"  ng-repeat="l in group">-->
+                                                    <!--{{l.name}}-->
+                                                <!--</md-option>-->
+                                            <!--</md-select>-->
+                                        <!--</md-input-container>-->
                                         <!--<md-input-container flex>-->
                                             <!--<label>选择组</label>-->
                                             <!--<md-select ng-model="pid" ng-change="getUsers(pid)">-->
@@ -102,7 +102,7 @@
 
                                     </div>
                                     <div class="form-group">
-                                        <label>二级河长</label>
+                                        <label>二级河长(按住ctrl键可多选)</label>
                                         <select ng-model="formObj.secondManagers" class="form-control" multiple>
                                             <option value="{{user}}" ng-repeat="user in users" >
                                                 {{user.userName||user.firstName}}</option>

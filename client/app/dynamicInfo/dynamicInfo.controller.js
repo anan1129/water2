@@ -5,11 +5,12 @@
     'use strict';
 
     angular.module('app.dynamicInfo.controller', [])
-        .controller('DynamicInfoCtrl', ['$scope', '$state', '$mdToast','RestangularService', DynamicInfoCtrl])
+        .controller('DynamicInfoCtrl', ['$scope', '$state', '$mdToast','RestangularService','$filter', DynamicInfoCtrl])
     ;
 
-    function DynamicInfoCtrl($scope, $state, $mdToast,RestangularService) {
+    function DynamicInfoCtrl($scope, $state, $mdToast,RestangularService,$filter) {
         var toast;
+        $scope.orderBy=orderBy;
         $scope.listObj = {
             del: del,
             data:[],
@@ -62,6 +63,12 @@
                     toast=null;
                 });
             }
+        }
+
+        function orderBy(name){
+            console.log(name);
+            $scope.row=name;
+            $scope.listObj.data=$filter('orderBy')($scope.listObj.data,name||'newsType2');
         }
 
         function editInfo(obj) {

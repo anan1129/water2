@@ -15,10 +15,24 @@
                                         <thead>
                                         <tr>
                                             <!--<th>#</th>-->
-                                            <th>组织名称</th>
+                                            <th>
+                                                <div class="th">
+                                                    组织名称
+                                                    <span class="fa fa-angle-up"
+                                                          data-ng-click=" orderBy('name') "
+                                                          data-ng-class="{active: row == 'name'}"></span>
+                                                    <span class="fa fa-angle-down"
+                                                          data-ng-click=" orderBy('-name') "
+                                                          data-ng-class="{active: row == '-name'}"></span>
+                                                </div>
+                                            </th>
                                             <!--<th>上级节点id</th>-->
                                             <!--<th>组织结构路径</th>-->
-                                            <th>操作</th>
+                                            <th>
+                                                <div class="th">
+                                                    操作
+                                                </div>
+                                            </th>
                                         </tr>
                                         </thead>
                                         <tbody>

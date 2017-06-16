@@ -5,14 +5,15 @@
     'use strict';
 
     angular.module('app.taskList.controller', [])
-        .controller('TaskListCtrl', ['$scope', '$state', '$mdToast','RestangularService', TaskListCtrl])
+        .controller('TaskListCtrl', ['$scope', '$state', '$mdToast','RestangularService','$filter', TaskListCtrl])
     ;
 
-    function TaskListCtrl($scope, $state, $mdToast,RestangularService) {
+    function TaskListCtrl($scope, $state, $mdToast,RestangularService,$filter) {
         var toast;
         $scope.toTaskDetails = toTaskDetails;
         $scope.editTask = editTask;
         $scope.edit = edit;
+        $scope.orderBy=orderBy;
         $scope.listObj = {
             del: del,
             data:[]
@@ -31,6 +32,12 @@
                     $scope.listObj.data=result.data;
                 }
             });
+        }
+
+        function orderBy(name){
+            console.log(name);
+            $scope.row=name;
+            $scope.listObj.data=$filter('orderBy')($scope.listObj.data,name);
         }
 
 

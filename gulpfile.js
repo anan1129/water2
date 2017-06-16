@@ -95,7 +95,7 @@ gulp.task('sass-min', function() {
         .pipe($.plumber({errorHandler: swallowError}))
         .pipe($.sass(sassOptions))
         .pipe($.autoprefixer())
-        .pipe(gulp.dest(config.tmp + '/styles'));    
+        .pipe(gulp.dest(config.tmp + '/styles'));
 })
 
 gulp.task('sass-watcher', function() {

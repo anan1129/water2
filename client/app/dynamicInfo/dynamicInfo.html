@@ -24,11 +24,35 @@
                                     <thead>
                                     <tr>
                                         <!--<th>#</th>-->
-                                        <th>信息标题</th>
+                                        <th>
+                                            <div class="th">
+                                                信息标题
+                                                <span class="fa fa-angle-up"
+                                                      data-ng-click=" orderBy('title') "
+                                                      data-ng-class="{active: row == 'title'}"></span>
+                                                <span class="fa fa-angle-down"
+                                                      data-ng-click=" orderBy('-title') "
+                                                      data-ng-class="{active: row == '-title'}"></span>
+                                            </div>
+                                        </th>
                                         <!--<th>内容</th>-->
                                         <!--<th>河道id</th>-->
-                                        <th>栏目</th>
-                                        <th>操作</th>
+                                        <th>
+                                            <div class="th">
+                                                栏目
+                                                <span class="fa fa-angle-up"
+                                                      data-ng-click=" orderBy('newsType') "
+                                                      data-ng-class="{active: row == 'newsType'}"></span>
+                                                <span class="fa fa-angle-down"
+                                                      data-ng-click=" orderBy('-newsType') "
+                                                      data-ng-class="{active: row == '-newsType'}"></span>
+                                            </div>
+                                        </th>
+                                        <th>
+                                            <div class="th">
+                                                操作
+                                            </div>
+                                        </th>
                                     </tr>
                                     </thead>
                                     <tbody>

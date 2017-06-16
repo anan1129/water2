@@ -133,7 +133,68 @@ md-pagination-wrapper {
     .md-tab{
         flex:1;
     }
+}
 
+.table thead th {
+    position: relative;
+    padding: 0;
+}
+
+.table thead th > .th {
+    position: relative;
+    padding: 8px 20px 8px 8px;
+}
+
+.table thead th .glyphicon-chevron-up,
+.table thead th .glyphicon-chevron-down {
+    position: absolute;
+    color: #999;
+}
+
+.table thead th .glyphicon-chevron-up:hover,
+.table thead th .glyphicon-chevron-down:hover {
+    color: #009688;
+    cursor: pointer;
+}
+
+.table thead th .glyphicon-chevron-up.active,
+.table thead th .glyphicon-chevron-down.active {
+    color: #009688;
+}
+
+.table thead th .fa-angle-up,
+.table thead th .fa-angle-down {
+    position: absolute;
+    color: #999;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.table thead th .fa-angle-up:hover,
+.table thead th .fa-angle-down:hover {
+    color: #009688;
+    cursor: pointer;
+}
+
+.table thead th .fa-angle-up.active,
+.table thead th .fa-angle-down.active {
+    color: #009688;
+}
+
+.table thead th .glyphicon-chevron-up,
+.table thead th .fa-angle-up {
+    top: 4px;
+    right: 5px;
+}
+
+.table thead th .fa-angle-down {
+    top: 18px;
+    right: 5px;
+}
+
+.table thead th .glyphicon-chevron-down {
+    top: 18px;
+    right: 6px;
 }
 
 

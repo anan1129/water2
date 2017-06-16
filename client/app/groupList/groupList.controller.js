@@ -11,11 +11,19 @@
     function GroupListCtrl($scope,$mdToast,$filter,RestangularService){
         $scope.listArr;
         $scope.del=del;
+        $scope.orderBy = orderBy;
         var toast;
         initData();
 
         function initData(){
             getGroups();
+        }
+
+
+        function orderBy(name){
+            console.log(name);
+            $scope.row=name;
+            $scope.listArr=$filter('orderBy')($scope.listArr,name);
         }
 
         function getGroups(){

@@ -20,28 +20,44 @@
                                             <input type="text" class="form-control" id="label-info-imageUrl" ng-model="formObj.imageUrl">
                                         </div>
                                     </div>
-                                    <!--<div class="form-group">-->
-                                        <!--<label for="label-info-type" class="col-sm-2">信息类型</label>-->
-                                        <!--<div class="col-sm-9">-->
-                                            <!--<select class="form-control" id="label-info-type" ng-model="formObj.newsTypeId">-->
-                                                <!--&lt;!&ndash;<option value="{{formObj.newsTypeId}}" ng-selected="22">{{formObj.newsTypeId}}</option>&ndash;&gt;-->
-                                                <!--<option value="{{type.id}}" ng-repeat="type in types" >{{type.id}}</option>-->
-                                            <!--</select>-->
-                                        <!--</div>-->
-                                    <!--</div>-->
-                                    <!--<div class="form-group">-->
-                                        <!--<label for="label-select-river" class="col-sm-2">选择河道</label>-->
-                                        <!--<div class="col-sm-10">-->
-                                            <!--<select class="form-control" id="label-select-river" ng-model="formObj.riverId">-->
-                                                <!--<option value="{{river.name}}" ng-repeat="river in rivers">{{river.name}}</option>-->
-                                            <!--</select>-->
-                                        <!--</div>-->
-                                    <!--</div>-->
+                                    <div class="form-group">
+                                        <label for="label-info-type" class="col-sm-2">信息类型</label>
+                                        <div class="col-sm-10">
+                                            <select class="form-control" id="label-info-type" ng-model="formObj.newsType">
+                                                <option value="{{type}}" ng-repeat="type in infoTypes">{{type}}
+                                                </option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group" ng-show="formObj.newsType=='一河一档'||formObj.newsType=='一河一策'||formObj.newsType=='河长日志'">
+                                        <label for="label-select-river" class="col-sm-2">选择河道</label>
+                                        <div class="col-sm-10">
+                                            <select class="form-control" id="label-select-river"
+                                                    ng-model="formObj.riverId">
+                                                <option value="{{river.id}}" ng-repeat="river in rivers">
+                                                    {{river.riverName}}
+                                                </option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group" ng-show="formObj.newsType=='新闻动态'">
+                                        <label for="" class="col-sm-2">信息类型</label>
+                                        <div class="col-sm-9">
+                                            <select class="form-control" id="" ng-model="formObj.newsType2" ng-hide="addTypes">
+                                                <option value="{{type.name}}" ng-repeat="type in newsTypes">{{type.name}}
+                                                </option>
+                                            </select>
+                                            <input type="text" class="form-control" ng-model="formObj.newsType2" ng-keydown="addNewsType2($event,newsType2)" ng-show="addTypes" >
+                                        </div>
+                                        <div class="col-md-1">
+                                            <button class="btn btn-primary pull-right" ng-click="addTypes=!addTypes">
+                                                <i class="fa fa-plus"></i>
+                                            </button>
+                                        </div>
+                                    </div>
                                     <div class="form-group">
                                         <label for="" class="col-sm-2">信息内容</label>
                                         <div class="col-sm-10">
-                                            <!--<input type="text" class="form-control" ng-model="formObj.taskContent">-->
-                                            <!--<textarea name="infoContent"class="form-control" cols="30" rows="10" ng-model="formObj.content" id="label-task-content"></textarea>-->
                                             <div text-angular ng-model="formObj.content"></div>
                                         </div>
                                     </div>

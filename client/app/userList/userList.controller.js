@@ -5,11 +5,14 @@
     'use strict';
 
     angular.module('app.userList.controller', [])
-        .controller('UserListCtrl', ['$scope', '$state', '$mdToast','RestangularService', UserListCtrl])
+        .controller('UserListCtrl', ['$scope', '$state', '$mdToast','RestangularService','$filter', UserListCtrl])
     ;
 
-    function UserListCtrl($scope, $state, $mdToast,RestangularService) {
+    function UserListCtrl($scope, $state, $mdToast,RestangularService,$filter) {
         var toast;
+        $scope.toTaskDetails = toTaskDetails;
+        $scope.editTask = editTask;
+        $scope.orderBy = orderBy;
         $scope.listObj = {
             del: del,
             data:[]
@@ -52,8 +55,13 @@
                 }
             });
         }
-        $scope.toTaskDetails = toTaskDetails;
-        $scope.editTask = editTask;
+
+
+        function orderBy(name){
+            console.log(name);
+            $scope.row=name;
+            $scope.listObj.data=$filter('orderBy')($scope.listObj.data,name);
+        }
 
         function del(obj) {
             if(!toast){
