@@ -7,7 +7,7 @@
     angular.module('app.addInfo', ['app.addInfo.controller', 'app.addInfo.state', 'angularFileUpload', 'textAngular','app.addInfo.directive'])
         .config(['$provide',function ($provide) {
             $provide.decorator('taOptions', ['taRegisterTool', '$delegate','taSelection', 'taBrowserTag', 'taTranslations',
-                'taToolFunctions','$window', function (taRegisterTool, taOptions,taSelection,taBrowserTag,taTranslations,taToolFunctions,$window) {
+                'taToolFunctions','$window','$mdDialog', function (taRegisterTool, taOptions,taSelection,taBrowserTag,taTranslations,taToolFunctions,$window,$mdDialog) {
                     // $delegate is the taOptions we are decorating
                     // register the tool with textAngular
 
@@ -143,9 +143,26 @@
                     taRegisterTool('selectImage', {
                         iconclass: 'fa fa-picture-o',
                         tooltiptext: 'selectImage',
-                        display:'<input type="file" style="overflow:hidden;" ng-model="img" onchange="angular.element(this).scope().action(this)"/>',
-                        action: function(f){
-                            console.log(f);
+                        // display:'<input type="file" style="overflow:hidden;" ng-model="img" onchange="angular.element(this).scope().action(this)"/>',
+                        action: function(){
+                           // var confirm=$mdDialog.confirm()
+                           //     .title('select')
+                           //     .content('<input type="file">')
+                           //     .ok('ok')
+                           //     .cancel('cancel');
+                            $mdDialog.show({
+                                controller: ['$scope',function(){
+
+                                }],
+                                templateUrl: 'app/addInfo/insertImgDialog.html',
+                                parent: angular.element(document.body),
+                                // targetEvent: ev,
+                                clickOutsideToClose:true
+                            }).then(function(r){
+                                console.log(r);
+                            },function(){
+                                console.log(22);
+                            });
                             var imageLink;
                             // imageLink = $window.prompt('http://', 'http://');
                             if(imageLink && imageLink !== '' && imageLink !== 'http://'){
@@ -194,7 +211,7 @@
 
                     // add the button to the default toolbar definition
                     // taOptions.toolbar[1].push('backgroundColor', 'fontColor', 'fontName', 'fontSize');
-                    taOptions.toolbar[3].push('fontSize','lineHeight');
+                    taOptions.toolbar[3].push('fontSize','lineHeight','selectImage');
                     return taOptions;
                 }]);
         }])
