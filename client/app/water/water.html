@@ -74,6 +74,9 @@
     .text{
         /*font-size:14px !important;*/
     }
+    .anchorBL{
+        display:none !important;
+    }
 </style>
 <div class="water" ng-controller="WaterCtrl" ng-cloak>
     <div ng-include="'app/water/header/header.html'"></div>
@@ -84,8 +87,8 @@
                 <div  >
                     <div class="row ui-section">
                         <div class="col-md-12">
-                            <div class="map" ng-style="{'background':'url('+src+') no-repeat 0 0','background-size':'100% 100%' }" >
-                                <!--<div id="baiduMap" baidu-map data-obj="dataObj" style="height:100%;"></div>-->
+                            <div class="map"  >
+                                <div id="baiduMap" baidu-map data-obj="dataObj" style="width:100%;height:100%;"></div>
                                 <!--<a class="btn btn-success">投诉建议</a>-->
                             </div>
                             <div class="container">

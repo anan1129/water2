@@ -5,11 +5,14 @@
     'use strict';
 
     angular.module('app.water.controller',[])
-        .controller('WaterCtrl',['$scope','$stateParams','RestangularService','$state',WaterCtrl])
+        .controller('WaterCtrl',['$scope','$stateParams','RestangularService','$state','$timeout',WaterCtrl])
     ;
 
-    function WaterCtrl($scope,$stateParams,RestangularService,$state){
+    function WaterCtrl($scope,$stateParams,RestangularService,$state,$timeout){
         var stateParams=$scope.stateParams=$stateParams;
+        var map=$scope.map;
+        var pointArr=[];
+        var point;
         // if(stateParams.id=="01-1"){
         //     $state.go('home');
         // }
@@ -34,57 +37,83 @@
                 if(result.status==200){
                     console.log(result.data);
                     $scope.dataObj=result.data;
-                    $scope.$broadcast('map');
-                    switch($scope.dataObj.riverName){
-                        case '吉浦河' :
-                        case '小吉浦' :
-                            $scope.src='assets/images/water/xjp.png';
-                            $scope.img='assets/images/water/05-1.jpg';
-                            break;
-                        case '东走马塘' :
-                            $scope.src='assets/images/water/dzmt.png';
-                            $scope.img='assets/images/water/02-1.jpg';
-                            break;
-                        case '复兴岛运河' :
-                            $scope.src='assets/images/water/fxdyh.png';
-                            $scope.img='assets/images/water/04-1.jpg';
-                            break;
-                        case '虬江' :
-                            $scope.src='assets/images/water/qj.png';
-                            $scope.img='assets/images/water/01-1.jpg';
-                            break;
-                        case '钱家浜' :
-                            $scope.src='assets/images/water/qjb.png';
-                            $scope.img='assets/images/water/06-1.jpg';
-                            break;
-                        case '纬一河' :
-                        case '纬二河' :
-                        case '纬三河' :
-                        case '纬四河' :
-                        case '纬五河' :
-                        case '纬六河' :
-                        case '纬七河' :
-                        case '经一河' :
-                        case '经二河' :
-                        case '经三河' :
-                            $scope.src='assets/images/water/xjwcsx.png';
-                            $scope.img='assets/images/water/08-1.jpg';
-                            break;
-                        case '杨浦滨江' :
-                            $scope.src='assets/images/water/ypbj.png';
-                            $scope.img='assets/images/water/03-2.jpg';
-                            break;
-                        case '杨树浦港' :
-                            $scope.src='assets/images/water/yspg.png';
-                            $scope.img='assets/images/water/07-1.jpg';
-                            break;
-                    }
+                    $scope.dataObj.addresses=$scope.dataObj.addresses.replace(/\'/g,'\"');
+                    $scope.dataObj.addresses=angular.fromJson($scope.dataObj.addresses);
+                    // $scope.$broadcast('map');
+                    $timeout(function(){
+                        $scope.$broadcast('map');
+                    },1000);
+                    // init();
+                    // switch($scope.dataObj.riverName){
+                    //     case '吉浦河' :
+                    //     case '小吉浦' :
+                    //         $scope.src='assets/images/water/xjp.png';
+                    //         $scope.img='assets/images/water/05-1.jpg';
+                    //         break;
+                    //     case '东走马塘' :
+                    //         $scope.src='assets/images/water/dzmt.png';
+                    //         $scope.img='assets/images/water/02-1.jpg';
+                    //         break;
+                    //     case '复兴岛运河' :
+                    //         $scope.src='assets/images/water/fxdyh.png';
+                    //         $scope.img='assets/images/water/04-1.jpg';
+                    //         break;
+                    //     case '虬江' :
+                    //         $scope.src='assets/images/water/qj.png';
+                    //         $scope.img='assets/images/water/01-1.jpg';
+                    //         break;
+                    //     case '钱家浜' :
+                    //         $scope.src='assets/images/water/qjb.png';
+                    //         $scope.img='assets/images/water/06-1.jpg';
+                    //         break;
+                    //     case '纬一河' :
+                    //     case '纬二河' :
+                    //     case '纬三河' :
+                    //     case '纬四河' :
+                    //     case '纬五河' :
+                    //     case '纬六河' :
+                    //     case '纬七河' :
+                    //     case '经一河' :
+                    //     case '经二河' :
+                    //     case '经三河' :
+                    //         $scope.src='assets/images/water/xjwcsx.png';
+                    //         $scope.img='assets/images/water/08-1.jpg';
+                    //         break;
+                    //     case '杨浦滨江' :
+                    //         $scope.src='assets/images/water/ypbj.png';
+                    //         $scope.img='assets/images/water/03-2.jpg';
+                    //         break;
+                    //     case '杨树浦港' :
+                    //         $scope.src='assets/images/water/yspg.png';
+                    //         $scope.img='assets/images/water/07-1.jpg';
+                    //         break;
+                    // }
                 }
             }).then(function(){
                 getNewsType('一河一策');
                 getNewsType('一河一档');
             })
         }
+
+        function init(){
+            map=new BMap.Map('baiduMap');
+            point = new BMap.Point(121.500757,31.3884);
+            map.centerAndZoom(point,13);
+            // map.addControl(new BMap.MapTypeControl());
+            map.setCurrentCity('上海');
+            map.enableScrollWheelZoom(true);
+        }
+
+        function setPolyline(){
+            angular.forEach($scope.dataObj.addresses,function(val){
+                var x=val.longitude;
+                var y=val.latitude;
+                pointArr.push(new BMap.Point(x,y));
+            });
+            var polyline=new BMap.Polyline(pointArr);
+            map.addOverlay(polyline);
+        }
+
         function getNewsType(newsType){
             RestangularService.all('api/news-show-top?newsType='+newsType+'&riverId='+stateParams.id).customGET().then(function(result){
                 if(result.status==200){

@@ -102,6 +102,15 @@
     }
 
 }
+
+.news-detail{
+    .news-content{
+        img{
+            width:100% !important;
+            height:auto !important;
+        }
+    }
+}
 .list-group-item{
     padding:10px 15px;
     .row{
@@ -126,6 +135,8 @@ md-pagination-wrapper {
     }
 
 }
+
+
 
 
 

@@ -37,12 +37,12 @@
     .md-tab>.custom-tab{
         padding:12px 24px;
     }
-    img{
+    .news-content img{
         width:100%;
     }
 
 </style>
-<div ng-controller="NewDetailCtrl" class="water" ng-cloak>
+<div ng-controller="NewDetailCtrl" class="water news-detail" ng-cloak>
     <div ng-include="'app/water/header/header.html'"></div>
     <div class="row ui-section">
         <div class="col-xs-12">
@@ -53,7 +53,8 @@
 
                     <!--<p style="text-indent:2em;">{{data.content}}</p>-->
                     <!--<text-angular ng-model="data.content"></text-angular>-->
-                    <p ng-bind-html="data.content" ></p>
+                    <!--<p ta-bind ng-model="data.content" ></p>-->
+                    <p class="news-content" ng-bind-html="data.content" ></p>
                     <div style="text-align:right;"><span class="text-info">{{data.createdDate|editDate}}</span></div>
                 </div>
             </div>

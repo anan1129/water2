@@ -5,15 +5,32 @@
     'use strict';
 
     angular.module('app.addInfo.controller', [])
-        .controller('AddInfoCtrl', ['$scope', '$filter', 'FileUploader', 'RestangularService','$mdToast', AddInfoCtrl])
+        .controller('AddInfoCtrl', ['$scope', '$filter', 'FileUploader', 'RestangularService','$mdToast','$sce','$parse', AddInfoCtrl])
     ;
 
-    function AddInfoCtrl($scope, $filter, FileUploader, RestangularService,$mdToast) {
+    function AddInfoCtrl($scope, $filter, FileUploader, RestangularService,$mdToast,$sce,$parse) {
         var users = [];
         $scope.infoTypes = ['新闻动态', '一河一档', '一河一策','河长日志'];
         $scope.title = 'add group';
         $scope.fileOrigin="http://106.15.48.81:8080/api/file-show/path?filepath=";
         $scope.filePath;
+
+        $scope.aaa=function(h){
+            h=$sce.trustAsHtml(h);
+            // $parse(h,function(v){
+            //     console.log(v);
+            //     return v;
+            // })
+            // console.log($($scope.htmlVariable));
+            // console.log($sce);
+            console.log($($sce.getTrustedHtml(h)));
+        }
+
+        $scope.bbb=function(file,insertAction){
+            console.log(file);
+            console.log(insertAction);
+        }
+
 
         $scope.formObj = {
             attachments: []

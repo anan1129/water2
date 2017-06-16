@@ -7,7 +7,7 @@
     angular.module('app.addInfo', ['app.addInfo.controller', 'app.addInfo.state', 'angularFileUpload', 'textAngular','app.addInfo.directive'])
         .config(['$provide',function ($provide) {
             $provide.decorator('taOptions', ['taRegisterTool', '$delegate','taSelection', 'taBrowserTag', 'taTranslations',
-                'taToolFunctions', function (taRegisterTool, taOptions,taSelection,taBrowserTag,taTranslations,taToolFunctions) {
+                'taToolFunctions','$window', function (taRegisterTool, taOptions,taSelection,taBrowserTag,taTranslations,taToolFunctions,$window) {
                     // $delegate is the taOptions we are decorating
                     // register the tool with textAngular
 
@@ -133,6 +133,50 @@
                         options: setOptions(1,50)
                     });
 
+
+                    var blockJavascript = function (link) {
+                        if (link.toLowerCase().indexOf('javascript')!==-1) {
+                            return true;
+                        }
+                        return false;
+                    };
+                    taRegisterTool('selectImage', {
+                        iconclass: 'fa fa-picture-o',
+                        tooltiptext: 'selectImage',
+                        display:'<input type="file" style="overflow:hidden;" ng-model="img" onchange="angular.element(this).scope().action(this)"/>',
+                        action: function(f){
+                            console.log(f);
+                            var imageLink;
+                            // imageLink = $window.prompt('http://', 'http://');
+                            if(imageLink && imageLink !== '' && imageLink !== 'http://'){
+                                /* istanbul ignore next: don't know how to test this... since it needs a dialogPrompt */
+                                // block javascript here
+                                if (!blockJavascript(imageLink)) {
+                                    if (taSelection.getSelectionElement().tagName && taSelection.getSelectionElement().tagName.toLowerCase() === 'a') {
+                                        // due to differences in implementation between FireFox and Chrome, we must move the
+                                        // insertion point past the <a> element, otherwise FireFox inserts inside the <a>
+                                        // With this change, both FireFox and Chrome behave the same way!
+                                        taSelection.setSelectionAfterElement(taSelection.getSelectionElement());
+                                    }
+                                    // In the past we used the simple statement:
+                                    //return this.$editor().wrapSelection('insertImage', imageLink, true);
+                                    //
+                                    // However on Firefox only, when the content is empty this is a problem
+                                    // See Issue #1201
+                                    // Investigation reveals that Firefox only inserts a <p> only!!!!
+                                    // So now we use insertHTML here and all is fine.
+                                    // NOTE: this is what 'insertImage' is supposed to do anyway!
+                                    var embed = '<img src="' + imageLink + '">';
+                                    return this.$editor().wrapSelection('insertHTML', embed, true);
+                                }
+                            }
+                        },
+                        onElementSelect: {
+                            element: 'img',
+                            action: taToolFunctions.imgOnSelectAction
+                        }
+                    });
+
                     function setOptions(start,end){
                         var arr=[];
                         for(var i=start;i<=end;i++){
@@ -141,6 +185,9 @@
                         }
                         return arr;
                     }
+
+
+
 
 
 

@@ -15,16 +15,40 @@
             data:[]
         };
 
+        $scope.pagObj={
+            numPerPageOpt:[5,10,15],
+            numPerPage:10,
+            onNumPerPageChange:function(){
+                $scope.pagObj.select(1);
+                return $scope.pagObj.currentPage = 1;
+            },
+            currentPage:1,
+            totalElements:'',
+            select:function(page){
+                $scope.pagObj.currentPage =page;
+                getJobs();
+            }
+        }
+
         initData();
 
         function initData(){
            getJobs();
+            getAllJobs();
         }
 
         function getJobs(){
-            RestangularService.all('api/users?size=999999').customGET().then(function(result){
+            RestangularService.all('api/users?size=9999').customGET().then(function(result){
                 if(result.status==200){
                     $scope.listObj.data=result.data;
+                }
+            });
+        }
+
+        function getAllJobs(){
+            RestangularService.all('api/users?size=9999999').customGET().then(function(result){
+                if(result.status==200){
+                    $scope.pagObj.totalElements=result.data.length;
                 }
             });
         }
