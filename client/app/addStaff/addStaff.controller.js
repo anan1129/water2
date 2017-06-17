@@ -5,10 +5,10 @@
     'use strict';
 
     angular.module('app.addStaff.controller',[])
-        .controller('AddStaffCtrl',['$scope','RestangularService','$mdToast','$stateParams',AddStaffCtrl])
+        .controller('AddStaffCtrl',['$scope','RestangularService','$mdToast','$stateParams','$state',AddStaffCtrl])
     ;
 
-    function AddStaffCtrl($scope,RestangularService,$mdToast,$stateParams){
+    function AddStaffCtrl($scope,RestangularService,$mdToast,$stateParams,$state){
         var stateParams=$scope.stateParams=$stateParams;
         $scope.getSubGroups=getSubGroups;
         initData();
@@ -81,6 +81,7 @@
                                 .position('top right')
                                 .hideDelay(2000)
                         );
+                        $state.go('user-list');
                         // initData();
                     }else{
                         $mdToast.show(
