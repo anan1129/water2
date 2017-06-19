@@ -37,25 +37,16 @@
 
         function initData(){
            getJobs();
-            getAllJobs();
+            // getAllJobs();
         }
 
         function getJobs(){
             RestangularService.all('api/users?size=9999').customGET().then(function(result){
                 if(result.status==200){
-                    $scope.listObj.data=result.data;
+                    $scope.listObj.data=result.data.content;
                 }
             });
         }
-
-        function getAllJobs(){
-            RestangularService.all('api/users?size=9999999').customGET().then(function(result){
-                if(result.status==200){
-                    $scope.pagObj.totalElements=result.data.length;
-                }
-            });
-        }
-
 
         function orderBy(name){
             console.log(name);

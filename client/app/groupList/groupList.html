@@ -26,6 +26,17 @@
                                                           data-ng-class="{active: row == '-name'}"></span>
                                                 </div>
                                             </th>
+                                            <th>
+                                                <div class="th">
+                                                    上级组织
+                                                    <span class="fa fa-angle-up"
+                                                          data-ng-click=" orderBy('longPname') "
+                                                          data-ng-class="{active: row == 'longPname'}"></span>
+                                                    <span class="fa fa-angle-down"
+                                                          data-ng-click=" orderBy('-longPname') "
+                                                          data-ng-class="{active: row == '-longPname'}"></span>
+                                                </div>
+                                            </th>
                                             <!--<th>上级节点id</th>-->
                                             <!--<th>组织结构路径</th>-->
                                             <th>
@@ -39,6 +50,7 @@
                                         <tr ng-repeat="list in listArr">
                                             <!--<td>{{list.id}}</td>-->
                                             <td>{{list.name}}</td>
+                                            <td>{{(list.longPname|filterGroupName)=='一级节点'?'杨浦河长制':(list.longPname|filterGroupName)}}</td>
                                             <!--<td>{{list.longPid}}</td>-->
                                             <!--<td>{{list.longPname}}</td>-->
                                             <td>
