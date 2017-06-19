@@ -12,8 +12,8 @@
         $scope.goBack=goBack;
 
         function goBack(){
-            // $window.history.go(-1);
-            $state.go('home')
+            $window.history.go(-1);
+            // $state.go('home')
         }
     }
 })();
