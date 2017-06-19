@@ -1,6 +1,6 @@
 <div ng-controller="TaskListCtrl">
     <div class="page page-form-ele">
-        <div class="row ui-section">
+        <div class="pagObj.sort ui-section">
             <div class="col-md-12">
                 <div class="panel panel-default">
                     <div class="panel-body">
@@ -21,10 +21,10 @@
                                                 任务标题
                                                 <span class="fa fa-angle-up"
                                                       data-ng-click=" orderBy('name') "
-                                                      data-ng-class="{active: row == 'name'}"></span>
+                                                      data-ng-class="{active: pagObj.sort == 'name'}"></span>
                                                 <span class="fa fa-angle-down"
-                                                      data-ng-click=" orderBy('-name') "
-                                                      data-ng-class="{active: row == '-name'}"></span>
+                                                      data-ng-click=" orderBy('name,desc') "
+                                                      data-ng-class="{active: pagObj.sort == 'name,desc'}"></span>
                                             </div>
                                         </th>
                                         <th>
@@ -32,10 +32,10 @@
                                                 处理进度
                                                 <span class="fa fa-angle-up"
                                                       data-ng-click=" orderBy('status') "
-                                                      data-ng-class="{active: row == 'status'}"></span>
+                                                      data-ng-class="{active: pagObj.sort == 'status'}"></span>
                                                 <span class="fa fa-angle-down"
-                                                      data-ng-click=" orderBy('-status') "
-                                                      data-ng-class="{active: row == '-status'}"></span>
+                                                      data-ng-click=" orderBy('status,desc') "
+                                                      data-ng-class="{active: pagObj.sort == 'status,desc'}"></span>
                                             </div>
                                         </th>
                                         <th>
@@ -46,23 +46,23 @@
                                         <th>
                                             <div class="th">
                                                 任务源
-                                                <span class="fa fa-angle-up"
-                                                      data-ng-click=" orderBy('origin') "
-                                                      data-ng-class="{active: row == 'origin'}"></span>
-                                                <span class="fa fa-angle-down"
-                                                      data-ng-click=" orderBy('-origin') "
-                                                      data-ng-class="{active: row == '-origin'}"></span>
+                                                <!--<span class="fa fa-angle-up"-->
+                                                      <!--data-ng-click=" orderBy('origin') "-->
+                                                      <!--data-ng-class="{active: pagObj.sort == 'origin'}"></span>-->
+                                                <!--<span class="fa fa-angle-down"-->
+                                                      <!--data-ng-click=" orderBy('-origin') "-->
+                                                      <!--data-ng-class="{active: pagObj.sort == '-origin'}"></span>-->
                                             </div>
                                         </th>
                                         <th>
                                             <div class="th">
                                                 河道
-                                                <span class="fa fa-angle-up"
-                                                      data-ng-click=" orderBy('river') "
-                                                      data-ng-class="{active: row == 'river'}"></span>
-                                                <span class="fa fa-angle-down"
-                                                      data-ng-click=" orderBy('-river') "
-                                                      data-ng-class="{active: row == '-river'}"></span>
+                                                <!--<span class="fa fa-angle-up"-->
+                                                      <!--data-ng-click=" orderBy('river') "-->
+                                                      <!--data-ng-class="{active: pagObj.sort == 'river'}"></span>-->
+                                                <!--<span class="fa fa-angle-down"-->
+                                                      <!--data-ng-click=" orderBy('-river') "-->
+                                                      <!--data-ng-class="{active: pagObj.sort == '-river'}"></span>-->
                                             </div>
                                         </th>
                                         <th>
@@ -93,6 +93,32 @@
                                     </tr>
                                     </tbody>
                                 </table>
+                                <footer class="table-footer">
+                                    <div class="pagObj.sort">
+                                        <div class="col-md-6 page-num-info">
+                <span>
+                展示
+                <select data-ng-model="pagObj.numPerPage"
+                        data-ng-options="num for num in pagObj.numPerPageOpt"
+                        data-ng-change="pagObj.onNumPerPageChange()">
+                </select>
+                条记录
+                </span>
+                                        </div>
+                                        <div class="col-md-6 text-right pagination-container">
+                                            <div uib-pagination class="pagination-sm"
+                                                 ng-model="pagObj.currentPage"
+                                                 total-items="pagObj.totalElements"
+                                                 max-size="4"
+                                                 ng-change="pagObj.select(pagObj.currentPage)"
+                                                 items-per-page="pagObj.numPerPage"
+                                                 rotate="false"
+                                                 previous-text="上一页" next-text="下一页"
+                                                 first-text="首页" last-text="尾页"
+                                                 boundary-links="true"></div>
+                                        </div>
+                                    </div>
+                                </footer>
                             </div>
                         </div>
                     </div>

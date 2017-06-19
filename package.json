@@ -43,6 +43,7 @@
     "node": ">=0.10.20"
   },
   "dependencies": {
-    "angular-ui-router": "^1.0.3"
+    "angular-ui-router": "^1.0.3",
+    "wiredep": "^4.0.0"
   }
 }

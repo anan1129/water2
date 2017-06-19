@@ -1,6 +1,6 @@
 <div ng-controller="DynamicInfoCtrl">
     <div class="page page-form-ele">
-        <div class="row ui-section">
+        <div class="pagObj.sort ui-section">
             <div class="col-md-12">
                 <div class="panel panel-default">
                     <div class="panel-body">
@@ -29,10 +29,10 @@
                                                 信息标题
                                                 <span class="fa fa-angle-up"
                                                       data-ng-click=" orderBy('title') "
-                                                      data-ng-class="{active: row == 'title'}"></span>
+                                                      data-ng-class="{active: pagObj.sort == 'title'}"></span>
                                                 <span class="fa fa-angle-down"
-                                                      data-ng-click=" orderBy('-title') "
-                                                      data-ng-class="{active: row == '-title'}"></span>
+                                                      data-ng-click=" orderBy('title,desc') "
+                                                      data-ng-class="{active: pagObj.sort == 'title,desc'}"></span>
                                             </div>
                                         </th>
                                         <!--<th>内容</th>-->
@@ -41,11 +41,11 @@
                                             <div class="th">
                                                 栏目
                                                 <span class="fa fa-angle-up"
-                                                      data-ng-click=" orderBy('newsType') "
-                                                      data-ng-class="{active: row == 'newsType'}"></span>
+                                                      data-ng-click=" orderBy('newsType2') "
+                                                      data-ng-class="{active: pagObj.sort == 'newsType2'}"></span>
                                                 <span class="fa fa-angle-down"
-                                                      data-ng-click=" orderBy('-newsType') "
-                                                      data-ng-class="{active: row == '-newsType'}"></span>
+                                                      data-ng-click=" orderBy('newsType2,desc') "
+                                                      data-ng-class="{active: pagObj.sort == 'newsType2,desc'}"></span>
                                             </div>
                                         </th>
                                         <th>
@@ -69,6 +69,32 @@
                                     </tr>
                                     </tbody>
                                 </table>
+                                <footer class="table-footer">
+                                    <div class="pagObj.sort">
+                                        <div class="col-md-6 page-num-info">
+                <span>
+                展示
+                <select data-ng-model="pagObj.numPerPage"
+                        data-ng-options="num for num in pagObj.numPerPageOpt"
+                        data-ng-change="pagObj.onNumPerPageChange()">
+                </select>
+                条记录
+                </span>
+                                        </div>
+                                        <div class="col-md-6 text-right pagination-container">
+                                            <div uib-pagination class="pagination-sm"
+                                                 ng-model="pagObj.currentPage"
+                                                 total-items="pagObj.totalElements"
+                                                 max-size="4"
+                                                 ng-change="pagObj.select(pagObj.currentPage)"
+                                                 items-per-page="pagObj.numPerPage"
+                                                 rotate="false"
+                                                 previous-text="上一页" next-text="下一页"
+                                                 first-text="首页" last-text="尾页"
+                                                 boundary-links="true"></div>
+                                        </div>
+                                    </div>
+                                </footer>
                             </div>
                         </div>
                     </div>

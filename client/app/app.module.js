@@ -40,6 +40,7 @@
         , 'restangular'
         , 'md.data.table'
         , 'app.user'
+        , 'ui.bootstrap'
     ])
         .service('RestangularService', ['Restangular', function (Restangular) {
             return Restangular.withConfig(function (RestangularConfigurer) {

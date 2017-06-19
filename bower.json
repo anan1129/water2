@@ -26,9 +26,9 @@
     "restangular": "^1.6.1",
     "angular-ui-router": "~0.4.2",
     "angular-file-upload": "^2.5.0",
-    "qiniu": "^1.0.19",
     "textAngular": "^1.5.16",
-    "angular-ui-bootstrap": "^2.5.0"
+    "angular-ui-bootstrap": "^2.5.0",
+    "angular-bootstrap": "angular-ui-bootstrap-bower#^2.5.0"
   },
   "devDependencies": {
     "bootstrap-sass-official": "~3.3.0"

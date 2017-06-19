@@ -4,6 +4,7 @@ var browserSync = require('browser-sync');
 var config = require('./gulp.config')();
 var del = require('del');
 var $ = require('gulp-load-plugins')({lazy: true});
+var wiredep=require('wiredep').stream;
 
 gulp.task('help', $.taskListing);
 gulp.task('default', ['help']);
@@ -111,6 +112,18 @@ gulp.task('inject', function() {
         .pipe(gulp.dest(config.client));
 });
 
+gulp.task('bower',function(){
+    log('bower inject');
+
+    return gulp
+        .src(config.index)
+        .pipe(wiredep({
+            optional: 'configuration',
+            goes: 'here'
+        }))
+        .pipe(gulp.dest(config.client));
+})
+
 gulp.task('copy', ['sass-min'], function() {
     log('Copying assets');
 
@@ -136,7 +149,7 @@ gulp.task('optimize', ['inject', 'sass-min'], function() {
 });
 
 
-gulp.task('serve', ['inject', 'sass'], function() {
+gulp.task('serve', ['inject', 'sass','bower'], function() {
     startBrowserSync('serve');
 });
 

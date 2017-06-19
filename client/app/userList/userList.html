@@ -1,6 +1,6 @@
 <div ng-controller="UserListCtrl">
     <div class="page page-form-ele">
-        <div class="row ui-section">
+        <div class="pagObj.sort ui-section">
             <div class="col-md-12">
                 <div class="panel panel-default">
                     <div class="panel-body">
@@ -22,10 +22,10 @@
                                                 姓名
                                                 <span class="fa fa-angle-up"
                                                       data-ng-click=" orderBy('firstName') "
-                                                      data-ng-class="{active: row == 'firstName'}"></span>
+                                                      data-ng-class="{active: pagObj.sort == 'firstName'}"></span>
                                                 <span class="fa fa-angle-down"
-                                                      data-ng-click=" orderBy('-firstName') "
-                                                      data-ng-class="{active: row == '-firstName'}"></span>
+                                                      data-ng-click=" orderBy('firstName,desc') "
+                                                      data-ng-class="{active: pagObj.sort == 'firstName,desc'}"></span>
                                             </div>
                                         </th>
                                         <th>
@@ -33,10 +33,10 @@
                                             组织
                                             <span class="fa fa-angle-up"
                                                   data-ng-click=" orderBy('groupName') "
-                                                  data-ng-class="{active: row == 'groupName'}"></span>
+                                                  data-ng-class="{active: pagObj.sort == 'groupName'}"></span>
                                             <span class="fa fa-angle-down"
-                                                  data-ng-click=" orderBy('-groupName') "
-                                                  data-ng-class="{active: row == '-groupName'}"></span>
+                                                  data-ng-click=" orderBy('groupName,desc') "
+                                                  data-ng-class="{active: pagObj.sort == 'groupName,desc'}"></span>
                                             </div>
                                         </th>
                                         <th>
@@ -44,10 +44,10 @@
                                                 手机
                                                 <span class="fa fa-angle-up"
                                                       data-ng-click=" orderBy('phoneNumber') "
-                                                      data-ng-class="{active: row == 'phoneNumber'}"></span>
+                                                      data-ng-class="{active: pagObj.sort == 'phoneNumber'}"></span>
                                                 <span class="fa fa-angle-down"
-                                                      data-ng-click=" orderBy('-phoneNumber') "
-                                                      data-ng-class="{active: row == '-phoneNumber'}"></span>
+                                                      data-ng-click=" orderBy('phoneNumber,desc') "
+                                                      data-ng-class="{active: pagObj.sort == 'phoneNumber,desc'}"></span>
                                             </div>
                                         </th>
                                         <!--<th>邮箱</th>-->
@@ -56,10 +56,10 @@
                                                 职位
                                                 <span class="fa fa-angle-up"
                                                       data-ng-click=" orderBy('department') "
-                                                      data-ng-class="{active: row == 'department'}"></span>
+                                                      data-ng-class="{active: pagObj.sort == 'department'}"></span>
                                                 <span class="fa fa-angle-down"
-                                                      data-ng-click=" orderBy('-department') "
-                                                      data-ng-class="{active: row == '-department'}"></span>
+                                                      data-ng-click=" orderBy('department,desc') "
+                                                      data-ng-class="{active: pagObj.sort == 'department,desc'}"></span>
                                             </div>
                                         </th>
 
@@ -88,8 +88,8 @@
                                     </tr>
                                     </tbody>
                                 </table>
-                                <footer class="table-footer hide">
-                                    <div class="row">
+                                <footer class="table-footer">
+                                    <div class="pagObj.sort">
                                         <div class="col-md-6 page-num-info">
                 <span>
                 展示
@@ -101,7 +101,7 @@
                 </span>
                                         </div>
                                         <div class="col-md-6 text-right pagination-container">
-                                            <uib-pagination class="pagination-sm"
+                                            <div uib-pagination class="pagination-sm"
                                                             ng-model="pagObj.currentPage"
                                                             total-items="pagObj.totalElements"
                                                             max-size="4"
@@ -110,7 +110,7 @@
                                                             rotate="false"
                                                             previous-text="上一页" next-text="下一页"
                                                             first-text="首页" last-text="尾页"
-                                                            boundary-links="true"></uib-pagination>
+                                                            boundary-links="true"></div>
                                         </div>
                                     </div>
                                 </footer>

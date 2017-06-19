@@ -19,6 +19,22 @@
             data:[]
         };
 
+        var pagObj=$scope.pagObj={
+            numPerPageOpt:[5,10,15],
+            numPerPage:10,
+            sort:'',
+            onNumPerPageChange:function(){
+                $scope.pagObj.select(1);
+                return $scope.pagObj.currentPage = 1;
+            },
+            currentPage:1,
+            totalElements:'',
+            select:function(page){
+                $scope.pagObj.currentPage =page;
+                getJobs();
+            }
+        }
+
         initData();
 
         function initData(){
@@ -26,18 +42,32 @@
         }
 
         function getJobs(){
-            RestangularService.all('api/jobs').customGET().then(function(result){
+            var data={
+                size:pagObj.numPerPage,
+                page:pagObj.currentPage-1,
+                sort:pagObj.sort,
+            };
+            RestangularService.all('api/jobs/page').customGET('',data).then(function(result){
                 if(result.status==200){
                     console.log(result);
-                    $scope.listObj.data=result.data;
+                    $scope.listObj.data=result.data.content;
+                    $scope.pagObj.totalElements=result.data.totalElements;
                 }
             });
         }
 
+        // function orderBy(name){
+        //     console.log(name);
+        //     $scope.row=name;
+        //     $scope.listObj.data=$filter('orderBy')($scope.listObj.data,name);
+        // }
         function orderBy(name){
+            if(name.indexOf('-')>-1){
+                name=name.slice(1)+',desc';
+            }
+            $scope.pagObj.sort=name;
             console.log(name);
-            $scope.row=name;
-            $scope.listObj.data=$filter('orderBy')($scope.listObj.data,name);
+            getJobs();
         }
 
 
