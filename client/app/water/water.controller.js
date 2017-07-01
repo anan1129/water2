@@ -13,6 +13,9 @@
         var map=$scope.map;
         var pointArr=[];
         var point;
+        var echartOpt=$scope.echartOpt={};
+        $scope.waterColors=['#14c1fb','#17a7e6','#54da17','#73c642','#ffbe14','#f35a00'];
+        $scope.setEchartOpt=setEchartOpt;
         // if(stateParams.id=="01-1"){
         //     $state.go('home');
         // }
@@ -30,7 +33,6 @@
         function initData(){
             getRivers();
         }
-        // $scope.src='assets/images/water/xjp.png';
 
         function getRivers(){
             RestangularService.all('api/rivers').customGET(stateParams.id).then(function(result){
@@ -42,52 +44,8 @@
                     // $scope.$broadcast('map');
                     $timeout(function(){
                         $scope.$broadcast('map');
-                    },1000);
+                    },100);
                     // init();
-                    // switch($scope.dataObj.riverName){
-                    //     case '吉浦河' :
-                    //     case '小吉浦' :
-                    //         $scope.src='assets/images/water/xjp.png';
-                    //         $scope.img='assets/images/water/05-1.jpg';
-                    //         break;
-                    //     case '东走马塘' :
-                    //         $scope.src='assets/images/water/dzmt.png';
-                    //         $scope.img='assets/images/water/02-1.jpg';
-                    //         break;
-                    //     case '复兴岛运河' :
-                    //         $scope.src='assets/images/water/fxdyh.png';
-                    //         $scope.img='assets/images/water/04-1.jpg';
-                    //         break;
-                    //     case '虬江' :
-                    //         $scope.src='assets/images/water/qj.png';
-                    //         $scope.img='assets/images/water/01-1.jpg';
-                    //         break;
-                    //     case '钱家浜' :
-                    //         $scope.src='assets/images/water/qjb.png';
-                    //         $scope.img='assets/images/water/06-1.jpg';
-                    //         break;
-                    //     case '纬一河' :
-                    //     case '纬二河' :
-                    //     case '纬三河' :
-                    //     case '纬四河' :
-                    //     case '纬五河' :
-                    //     case '纬六河' :
-                    //     case '纬七河' :
-                    //     case '经一河' :
-                    //     case '经二河' :
-                    //     case '经三河' :
-                    //         $scope.src='assets/images/water/xjwcsx.png';
-                    //         $scope.img='assets/images/water/08-1.jpg';
-                    //         break;
-                    //     case '杨浦滨江' :
-                    //         $scope.src='assets/images/water/ypbj.png';
-                    //         $scope.img='assets/images/water/03-2.jpg';
-                    //         break;
-                    //     case '杨树浦港' :
-                    //         $scope.src='assets/images/water/yspg.png';
-                    //         $scope.img='assets/images/water/07-1.jpg';
-                    //         break;
-                    // }
                 }
             }).then(function(){
                 getNewsType('一河一策');
@@ -123,13 +81,6 @@
 
                     }else{
                         $scope.news[1].content=result.data;
-                        // console.log($scope.news[1].content.content);
-                        // angular.forEach($scope.news[1].content.content,function(val){
-                        //     if(val.content){
-                        //         console.log(val.content);
-                        //         $scope.$broadcast('showContent',val.content);
-                        //     }
-                        // })
                     }
                 }
             })
@@ -139,43 +90,78 @@
         function logDetail(id){
             $state.go('log-detail',{id:id});
         }
-        // switch($scope.name){
-        //     case '01-1':
-        //     case '01-2-1':
-        //     case '01-2-2':
-        //     case '01-3':
-        //         $scope.dataObj=GlobalData.rivers[0];
-        //         break;
-        //     case '02-1':
-        //     case '02-2':
-        //     case '02-3':
-        //         $scope.dataObj=GlobalData.rivers[1];
-        //         break;
-        //     case '03-2':
-        //     case '03-1':
-        //         $scope.dataObj=GlobalData.rivers[2];
-        //         break;
-        //     case '04-1':
-        //     case '04-2':
-        //         $scope.dataObj=GlobalData.rivers[3];
-        //         break;
-        //     case '05-1':
-        //         $scope.dataObj=GlobalData.rivers[4];
-        //         break;
-        //     case '06-1':
-        //         $scope.dataObj=GlobalData.rivers[5];
-        //         break;
-        //     case '07-1':
-        //     case '07-2':
-        //         $scope.dataObj=GlobalData.rivers[6];
-        //         break;
-        //     case '08-1':
-        //         $scope.dataObj=GlobalData.rivers[7];
-        //         break;
-        //     case '09-1':
-        //         $scope.dataObj=GlobalData.rivers[8];
-        //         break;
-        // }
 
+        function setEchartOpt(){
+            $scope.echartOpt= {
+                grid: {
+                    x: 50,
+                    y: 50,
+                    x2: 50,
+                    y2: 10,
+                },
+                tooltip : {
+                    trigger: 'axis'
+                },
+                legend: {
+                    show:false,
+                    data:['邮件营销','联盟广告','视频广告','直接访问','搜索引擎']
+                },
+                toolbox: {
+                    show : false,
+                    feature : {
+                        mark : {show: true},
+                        dataView : {show: true, readOnly: false},
+                        magicType : {show: true, type: ['line', 'bar', 'stack', 'tiled']},
+                        restore : {show: true},
+                        saveAsImage : {show: true}
+                    }
+                },
+                calculable : true,
+                xAxis : [
+                    {
+                        type : 'category',
+                        boundaryGap : false,
+                        data : ['周一','周二','周三','周四','周五','周六','周日']
+                    }
+                ],
+                yAxis : [
+                    {
+                        type : 'value'
+                    }
+                ],
+                series : [
+                    {
+                        name:'邮件营销',
+                        type:'line',
+                        stack: '总量',
+                        data:[120, 132, 101, 134, 90, 230, 210]
+                    },
+                    {
+                        name:'联盟广告',
+                        type:'line',
+                        stack: '总量',
+                        data:[220, 182, 191, 234, 290, 330, 310]
+                    },
+                    {
+                        name:'视频广告',
+                        type:'line',
+                        stack: '总量',
+                        data:[150, 232, 201, 154, 190, 330, 410]
+                    },
+                    {
+                        name:'直接访问',
+                        type:'line',
+                        stack: '总量',
+                        data:[320, 332, 301, 334, 390, 330, 320]
+                    },
+                    {
+                        name:'搜索引擎',
+                        type:'line',
+                        stack: '总量',
+                        data:[820, 932, 901, 934, 1290, 1330, 1320]
+                    }
+                ]
+            };
+        }
     }
 })();

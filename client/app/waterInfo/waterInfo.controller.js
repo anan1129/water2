@@ -71,7 +71,7 @@
             }else{
                 RestangularService.all('api/users?size=999999').customGET().then(function(result){
                     if(result.status==200){
-                        $scope.users=result.data;
+                        $scope.users=result.data.content;
                     }
                 })
             }

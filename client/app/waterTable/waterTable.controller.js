@@ -14,6 +14,7 @@
         $scope.editTask = editTask;
         $scope.orderBy = orderBy;
         $scope.toRiverInfo=toRiverInfo;
+        $scope.toRiverPoints=toRiverPoints;
         $scope.listObj = {
             del: del,
             data:[]
@@ -101,6 +102,10 @@
 
         function toRiverInfo(list){
             $state.go('water',list);
+        }
+
+        function toRiverPoints(list){
+            $state.go('river-points',list);
         }
     }
 })();

@@ -1,0 +1,62 @@
+<div ng-controller="PointDetailCtrl" class="point-detail">
+    <div class="page">
+        <div class="row ui-section">
+            <div class="col-xs-12">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <div layout="column" cloak class="">
+                            <div layout-padding>
+                                <h2 class="section-header">
+                                    {{stateParams.riverName}}
+                                    <span ng-show="stateParams.name">({{stateParams.name}})</span>
+                                   <span ng-show="!stateParams.id">添加河道监测点</span>
+                                    <span class="pull-right">
+                                        <button class="btn btn-primary btn-xs ">导入</button>
+                                    </span>
+
+                                </h2>
+                                <form name="waterInfo" ng-submit="save()">
+                                    <div layout layout-sm="column">
+                                        <md-input-container flex>
+                                            <label>监测点名称</label>
+                                            <input ng-model="formObj.name">
+                                        </md-input-container>
+                                    </div>
+                                    <md-input-container md-no-float class="md-block">
+                                        <label>描述</label>
+                                        <input ng-model="formObj.content" >
+                                    </md-input-container>
+
+                                    <div layout layout-sm="column">
+                                        <md-input-container flex>
+                                            <label>经度</label>
+                                            <input ng-model="formObj.longitude">
+                                        </md-input-container>
+                                        <md-input-container flex>
+                                            <label>纬度</label>
+                                            <input ng-model="formObj.latitude">
+                                        </md-input-container>
+                                    </div>
+                                    <div class="divider divider-dashed divider-lg pull-in"></div>
+                                    <h2 class="section-header">河道地图</h2>
+                                    <span>(点击下方地图上任意一点，可添加经纬度。)</span>
+                                    <div layout layout-sm="row" style="height:400px;">
+                                        <div id="baiduMap" baidu-map data-obj="dataObj" style="width:100%;height:100%;"></div>
+                                    </div>
+                                    <br/>
+                                    <span class="pull-right">
+                                        <button type="submit" ui-wave="" class="btn btn-primary btn-w-md ui-wave">提交
+                                    </button>
+                                         <button type="button" class="btn btn-danger btn-w-md ui-wave" ng-click="back()">返回</button>
+                                    </span>
+
+
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

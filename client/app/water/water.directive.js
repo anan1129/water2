@@ -10,7 +10,7 @@
                 restrict:'A',
                 link:function(scope,ele,attr){
                     // if(scope.dataObj.riverName=='经一河*') scope.dataObj.riverName='新江湾城水系' ;
-                    var p,map,point,myGeo,pointArr=[];
+                    var p,map,point,myGeo,pointArr=[],marker;
                     // init();
 
                     function init(){
@@ -33,12 +33,29 @@
                         setPolyline();
                     });
 
+                    scope.$on('clickMapAddPos',function(){
+                        map.addEventListener('click',function(e){
+                            map.removeOverlay(marker);
+                            var pt=e.point;
+                            var obj={
+                                longitude:pt.lng+'',
+                                latitude:pt.lat+''
+                            };
+                            marker=new BMap.Marker(pt);
+                            map.addOverlay(marker);
+                            scope.$apply(function(){
+                                scope.formObj.longitude=pt.lng;
+                                scope.formObj.latitude=pt.lat;
+                            })
+                        });
+                    })
+
                     function pos(){
+                        console.log(scope.dataObj.addresses);
                         var len=Math.ceil(scope.dataObj.addresses.length/2);
                         var centerP=scope.dataObj.addresses[len];
 
                         var point=new BMap.Point(centerP.longitude,centerP.latitude);
-                        console.log(point);
                         map.centerAndZoom(point, 14);
                         // var maker=new BMap.Marker(point);
                         // map.addOverlay(maker);
@@ -60,9 +77,6 @@
                         var polyline=new BMap.Polyline(pointArr,{strokeColor:'#3f2ce6'});
                         map.addOverlay(polyline);
                     }
-
-
-
 
                     function setStyle(){
                         map.setMapStyle({
@@ -160,6 +174,8 @@
                             ]
                         });
                     }
+
+
 
 
 

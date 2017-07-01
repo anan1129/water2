@@ -17,7 +17,7 @@
                 x: 'right',
                 y: 'top',
                 data: ['WOM', 'Viral', 'Paid']
-            },            
+            },
             grid: {
                 x: 40,
                 y: 60,
@@ -33,7 +33,7 @@
                         color: $scope.color.gray
                     }
                 }
-            },            
+            },
             xAxis: [
                 {
                     type : 'category',
@@ -133,11 +133,11 @@
                     legendHoverLink: false,
                     z: 4
                 }
-            ]            
+            ]
         };
 
 
-        // 
+        //
         $scope.smline1 = {};
         $scope.smline2 = {};
         $scope.smline3 = {};
@@ -151,14 +151,14 @@
                         color: $scope.color.gray
                     }
                 }
-            }, 
+            },
             grid: {
                 x: 1,
                 y: 1,
                 x2: 1,
                 y2: 1,
                 borderWidth: 0
-            },            
+            },
             xAxis : [
                 {
                     type : 'category',
@@ -186,7 +186,7 @@
                         normal: {
                             color: $scope.color.info
                         }
-                    }                    
+                    }
                 }
             ]
         };
@@ -199,14 +199,14 @@
                         color: $scope.color.gray
                     }
                 }
-            }, 
+            },
             grid: {
                 x: 1,
                 y: 1,
                 x2: 1,
                 y2: 1,
                 borderWidth: 0
-            },            
+            },
             xAxis : [
                 {
                     type : 'category',
@@ -234,7 +234,7 @@
                         normal: {
                             color: $scope.color.success
                         }
-                    }                     
+                    }
                 }
             ]
         };
@@ -247,14 +247,14 @@
                         color: $scope.color.gray
                     }
                 }
-            }, 
+            },
             grid: {
                 x: 1,
                 y: 1,
                 x2: 1,
                 y2: 1,
                 borderWidth: 0
-            },            
+            },
             xAxis : [
                 {
                     type : 'category',
@@ -282,7 +282,7 @@
                         normal: {
                             color: $scope.color.danger
                         }
-                    }                 
+                    }
                 }
             ]
         };
@@ -295,14 +295,14 @@
                         color: $scope.color.gray
                     }
                 }
-            }, 
+            },
             grid: {
                 x: 1,
                 y: 1,
                 x2: 1,
                 y2: 1,
                 borderWidth: 0
-            },            
+            },
             xAxis : [
                 {
                     type : 'category',
@@ -330,7 +330,7 @@
                         normal: {
                             color: $scope.color.warning
                         }
-                    }                      
+                    }
                 }
             ]
         };
@@ -381,7 +381,7 @@
                     show : false
                 }
             }
-        };        
+        };
         var radius = [55, 60];
         $scope.pie = {};
         $scope.pie.options = {
@@ -428,4 +428,4 @@
     }
 
 
-})(); 
+})();
