@@ -4,6 +4,6 @@
 (function(){
     'use strict';
 
-    angular.module('app.taskList',['app.taskList.controller','app.taskList.state'])
+    angular.module('app.foreTaskList',['app.foreTaskList.controller','app.foreTaskList.state'])
     ;
 })();

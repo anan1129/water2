@@ -4,11 +4,11 @@
 (function () {
     'use strict';
 
-    angular.module('app.taskList.controller', [])
-        .controller('TaskListCtrl', ['$scope', '$state', '$mdToast','RestangularService','$filter', TaskListCtrl])
+    angular.module('app.foreTaskList.controller', [])
+        .controller('ForeTaskListCtrl', ['$scope', '$state', '$mdToast','RestangularService','$filter', ForeTaskListCtrl])
     ;
 
-    function TaskListCtrl($scope, $state, $mdToast,RestangularService,$filter) {
+    function ForeTaskListCtrl($scope, $state, $mdToast,RestangularService,$filter) {
         var toast;
         $scope.toTaskDetails = toTaskDetails;
         $scope.editTask = editTask;
@@ -103,6 +103,13 @@
 
         function edit(list){
             $state.go('edit-task',list);
+        }
+// --------------------------------------------------------------------------
+
+        $scope.toTaskFinishing=toTaskFinishing;
+
+        function toTaskFinishing(){
+            $state.go('fore-task-finishing');
         }
     }
 })();

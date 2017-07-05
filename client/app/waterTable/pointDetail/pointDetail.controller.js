@@ -68,6 +68,7 @@
             console.log($scope.formObj);
             var data=$scope.formObj;
             data.riverId=stateParams.riverId;
+            data.alive=data.alive?1:0;
             RestangularService.all('api/river-points').customPOST(data).then(function(res){
                 if(res.status==201){
                     // $mdToast.show(

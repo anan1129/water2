@@ -17,6 +17,8 @@
         , 'app.waterInfo'
         , 'app.addTask'
         , 'app.taskList'
+        , 'app.foreTaskList'
+        , 'app.foreTaskFinishing'
         , 'app.addGroup'
         , 'app.addStaff'
         , 'app.taskDetails'

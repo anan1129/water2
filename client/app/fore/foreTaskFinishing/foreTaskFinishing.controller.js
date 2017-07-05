@@ -4,11 +4,11 @@
 (function () {
     'use strict';
 
-    angular.module('app.foreTaskList.controller', [])
-        .controller('ForeTaskListCtrl', ['$scope', '$state', '$mdToast','RestangularService','$filter', ForeTaskListCtrl])
+    angular.module('app.foreTaskFinishing.controller', [])
+        .controller('ForeTasFinishingCtrl', ['$scope', '$state', '$mdToast','RestangularService','$filter', ForeTasFinishingCtrl])
     ;
 
-    function ForeTaskListCtrl($scope, $state, $mdToast,RestangularService,$filter) {
+    function ForeTasFinishingCtrl($scope, $state, $mdToast,RestangularService,$filter) {
         var toast;
         $scope.toTaskDetails = toTaskDetails;
         $scope.editTask = editTask;
@@ -56,11 +56,7 @@
             });
         }
 
-        // function orderBy(name){
-        //     console.log(name);
-        //     $scope.row=name;
-        //     $scope.listObj.data=$filter('orderBy')($scope.listObj.data,name);
-        // }
+
         function orderBy(name){
             if(name.indexOf('-')>-1){
                 name=name.slice(1)+',desc';
@@ -104,5 +100,7 @@
         function edit(list){
             $state.go('edit-task',list);
         }
+
+
     }
 })();

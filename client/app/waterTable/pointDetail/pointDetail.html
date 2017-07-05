@@ -37,6 +37,9 @@
                                             <input ng-model="formObj.latitude">
                                         </md-input-container>
                                     </div>
+                                    <div layout layout-sm="column">
+                                        <md-switch ng-model="formObj.alive" aria-label="Switch 1"> {{formObj.alive?'开启':'关闭'}} </md-switch>
+                                    </div>
                                     <div class="divider divider-dashed divider-lg pull-in"></div>
                                     <h2 class="section-header">河道地图</h2>
                                     <span>(点击下方地图上任意一点，可添加经纬度。)</span>

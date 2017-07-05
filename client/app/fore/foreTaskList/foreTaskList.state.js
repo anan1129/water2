@@ -4,12 +4,12 @@
 (function(){
     'use strict';
 
-    angular.module('app.taskList.state',[])
+    angular.module('app.foreTaskList.state',[])
         .config(['$stateProvider',function($stateProvider){
             $stateProvider
-                .state('task-list',{
-                    url:'/task-list',
-                    templateUrl:'app/taskList/taskList.html'
+                .state('fore-task-list',{
+                    url:'/fore-task-list',
+                    templateUrl:'app/fore/foreTaskList/foreTaskList.html'
                 })
         }])
 })();

@@ -88,16 +88,42 @@
                                                 <span>经度:{{data.longitude}},</span>
                                                 <span>纬度:{{data.latitude}}</span>
                                             </td>
-                                            <td></td>
+                                            <td>{{data.alive?'开启':'关闭'}}</td>
                                             <td></td>
                                             <td>
                                                 <span class="fa fa-edit text-primary" ng-click="edit(data)"></span>
                                                 <span class="fa fa-trash text-danger"  ng-click="del(data)"></span>
-                                                <span class="fa fa-eye text-info" ng-click="toDetail(data)"></span>
+                                                <!--<span class="fa fa-eye text-info" ng-click="toDetail(data)"></span>-->
                                             </td>
                                         </tr>
                                         </tbody>
                                     </table>
+                                    <footer class="table-footer">
+                                        <div class="pagObj.sort">
+                                            <div class="col-md-6 page-num-info">
+                <span>
+                展示
+                <select data-ng-model="pagObj.numPerPage"
+                        data-ng-options="num for num in pagObj.numPerPageOpt"
+                        data-ng-change="pagObj.onNumPerPageChange()">
+                </select>
+                条记录
+                </span>
+                                            </div>
+                                            <div class="col-md-6 text-right pagination-container">
+                                                <div uib-pagination class="pagination-sm"
+                                                     ng-model="pagObj.currentPage"
+                                                     total-items="pagObj.totalElements"
+                                                     max-size="4"
+                                                     ng-change="pagObj.select(pagObj.currentPage)"
+                                                     items-per-page="pagObj.numPerPage"
+                                                     rotate="false"
+                                                     previous-text="上一页" next-text="下一页"
+                                                     first-text="首页" last-text="尾页"
+                                                     boundary-links="true"></div>
+                                            </div>
+                                        </div>
+                                    </footer>
                                 </div>
                             </div>
                         </div>
