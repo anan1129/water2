@@ -4,12 +4,13 @@
 (function () {
     'use strict';
 
-    angular.module('app.riverPoints.controller', [])
-        .controller('RiverPointsCtrl', ['$scope', '$state', '$mdToast','RestangularService','$stateParams','$window', RiverPointsCtrl])
+    angular.module('app.waterDataTable.controller', [])
+        .controller('WaterDataTableCtrl', ['$scope', '$state', '$mdToast','RestangularService','$stateParams','$window', WaterDataTableCtrl])
     ;
 
-    function RiverPointsCtrl($scope, $state, $mdToast,RestangularService,$stateParams,$window) {
+    function WaterDataTableCtrl($scope, $state, $mdToast,RestangularService,$stateParams,$window) {
         var stateParams=$scope.stateParams=$stateParams;
+        console.log(stateParams);
         var toast;
         $scope.tableData;
         $scope.toDetail=toDetail;
@@ -17,7 +18,6 @@
         $scope.del=del;
         $scope.add=add;
         $scope.back=back;
-        $scope.toWaterDataTable=toWaterDataTable;
         var pagObj=$scope.pagObj={
             numPerPageOpt:[5,10,15],
             numPerPage:10,
@@ -45,9 +45,9 @@
 
         function getTableData(){
             var data={
-                riverId:stateParams.id
+                rpid:stateParams.id
             };
-            RestangularService.all('api/river-points').customGET('',data).then(function(res){
+            RestangularService.all('api/river-point-datas').customGET('',data).then(function(res){
                 if(res.status==200){
                     console.log(res.data);
                     $scope.tableData=res.data;
@@ -71,10 +71,10 @@
         }
         function edit(data){
             console.log(data);
-            $state.go('point-detail',angular.extend(data,{riverName:stateParams.riverName}));
+            $state.go('water-data-detail-edit',data);
         }
         function del(data){
-            if(!toast){
+            if(true){
                 toast = $mdToast.simple()
                     .content('确定要删除该任务？')
                     .action('确定')
@@ -83,7 +83,7 @@
                 $mdToast.show(toast).then(function (response) {
                     console.log(response);
                     if(response=='ok'){
-                        RestangularService.all('api/river-points').customDELETE(data.id).then(function(res){
+                        RestangularService.all('api/river-point-datas').customDELETE(data.id).then(function(res){
                             if(res.status==200){
                                 toast=null;
                                 getTableData();
@@ -96,21 +96,28 @@
         }
 
         function add(){
-            $state.go('point-detail',{riverName:stateParams.riverName,riverId:stateParams.id});
+            $state.go('water-data-detail-look',stateParams);
         }
 
         function back(){
             $window.history.go('-1');
         }
 
-        function toWaterDataTable(riverPoint){
-            console.log(riverPoint);
-            // var data={
-            //     riverPointId:id,
-            //     riverName:stateParams.riverName
-            // }
-
-            $state.go('water-data-table',riverPoint);
+        $scope.submitExcel=submitExcel;
+        function submitExcel(){
+            var f=new FormData();
+            var file = document.querySelector('input[type=file]').files[0];
+            console.log(file);
+            f.append('file',file);
+            console.log(f);
+            RestangularService.all('api/river-point-dataUpload/'+stateParams.id).withHttpConfig({transformRequest: angular.identity}).customPOST(f,undefined,undefined,{'Content-Type':undefined}).then(function(res){
+                if(res.status==200){
+                    // angular.forEach(res.data,function(val){
+                    //
+                    // })
+                    getTableData();
+                }
+            })
         }
     }
 })();

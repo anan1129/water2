@@ -8,7 +8,7 @@
         .config(['$stateProvider',function($stateProvider){
             $stateProvider
                 .state('edit-task',{
-                    url:'/edit-task/:id',
+                    url:'/edit-task/:id/:riverName/;type/:title',
                     templateUrl:'app/taskList/editTask/editTask.html'
                 })
         }])

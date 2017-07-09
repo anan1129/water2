@@ -14,7 +14,7 @@
                     // init();
 
                     function init(){
-                        map=new BMap.Map(ele[0]);
+                        scope.map=map=new BMap.Map(ele[0]);
                         pos();
                         // point = new BMap.Point(121.500757,31.3884);
                         // map.centerAndZoom(point,13);
@@ -48,10 +48,14 @@
                                 scope.formObj.latitude=pt.lat;
                             })
                         });
+                    });
+
+                    scope.$on('addMarker',function(e,data){
+                        console.log(data);
                     })
 
+
                     function pos(){
-                        console.log(scope.dataObj.addresses);
                         var len=Math.ceil(scope.dataObj.addresses.length/2);
                         var centerP=scope.dataObj.addresses[len];
 

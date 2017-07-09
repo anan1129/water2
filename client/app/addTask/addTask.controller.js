@@ -10,28 +10,57 @@
 
     function AddTaskCtrl($scope, RestangularService, $filter,$mdToast,FileUploader) {
         var users = [],resultData;
+        $scope.getGroups=getGroups;
+        $scope.getSubGroups=getSubGroups;
 
         initData();
 
         function initData(){
+            $scope.groups=[];
+            $scope.pidArr=[];
             $scope.formObj = {
                 users:[],
                 attachments:[]
             };
             $scope.filterUsers=[];
             users=[];
-            getUsers();
+            // getUsers();
+            getGroups();
         }
 
-        function getUsers(){
-            RestangularService.all('api/users?size=99999').customGET().then(function(result){
-               if(result.status==200){
-                   resultData=result.data;
-                   angular.forEach(result.data,function(val){
-                       users.push(val.firstName);
-                   })
-               }
+        function getUsers(id){
+            RestangularService.all('api/users/byGroup/'+id+'?size=10000').customGET(id).then(function(result){
+                if(result.status==200){
+                    $scope.users=result.data;
+                }
+            })
+        }
+
+        function getGroups(){
+            RestangularService.all('api/groups-level/1').customGET().then(function(result){
+                if(result.status==200){
+                    $scope.groups.push(result.data);
+                    // getSubGroups(result.data[0].id,0);
+                }
             });
+        }
+
+        function getSubGroups(id,index){
+            id=angular.fromJson(id).id;
+            if(id){
+                RestangularService.all('api/groups-childs').customGET(id).then(function(result){
+                    if(result.status==200){
+                        if(result.data.length>0){
+                            $scope.groups=$scope.groups.slice(0,index+1);
+                            $scope.groups[index+1]=result.data;
+                        }else{
+                            $scope.groups.length=index+1;
+                            $scope.pidArr.length=index+1;
+                            getUsers(id);
+                        }
+                    }
+                });
+            }
         }
 
         $scope.save = function () {

@@ -1,4 +1,4 @@
-<div ng-controller="TaskListCtrl">
+<div ng-controller="JobListCtrl">
     <div class="page page-form-ele">
         <div class="pagObj.sort ui-section">
             <div class="col-md-12">
@@ -7,15 +7,25 @@
                         <div layout="column" ng-cloak class="md-inline-form inputdemoBasicUsage">
                             <div layout-padding class="table-responsive">
                                 <h2 class="section-header">
-                                    随手拍任务列表
-                                    <a href="#!/add-task">
-                                        <span class="fa fa-plus-square pull-right"></span>
-                                    </a>
+                                    已下发任务列表
+                                    <!--<a href="#!/add-task">-->
+                                        <!--<span class="fa fa-plus-square pull-right"></span>-->
+                                    <!--</a>-->
                                 </h2>
                                 <table class="table no-margin">
                                     <thead>
                                     <tr>
-                                        <!--<th>#</th>-->
+                                        <th>
+                                            <div class="th">
+                                                下发时间
+                                                <span class="fa fa-angle-up"
+                                                data-ng-click=" orderBy('issueDate') "
+                                                data-ng-class="{active: pagObj.sort == 'issueDate'}"></span>
+                                                <span class="fa fa-angle-down"
+                                                data-ng-click=" orderBy('-issueDate') "
+                                                data-ng-class="{active: pagObj.sort == '-issueDate'}"></span>
+                                            </div>
+                                        </th>
                                         <th>
                                             <div class="th">
                                                 任务标题
@@ -42,30 +52,26 @@
                                             <div class="th">
                                                 <!--处理员-->
                                                 组织名称
+                                                <span class="fa fa-angle-up"
+                                                      data-ng-click=" orderBy('groupName') "
+                                                      data-ng-class="{active: pagObj.sort == 'groupName'}"></span>
+                                                <span class="fa fa-angle-down"
+                                                      data-ng-click=" orderBy('-groupName') "
+                                                      data-ng-class="{active: pagObj.sort == '-groupName'}"></span>
                                             </div>
                                         </th>
                                         <th>
                                             <div class="th">
                                                 任务源
-                                                <!--<span class="fa fa-angle-up"-->
-                                                      <!--data-ng-click=" orderBy('origin') "-->
-                                                      <!--data-ng-class="{active: pagObj.sort == 'origin'}"></span>-->
-                                                <!--<span class="fa fa-angle-down"-->
-                                                      <!--data-ng-click=" orderBy('-origin') "-->
-                                                      <!--data-ng-class="{active: pagObj.sort == '-origin'}"></span>-->
+                                                <span class="fa fa-angle-up"
+                                                      data-ng-click=" orderBy('source') "
+                                                      data-ng-class="{active: pagObj.sort == 'source'}"></span>
+                                                <span class="fa fa-angle-down"
+                                                      data-ng-click=" orderBy('-source') "
+                                                      data-ng-class="{active: pagObj.sort == '-source'}"></span>
                                             </div>
                                         </th>
-                                        <th>
-                                            <div class="th">
-                                                河道
-                                                <!--<span class="fa fa-angle-up"-->
-                                                      <!--data-ng-click=" orderBy('river') "-->
-                                                      <!--data-ng-class="{active: pagObj.sort == 'river'}"></span>-->
-                                                <!--<span class="fa fa-angle-down"-->
-                                                      <!--data-ng-click=" orderBy('-river') "-->
-                                                      <!--data-ng-class="{active: pagObj.sort == '-river'}"></span>-->
-                                            </div>
-                                        </th>
+
                                         <th>
                                             <div class="th">
                                                 操作
@@ -76,7 +82,8 @@
                                     <tbody>
                                     <tr ng-repeat="list in listObj.data">
                                         <!--<td>{{list.id}}</td>-->
-                                        <td>{{list.title}}</td>
+                                        <td>{{list.issueDate}}</td>
+                                        <td>{{list.name}}</td>
                                         <td>{{list.status}}
                                             <!--<span ng-class="{'text-primary':list.status=='已上报','text-info':list.status=='正在处理','text-success':list.status=='处理完成'}">{{list.status}}</span>-->
                                         </td>
@@ -85,12 +92,12 @@
                                             <!--<span ng-repeat="user in list.users" style="margin:0 3px;">{{user.user}}</span>-->
                                         </td>
                                         <td>{{list.source}}</td>
-                                        <td>{{list.riverName}}</td>
+
                                         <td>
                                             <!--<span class="fa fa-eye text-primary" ng-click="toTaskDetails(list)"></span>-->
                                             <!--<span class="fa fa-edit text-info" ng-click="editTask(list)"></span>-->
                                             <span class="fa fa-trash text-danger" ng-click="listObj.del(list)"></span>
-                                            <span class="fa fa-user text-success" ng-click="edit(list)"></span>
+                                            <!--<span class="fa fa-user text-success" ng-click="edit(list)"></span>-->
                                         </td>
                                     </tr>
                                     </tbody>

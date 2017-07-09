@@ -5,10 +5,10 @@
     'use strict';
 
     angular.module('app.water.controller',[])
-        .controller('WaterCtrl',['$scope','$stateParams','RestangularService','$state','$timeout',WaterCtrl])
+        .controller('WaterCtrl',['$scope','$stateParams','RestangularService','$state','$timeout','$filter',WaterCtrl])
     ;
 
-    function WaterCtrl($scope,$stateParams,RestangularService,$state,$timeout){
+    function WaterCtrl($scope,$stateParams,RestangularService,$state,$timeout,$filter){
         var stateParams=$scope.stateParams=$stateParams;
         var map=$scope.map;
         var pointArr=[];
@@ -16,28 +16,30 @@
         var echartOpt=$scope.echartOpt={};
         $scope.waterColors=['#14c1fb','#17a7e6','#54da17','#73c642','#ffbe14','#f35a00'];
         $scope.setEchartOpt=setEchartOpt;
-        // if(stateParams.id=="01-1"){
-        //     $state.go('home');
-        // }
         $scope.logDetail=logDetail;
         $scope.riverName='';
-        console.log(stateParams);
         $scope.dataObj={};
         $scope.news=[
             {title:'一河一策',content:null},
             {title:'一河一档',content:null},
 
         ];
+        $scope.riverPoints;//河道上所有监测点
+        $scope.pointObj={};//监测点对象
+        $scope.pointData;//水质数据
+        $scope.getRiverPoints=getRiverPoints;//水质数据
         initData();
 
         function initData(){
-            getRivers();
+            getRivers().then(function(){
+                getNewsType('一河一策');
+                getNewsType('一河一档');
+            });
         }
 
         function getRivers(){
-            RestangularService.all('api/rivers').customGET(stateParams.id).then(function(result){
+            return RestangularService.all('api/rivers').customGET(stateParams.id).then(function(result){
                 if(result.status==200){
-                    console.log(result.data);
                     $scope.dataObj=result.data;
                     $scope.dataObj.addresses=$scope.dataObj.addresses.replace(/\'/g,'\"');
                     $scope.dataObj.addresses=angular.fromJson($scope.dataObj.addresses);
@@ -48,18 +50,17 @@
                     // init();
                 }
             }).then(function(){
-                getNewsType('一河一策');
-                getNewsType('一河一档');
+
             })
         }
 
         function init(){
-            map=new BMap.Map('baiduMap');
+            $scope.map=new BMap.Map('baiduMap');
             point = new BMap.Point(121.500757,31.3884);
-            map.centerAndZoom(point,13);
-            // map.addControl(new BMap.MapTypeControl());
-            map.setCurrentCity('上海');
-            map.enableScrollWheelZoom(true);
+            $scope.map.centerAndZoom(point,13);
+            // $scope.map.addControl(new BMap.MapTypeControl());
+            $scope.map.setCurrentCity('上海');
+            $scope.map.enableScrollWheelZoom(true);
         }
 
         function setPolyline(){
@@ -69,13 +70,12 @@
                 pointArr.push(new BMap.Point(x,y));
             });
             var polyline=new BMap.Polyline(pointArr);
-            map.addOverlay(polyline);
+            $scope.map.addOverlay(polyline);
         }
 
         function getNewsType(newsType){
             RestangularService.all('api/news-show-top?newsType='+newsType+'&riverId='+stateParams.id).customGET().then(function(result){
                 if(result.status==200){
-                    console.log(result.data);
                     if(newsType=='一河一策'){
                         $scope.news[0].content=result.data;
 
@@ -97,14 +97,14 @@
                     x: 50,
                     y: 50,
                     x2: 50,
-                    y2: 10,
+                    y2: 50,
                 },
                 tooltip : {
                     trigger: 'axis'
                 },
                 legend: {
-                    show:false,
-                    data:['邮件营销','联盟广告','视频广告','直接访问','搜索引擎']
+                    show:true,
+                    data:['DO(溶解氧)','CODmn(高锰酸钾指数)','NH3-N(氨氧)','TP(总磷)']
                 },
                 toolbox: {
                     show : false,
@@ -121,47 +121,106 @@
                     {
                         type : 'category',
                         boundaryGap : false,
-                        data : ['周一','周二','周三','周四','周五','周六','周日']
+                        data : $scope.pointData.map(function(val){
+                            console.log(val.checkdate);
+                            return $filter('date')(val.checkdate,'MM-dd');
+                        })
                     }
                 ],
                 yAxis : [
                     {
-                        type : 'value'
+                        type : 'value',
+                        // scale: true,
+                        // precision: 2,
+                        // splitNumber: 9,
+                        // boundaryGap: [0.01, 0.01],
+                        // splitArea: { show: true }
                     }
                 ],
                 series : [
                     {
-                        name:'邮件营销',
+                        name:'DO(溶解氧)',
                         type:'line',
-                        stack: '总量',
-                        data:[120, 132, 101, 134, 90, 230, 210]
+                        // stack: '总量',
+                        data:$scope.pointData.map(function(val){
+                            return val.oxygen;
+                        })
+                        // data:[1.1,1.2,1.3]
                     },
                     {
-                        name:'联盟广告',
+                        name:'CODmn(高锰酸钾指数)',
                         type:'line',
-                        stack: '总量',
-                        data:[220, 182, 191, 234, 290, 330, 310]
+                        // stack: '总量',
+                        data:$scope.pointData.map(function(val){
+                            return val.permanganate;
+                        })
+                        // data:[2.1,2.2,2.3]
                     },
                     {
-                        name:'视频广告',
+                        name:'NH3-N(氨氧)',
                         type:'line',
-                        stack: '总量',
-                        data:[150, 232, 201, 154, 190, 330, 410]
+                        // stack: '总量',
+                        data:$scope.pointData.map(function(val){
+                            return val.ammonia;
+                        })
+                        // data:[3.1,4.2,4.4]
                     },
                     {
-                        name:'直接访问',
+                        name:'TP(总磷)',
                         type:'line',
-                        stack: '总量',
-                        data:[320, 332, 301, 334, 390, 330, 320]
-                    },
-                    {
-                        name:'搜索引擎',
-                        type:'line',
-                        stack: '总量',
-                        data:[820, 932, 901, 934, 1290, 1330, 1320]
+                        // stack: '总量',
+                        data:$scope.pointData.map(function(val){
+                            return val.phosphorus;
+                        })
+                        // data:[6.1,6.2,6.4]
                     }
                 ]
             };
+            // getRiverPoints();
+        }
+
+        function getRiverPoints(){
+            var data={
+                riverId:stateParams.id
+            }
+            RestangularService.all('api/river-points').customGET('',data).then(function(res){
+                if(res.status==200){
+                    console.log($scope.map);
+                    $scope.riverPoints=res.data;
+                    angular.forEach(res.data,function(val){
+                        var marker=new BMap.Marker(new BMap.Point(val.longitude,val.latitude));
+                        marker.pointData=val;
+                        marker.addEventListener('click',function(val){
+                            console.log(val);
+                            console.log(marker);
+                            $scope.pointObj=marker.pointData;
+                            getPointData($scope.pointObj.id);
+                        })
+                        setMapMarker(marker);
+                    });
+                    // setEchartOpt();
+                    // $scope.$broadcast('addMarker',res);
+                }
+            })
+        }
+
+        function setMapMarker(marker){
+            console.log(marker);
+            $scope.map.addOverlay(marker);
+        }
+
+        function getPointData(id){
+            var data={
+                rpid:id
+            }
+            RestangularService.all('api/river-point-datas/page').customGET('',data).then(function(res){
+                if(res.status==200){
+                    $scope.pointData=res.data.content;
+                    console.log($scope.pointData);
+                }
+            }).then(function(){
+                setEchartOpt();
+            })
         }
     }
 })();

@@ -1,4 +1,4 @@
-<div ng-controller="RiverPointsCtrl" class="river-points">
+<div ng-controller="WaterDataTableCtrl" class="river-points">
     <div class="page">
         <div class="row ui-section">
             <div class="col-xs-12">
@@ -7,70 +7,81 @@
                         <div layout="column" cloak class="">
                             <div layout-padding>
                                 <h2 class="section-header">
-                                    {{stateParams.riverName}} 水质数据监测点类表及水质监测数据
+                                    {{stateParams.name}} 水质监测数据
                                     <span class="pull-right">
                                         <button class="btn btn-primary btn-xs" ng-click="add()"><i class="fa fa-plus" title="添加检测点"></i></button>
+
                                         <button class="btn btn-primary btn-xs" ng-click="back()">返回上级列表</button>
                                     </span>
 
                                 </h2>
                                 <div class="table-responsive">
+                                    <div>
+                                        <div class="row">
+                                            <div class="form-group col-xs-8">
+                                                <label for="">导入Excel表格</label>
+                                                <input type="file" name="excel"  class="form-control">
+                                            </div>
+                                        </div>
+
+                                        <button  class="btn btn-primary" ng-click="submitExcel()">确定</button>
+                                    </div>
                                     <table class="table no-border">
                                         <thead>
                                             <tr>
                                                 <th>
                                                     <div class="th">
-                                                        序号
-                                                        <span class="fa fa-angle-up"
-                                                              data-ng-click=" orderBy('riverName') "
-                                                              data-ng-class="{active: pagObj.sort == 'riverName'}"></span>
-                                                        <span class="fa fa-angle-down"
-                                                              data-ng-click=" orderBy('riverName,desc') "
-                                                              data-ng-class="{active: pagObj.sort == 'riverName,desc'}"></span>
+                                                        日期
+                                                        <!--<span class="fa fa-angle-up"-->
+                                                              <!--data-ng-click=" orderBy('checkdate') "-->
+                                                              <!--data-ng-class="{active: pagObj.sort == 'riverName'}"></span>-->
+                                                        <!--<span class="fa fa-angle-down"-->
+                                                              <!--data-ng-click=" orderBy('riverName,desc') "-->
+                                                              <!--data-ng-class="{active: pagObj.sort == 'riverName,desc'}"></span>-->
                                                     </div>
                                                 </th>
                                                 <th>
                                                     <div class="th">
-                                                        名称
-                                                        <span class="fa fa-angle-up"
-                                                              data-ng-click=" orderBy('riverName') "
-                                                              data-ng-class="{active: pagObj.sort == 'riverName'}"></span>
-                                                        <span class="fa fa-angle-down"
-                                                              data-ng-click=" orderBy('riverName,desc') "
-                                                              data-ng-class="{active: pagObj.sort == 'riverName,desc'}"></span>
+                                                        DO(溶解氧)
+                                                        <!--<span class="fa fa-angle-up"-->
+                                                              <!--data-ng-click=" orderBy('riverName') "-->
+                                                              <!--data-ng-class="{active: pagObj.sort == 'riverName'}"></span>-->
+                                                        <!--<span class="fa fa-angle-down"-->
+                                                              <!--data-ng-click=" orderBy('riverName,desc') "-->
+                                                              <!--data-ng-class="{active: pagObj.sort == 'riverName,desc'}"></span>-->
                                                     </div>
                                                 </th>
                                                 <th>
                                                     <div class="th">
-                                                        位置
-                                                        <span class="fa fa-angle-up"
-                                                              data-ng-click=" orderBy('riverName') "
-                                                              data-ng-class="{active: pagObj.sort == 'riverName'}"></span>
-                                                        <span class="fa fa-angle-down"
-                                                              data-ng-click=" orderBy('riverName,desc') "
-                                                              data-ng-class="{active: pagObj.sort == 'riverName,desc'}"></span>
+                                                        CODmn(高锰酸钾指数)
+                                                        <!--<span class="fa fa-angle-up"-->
+                                                              <!--data-ng-click=" orderBy('riverName') "-->
+                                                              <!--data-ng-class="{active: pagObj.sort == 'riverName'}"></span>-->
+                                                        <!--<span class="fa fa-angle-down"-->
+                                                              <!--data-ng-click=" orderBy('riverName,desc') "-->
+                                                              <!--data-ng-class="{active: pagObj.sort == 'riverName,desc'}"></span>-->
                                                     </div>
                                                 </th>
                                                 <th>
                                                     <div class="th">
-                                                        状态
-                                                        <span class="fa fa-angle-up"
-                                                              data-ng-click=" orderBy('riverName') "
-                                                              data-ng-class="{active: pagObj.sort == 'riverName'}"></span>
-                                                        <span class="fa fa-angle-down"
-                                                              data-ng-click=" orderBy('riverName,desc') "
-                                                              data-ng-class="{active: pagObj.sort == 'riverName,desc'}"></span>
+                                                        NH3-N(氨氧)
+                                                        <!--<span class="fa fa-angle-up"-->
+                                                              <!--data-ng-click=" orderBy('riverName') "-->
+                                                              <!--data-ng-class="{active: pagObj.sort == 'riverName'}"></span>-->
+                                                        <!--<span class="fa fa-angle-down"-->
+                                                              <!--data-ng-click=" orderBy('riverName,desc') "-->
+                                                              <!--data-ng-class="{active: pagObj.sort == 'riverName,desc'}"></span>-->
                                                     </div>
                                                 </th>
                                                 <th>
                                                     <div class="th">
-                                                        水质数据
-                                                        <span class="fa fa-angle-up"
-                                                              data-ng-click=" orderBy('riverName') "
-                                                              data-ng-class="{active: pagObj.sort == 'riverName'}"></span>
-                                                        <span class="fa fa-angle-down"
-                                                              data-ng-click=" orderBy('riverName,desc') "
-                                                              data-ng-class="{active: pagObj.sort == 'riverName,desc'}"></span>
+                                                        TP(总磷)
+                                                        <!--<span class="fa fa-angle-up"-->
+                                                              <!--data-ng-click=" orderBy('riverName') "-->
+                                                              <!--data-ng-class="{active: pagObj.sort == 'riverName'}"></span>-->
+                                                        <!--<span class="fa fa-angle-down"-->
+                                                              <!--data-ng-click=" orderBy('riverName,desc') "-->
+                                                              <!--data-ng-class="{active: pagObj.sort == 'riverName,desc'}"></span>-->
                                                     </div>
                                                 </th>
                                                 <th>
@@ -82,17 +93,11 @@
                                         </thead>
                                         <tbody>
                                         <tr ng-repeat="data in tableData">
-                                            <td>{{$index+1}}</td>
-                                            <td>{{data.name}}</td>
-                                            <td>
-                                                <span>经度:{{data.longitude}},</span>
-                                                <span>纬度:{{data.latitude}}</span>
-                                            </td>
-                                            <td>{{data.alive?'开启':'关闭'}}</td>
-                                            <td>
-                                                <span class="label label-info" ng-click="toWaterDataTable(data)">查看</span>
-                                                <span class="label label-primary">管理</span>
-                                            </td>
+                                            <td>{{data.checkdate}}</td>
+                                            <td>{{data.oxygen}}</td>
+                                            <td>{{data.permanganate}}</td>
+                                            <td>{{data.ammonia}}</td>
+                                            <td>{{data.phosphorus}}</td>
                                             <td>
                                                 <span class="fa fa-edit text-primary" ng-click="edit(data)"></span>
                                                 <span class="fa fa-trash text-danger"  ng-click="del(data)"></span>

@@ -1,0 +1,52 @@
+<div ng-controller="WaterDataDetailCtrl" class="point-detail">
+    <div class="page">
+        <div class="row ui-section">
+            <div class="col-xs-12">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <div layout="column" cloak class="">
+                            <div layout-padding>
+                                <h2 class="section-header">
+                                    {{stateParams.name}} 水质数据
+                                </h2>
+                                <form name="waterInfo" ng-submit="save()">
+                                    <div layout layout-sm="column">
+                                        <md-datepicker ng-model="formObj.checkdate" md-placeholder="时间"></md-datepicker>
+                                    </div>
+                                    <div layout layout-sm="column">
+                                        <md-input-container flex>
+                                            <label>DO(溶解氧)</label>
+                                            <input ng-model="formObj.oxygen">
+                                        </md-input-container>
+                                        <md-input-container flex>
+                                            <label>CODmn(高锰酸钾指数)</label>
+                                            <input ng-model="formObj.permanganate">
+                                        </md-input-container>
+                                    </div>
+                                    <div layout layout-sm="column">
+                                        <md-input-container flex>
+                                            <label>NH3-N(氨氧)</label>
+                                            <input ng-model="formObj.ammonia">
+                                        </md-input-container>
+                                        <md-input-container flex>
+                                            <label>TP(总磷)</label>
+                                            <input ng-model="formObj.phosphorus">
+                                        </md-input-container>
+                                    </div>
+                                    <br/>
+                                    <span class="pull-right">
+                                        <button type="submit" ui-wave="" class="btn btn-primary btn-w-md ui-wave">提交
+                                    </button>
+                                         <button type="button" class="btn btn-danger btn-w-md ui-wave" ng-click="back()">返回</button>
+                                    </span>
+
+
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

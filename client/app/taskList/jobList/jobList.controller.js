@@ -4,11 +4,11 @@
 (function () {
     'use strict';
 
-    angular.module('app.taskList.controller', [])
-        .controller('TaskListCtrl', ['$scope', '$state', '$mdToast','RestangularService','$filter', TaskListCtrl])
+    angular.module('app.jobList.controller', [])
+        .controller('JobListCtrl', ['$scope', '$state', '$mdToast','RestangularService','$filter', JobListCtrl])
     ;
 
-    function TaskListCtrl($scope, $state, $mdToast,RestangularService,$filter) {
+    function JobListCtrl($scope, $state, $mdToast,RestangularService,$filter) {
         var toast;
         $scope.toTaskDetails = toTaskDetails;
         $scope.editTask = editTask;
@@ -47,7 +47,7 @@
                 page:pagObj.currentPage-1,
                 sort:pagObj.sort,
             };
-            RestangularService.all('api/readily-jobs/page').customGET('',data).then(function(result){
+            RestangularService.all('api/jobs/page').customGET('',data).then(function(result){
                 if(result.status==200){
                     console.log(result);
                     $scope.listObj.data=result.data.content;
@@ -72,7 +72,7 @@
 
 
         function del(obj) {
-            if(!toast){
+            if(true){
                 toast = $mdToast.simple()
                     .content('确定要删除该任务？')
                     .action('确定')
@@ -82,7 +82,7 @@
                     console.log(response);
                     if(response=='ok'){
                         console.log(obj);
-                        RestangularService.all('api/readily-jobs').customDELETE(obj.id).then(function(result){
+                        RestangularService.all('api/jobs').customDELETE(obj.id).then(function(result){
                            if(result.status==200){
                                initData();
                                toast=null;
