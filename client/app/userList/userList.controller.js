@@ -76,7 +76,7 @@
                     console.log(response);
                     if(response=='ok'){
                         console.log(obj);
-                        RestangularService.all('api/users').customDELETE(obj.id).then(function(result){
+                        RestangularService.all('api/users').customDELETE(obj.login).then(function(result){
                            if(result.status==200){
                                initData();
                                toast=null;
