@@ -60,9 +60,10 @@
                     case '/login':
                     case '/fore-task-list':
                     case '/fore-task-finishing':
+                    case '/':
                         return $element.addClass('body-wide body-water');
                 }
-                if(path.indexOf('water/')>0||path.indexOf('new-detail')>0){
+                if(path.indexOf('water/')>0||path.indexOf('new-detail')>0||path.indexOf('jobs-execute')>0){
                     return $element.addClass('body-wide body-water');
                 }
             };

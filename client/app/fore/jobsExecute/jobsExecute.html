@@ -1,0 +1,62 @@
+<div ng-controller="JobsExecuteCtrl" class="jobs-execute">
+    <div ng-include="'app/water/header/header.html'"></div>
+    <ul class="list-group" >
+        <li class="list-group-item">
+            <div class="row">`
+                <div class="col-xs-5">
+                    <span class="text-primary">任务编号</span> {{listObj.data.id}}
+                </div>
+                <div class="col-xs-5">
+                    <span class="text-primary">发布时间</span> {{listObj.data.issueDate}}
+                </div>
+            </div>
+
+        </li>
+        <li class="list-group-item">
+            <div class="row">
+                <div class="col-xs-12">
+                    <span class="text-primary">任务标题</span> {{listObj.data.name}}
+                </div>
+            </div>
+        </li>
+        <li class="list-group-item files" ng-hide="job.attachments.length==0">
+            <span ng-repeat="file in job.attachments" class="file-item">
+                <img ng-src="{{host}}/api/file-show/path?filepath={{file.filePath}}" alt="" ng-show="file.fileName.indexOf('.jpg')>-1||file.fileName.indexOf('.jpeg')>-1||file.fileName.indexOf('.png')>-1">
+                <img ng-src="assets/images/excel.png" alt="" ng-show="file.fileName.indexOf('.xls')>-1||file.fileName.indexOf('.xlsx')>-1" ng-click="download(file.filePath)">
+                <img ng-src="assets/images/ppt.jpg" alt="" ng-show="file.fileName.indexOf('.ppt')>-1||file.fileName.indexOf('.pptx')>-1" ng-click="download(file.filePath)">
+                <img ng-src="assets/images/word.jpg" alt="" ng-show="file.fileName.indexOf('.doc')>-1||file.fileName.indexOf('.docx')>-1" ng-click="download(file.filePath)">
+
+            </span>
+        </li>
+        <li class="list-group-item">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="form-group">
+                        <label class="text-primary">处置描述</label>
+                        <textarea class="form-control" id="" cols="30" rows="10" ng-model="content"></textarea>
+                    </div>
+                </div>
+            </div>
+        </li>
+        <li class="list-group-item">
+            <span class="files-imgs" >
+                <div class="imgs" ng-show="images.length>0">
+                    <!--<img src="../assets/images/noimg.png" alt="">-->
+                <!--<img src="../assets/images/noimg.png" alt="">-->
+                <!--<img src="../assets/images/noimg.png" alt="">-->
+                <!--<img src="../assets/images/noimg.png" alt="">-->
+                <!--<img src="../assets/images/noimg.png" alt="">-->
+                <!--<img src="../assets/images/noimg.png" alt="">-->
+                    <img ng-src="{{host}}/api/file-show/path?filepath={{img.filePath}}" alt="" ng-repeat="img in images">
+                </div>
+
+            </span>
+            <span class="fa fa-plus-square upload-file text-primary" >
+                <input type="file" class="form-control" style="opacity:0;" onchange="angular.element(this).scope().handleChange()" ng-model="file" name="file">
+            </span>
+        </li>
+        <li class="list-group-item text-center">
+            <button class="btn btn-primary " ng-click="save(listObj.data)">确认反馈</button>
+        </li>
+    </ul>
+</div>

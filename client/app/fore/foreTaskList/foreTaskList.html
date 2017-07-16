@@ -1,13 +1,16 @@
 <div ng-controller="ForeTaskListCtrl">
     <div ng-include="'app/water/header/header.html'"></div>
-    <ul class="list-group">
+    <ul class="list-group" ng-hide="listObj.data.length>0">
+        <li class="list-group-item text-center text-info">目前没有任务！</li>
+    </ul>
+    <ul class="list-group" ng-repeat="job in listObj.data">
         <li class="list-group-item">
             <div class="row">`
                 <div class="col-xs-5">
-                    <span class="text-primary">任务编号</span> RW20170625001
+                    <span class="text-primary">任务编号</span> {{job.id}}
                 </div>
                 <div class="col-xs-5">
-                    <span class="text-primary">发布时间</span> 2017-06-24 12:45
+                    <span class="text-primary">发布时间</span> {{job.issueDate}}
                 </div>
             </div>
 
@@ -15,84 +18,123 @@
         <li class="list-group-item">
             <div class="row">
                 <div class="col-xs-12">
-                    <span class="text-primary">任务内容</span> 拱墅区 余杭塘河（小河道）
+                    <span class="text-primary">任务标题</span> {{job.name}}
                 </div>
             </div>
         </li>
         <li class="list-group-item">
-            <span><img src="assets/images/puff.svg" alt=""></span>
-            <span><img src="assets/images/puff.svg" alt=""></span>
-            <span><img src="assets/images/puff.svg" alt=""></span>
-            <span><img src="assets/images/puff.svg" alt=""></span>
+            <div class="row">
+                <div class="col-xs-12">
+                    <span class="text-primary">任务内容</span> {{job.content}}
+                </div>
+            </div>
+        </li>
+        <li class="list-group-item files">
+            <span ng-repeat="file in job.attachments" class="file-item">
+                <img ng-src="{{host}}/api/file-show/path?filepath={{file.filePath}}" alt="" ng-show="file.fileName.indexOf('.jpg')>-1||file.fileName.indexOf('.jpeg')>-1||file.fileName.indexOf('.png')>-1">
+                <img ng-src="assets/images/excel.png" alt="" ng-show="file.fileName.indexOf('.xls')>-1||file.fileName.indexOf('.xlsx')>-1" ng-click="download(file.filePath)">
+                <img ng-src="assets/images/ppt.jpg" alt="" ng-show="file.fileName.indexOf('.ppt')>-1||file.fileName.indexOf('.pptx')>-1" ng-click="download(file.filePath)">
+                <img ng-src="assets/images/word.jpg" alt="" ng-show="file.fileName.indexOf('.doc')>-1||file.fileName.indexOf('.docx')>-1" ng-click="download(file.filePath)">
+
+            </span>
         </li>
         <li class="list-group-item text-center">
-            <button class="btn btn-primary ">接受任务</button>
+            <button class="btn btn-primary " ng-click="toTaskFinishing(job)">接受任务</button>
         </li>
     </ul>
-    <ul class="list-group">
-        <li class="list-group-item">
-            <div class="row">`
-                <div class="col-xs-5">
-                    <span class="text-primary">任务编号</span> RW20170625005
-                </div>
-                <div class="col-xs-5">
-                    <span class="text-primary">发布时间</span> 2017-06-25 12:45
-                </div>
-            </div>
+    <!--<ul class="list-group">-->
+        <!--<li class="list-group-item">-->
+            <!--<div class="row">`-->
+                <!--<div class="col-xs-5">-->
+                    <!--<span class="text-primary">任务编号</span> RW20170625001-->
+                <!--</div>-->
+                <!--<div class="col-xs-5">-->
+                    <!--<span class="text-primary">发布时间</span> 2017-06-24 12:45-->
+                <!--</div>-->
+            <!--</div>-->
 
-        </li>
-        <li class="list-group-item">
-            <div class="row">
-                <div class="col-xs-12">
-                    <span class="text-primary">任务内容</span> 请按照附件要求，做好相关防汛、清淤工作
-                </div>
-            </div>
-        </li>
-        <li class="list-group-item">
-            <span><img src="assets/images/puff.svg" alt=""></span>
-            <span><img src="assets/images/puff.svg" alt=""></span>
-            <span><img src="assets/images/puff.svg" alt=""></span>
-            <span><img src="assets/images/puff.svg" alt=""></span>
-        </li>
-        <li class="list-group-item text-center">
-            <button class="btn btn-primary " ng-click="toTaskFinishing()">接受任务</button>
-        </li>
-    </ul>
+        <!--</li>-->
+        <!--<li class="list-group-item">-->
+            <!--<div class="row">-->
+                <!--<div class="col-xs-12">-->
+                    <!--<span class="text-primary">任务内容</span> 拱墅区 余杭塘河（小河道）-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</li>-->
+        <!--<li class="list-group-item">-->
+            <!--<span><img src="assets/images/puff.svg" alt=""></span>-->
+            <!--<span><img src="assets/images/puff.svg" alt=""></span>-->
+            <!--<span><img src="assets/images/puff.svg" alt=""></span>-->
+            <!--<span><img src="assets/images/puff.svg" alt=""></span>-->
+        <!--</li>-->
+        <!--<li class="list-group-item text-center">-->
+            <!--<button class="btn btn-primary ">接受任务</button>-->
+        <!--</li>-->
+    <!--</ul>-->
+    <!--<ul class="list-group">-->
+        <!--<li class="list-group-item">-->
+            <!--<div class="row">`-->
+                <!--<div class="col-xs-5">-->
+                    <!--<span class="text-primary">任务编号</span> RW20170625005-->
+                <!--</div>-->
+                <!--<div class="col-xs-5">-->
+                    <!--<span class="text-primary">发布时间</span> 2017-06-25 12:45-->
+                <!--</div>-->
+            <!--</div>-->
 
-    <ul class="list-group">
-        <li class="list-group-item">
-            <div class="row">`
-                <div class="col-xs-5">
-                    <span class="text-primary">任务编号</span> RW20170625005
-                </div>
-                <div class="col-xs-5">
-                    <span class="text-primary">发布时间</span> 2017-06-25 12:45
-                </div>
-            </div>
+        <!--</li>-->
+        <!--<li class="list-group-item">-->
+            <!--<div class="row">-->
+                <!--<div class="col-xs-12">-->
+                    <!--<span class="text-primary">任务内容</span> 请按照附件要求，做好相关防汛、清淤工作-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</li>-->
+        <!--<li class="list-group-item">-->
+            <!--<span><img src="assets/images/puff.svg" alt=""></span>-->
+            <!--<span><img src="assets/images/puff.svg" alt=""></span>-->
+            <!--<span><img src="assets/images/puff.svg" alt=""></span>-->
+            <!--<span><img src="assets/images/puff.svg" alt=""></span>-->
+        <!--</li>-->
+        <!--<li class="list-group-item text-center">-->
+            <!--<button class="btn btn-primary " ng-click="toTaskFinishing()">接受任务</button>-->
+        <!--</li>-->
+    <!--</ul>-->
 
-        </li>
-        <li class="list-group-item">
-            <div class="row">
-                <div class="col-xs-12">
-                    <span class="text-primary">任务内容</span> 请按照附件要求，做好相关防汛、清淤工作
-                </div>
-            </div>
-        </li>
-        <li class="list-group-item">
-            <span><img src="assets/images/puff.svg" alt=""></span>
-            <span><img src="assets/images/puff.svg" alt=""></span>
-            <span><img src="assets/images/puff.svg" alt=""></span>
-            <span><img src="assets/images/puff.svg" alt=""></span>
-        </li>
-        <li class="list-group-item">
-            <div class="row">
-                <div class="col-xs-5">
-                    <span class="text-danger">已处理</span>
-                </div>
-                <div class="col-xs-5">
-                    <span class="text-primary">处理时间  2017-06-25 12:45</span>
-                </div>
-            </div>
-        </li>
-    </ul>
+    <!--<ul class="list-group">-->
+        <!--<li class="list-group-item">-->
+            <!--<div class="row">`-->
+                <!--<div class="col-xs-5">-->
+                    <!--<span class="text-primary">任务编号</span> RW20170625005-->
+                <!--</div>-->
+                <!--<div class="col-xs-5">-->
+                    <!--<span class="text-primary">发布时间</span> 2017-06-25 12:45-->
+                <!--</div>-->
+            <!--</div>-->
+
+        <!--</li>-->
+        <!--<li class="list-group-item">-->
+            <!--<div class="row">-->
+                <!--<div class="col-xs-12">-->
+                    <!--<span class="text-primary">任务内容</span> 请按照附件要求，做好相关防汛、清淤工作-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</li>-->
+        <!--<li class="list-group-item">-->
+            <!--<span><img src="assets/images/puff.svg" alt=""></span>-->
+            <!--<span><img src="assets/images/puff.svg" alt=""></span>-->
+            <!--<span><img src="assets/images/puff.svg" alt=""></span>-->
+            <!--<span><img src="assets/images/puff.svg" alt=""></span>-->
+        <!--</li>-->
+        <!--<li class="list-group-item">-->
+            <!--<div class="row">-->
+                <!--<div class="col-xs-5">-->
+                    <!--<span class="text-danger">已处理</span>-->
+                <!--</div>-->
+                <!--<div class="col-xs-5">-->
+                    <!--<span class="text-primary">处理时间  2017-06-25 12:45</span>-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</li>-->
+    <!--</ul>-->
 </div>

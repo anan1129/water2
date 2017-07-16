@@ -146,6 +146,16 @@
         }
     }
 }
+.list-group-item.files{
+    .file-item{
+        //display:inline-block;
+        img{
+            height:80px;
+            vertical-align: middle;
+            margin-right:2px;
+        }
+    }
+}
 .md-tab>.custom-tab{
     padding:12px 0;
 }
@@ -301,6 +311,50 @@ md-tabs-canvas.md-paginated{
         padding:12px 0;
     }
 }
+
+.fore-task-finishing{
+    .file{
+        span{
+            border:1px solid #ccc;
+        }
+    }
+    md-tab-content{
+        background:#35a6ff;
+    }
+}
+.jobs-execute{
+    .files-imgs{
+        width:80%;
+        height:70px;
+        line-height:90px;
+        display:inline-block;
+        overflow-x: scroll;
+        overflow-y: hidden;
+        .imgs{
+            width:1000px;
+            height:70px;
+        }
+        img{
+            //width:70px;
+            height:100%;
+            vertical-align: top;
+            margin-right:5px;
+        }
+    }
+    .upload-file{
+        width:50px;
+        height:50px;
+        position:relative;
+        font-size:50px;
+        &:before{
+            position:absolute;
+        }
+        input[type=file]{
+            position:absolute;
+        }
+    }
+}
+
 
 
 

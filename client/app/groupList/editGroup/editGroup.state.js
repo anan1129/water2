@@ -8,7 +8,7 @@
         .config(['$stateProvider',function($stateProvider){
             $stateProvider
                 .state('edit-group',{
-                    url:'/edit-group/:id',
+                    url:'/edit-group/:id/:pid',
                     templateUrl:'app/groupList/editGroup/editGroup.html'
                 })
         }])

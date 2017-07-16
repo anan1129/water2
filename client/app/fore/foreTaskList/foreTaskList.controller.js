@@ -5,19 +5,23 @@
     'use strict';
 
     angular.module('app.foreTaskList.controller', [])
-        .controller('ForeTaskListCtrl', ['$scope', '$state', '$mdToast','RestangularService','$filter', ForeTaskListCtrl])
+        .controller('ForeTaskListCtrl', ['$scope', '$state', '$mdToast','RestangularService','$filter','$rootScope','$window', ForeTaskListCtrl])
     ;
 
-    function ForeTaskListCtrl($scope, $state, $mdToast,RestangularService,$filter) {
+    function ForeTaskListCtrl($scope, $state, $mdToast,RestangularService,$filter,$rootScope,$window) {
         var toast;
         $scope.toTaskDetails = toTaskDetails;
         $scope.editTask = editTask;
         $scope.edit = edit;
         $scope.orderBy=orderBy;
+        $scope.toTaskFinishing=toTaskFinishing;
+        // $scope.receiveJob=receiveJob;
+        $scope.download=download;
         $scope.listObj = {
             del: del,
             data:[]
         };
+
 
         var pagObj=$scope.pagObj={
             numPerPageOpt:[5,10,15],
@@ -47,7 +51,7 @@
                 page:pagObj.currentPage-1,
                 sort:pagObj.sort,
             };
-            RestangularService.all('api/jobs/page').customGET('',data).then(function(result){
+            RestangularService.all('api/jobs-status/page?status=已下发').customGET('',data).then(function(result){
                 if(result.status==200){
                     console.log(result);
                     $scope.listObj.data=result.data.content;
@@ -104,12 +108,32 @@
         function edit(list){
             $state.go('edit-task',list);
         }
+
+        function toTaskFinishing(job){
+
+            var data={
+                id:job.id,
+                receiver:$window.sessionStorage.username,
+                status:'处理中'
+            }
+            console.log(data);
+            RestangularService.all('api/jobs-receive').customPOST(data).then(function(res){
+                if(res.status==201){
+                    getJobs();
+                }
+            })
+        }
+
+        function download(filePath){
+            var url=$rootScope.host+'/api/file-download?filepath='+filePath;
+            $window.open(url);
+        }
 // --------------------------------------------------------------------------
 
-        $scope.toTaskFinishing=toTaskFinishing;
 
-        function toTaskFinishing(){
-            $state.go('fore-task-finishing');
-        }
+
+        // function toTaskFinishing(){
+        //     $state.go('fore-task-finishing');
+        // }
     }
 })();

@@ -9,6 +9,7 @@
     ;
 
     function WaterCtrl($scope,$stateParams,RestangularService,$state,$timeout,$filter){
+
         var stateParams=$scope.stateParams=$stateParams;
         var map=$scope.map;
         var pointArr=[];
@@ -28,6 +29,43 @@
         $scope.pointObj={};//监测点对象
         $scope.pointData;//水质数据
         $scope.getRiverPoints=getRiverPoints;//水质数据
+        $scope.getJobs=getJobs;//获取任务
+        $scope.zhzl=zhzl;//综合治理点击
+        $scope.download=download;//综合治理点击
+        var pagObj=$scope.pagObj={
+            finishing:{
+                numPerPageOpt:[5,10,15],
+                numPerPage:10,
+                sort:'',
+                onNumPerPageChange:function(){
+                    $scope.pagObj.select(1);
+                    return $scope.pagObj.currentPage = 1;
+                },
+                currentPage:1,
+                totalElements:'',
+                select:function(page){
+                    $scope.pagObj.currentPage =page;
+                    getJobs();
+                }
+            },
+            finished:{
+                numPerPageOpt:[5,10,15],
+                numPerPage:10,
+                sort:'',
+                onNumPerPageChange:function(){
+                    $scope.pagObj.select(1);
+                    return $scope.pagObj.currentPage = 1;
+                },
+                currentPage:1,
+                totalElements:'',
+                select:function(page){
+                    $scope.pagObj.currentPage =page;
+                    getFinsihedJobs();
+                }
+            }
+
+        }
+        $scope.listObj={};
         initData();
 
         function initData(){
@@ -221,6 +259,30 @@
             }).then(function(){
                 setEchartOpt();
             })
+        }
+
+        function getJobs(){
+            var data={
+                size:pagObj.finishing.numPerPage,
+                page:pagObj.finishing.currentPage-1,
+                sort:pagObj.finishing.sort,
+            };
+            RestangularService.all('/api/readily-jobs/page').customGET('',data).then(function(result){
+                if(result.status==200){
+                    console.log(result);
+                    $scope.listObj.data=result.data.content;
+                    $scope.pagObj.finishing.totalElements=result.data.totalElements;
+                }
+            });
+        }
+
+        function zhzl(){
+            getJobs();
+        }
+
+        function download(filePath){
+            var url=$rootScope.host+'/api/file-download?filepath='+filePath;
+            $window.open(url);
         }
     }
 })();

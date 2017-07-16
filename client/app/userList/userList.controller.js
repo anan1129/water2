@@ -65,7 +65,8 @@
         }
 
         function del(obj) {
-            if(!toast){
+            console.log(obj);
+            if(true){
                 toast = $mdToast.simple()
                     .content('确定要删除该任务？')
                     .action('确定')
@@ -75,7 +76,7 @@
                     console.log(response);
                     if(response=='ok'){
                         console.log(obj);
-                        RestangularService.all('api/users?size=9999').customDELETE(obj.id).then(function(result){
+                        RestangularService.all('api/users').customDELETE(obj.id).then(function(result){
                            if(result.status==200){
                                initData();
                                toast=null;

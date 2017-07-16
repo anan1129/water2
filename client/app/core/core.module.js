@@ -16,6 +16,9 @@
         ,'ngMaterial'
         ,'ui.router'
         ,'duScroll'
+        ,'restangular'
+        , 'angular-jwt'
+        , 'infinite-scroll'
     ]);
 
 })();

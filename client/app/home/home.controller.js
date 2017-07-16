@@ -5,23 +5,61 @@
     'use strict';
 
     angular.module('app.home.controller',[])
-        .controller('HomeCtrl',['$scope','RestangularService','$state','$window','$rootScope',HomeCtrl])
+        .controller('HomeCtrl',['$scope','RestangularService','$state','$window','$rootScope','$mdDialog',HomeCtrl])
     ;
 
-    function HomeCtrl($scope,RestangularService,$state,$window,$rootScope){
+    function HomeCtrl($scope,RestangularService,$state,$window,$rootScope,$mdDialog){
         // console.log($window.localStorage);
         $scope.username=$window.sessionStorage.username;
         console.log($scope.username);
         $scope.toDetail=toDetail;
         $scope.login=login;
         $scope.logout=logout;
+
+
         initData();
 
         function initData(){
+            getJobs();
             getRivers();
+            getAccount();
         }
         $scope.customClass={
 
+        }
+
+        function getJobs(){
+            RestangularService.all('api/jobs-status/page?status=已下发').customGET().then(function(res){
+                if(res.status==200&&res.data.content.length>0&&!$rootScope.openDialog){
+                    // $state.go('fore-task-list');
+                    $mdDialog.show({
+                        templateUrl:'app/home/dialog.html',
+                        // template:'<div class="modal-body"><div ng-include="\'app/fore/foreTaskList/foreTaskList.html\'"></div></div>',
+                        clickOutsideToClose:true,
+                        controller:['$scope','$mdDialog',function($scope,$mdDialog){
+                            $scope.title='任务单';
+                            $scope.hideHeader=true;
+                            $scope.close=function(){
+                                $mdDialog.cancel();
+                            }
+                        }]
+                    });
+                    $rootScope.openDialog=true;
+                }
+            });
+        }
+
+        function getAccount(){
+            RestangularService.all('api/my-group').customGET().then(function(res){
+                if(res.status==200){
+                    $rootScope.account=res.data;
+                }
+            },function(res){
+                console.log(res);
+                if(res.status==404){
+                    $rootScope.account.guest=true;
+                }
+            })
         }
 
         function getRivers(){
@@ -54,6 +92,7 @@
             $window.sessionStorage.removeItem('username');
             $window.sessionStorage.removeItem('id_token');
             $rootScope.user={};
+            $rootScope.userName=null;
         }
     }
 })();

@@ -26,16 +26,17 @@
 
         function login(){
             RestangularService.all('api/authenticate').customPOST($scope.user).then(function(result){
-               console.log(result);
                 if(result.status==200){
                     // $window.localStorage.id_token=result.data.id_token;
                     // $window.localStorage.username=$scope.user.username;
                     // $window.localStorage.password=$scope.user.password;
                     // localStorage.removeItem('id_token');
                     // localStorage.removeItem('username');
+                    console.log($scope.user);
 
                     $window.sessionStorage.id_token=result.data.id_token;
                     $window.sessionStorage.username=$scope.user.username;
+                    $rootScope.username=$scope.user.username;
                     $scope.success=true;
                         $scope.err=false;
                         $rootScope.user={
@@ -52,6 +53,12 @@
             },function(result){
                 $scope.err=true;
                 $scope.success=false;
+            }).then(function(){
+                RestangularService.all('api/account').customGET().then(function(res){
+                    if(res.status==200){
+                        console.log(res);
+                    }
+                })
             });
         }
 

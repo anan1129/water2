@@ -189,18 +189,12 @@
                 </button>
                 <ul class="dropdown-menu" role="menu">
 
-                    <li><a href="">信息发布</a></li>
-                    <li><a href="">数据统计</a></li>
-                    <li class="divider"></li>
-                    <li><a href="">数据总览</a></li>
-                    <li class="divider"></li>
-                    <li><a href="">任务处置</a></li>
-                    <li><a href="">投诉建议</a></li>
-                    <li class="divider"></li>
-                    <li><a href="">任务处置</a></li>
-                    <li><a href="">投诉建议</a></li>
-                    <li class="divider"></li>
-                    <li><a href="#" ng-click="logout()">退出登录</a></li>
+                    <!--<li><a href="">信息发布</a></li>-->
+                    <!--<li><a href="">数据统计</a></li>-->
+                    <li ng-show="account.superRiverLeader&&!account.guest"><a href="">数据总览</a></li>
+                    <li ng-show="account.adminGroup"><a href="#!/fore-task-list">任务与投诉建议</a></li>
+                    <li ng-show="account.adminGroup"><a href="#!/fore-task-finishing">已接受任务</a></li>
+                    <li ><a href="#" ng-click="logout()">退出登录</a></li>
                     <!--<li class="divider"></li>-->
                 </ul>
             </div>

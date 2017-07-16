@@ -19,6 +19,7 @@
         , 'app.taskList'
         , 'app.foreTaskList'
         , 'app.foreTaskFinishing'
+        , 'app.jobsExecute'
         , 'app.addGroup'
         , 'app.addStaff'
         , 'app.taskDetails'
@@ -52,6 +53,8 @@
         .run(['$rootScope','$window','$state','$location',
             function ($rootScope,$window,$state,$location) {
                 $rootScope.isPC=isPCFun();
+                $rootScope.host='http://106.15.48.81:8080';
+                $rootScope.account={};
 
                 function isPCFun(){
                     var userAgentInfo = navigator.userAgent;

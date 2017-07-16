@@ -5,10 +5,10 @@
     'use strict';
 
     angular.module('app.addTask.controller', [])
-        .controller('AddTaskCtrl', ['$scope', 'RestangularService', '$filter','$mdToast','FileUploader', AddTaskCtrl])
+        .controller('AddTaskCtrl', ['$scope', 'RestangularService', '$filter','$mdToast','FileUploader','$state', AddTaskCtrl])
     ;
 
-    function AddTaskCtrl($scope, RestangularService, $filter,$mdToast,FileUploader) {
+    function AddTaskCtrl($scope, RestangularService, $filter,$mdToast,FileUploader,$state) {
         var users = [],resultData;
         $scope.getGroups=getGroups;
         $scope.getSubGroups=getSubGroups;
@@ -81,6 +81,10 @@
                    }
                })
             });
+            var pid=angular.fromJson($scope.pidArr[$scope.pidArr.length-1]);
+            data.groupId=pid.id;
+            data.groupName=pid.name;
+            data.status='已下发';
             // data.mangeuser=localStorage.mangeuser||'';
             // data.status="已上报";
             // data.source=""
@@ -93,8 +97,10 @@
                             .position('top right')
                             .hideDelay(2000)
                     );
-                    initData();
+                    // initData();
                     uploader.clearQueue();
+                    $state.go('job-list');
+
                 }else{
                     $mdToast.show(
                         $mdToast.simple()

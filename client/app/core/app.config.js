@@ -3,7 +3,7 @@
 
     angular.module('app.core')
         .factory('appConfig', [appConfig])
-        .config(['$mdThemingProvider', mdConfig]);
+        .config(['$mdThemingProvider','jwtOptionsProvider','RestangularProvider', mdConfig]);
 
     function appConfig() {
         var pageTransitionOpts = [
@@ -54,7 +54,7 @@
         }
     }
 
-    function mdConfig($mdThemingProvider) {
+    function mdConfig($mdThemingProvider,jwtOptionsProvider,RestangularProvider) {
         var cyanAlt = $mdThemingProvider.extendPalette('cyan', {
             'contrastLightColors': '500 600 700 800 900',
             'contrastStrongLightColors': '500 600 700 800 900'
@@ -62,7 +62,7 @@
         var lightGreenAlt = $mdThemingProvider.extendPalette('light-green', {
             'contrastLightColors': '500 600 700 800 900',
             'contrastStrongLightColors': '500 600 700 800 900'
-        })        
+        })
 
         $mdThemingProvider
             .definePalette('cyanAlt', cyanAlt)
@@ -80,6 +80,27 @@
                 'default': '500'
             })
             .backgroundPalette('grey');
+
+        jwtOptionsProvider.config({
+            tokenGetter: function () {
+                return localStorage.getItem('id_token');
+            },
+            whiteListedDomains: ['localhost','api.gitlab-service.com'],
+            loginPath: '/login'
+        });
+
+        RestangularProvider.setFullRequestInterceptor(function(element, operation, route, url, headers, params, httpConfig) {
+            var jwt = sessionStorage.getItem('id_token');
+            if(jwt && !angular.isString(headers.Authorization)) {
+                headers.Authorization = 'Bearer ' + jwt;
+            }
+            return {
+                element: element,
+                params: params,
+                headers: headers,
+                httpConfig: httpConfig
+            };
+        });
     }
 
 })();

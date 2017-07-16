@@ -5,11 +5,12 @@
     'use strict';
 
     angular.module('app.editGroup.controller',[])
-        .controller('EditGroupCtrl',['$scope','$mdToast','$filter','RestangularService','$stateParams',EditGroupCtrl])
+        .controller('EditGroupCtrl',['$scope','$mdToast','$filter','RestangularService','$stateParams','$window',EditGroupCtrl])
     ;
 
-    function EditGroupCtrl($scope,$mdToast,$filter,RestangularService,$stateParams){
+    function EditGroupCtrl($scope,$mdToast,$filter,RestangularService,$stateParams,$window){
         var statePararms=$scope.stateParams=$stateParams;
+        console.log(statePararms);
         $scope.getSubGroups=getSubGroups;
         $scope.pidArr=[];
         $scope.users=[];
@@ -71,7 +72,8 @@
         $scope.save=function(){
 
             var data=$scope.formObj;
-            data.pid=$scope.pidArr[$scope.pidArr.length-1];
+            if(statePararms.pid) data.pid=statePararms.pid;
+            if($scope.pidArr.length>0) data.pid=$scope.pidArr[$scope.pidArr.length-1];
             // data.users=angular.fromJson(data.users);
             angular.forEach(data.users,function(val,key){
                 data.users[key]=angular.fromJson(val);
@@ -82,11 +84,12 @@
                 if(result.status==201){
                     $mdToast.show(
                         $mdToast.simple()
-                            .content('添加成功！')
+                            .content('修改成功！')
                             .position('top right')
                             .hideDelay(2000)
                     );
-                    initData();
+                    // initData();
+                    $window.history.go(-1);
                 }else{
                     $mdToast.show(
                         $mdToast.simple()
