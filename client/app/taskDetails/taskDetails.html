@@ -8,8 +8,9 @@
                             <div layout-padding>
                                 <h2 class="section-header">
                                     任务详情
-                                    <a href="#!/add-task">
-                                        <span class="fa fa-plus-square pull-right"></span>
+                                    <a href="#!/job-list" class="btn btn-xs btn-primary pull-right">
+                                        返回列表
+                                        <!--<span class="fa fa-plus-square pull-right"></span>-->
                                     </a>
                                 </h2>
                                 <div class="row">
@@ -17,26 +18,99 @@
                                     <div class="col-xs-8">{{data.name}}</div>
                                 </div>
                                 <div class="row">
+                                    <div class="col-xs-4">任务下发人名称:</div>
+                                    <div class="col-xs-8">{{data.issuerName}}</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-4">任务下发人名称:</div>
+                                    <div class="col-xs-8">{{data.issuerName}}</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-4">下发至组织节点名称:</div>
+                                    <div class="col-xs-8">{{data.groupName}}</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-4">下发时间:</div>
+                                    <div class="col-xs-8">{{data.issueDate}}</div>
+                                </div>
+                                <div class="row">
                                     <div class="col-xs-4">任务内容:</div>
                                     <div class="col-xs-8">{{data.content}},水上有漂浮物</div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-xs-4">处理员:</div>
-                                    <div class="col-xs-8">
-                                        <span ng-repeat="user in data.users" style="margin-right:5px;">{{user.user}}</span>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-xs-4">处理进度:</div>
+                                    <div class="col-xs-4">任务进度:</div>
                                     <div class="col-xs-8">{{data.status}}</div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-xs-4">任务反馈:</div>
-                                    <div class="col-xs-8">{{data.jobBack}}</div>
+                                    <div class="col-xs-4">任务来源:</div>
+                                    <div class="col-xs-8">{{data.source}}</div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-xs-8 col-xs-offset-4">
-                                        <img src="../assets/images/water/01-1.jpg" width="100%" alt="">
+                                    <div class="col-xs-4">任务接收人姓名:</div>
+                                    <div class="col-xs-8">{{data.jobUserName}}</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-4">附件:</div>
+                                    <div class="col-xs-8">
+                                        <span ng-show="data.attachments.length==0">无</span>
+                                        <div class="row" ng-show="data.attachments.length>0">
+                                            <div class="col-xs-2" ng-repeat="file in data.attachments" class="file-item">
+                                                <img ng-src="{{host}}/api/file-show/path?filepath={{file.filePath}}" alt=""
+                                                     ng-show="file.fileName.indexOf('.jpg')>-1||file.fileName.indexOf('.jpeg')>-1||file.fileName.indexOf('.png')>-1">
+                                                <img ng-src="assets/images/excel.png" alt=""
+                                                     ng-show="file.fileName.indexOf('.xls')>-1||file.fileName.indexOf('.xlsx')>-1"
+                                                     ng-click="download(file.filePath)">
+                                                <img ng-src="assets/images/ppt.jpg" alt=""
+                                                     ng-show="file.fileName.indexOf('.ppt')>-1||file.fileName.indexOf('.pptx')>-1"
+                                                     ng-click="download(file.filePath)">
+                                                <img ng-src="assets/images/word.jpg" alt=""
+                                                     ng-show="file.fileName.indexOf('.doc')>-1||file.fileName.indexOf('.docx')>-1"
+                                                     ng-click="download(file.filePath)">
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-4">任务处理信息:</div>
+                                    <div class="col-xs-8">
+                                        <span ng-show="data.executes.length==0">无</span>
+                                        <div ng-show="data.executes.length>0" ng-repeat="file in data.executes" class="file-item">
+                                            <div class="row">
+                                                <div class="col-xs-2">处理人:</div>
+                                                <div class="col-xs-10">{{file.userName}}</div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-xs-2">处理时间:</div>
+                                                <div class="col-xs-10">{{file.createdDate|editDate}}</div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-xs-2">处理内容:</div>
+                                                <div class="col-xs-10">{{file.content}}</div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-xs-2">图片:</div>
+                                                <div class="col-xs-10">
+                                                    <div class="row" >
+                                                        <div class="col-xs-2" ng-repeat="file in file.images">
+                                                            <img ng-src="{{host}}/api/file-show/path?filepath={{file.filePath}}" alt=""
+                                                                 ng-show="file.fileName.indexOf('.jpg')>-1||file.fileName.indexOf('.jpeg')>-1||file.fileName.indexOf('.png')>-1">
+                                                            <!--<img ng-src="assets/images/excel.png" alt=""-->
+                                                                 <!--ng-show="file.fileName.indexOf('.xls')>-1||file.fileName.indexOf('.xlsx')>-1"-->
+                                                                 <!--ng-click="download(file.filePath)">-->
+                                                            <!--<img ng-src="assets/images/ppt.jpg" alt=""-->
+                                                                 <!--ng-show="file.fileName.indexOf('.ppt')>-1||file.fileName.indexOf('.pptx')>-1"-->
+                                                                 <!--ng-click="download(file.filePath)">-->
+                                                            <!--<img ng-src="assets/images/word.jpg" alt=""-->
+                                                                 <!--ng-show="file.fileName.indexOf('.doc')>-1||file.fileName.indexOf('.docx')>-1"-->
+                                                                 <!--ng-click="download(file.filePath)">-->
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
                                     </div>
                                 </div>
                             </div>

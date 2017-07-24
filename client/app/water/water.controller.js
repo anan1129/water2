@@ -23,8 +23,8 @@
         $scope.news=[
             {title:'一河一策',content:null},
             {title:'一河一档',content:null},
-
         ];
+        $scope.getNewsType=getNewsType;
         $scope.riverPoints;//河道上所有监测点
         $scope.pointObj={};//监测点对象
         $scope.pointData;//水质数据
@@ -32,47 +32,23 @@
         $scope.getJobs=getJobs;//获取任务
         $scope.zhzl=zhzl;//综合治理点击
         $scope.download=download;//综合治理点击
-        var pagObj=$scope.pagObj={
-            finishing:{
-                numPerPageOpt:[5,10,15],
-                numPerPage:10,
+        $scope.listObj={
+            data:[]
+        };
+        var pageObj=$scope.pageObj={
+            zlgs:{
+                numPerPage:5,
                 sort:'',
-                onNumPerPageChange:function(){
-                    $scope.pagObj.select(1);
-                    return $scope.pagObj.currentPage = 1;
-                },
-                currentPage:1,
+                currentPage:0,
                 totalElements:'',
-                select:function(page){
-                    $scope.pagObj.currentPage =page;
-                    getJobs();
-                }
+                totalPages:0,
+                busy:false
             },
-            finished:{
-                numPerPageOpt:[5,10,15],
-                numPerPage:10,
-                sort:'',
-                onNumPerPageChange:function(){
-                    $scope.pagObj.select(1);
-                    return $scope.pagObj.currentPage = 1;
-                },
-                currentPage:1,
-                totalElements:'',
-                select:function(page){
-                    $scope.pagObj.currentPage =page;
-                    getFinsihedJobs();
-                }
-            }
-
-        }
-        $scope.listObj={};
+        };
         initData();
 
         function initData(){
-            getRivers().then(function(){
-                getNewsType('一河一策');
-                getNewsType('一河一档');
-            });
+            getRivers();
         }
 
         function getRivers(){
@@ -262,16 +238,24 @@
         }
 
         function getJobs(){
+            $scope.pageObj.zlgs.busy=true;
             var data={
-                size:pagObj.finishing.numPerPage,
-                page:pagObj.finishing.currentPage-1,
-                sort:pagObj.finishing.sort,
+                size:pageObj.zlgs.numPerPage,
+                page:pageObj.zlgs.currentPage,
+                sort:pageObj.zlgs.sort,
             };
             RestangularService.all('/api/readily-jobs/page').customGET('',data).then(function(result){
                 if(result.status==200){
                     console.log(result);
-                    $scope.listObj.data=result.data.content;
-                    $scope.pagObj.finishing.totalElements=result.data.totalElements;
+                    $scope.listObj.data=$scope.listObj.data.concat(result.data.content);
+                    $scope.pageObj.zlgs.totalElements=result.data.totalElements;
+                    $scope.pageObj.zlgs.totalPages=result.data.totalPages;
+                    $scope.pageObj.zlgs.busy=false;
+                    console.log($scope.pageObj.zlgs.currentPage,$scope.pageObj.zlgs.totalPages);
+                    if($scope.pageObj.zlgs.currentPage>=$scope.pageObj.zlgs.totalPages){
+                        $scope.pageObj.zlgs.busy=true;
+                    }
+                    $scope.pageObj.zlgs.currentPage++;
                 }
             });
         }
@@ -284,5 +268,10 @@
             var url=$rootScope.host+'/api/file-download?filepath='+filePath;
             $window.open(url);
         }
+
+        $scope.loadMoreZlgs = function() {
+            console.log('111');
+            getJobs();
+        };
     }
 })();

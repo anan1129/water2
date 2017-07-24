@@ -2,116 +2,126 @@
     <div ng-include="'app/water/header/header.html'"></div>
     <div class="ui-section row">
         <div class="col-xs-12" style="background:#fff;">
-            <md-tabs md-dynamic-height >
+            <md-tabs md-dynamic-height>
                 <md-tab>
                     <md-tab-label>
-                        <div class="custom-tab" ng-click="getJobs()">未处理</div>
+                        <div class="custom-tab" ng-click="">未处理</div>
                     </md-tab-label>
                     <md-tab-body>
-                        <div class="well" style="height:300px;">
-                            <div infinite-scroll="loadMore()" infinite-scroll-distance="2">
-
-                            </div>
-                        </div>
                         <ul class="list-group" ng-hide="listObj.data.length>0">
-                            <li class="list-group-item text-info text-center" >没有未处理的任务！</li>
+                            <li class="list-group-item text-info text-center">没有未处理的任务！</li>
                         </ul>
-                        <ul class="list-group" ng-repeat="job in listObj.data">
+                        <div infinite-scroll="loadMoreFinishing()" infinite-scroll-disabled="pageObj.finishing.busy">
+                            <ul class="list-group" ng-repeat="job in listObj.data">
 
-                            <li class="list-group-item">
-                                <div class="row">`
-                                    <div class="col-xs-5">
-                                        <span class="text-primary">任务编号</span> {{job.id}}
+                                <li class="list-group-item">
+                                    <div class="row">`
+                                        <div class="col-xs-5">
+                                            <span class="text-primary">任务编号</span> {{job.id}}
+                                        </div>
+                                        <div class="col-xs-5">
+                                            <span class="text-primary">发布时间</span> {{job.issueDate}}
+                                        </div>
                                     </div>
-                                    <div class="col-xs-5">
-                                        <span class="text-primary">发布时间</span> {{job.issueDate}}
-                                    </div>
-                                </div>
 
-                            </li>
-                            <li class="list-group-item">
-                                <div class="row">
-                                    <div class="col-xs-12">
-                                        <span class="text-primary">任务标题</span> {{job.name}}
+                                </li>
+                                <li class="list-group-item">
+                                    <div class="row">
+                                        <div class="col-xs-12">
+                                            <span class="text-primary">任务标题</span> {{job.name}}
+                                        </div>
                                     </div>
-                                </div>
-                            </li>
-                            <li class="list-group-item">
-                                <div class="row">
-                                    <div class="col-xs-12">
-                                        <span class="text-primary">任务内容</span> {{job.content}}
+                                </li>
+                                <li class="list-group-item">
+                                    <div class="row">
+                                        <div class="col-xs-12">
+                                            <span class="text-primary">任务内容</span> {{job.content}}
+                                        </div>
                                     </div>
-                                </div>
-                            </li>
-                            <li class="list-group-item files">
-            <span ng-repeat="file in job.attachments" class="file-item">
-                <img ng-src="{{host}}/api/file-show/path?filepath={{file.filePath}}" alt="" ng-show="file.fileName.indexOf('.jpg')>-1||file.fileName.indexOf('.jpeg')>-1||file.fileName.indexOf('.png')>-1">
-                <img ng-src="assets/images/excel.png" alt="" ng-show="file.fileName.indexOf('.xls')>-1||file.fileName.indexOf('.xlsx')>-1" ng-click="download(file.filePath)">
-                <img ng-src="assets/images/ppt.jpg" alt="" ng-show="file.fileName.indexOf('.ppt')>-1||file.fileName.indexOf('.pptx')>-1" ng-click="download(file.filePath)">
-                <img ng-src="assets/images/word.jpg" alt="" ng-show="file.fileName.indexOf('.doc')>-1||file.fileName.indexOf('.docx')>-1" ng-click="download(file.filePath)">
+                                </li>
+                                <li class="list-group-item files">
+        <span ng-repeat="file in job.attachments" class="file-item">
+            <img ng-src="{{host}}/api/file-show/path?filepath={{file.filePath}}" alt=""
+                 ng-show="file.fileName.indexOf('.jpg')>-1||file.fileName.indexOf('.jpeg')>-1||file.fileName.indexOf('.png')>-1">
+            <img ng-src="assets/images/excel.png" alt=""
+                 ng-show="file.fileName.indexOf('.xls')>-1||file.fileName.indexOf('.xlsx')>-1"
+                 ng-click="download(file.filePath)">
+            <img ng-src="assets/images/ppt.jpg" alt=""
+                 ng-show="file.fileName.indexOf('.ppt')>-1||file.fileName.indexOf('.pptx')>-1"
+                 ng-click="download(file.filePath)">
+            <img ng-src="assets/images/word.jpg" alt=""
+                 ng-show="file.fileName.indexOf('.doc')>-1||file.fileName.indexOf('.docx')>-1"
+                 ng-click="download(file.filePath)">
 
-            </span>
-                            </li>
-                            <li class="list-group-item text-center">
-                                <button class="btn btn-primary " ng-click="jobsExecute(job)">处置任务</button>
-                            </li>
-                        </ul>
+        </span>
+                                </li>
+                                <li class="list-group-item text-center">
+                                    <button class="btn btn-primary " ng-click="jobsExecute(job)">处置任务</button>
+                                </li>
+                            </ul>
+                        </div>
+
                     </md-tab-body>
                 </md-tab>
                 <md-tab>
                     <md-tab-label>
-                        <div class="custom-tab" ng-click="getFinsihedJobs()">已处理</div>
+                        <div class="custom-tab" ng-click="">已处理</div>
                     </md-tab-label>
                     <md-tab-body>
                         <ul class="list-group" ng-hide="listObj.dataed.length>0">
-                            <li class="list-group-item text-info text-center" >没有已处理的任务！</li>
+                            <li class="list-group-item text-info text-center">没有已处理的任务！</li>
                         </ul>
-                        <div style="height:150vw;overflow: auto;">
-                            <div infinite-scroll="loadMore()" infinite-scroll-distance='1'>
-                                <ul class="list-group" ng-repeat="job in listObj.dataed">
-                                    <li class="list-group-item">
-                                        <div class="row">`
-                                            <div class="col-xs-5">
-                                                <span class="text-primary">任务编号</span> {{job.id}}
-                                            </div>
-                                            <div class="col-xs-5">
-                                                <span class="text-primary">发布时间</span> {{job.issueDate}}
-                                            </div>
+                        <div infinite-scroll="loadMoreFinished()" infinite-scroll-disabled="pageObj.finished.busy">
+                            <ul class="list-group" ng-repeat="job in listObj.dataed">
+                                <li class="list-group-item">
+                                    <div class="row">`
+                                        <div class="col-xs-5">
+                                            <span class="text-primary">任务编号</span> {{job.id}}
                                         </div>
+                                        <div class="col-xs-5">
+                                            <span class="text-primary">发布时间</span> {{job.issueDate}}
+                                        </div>
+                                    </div>
 
-                                    </li>
-                                    <li class="list-group-item">
-                                        <div class="row">
-                                            <div class="col-xs-12">
-                                                <span class="text-primary">任务标题</span> {{job.name}}
-                                            </div>
+                                </li>
+                                <li class="list-group-item">
+                                    <div class="row">
+                                        <div class="col-xs-12">
+                                            <span class="text-primary">任务标题</span> {{job.name}}
                                         </div>
-                                    </li>
-                                    <li class="list-group-item">
-                                        <div class="row">
-                                            <div class="col-xs-12">
-                                                <span class="text-primary">任务内容</span> {{job.content}}
-                                            </div>
+                                    </div>
+                                </li>
+                                <li class="list-group-item">
+                                    <div class="row">
+                                        <div class="col-xs-12">
+                                            <span class="text-primary">任务内容</span> {{job.content}}
                                         </div>
-                                    </li>
-                                    <li class="list-group-item files">
+                                    </div>
+                                </li>
+                                <li class="list-group-item files">
                 <span ng-repeat="file in job.attachments" class="file-item">
-                    <img ng-src="{{host}}/api/file-show/path?filepath={{file.filePath}}" alt="" ng-show="file.fileName.indexOf('.jpg')>-1||file.fileName.indexOf('.jpeg')>-1||file.fileName.indexOf('.png')>-1">
-                    <img ng-src="assets/images/excel.png" alt="" ng-show="file.fileName.indexOf('.xls')>-1||file.fileName.indexOf('.xlsx')>-1" ng-click="download(file.filePath)">
-                    <img ng-src="assets/images/ppt.jpg" alt="" ng-show="file.fileName.indexOf('.ppt')>-1||file.fileName.indexOf('.pptx')>-1" ng-click="download(file.filePath)">
-                    <img ng-src="assets/images/word.jpg" alt="" ng-show="file.fileName.indexOf('.doc')>-1||file.fileName.indexOf('.docx')>-1" ng-click="download(file.filePath)">
+                    <img ng-src="{{host}}/api/file-show/path?filepath={{file.filePath}}" alt=""
+                         ng-show="file.fileName.indexOf('.jpg')>-1||file.fileName.indexOf('.jpeg')>-1||file.fileName.indexOf('.png')>-1">
+                    <img ng-src="assets/images/excel.png" alt=""
+                         ng-show="file.fileName.indexOf('.xls')>-1||file.fileName.indexOf('.xlsx')>-1"
+                         ng-click="download(file.filePath)">
+                    <img ng-src="assets/images/ppt.jpg" alt=""
+                         ng-show="file.fileName.indexOf('.ppt')>-1||file.fileName.indexOf('.pptx')>-1"
+                         ng-click="download(file.filePath)">
+                    <img ng-src="assets/images/word.jpg" alt=""
+                         ng-show="file.fileName.indexOf('.doc')>-1||file.fileName.indexOf('.docx')>-1"
+                         ng-click="download(file.filePath)">
 
                 </span>
-                                    </li>
-                                    <li class="list-group-item">
-                                        <div class="row">
-                                            <span class="col-xs-6 text-success">{{job.status}}</span>
-                                            <span class="col-xs-6 text-success">{{job.receiveDate}}</span>
-                                        </div>
+                                </li>
+                                <li class="list-group-item">
+                                    <div class="row">
+                                        <span class="col-xs-6 text-success">{{job.status}}</span>
+                                        <span class="col-xs-6 text-success">{{job.receiveDate}}</span>
+                                    </div>
 
-                                    </li>
-                                </ul>
-                            </div>
+                                </li>
+                            </ul>
                         </div>
                     </md-tab-body>
                 </md-tab>

@@ -21,72 +21,71 @@
         };
         $scope.jobsExecute=jobsExecute;
 
-        var pagObj=$scope.pagObj={
+        var pageObj=$scope.pageObj={
             finishing:{
-                numPerPageOpt:[5,10,15],
-                numPerPage:10,
+                numPerPage:5,
                 sort:'',
-                onNumPerPageChange:function(){
-                    $scope.pagObj.select(1);
-                    return $scope.pagObj.currentPage = 1;
-                },
-                currentPage:1,
+                currentPage:0,
                 totalElements:'',
-                select:function(page){
-                    $scope.pagObj.currentPage =page;
-                    getJobs();
-                }
+                totalPages:0,
+                busy:false
             },
             finished:{
-                numPerPageOpt:[5,10,15],
-                numPerPage:10,
+                numPerPage:5,
                 sort:'',
-                onNumPerPageChange:function(){
-                    $scope.pagObj.select(1);
-                    return $scope.pagObj.currentPage = 1;
-                },
-                currentPage:1,
+                currentPage:0,
                 totalElements:'',
-                select:function(page){
-                    $scope.pagObj.currentPage =page;
-                    getFinsihedJobs();
-                }
+                totalPages:0,
+                busy:false,
             }
-
         }
 
         initData();
 
         function initData(){
+
            getJobs();
         }
 
         function getJobs(){
+            $scope.pageObj.finishing.busy=true;
+            $scope.pageObj.currentType='finishing';
             var data={
-                size:pagObj.finishing.numPerPage,
-                page:pagObj.finishing.currentPage-1,
-                sort:pagObj.finishing.sort,
+                size:pageObj.finishing.numPerPage,
+                page:pageObj.finishing.currentPage,
             };
             RestangularService.all('api/my-jobs?isOver=false').customGET('',data).then(function(result){
                 if(result.status==200){
-                    console.log(result);
-                    $scope.listObj.data=result.data.content;
-                    $scope.pagObj.finishing.totalElements=result.data.totalElements;
+                    $scope.listObj.data=$scope.listObj.data.concat(result.data.content);
+                    $scope.pageObj.finishing.totalElements=result.data.totalElements;
+                    $scope.pageObj.finishing.totalPages=result.data.totalPages;
+                    $scope.pageObj.finishing.busy=false;
+                    if($scope.pageObj.finishing.currentPage>=$scope.pageObj.finishing.totalPages){
+                        $scope.pageObj.finishing.busy=true;
+                    }
+                    $scope.pageObj.finishing.currentPage++;
                 }
             });
         }
 
         function getFinsihedJobs(){
+            $scope.pageObj.finished.busy=true;
+            $scope.pageObj.currentType='finished';
             var data={
-                size:pagObj.finished.numPerPage,
-                page:pagObj.finished.currentPage-1,
-                sort:pagObj.finished.sort,
+                size:pageObj.finished.numPerPage,
+                page:pageObj.finished.currentPage,
+                sort:pageObj.finished.sort,
             };
             RestangularService.all('api/my-jobs?isOver=true').customGET('',data).then(function(result){
                 if(result.status==200){
-                    console.log(result);
-                    $scope.listObj.dataed=result.data.content;
-                    $scope.pagObj.finished.totalElements=result.data.totalElements;
+                    $scope.listObj.dataed= $scope.listObj.dataed.concat(result.data.content);
+                    $scope.pageObj.finished.totalElements=result.data.totalElements;
+                    $scope.pageObj.finished.totalPages=result.data.totalPages;
+                    $scope.pageObj.finished.busy=false;
+                    if($scope.pageObj.finished.currentPage>=$scope.pageObj.finished.totalPages){
+                        $scope.pageObj.finished.busy=true;
+                    }
+                    $scope.pageObj.finished.currentPage++;
                 }
             });
         }
@@ -96,7 +95,7 @@
             if(name.indexOf('-')>-1){
                 name=name.slice(1)+',desc';
             }
-            $scope.pagObj.finishing.sort=name;
+            $scope.pageObj.finishing.sort=name;
             console.log(name);
             getJobs();
         }
@@ -111,9 +110,13 @@
             $window.open(url);
         }
 
-        $scope.loadMore = function() {
-            // getJobs
-            console.log(111);
+        $scope.loadMoreFinishing = function() {
+            getJobs();
+
+        };
+        $scope.loadMoreFinished = function() {
+            getFinsihedJobs();
+
         };
     }
 })();

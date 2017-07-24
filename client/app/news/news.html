@@ -3,6 +3,7 @@
         color: #3D4051;
         line-height: 1.65em;
     }
+
     .body-water .customizer-toggle {
         display: none;
     }
@@ -18,83 +19,86 @@
 
     .water {
     }
-    .body-water .water .container  .row>div:nth-child(2){
-        text-align-last:justify;/* ie9*/
-        text-align:justify;
+
+    .body-water .water .container .row > div:nth-child(2) {
+        text-align-last: justify; /* ie9*/
+        text-align: justify;
         /*text-justify:inter-ideograph;*/
     }
+
     .water h5 {
         font-weight: bold;
         margin-top: 3px;
     }
 
     .water .content {
-        text-indent:2em;
+        text-indent: 2em;
     }
-    .md-tab{
-        padding:0;
+
+    .md-tab {
+        padding: 0;
     }
-    .list-group-item>div.row{
-        position:relative;
+
+    .list-group-item > div.row {
+        position: relative;
 
     }
-    /*.list-group-item>div.row .date{*/
-        /*position:absolute;*/
-        /*bottom:0;*/
-        /*right:10px;*/
+    /*md-tabs{*/
+        /*height:200vw;*/
     /*}*/
-
-
 
 </style>
 <div ng-controller="NewsCtrl" class="water">
     <div class="row ui-section news">
         <div class="col-md-12">
-        <md-tabs md-dynamic-height >
-            <md-tab ng-repeat="type in listObj.types">
-                <md-tab-label>
-                    <div class="custom-tab" ng-click="getData(type.name,$index)">{{type.name}}</div>
-                </md-tab-label>
-                <md-tab-body>
-                    <ul class="list-group">
-                        <li class="list-group-item" ng-repeat="body in type.body.content"  ng-click="dataInfo(body,$index)">
-                            <div class="row">
-                                <div class="col-xs-5">
-                                    <img ng-src="{{body.imageUrl}}" class="news-img" width="100%" alt="">
-                                </div>
-                                <div class="col-xs-7">
-                                    <h5 class="news-title">{{body.title}}</h5>
+            <md-tabs md-dynamic-height>
+                <md-tab ng-repeat="type in listObj.types">
+                    <md-tab-label>
+                        <div class="custom-tab" ng-click="getData(type.name,$index)">{{type.name}}</div>
+                    </md-tab-label>
+                    <md-tab-body >
+                        <div >
+                            <ul class="list-group">
+                                <li class="list-group-item" ng-repeat="body in type.content"
+                                    ng-click="dataInfo(body,$index)">
+                                    <div class="row">
+                                        <div class="col-xs-5">
+                                            <img ng-src="{{body.imageUrl}}" class="news-img" width="100%" alt="">
+                                        </div>
+                                        <div class="col-xs-7">
+                                            <h5 class="news-title">{{body.title}}</h5>
 
-                                </div>
-                                <!--<div class="news-date text-right">{{body.createdDate|editDate}}</div>-->
-                            </div>
-                        </li>
-                    </ul>
-                </md-tab-body>
-            </md-tab>
-            <!--<md-tab >-->
+                                        </div>
+                                        <!--<div class="news-date text-right">{{body.createdDate|editDate}}</div>-->
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </md-tab-body>
+                </md-tab>
+                <!--<md-tab >-->
                 <!--<md-tab-label>-->
-                    <!--<div class="custom-tab" ng-click="getData(listObj.types[0].name,$index)">专报</div>-->
+                <!--<div class="custom-tab" ng-click="getData(listObj.types[0].name,$index)">专报</div>-->
                 <!--</md-tab-label>-->
                 <!--<md-tab-body>-->
-                    <!--<ul class="list-group">-->
-                        <!--<li class="list-group-item" ng-repeat="body in listObj.types[0].body.content"  ng-click="dataInfo(body,$index)">-->
-                            <!--<div class="row">-->
-                                <!--<div class="col-xs-4" ng-show="body.imageUrl">-->
-                                    <!--<img ng-src="{{body.imageUrl}}" width="100%" alt="">-->
-                                <!--</div>-->
-                                <!--<div class="col-xs-8">-->
-                                    <!--<h5>{{body.title}}</h5>-->
-                                    <!--<p>-->
-                                        <!--<span class="pull-right">{{body.createdDate|editDate}}</span>-->
-                                    <!--</p>-->
-                                <!--</div>-->
-                            <!--</div>-->
-                        <!--</li>-->
-                    <!--</ul>-->
+                <!--<ul class="list-group">-->
+                <!--<li class="list-group-item" ng-repeat="body in listObj.types[0].body.content"  ng-click="dataInfo(body,$index)">-->
+                <!--<div class="row">-->
+                <!--<div class="col-xs-4" ng-show="body.imageUrl">-->
+                <!--<img ng-src="{{body.imageUrl}}" width="100%" alt="">-->
+                <!--</div>-->
+                <!--<div class="col-xs-8">-->
+                <!--<h5>{{body.title}}</h5>-->
+                <!--<p>-->
+                <!--<span class="pull-right">{{body.createdDate|editDate}}</span>-->
+                <!--</p>-->
+                <!--</div>-->
+                <!--</div>-->
+                <!--</li>-->
+                <!--</ul>-->
                 <!--</md-tab-body>-->
-            <!--</md-tab>-->
-        </md-tabs>
+                <!--</md-tab>-->
+            </md-tabs>
         </div>
     </div>
 </div>

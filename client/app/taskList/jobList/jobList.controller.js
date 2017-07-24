@@ -22,7 +22,7 @@
         var pagObj=$scope.pagObj={
             numPerPageOpt:[5,10,15],
             numPerPage:10,
-            sort:'',
+            sort:'issueDate,desc',
             onNumPerPageChange:function(){
                 $scope.pagObj.select(1);
                 return $scope.pagObj.currentPage = 1;
