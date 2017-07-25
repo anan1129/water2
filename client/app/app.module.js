@@ -50,11 +50,12 @@
                 RestangularConfigurer.setFullResponse(true).setBaseUrl('http://106.15.48.81:8080');
             });
         }])
-        .run(['$rootScope','$window','$state','$location',
-            function ($rootScope,$window,$state,$location) {
+        .run(['$rootScope','$window','$state','$location','RestangularService',
+            function ($rootScope,$window,$state,$location,RestangularService) {
                 $rootScope.isPC=isPCFun();
                 $rootScope.host='http://106.15.48.81:8080';
                 $rootScope.account={};
+
 
                 function isPCFun(){
                     var userAgentInfo = navigator.userAgent;
@@ -66,6 +67,8 @@
                     return flag;
                 }
                 $rootScope.$on('$stateChangeSuccess',function (event, toState, toParams, fromState, fromParams, options){
+                    getAccount();
+
                     if($rootScope.isPC){
                         if(toState.name!='login'){
                             if(!$window.sessionStorage.id_token){
@@ -73,13 +76,19 @@
                             }
                         }
                     }
-                    // console.log(fromState.name);
-                    // console.log(toState.name);
-                    // if(toState.name!='login'&&toState.name!='home'){
-                    //     if(!$window.sessionStorage.id_token){
-                    //         $location.path('/login');
-                    //     }
-                    // }
+
+                    function getAccount(){
+                        RestangularService.all('api/my-group').customGET().then(function(res){
+                            if(res.status==200){
+                                $rootScope.account=res.data;
+                            }
+                        },function(res){
+                            console.log(res);
+                            if(res.status==404){
+                                $rootScope.account.guest=true;
+                            }
+                        })
+                    }
                 })
             }])
     ;

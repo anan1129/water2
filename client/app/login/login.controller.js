@@ -43,12 +43,7 @@
                             username:$window.sessionStorage.username,
                             id_token:$window.sessionStorage.id_token,
                         };
-                        if(isPC){
-                            // $state.go('dynamic-info');
-                            $state.go('dashboard');
-                        }else{
-                            $state.go('home');
-                        }
+
                 }
             },function(result){
                 $scope.err=true;
@@ -59,6 +54,24 @@
                         console.log(res);
                     }
                 })
+            }).then(function(){
+                RestangularService.all('api/my-group').customGET().then(function(res){
+                    if(res.status==200){
+                        $rootScope.account=res.data;
+                    }
+                },function(res){
+                    console.log(res);
+                    if(res.status==404){
+                        $rootScope.account.guest=true;
+                    }
+                })
+            }).then(function(){
+                if(isPC){
+                    // $state.go('dynamic-info');
+                    $state.go('dashboard');
+                }else{
+                    $state.go('home');
+                }
             });
         }
 
