@@ -151,42 +151,67 @@
                            //     .ok('ok')
                            //     .cancel('cancel');
                             $mdDialog.show({
-                                controller: ['$scope',function(){
+                                controller: ['$scope','$mdDialog','RestangularService',function($scope,$mdDialog,RestangularService){
+                                    var host='http://106.15.48.81:8080';
+                                    $scope.cancel=function(){
+                                        console.log($mdDialog);
+                                        $mdDialog.cancel();
+                                    }
+                                    $scope.save=function(){
+                                        if(angular.element('#img')[0].files[0]){
+                                            var f=new FormData();
+                                            var data=angular.element('#img')[0].files[0];
+                                            f.append('file',data);
+                                            RestangularService.all('api/files').withHttpConfig({transformRequest: angular.identity}).customPOST(f,undefined,undefined,{'Content-Type':undefined}).then(function(res){
+                                                if(res.status==201){
+                                                    console.log(res.data);
+                                                    var  imgSrc=host+'/api/file-show/path?filepath='+res.data.filePath;
+                                                    $mdDialog.hide(imgSrc);
+                                                }
+                                            })
+                                        }else{
+                                            $mdDialog.hide('aaa');
+                                        }
+                                    }
+
 
                                 }],
                                 templateUrl: 'app/addInfo/insertImgDialog.html',
                                 parent: angular.element(document.body),
                                 // targetEvent: ev,
                                 clickOutsideToClose:true
-                            }).then(function(r){
-                                console.log(r);
+                            }).then(function(src){
+
+                                var imageLink;
+                                imageLink=src;
+                                // imageLink = $window.prompt('http://', 'http://');
+                                if(imageLink && imageLink !== '' && imageLink !== 'http://'){
+                                    /* istanbul ignore next: don't know how to test this... since it needs a dialogPrompt */
+                                    // block javascript here
+                                    if (!blockJavascript(imageLink)) {
+                                        if (taSelection.getSelectionElement().tagName && taSelection.getSelectionElement().tagName.toLowerCase() === 'a') {
+                                            // due to differences in implementation between FireFox and Chrome, we must move the
+                                            // insertion point past the <a> element, otherwise FireFox inserts inside the <a>
+                                            // With this change, both FireFox and Chrome behave the same way!
+                                            taSelection.setSelectionAfterElement(taSelection.getSelectionElement());
+                                        }
+                                        // In the past we used the simple statement:
+                                        //return this.$editor().wrapSelection('insertImage', imageLink, true);
+                                        //
+                                        // However on Firefox only, when the content is empty this is a problem
+                                        // See Issue #1201
+                                        // Investigation reveals that Firefox only inserts a <p> only!!!!
+                                        // So now we use insertHTML here and all is fine.
+                                        // NOTE: this is what 'insertImage' is supposed to do anyway!
+                                        var embed = '<img src="' + imageLink + '">';
+                                        return me.$editor().wrapSelection('insertHTML', embed, true);
+                                    }
+                                }
                             },function(){
                                 console.log(22);
                             });
-                            var imageLink;
-                            // imageLink = $window.prompt('http://', 'http://');
-                            if(imageLink && imageLink !== '' && imageLink !== 'http://'){
-                                /* istanbul ignore next: don't know how to test this... since it needs a dialogPrompt */
-                                // block javascript here
-                                if (!blockJavascript(imageLink)) {
-                                    if (taSelection.getSelectionElement().tagName && taSelection.getSelectionElement().tagName.toLowerCase() === 'a') {
-                                        // due to differences in implementation between FireFox and Chrome, we must move the
-                                        // insertion point past the <a> element, otherwise FireFox inserts inside the <a>
-                                        // With this change, both FireFox and Chrome behave the same way!
-                                        taSelection.setSelectionAfterElement(taSelection.getSelectionElement());
-                                    }
-                                    // In the past we used the simple statement:
-                                    //return this.$editor().wrapSelection('insertImage', imageLink, true);
-                                    //
-                                    // However on Firefox only, when the content is empty this is a problem
-                                    // See Issue #1201
-                                    // Investigation reveals that Firefox only inserts a <p> only!!!!
-                                    // So now we use insertHTML here and all is fine.
-                                    // NOTE: this is what 'insertImage' is supposed to do anyway!
-                                    var embed = '<img src="' + imageLink + '">';
-                                    return this.$editor().wrapSelection('insertHTML', embed, true);
-                                }
-                            }
+                            var  me=this;
+
                         },
                         onElementSelect: {
                             element: 'img',
@@ -205,7 +230,8 @@
 
                     // add the button to the default toolbar definition
                     // taOptions.toolbar[1].push('backgroundColor', 'fontColor', 'fontName', 'fontSize');
-                    taOptions.toolbar[3].push('fontSize','lineHeight');
+                    taOptions.toolbar[3]=['fontSize','lineHeight','selectImage'];
+                    // taOptions.toolbar[3].push('fontSize','lineHeight','selectImage');
                     return taOptions;
                 }]);
         }])

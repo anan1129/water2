@@ -10,10 +10,30 @@
 
     function AddInfoCtrl($scope, $filter, FileUploader, RestangularService,$mdToast,$sce,$parse) {
         var users = [];
+
         $scope.infoTypes = ['新闻动态', '一河一档', '一河一策','河长日志'];
         $scope.title = 'add group';
         $scope.fileOrigin="http://106.15.48.81:8080/api/file-show/path?filepath=";
         $scope.filePath;
+        $scope.handleChange=handleChange;
+
+        var host='http://106.15.48.81:8080';
+
+        function handleChange(){
+            var f=new FormData();
+            var val=angular.element('#label-info-imageUrl')[0].files[0];
+            f.append('file',val);
+            loadFile(f);
+        }
+
+        function loadFile(f) {
+            RestangularService.all('api/files').withHttpConfig({transformRequest: angular.identity}).customPOST(f,undefined,undefined,{'Content-Type':undefined}).then(function(res){
+                if(res.status==201){
+                    console.log(res.data);
+                    $scope.formObj.imageUrl=host+'/api/file-show/path?filepath='+res.data.filePath;
+                }
+            })
+        }
 
         $scope.aaa=function(h){
             h=$sce.trustAsHtml(h);
