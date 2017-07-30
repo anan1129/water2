@@ -29,7 +29,7 @@
         }
 
         function getJobs(){
-            RestangularService.all('api/jobs-status/page?status=已下发').customGET().then(function(res){
+            RestangularService.all('api/group-jobs-status/page?status=已下发').customGET().then(function(res){
                 if(res.status==200&&res.data.content.length>0&&!$rootScope.openDialog){
                     // $state.go('fore-task-list');
                     $mdDialog.show({

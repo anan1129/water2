@@ -51,7 +51,7 @@
                 page:pagObj.currentPage-1,
                 sort:pagObj.sort,
             };
-            RestangularService.all('api/jobs-status/page?status=已下发').customGET('',data).then(function(result){
+            RestangularService.all('api/group-jobs-status/page?status=已下发').customGET('',data).then(function(result){
                 if(result.status==200){
                     console.log(result);
                     $scope.listObj.data=result.data.content;
