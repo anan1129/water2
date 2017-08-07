@@ -32,6 +32,63 @@
     width:100%;
     padding:10px;
 }
+
+.m-login{
+    top: 0;
+    left: 0;
+    right:0;
+    bottom: 0;
+    position: absolute;
+    .bg{
+        position: absolute;
+        top:0;
+        bottom:0;
+        right:0;
+        left:0;
+        -webkit-filter: blur(10px); /* Chrome, Opera */
+        -moz-filter: blur(10px);
+        -ms-filter: blur(10px);
+        filter: blur(2px);
+    }
+    .card{
+        position: absolute;
+        top:50%;
+        left:50px;
+        right:50px;
+        -webkit-transform: translateY(-50%);
+        -moz-transform: translateY(-50%);
+        -ms-transform: translateY(-50%);
+        -o-transform: translateY(-50%);
+        transform: translateY(-50%);
+        padding:10px;
+    }
+    a.title{
+        color:#fff;
+    }
+    .ui-input-group > input, .ui-input-group > textarea{
+        background:none;
+        border-bottom:1px solid #fff;
+    }
+    .ui-input-group > input:focus ~ label, .ui-input-group > textarea:focus ~ label,.ui-input-group > input:valid ~ label, .ui-input-group > textarea:valid ~ label,.ui-input-group > label{
+        color:#fff;
+    }
+    .ui-input-group .form-control:focus{
+        border-color:#fff;
+    }
+    .ui-input-group .input-bar:before, .ui-input-group .input-bar:after{
+        background:#fff;
+    }
+    input.form-control{
+        color:#fff;
+    }
+    button.btn{
+        width:100%;
+        display: block;
+        background: none;
+        color:#fff;
+    }
+}
+
 @media (min-width:768px){
     .login{
         margin-left:-110px;

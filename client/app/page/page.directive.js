@@ -60,6 +60,7 @@
                     case '/login':
                     case '/fore-task-list':
                     case '/fore-task-finishing':
+                    case '/m-login':
                     case '/':
                         return $element.addClass('body-wide body-water');
                 }

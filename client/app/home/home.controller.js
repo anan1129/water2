@@ -85,7 +85,7 @@
         }
 
         function login(){
-            $state.go('login');
+            $state.go('m-login');
         }
 
         function logout(){

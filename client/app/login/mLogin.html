@@ -1,0 +1,71 @@
+
+<div ng-controller="MLoginCtrl" class="m-login" ng-cloak>
+    <img class="bg" src="../../assets/images/login-bg.jpg" alt="">
+    <div class="wrapper">
+        <div class="main-body">
+            <div class="body-inner">
+                <div class="card">
+                    <div class="card-content">
+
+                        <section class="logo text-center">
+                            <h4><a href="#!/home"  class="title">欢迎登陆</a></h4>
+                        </section>
+
+                        <form class="form-horizontal" ng-submit="login()">
+                            <fieldset>
+                                <div class="form-group">
+                                    <div class="ui-input-group">
+                                        <input type="text" required class="form-control" ng-model="user.username">
+                                        <span class="input-bar"></span>
+                                        <label>用户名</label>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="ui-input-group">
+                                        <input type="password" required class="form-control" ng-model="user.password">
+                                        <!--<span class="input-bar"></span>-->
+                                        <label>密码</label>
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <!--<div layout="row">-->
+                                <!--<md-input-container flex>-->
+                                    <!--<label for="username">用户名</label>-->
+                                    <!--<input type="text" id="username" required class="form-control" ng-model="user.username">-->
+                                <!--</md-input-container>-->
+                            <!--</div>-->
+                             <!--<div layout="row">-->
+                                 <!--<md-input-container flex>-->
+                                     <!--<md-icon  class="name"><i class="zmdi zmdi-user"></i></md-icon>-->
+                                     <!--<label for="password">密码</label>-->
+                                     <!--<input type="password" id="password" required class="form-control" ng-model="user.password">-->
+                                 <!--</md-input-container>-->
+                             <!--</div>-->
+
+                            <div ng-show="err" class="text-danger pull-left">用户名或密码不正确</div>
+                            <div class="row" style="margin-bottom:10px;">
+                                <div class="">
+                                    <button class="btn btn-default">登陆</button>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="">
+                                    <button class="btn btn-default" ng-click="cancel()">取消</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!--<div class="additional-info">-->
+                    <!--<a href="#!/page/signup">Register</a>-->
+                    <!--<span class="divider-h"></span>-->
+                    <!--<a href="#!/page/forgot-password">Forgot your password?</a>-->
+                <!--</div>-->
+
+            </div>
+        </div>
+
+    </div>
+</div>
+

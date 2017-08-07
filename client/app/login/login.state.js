@@ -11,5 +11,9 @@
                     url:'/login',
                     templateUrl:'app/login/login.html'
                 })
+                .state('m-login',{
+                    url:'/m-login',
+                    templateUrl:'app/login/mLogin.html'
+                })
         }])
 })();
