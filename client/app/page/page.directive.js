@@ -61,10 +61,13 @@
                     case '/fore-task-list':
                     case '/fore-task-finishing':
                     case '/m-login':
+                    case '/fore-task-list-manage':
+                    case '/fore-job-list-manage':
+                    case '/fore-add-task-manage':
                     case '/':
                         return $element.addClass('body-wide body-water');
                 }
-                if(path.indexOf('water/')>0||path.indexOf('new-detail')>0||path.indexOf('jobs-execute')>0){
+                if(path.indexOf('water/')>0||path.indexOf('new-detail')>0||path.indexOf('jobs-execute')>0||path.indexOf('fore-edit-task-manage')>0||path.indexOf('fore-task-details-manage')>0){
                     return $element.addClass('body-wide body-water');
                 }
             };

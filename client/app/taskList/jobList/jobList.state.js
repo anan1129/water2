@@ -11,5 +11,9 @@
                     url:'/job-list',
                     templateUrl:'app/taskList/jobList/jobList.html'
                 })
+                .state('fore-job-list-manage',{
+                    url:'/fore-job-list-manage',
+                    templateUrl:'app/fore/foreJobListManage/foreJobListManage.html'
+                })
         }])
 })();

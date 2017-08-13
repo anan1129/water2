@@ -99,7 +99,12 @@
                     );
                     // initData();
                     uploader.clearQueue();
-                    $state.go('job-list');
+                    if($scope.isdPC){
+                        $state.go('job-list');
+                    }else{
+                        $state.go('fore-task-list-manage');
+                    }
+
 
                 }else{
                     $mdToast.show(

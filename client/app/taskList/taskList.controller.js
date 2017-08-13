@@ -5,10 +5,10 @@
     'use strict';
 
     angular.module('app.taskList.controller', [])
-        .controller('TaskListCtrl', ['$scope', '$state', '$mdToast','RestangularService','$filter', TaskListCtrl])
+        .controller('TaskListCtrl', ['$scope', '$state', '$mdToast','RestangularService','$filter','$rootScope', TaskListCtrl])
     ;
 
-    function TaskListCtrl($scope, $state, $mdToast,RestangularService,$filter) {
+    function TaskListCtrl($scope, $state, $mdToast,RestangularService,$filter,$rootScope) {
         var toast;
         $scope.toTaskDetails = toTaskDetails;
         $scope.editTask = editTask;
@@ -21,7 +21,7 @@
 
         var pagObj=$scope.pagObj={
             numPerPageOpt:[5,10,15],
-            numPerPage:10,
+            numPerPage:$scope.isPC?10:5,
             sort:'',
             onNumPerPageChange:function(){
                 $scope.pagObj.select(1);
@@ -103,7 +103,12 @@
 
         function edit(list){
             console.log(list);
-            $state.go('edit-task',list);
+            if($rootScope.isPC){
+                $state.go('edit-task',list);
+            }else{
+                $state.go('fore-edit-task-manage',list);
+            }
+
         }
     }
 })();

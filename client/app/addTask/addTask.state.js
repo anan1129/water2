@@ -11,5 +11,9 @@
                     url:'/add-task',
                     templateUrl:'app/addTask/addTask.html'
                 })
+                .state('fore-add-task-manage',{
+                    url:'/fore-add-task-manage',
+                    templateUrl:'app/fore/foreAddTaskManage/foreAddTaskManage.html'
+                })
         }])
 })();

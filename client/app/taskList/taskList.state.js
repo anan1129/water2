@@ -11,5 +11,9 @@
                     url:'/task-list',
                     templateUrl:'app/taskList/taskList.html'
                 })
+                .state('fore-task-list-manage',{
+                    url:'/fore-task-list-manage',
+                    templateUrl:'app/fore/foreTaskListManage/foreTaskListManage.html'
+                })
         }])
 })();

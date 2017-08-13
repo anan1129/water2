@@ -11,5 +11,9 @@
                     url:'/edit-task/:id/:riverName/;type/:title',
                     templateUrl:'app/taskList/editTask/editTask.html'
                 })
+                .state('fore-edit-task-manage',{
+                    url:'/fore-edit-task-manage/:id/:riverName/;type/:title',
+                    templateUrl:'app/fore/foreEditTaskManage/foreEditTaskManage.html'
+                })
         }])
 })();

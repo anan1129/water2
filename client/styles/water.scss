@@ -34,21 +34,24 @@
 }
 
 .m-login{
-    top: 0;
-    left: 0;
-    right:0;
-    bottom: 0;
-    position: absolute;
+    //top: 0;
+    //left: 0;
+    //right:0;
+    //bottom: 0;
+    //position: absolute;
+    //background:url(../assets/images/login-bg2.jpg) no-repeat 0 0;
+    //background-size:auto 100%;
     .bg{
         position: absolute;
         top:0;
         bottom:0;
-        right:0;
+        right:-10px;
         left:0;
-        -webkit-filter: blur(10px); /* Chrome, Opera */
-        -moz-filter: blur(10px);
-        -ms-filter: blur(10px);
+        -webkit-filter: blur(2px); /* Chrome, Opera */
+        -moz-filter: blur(2px);
+        -ms-filter: blur(2px);
         filter: blur(2px);
+        //height:100%;
     }
     .card{
         position: absolute;
@@ -147,6 +150,14 @@
             button.btn{
                 background:none;
                 border:none;
+                -webkit-transform: translateY(2px);
+                -moz-transform: translateY(2px);
+                -ms-transform: translateY(2px);
+                -o-transform: translateY(2px);
+                transform: translateY(2px);
+                &:active{
+                    border:1px solid #fff;
+                }
                 i{
                     color:#fff;
                     font-size:16px;
@@ -158,7 +169,6 @@
                 min-width:auto;
             }
         }
-
         button.btn{
             background:none;
             border:none;
@@ -166,6 +176,47 @@
                 color:#fff;
                 font-size:16px;
                 line-height:28px;
+            }
+        }
+        .dropdown-menu{
+            background:none;
+            border:none;
+            -webkit-box-shadow: none;
+            -moz-box-shadow: none    ;
+            box-shadow: none    ;
+            margin-top:7px;
+            &::before{
+                content:'';
+                width: 0;
+                height: 0;
+                border-top: 20px solid #fff;
+                border-left: 20px solid transparent;
+                -webkit-transform: rotate(-45deg);
+                -moz-transform: rotate(-45deg);
+                -ms-transform: rotate(-45deg);
+                -o-transform: rotate(-45deg);
+                transform: rotate(-45deg);
+                position:absolute;
+                right:10px;
+                top:0;
+                z-index: -1;
+            }
+            li:first-child{
+                border-radius:5px 5px 0 0;
+            }
+            li:last-child{
+                border-radius:0 0 5px 5px ;
+                border-bottom:none;
+            }
+            li{
+                background:#fff;
+                border-bottom:1px solid #ccc;
+                &:hover{
+                }
+                a{
+                    color:#57c3e9;
+                    padding:6px 30px;
+                }
             }
         }
     }

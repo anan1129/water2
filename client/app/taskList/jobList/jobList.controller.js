@@ -21,7 +21,7 @@
 
         var pagObj=$scope.pagObj={
             numPerPageOpt:[5,10,15],
-            numPerPage:10,
+            numPerPage:$scope.isPC?10:5,
             sort:'issueDate,desc',
             onNumPerPageChange:function(){
                 $scope.pagObj.select(1);
@@ -95,7 +95,12 @@
         }
 
         function toTaskDetails(obj) {
-            $state.go('task-details', obj);
+            if($scope.isPC){
+                $state.go('task-details', obj);
+            }else{
+                $state.go('fore-task-details-manage', obj);
+            }
+
         }
         function editTask(obj){
             $state.go('edit-task', obj);

@@ -105,7 +105,12 @@
             RestangularService.all('api/jobs-issued').customPOST(data).then(function(result){
                 if(result.status==201){
                     console.log(result.data);
-                    $state.go('task-list');
+                    if($scope.isPC){
+                        $state.go('task-list');
+                    }else{
+                        $state.go('fore-task-list-manage');
+                    }
+
                 }
             })
         }
