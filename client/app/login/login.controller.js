@@ -26,6 +26,13 @@
         console.log(isPC);
 
         function login(){
+            $window.sessionStorage.removeItem('id_token');
+            $window.sessionStorage.removeItem('username');
+            $rootScope.username='';
+            $rootScope.user={
+                username:'',
+                id_token:'',
+            };
             RestangularService.all('api/authenticate').customPOST($scope.user).then(function(result){
                 if(result.status==200){
                     // $window.localStorage.id_token=result.data.id_token;
@@ -44,18 +51,21 @@
                         username:$window.sessionStorage.username,
                         id_token:$window.sessionStorage.id_token,
                     };
-
+                    getAccount();
                 }
             },function(result){
                 $scope.err=true;
                 $scope.success=false;
-            }).then(function(){
+            });
+        }
+
+        function getAccount(){
+
                 RestangularService.all('api/account').customGET().then(function(res){
                     if(res.status==200){
                         console.log(res);
                     }
-                })
-            }).then(function(){
+                }).then(function(){
                 RestangularService.all('api/my-group').customGET().then(function(res){
                     if(res.status==200){
                         $rootScope.account=res.data;
@@ -73,7 +83,7 @@
                 }else{
                     $state.go('home');
                 }
-            });
+            })
         }
 
         function cancel(){

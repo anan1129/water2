@@ -10,6 +10,7 @@
 
     function EditTaskCtrl($scope, $stateParams, $mdToast,RestangularService,$state,FileUploader) {
         var stateParams=$scope.stateParams=$stateParams;
+        console.log(stateParams);
         $scope.getSubGroups=getSubGroups;
         $scope.save=save;
         $scope.formObj={
@@ -159,7 +160,6 @@
         // uploader.onProgressAll = function(progress) {
         //     console.info('onProgressAll', progress);
         // };
-        console.log(uploader);
         uploader.onSuccessItem = function(fileItem, response, status, headers) {
 
             console.log( response);

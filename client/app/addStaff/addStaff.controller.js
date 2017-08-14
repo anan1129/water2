@@ -141,34 +141,38 @@
 
 
         $scope.save=function(){
-            var data=$scope.formObj;
+            var data=angular.copy($scope.formObj);
             var groupObj=angular.fromJson($scope.pidArr[$scope.pidArr.length-1]);
             if(groupObj.id) data.groupId=groupObj.id;
             if(groupObj.name) data.groupName=groupObj.name;
+            delete data.password;
             console.log(data);
             if(stateParams.login){
                 RestangularService.all('api/users').customPUT(data).then(function(result){
                     console.log(result);
-                    if(result.status==200){
-                        $mdToast.show(
-                            $mdToast.simple()
-                                .content('修改成功！')
-                                .position('top right')
-                                .hideDelay(2000)
-                        );
-                        $state.go('user-list');
-                        // initData();
-                    }else{
-                        $mdToast.show(
-                            $mdToast.simple()
-                                .content('修改失败！')
-                                .position('top right')
-                                .hideDelay(2000)
-                        );
-                    }
+                }).then(function(){
+                    RestangularService.all('api/users-change_password/'+$scope.formObj.login).withHttpConfig({transformRequest: angular.identity}).customPOST($scope.formObj.password,undefined,undefined,{'Content-Type':'text/plain'}).then(function(result){
+                        if(result.status==200){
+                            $mdToast.show(
+                                $mdToast.simple()
+                                    .content('修改成功！')
+                                    .position('top right')
+                                    .hideDelay(2000)
+                            );
+                            $state.go('user-list');
+                            // initData();
+                        }else{
+                            $mdToast.show(
+                                $mdToast.simple()
+                                    .content('修改失败！')
+                                    .position('top right')
+                                    .hideDelay(2000)
+                            );
+                        }
+                    })
                 })
             }else{
-                RestangularService.all('api/register').customPOST(data).then(function(result){
+                RestangularService.all('api/register').customPOST($scope.formObj.password).then(function(result){
                     console.log(result);
                     if(result.status==201){
                         $mdToast.show(
