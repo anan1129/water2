@@ -23,7 +23,7 @@
         var pagObj=$scope.pagObj={
             numPerPageOpt:[5,10,15],
             numPerPage:15,
-            sort:'',
+            sort:'createdDate,desc',
             onNumPerPageChange:function(){
                 $scope.pagObj.select(1);
                 return $scope.pagObj.currentPage = 1;

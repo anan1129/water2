@@ -93,7 +93,7 @@
     <!--</div>-->
     <md-list>
         <md-list-item>
-            <p class="col-xs-6">任务标题</p>
+            <p class="col-xs-6">任务内容</p>
             <p class="col-xs-4" >处理进度</p>
             <p class="col-xs-2" >操作</p>
         </md-list-item>
@@ -102,7 +102,7 @@
     <div infinite-scroll="loadMore()" infinite-scroll-disabled="pagObj.busy">
         <md-list>
             <md-list-item ng-repeat="list in listObj.data">
-                <p class="col-xs-6">{{list.name}}</p>
+                <p class="col-xs-6">{{list.content}}</p>
                 <p class="col-xs-4" >
                     <span ng-class="{'text-primary':list.status=='已下发','text-info':list.status=='处理中','text-success':list.status=='已处理'}">{{list.status}}</span>
                 </p>
@@ -115,5 +115,5 @@
             </md-list-item>
         </md-list>
     </div>
-    <div class="text-center">{{noData}}</div>
+    <div class="text-center">{{jobsNoData}}</div>
 </div>

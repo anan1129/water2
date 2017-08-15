@@ -17,7 +17,7 @@
                                         <label for="label-task-title" class="col-sm-2">任务标题</label>
                                         <div class="col-sm-10">
                                             <input type="text" class="form-control" id="label-task-title"
-                                                   ng-model="formObj.title">
+                                                   ng-model="formObj.title" required>
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -25,7 +25,7 @@
                                         <div class="col-sm-10">
                                             <div class="row">
                                                 <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12"  ng-repeat="group in groups">
-                                                    <select class="form-control" ng-model="pidArr[$index]" ng-change="getSubGroups(pidArr[$index],$index)">
+                                                    <select class="form-control" ng-model="pidArr[$index]" ng-change="getSubGroups(pidArr[$index],$index)" ng-required="$last">
                                                         <option ng-repeat="g in group" value="{{g}}">{{g.name}}</option>
                                                     </select>
                                                 </div>
@@ -165,7 +165,7 @@
                                     </div>
                                     <div class="">
                                         <button type="submit" ui-wave class="btn btn-primary btn-w-md pull-right" ng-disabled="pidArr.length==0"
-                                                >保存
+                                                >下发
                                         </button>
                                     </div>
                                 </form>
