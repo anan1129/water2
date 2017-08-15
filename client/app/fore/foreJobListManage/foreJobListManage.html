@@ -106,10 +106,10 @@
                 <p class="col-xs-4" >
                     <span ng-class="{'text-primary':list.status=='已下发','text-info':list.status=='处理中','text-success':list.status=='已处理'}">{{list.status}}</span>
                 </p>
-                <p class="col-xs-2" >
-                    <span class="fa fa-eye text-primary" ng-click="toTaskDetails(list)"></span>
+                <p class="col-xs-2" layout="row">
+                    <span class="fa fa-eye text-primary" ng-click="toTaskDetails(list)" flex></span>
                     <!--<span class="fa fa-edit text-info" ng-click="editTask(list)"></span>-->
-                    <span class="fa fa-trash text-danger" ng-click="listObj.del(list)"></span>
+                    <span class="fa fa-trash text-danger" ng-click="listObj.del(list)" flex></span>
                     <!--<span class="fa fa-user text-success" ng-click="edit(list)"></span>-->
                 </p>
             </md-list-item>
