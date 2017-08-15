@@ -21,7 +21,7 @@
 
         var pagObj=$scope.pagObj={
             numPerPageOpt:[5,10,15],
-            numPerPage:$scope.isPC?10:5,
+            numPerPage:15,
             sort:'issueDate,desc',
             onNumPerPageChange:function(){
                 $scope.pagObj.select(1);
@@ -29,6 +29,7 @@
             },
             currentPage:1,
             totalElements:'',
+            busy:false,
             select:function(page){
                 $scope.pagObj.currentPage =page;
                 getJobs();
@@ -42,6 +43,7 @@
         }
 
         function getJobs(){
+            $scope.pagObj.busy=true;
             var data={
                 size:pagObj.numPerPage,
                 page:pagObj.currentPage-1,
@@ -50,10 +52,29 @@
             RestangularService.all('api/jobs/page').customGET('',data).then(function(result){
                 if(result.status==200){
                     console.log(result);
-                    $scope.listObj.data=result.data.content;
-                    $scope.pagObj.totalElements=result.data.totalElements;
+                    if($scope.isPC){
+                        $scope.listObj.data=result.data.content;
+                        $scope.pagObj.totalElements=result.data.totalElements;
+                    }else{
+                        $scope.listObj.data=$scope.listObj.data.concat(result.data.content);
+                        $scope.pagObj.totalElements=result.data.totalElements;
+                        $scope.pagObj.totalPages=result.data.totalPages;
+                        $scope.pagObj.busy=false;
+                        if($scope.pagObj.currentPage>=$scope.pagObj.totalPages){
+                            $scope.pagObj.busy=true;
+                        }
+                        $scope.pagObj.currentPage++;
+                    }
                 }
             });
+        }
+
+        $scope.loadMore=loadMore;
+
+        function loadMore(){
+            console.log('loadMore');
+            // $scope.pagObj.busy=true;
+            getJobs();
         }
 
         // function orderBy(name){

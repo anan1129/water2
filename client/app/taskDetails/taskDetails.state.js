@@ -15,5 +15,9 @@
                     url:'/fore-task-details-manage/:name/:status/:users/:id/:content/:jobBack',
                     templateUrl:'app/fore/foreTaskDetailsManage/foreTaskDetailsManage.html'
                 })
+                .state('fore-task-details-manage2',{
+                    url:'/fore-task-details-manage2/:name/:status/:users/:id/:content/:jobBack',
+                    templateUrl:'app/fore/foreTaskDetailsManage/foreTaskDetailsManage2.html'
+                })
         }])
 })();

@@ -11,6 +11,7 @@
     function TaskListCtrl($scope, $state, $mdToast,RestangularService,$filter,$rootScope) {
         var toast;
         $scope.toTaskDetails = toTaskDetails;
+        $scope.toTaskDetails2 = toTaskDetails2;
         $scope.editTask = editTask;
         $scope.edit = edit;
         $scope.orderBy=orderBy;
@@ -21,7 +22,7 @@
 
         var pagObj=$scope.pagObj={
             numPerPageOpt:[5,10,15],
-            numPerPage:$scope.isPC?10:5,
+            numPerPage:15,
             sort:'',
             onNumPerPageChange:function(){
                 $scope.pagObj.select(1);
@@ -29,6 +30,7 @@
             },
             currentPage:1,
             totalElements:'',
+            busy:false,
             select:function(page){
                 $scope.pagObj.currentPage =page;
                 getJobs();
@@ -38,10 +40,13 @@
         initData();
 
         function initData(){
-           getJobs();
+            if($scope.isPC){
+                getJobs();
+            }
         }
 
         function getJobs(){
+            $scope.pagObj.busy=true;
             var data={
                 size:pagObj.numPerPage,
                 page:pagObj.currentPage-1,
@@ -50,10 +55,27 @@
             RestangularService.all('api/readily-jobs/page').customGET('',data).then(function(result){
                 if(result.status==200){
                     console.log(result);
-                    $scope.listObj.data=result.data.content;
-                    $scope.pagObj.totalElements=result.data.totalElements;
+                    if($scope.isPC){
+                        $scope.listObj.data=result.data.content;
+                        $scope.pagObj.totalElements=result.data.totalElements;
+                    }else{
+                        $scope.listObj.data=$scope.listObj.data.concat(result.data.content);
+                        $scope.pagObj.totalElements=result.data.totalElements;
+                        $scope.pagObj.totalPages=result.data.totalPages;
+                        $scope.pagObj.busy=false;
+                        if($scope.pagObj.currentPage>=$scope.pagObj.totalPages){
+                            $scope.pagObj.busy=true;
+                        }
+                        $scope.pagObj.currentPage++;
+                    }
                 }
             });
+        }
+
+        $scope.loadMore=loadMore;
+
+        function loadMore(){
+            getJobs();
         }
 
         // function orderBy(name){
@@ -95,8 +117,17 @@
         }
 
         function toTaskDetails(obj) {
-            $state.go('task-details', obj);
+            if($scope.isPC){
+                $state.go('task-details', obj);
+            }else{
+                $state.go('fore-task-details-manage', obj);
+            }
         }
+
+        function toTaskDetails2(obj) {
+            $state.go('fore-task-details-manage2', obj);
+        }
+
         function editTask(obj){
             $state.go('edit-task', obj);
         }

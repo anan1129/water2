@@ -1,4 +1,4 @@
-<div ng-controller="TaskListCtrl">
+<div ng-controller="TaskListCtrl" class="fore-task-list-manage">
     <div ng-include="'app/water/header/header.html'"></div>
     <div class="ui-section row">
         <div class="col-xs-12" style="background:#fff;">
@@ -8,116 +8,112 @@
                         <div>未分配任务</div>
                     </md-tab-label>
                     <md-tab-body>
-                        <div class="table-responsive">
-                            <table class="table no-margin">
-                                <thead>
-                                <tr>
-                                    <!--<th>#</th>-->
-                                    <th>
-                                        <div class="th">
-                                            任务标题
-                                            <span class="fa fa-angle-up"
-                                                  data-ng-click=" orderBy('title') "
-                                                  data-ng-class="{active: pagObj.sort == 'title'}"></span>
-                                            <span class="fa fa-angle-down"
-                                                  data-ng-click=" orderBy('title,desc') "
-                                                  data-ng-class="{active: pagObj.sort == 'title,desc'}"></span>
-                                        </div>
-                                    </th>
-                                    <th class="hidden-xs">
-                                        <div class="th">
-                                            处理进度
-                                            <span class="fa fa-angle-up"
-                                                  data-ng-click=" orderBy('status') "
-                                                  data-ng-class="{active: pagObj.sort == 'status'}"></span>
-                                            <span class="fa fa-angle-down"
-                                                  data-ng-click=" orderBy('status,desc') "
-                                                  data-ng-class="{active: pagObj.sort == 'status,desc'}"></span>
-                                        </div>
-                                    </th>
-                                    <th class="hidden-xs">
-                                        <div class="th">
-                                            <!--处理员-->
-                                            组织名称
-                                        </div>
-                                    </th>
-                                    <th>
-                                        <div class="th">
-                                            任务源
+                        <!--<div class="table-responsive">-->
+                            <!--<table class="table no-margin">-->
+                                <!--<thead>-->
+                                <!--<tr>-->
+                                    <!--&lt;!&ndash;<th>#</th>&ndash;&gt;-->
+                                    <!--<th>-->
+                                        <!--<div class="th">-->
+                                            <!--任务标题-->
                                             <!--<span class="fa fa-angle-up"-->
-                                            <!--data-ng-click=" orderBy('origin') "-->
-                                            <!--data-ng-class="{active: pagObj.sort == 'origin'}"></span>-->
+                                                  <!--data-ng-click=" orderBy('title') "-->
+                                                  <!--data-ng-class="{active: pagObj.sort == 'title'}"></span>-->
                                             <!--<span class="fa fa-angle-down"-->
-                                            <!--data-ng-click=" orderBy('-origin') "-->
-                                            <!--data-ng-class="{active: pagObj.sort == '-origin'}"></span>-->
-                                        </div>
-                                    </th>
-                                    <th>
-                                        <div class="th">
-                                            河道
+                                                  <!--data-ng-click=" orderBy('title,desc') "-->
+                                                  <!--data-ng-class="{active: pagObj.sort == 'title,desc'}"></span>-->
+                                        <!--</div>-->
+                                    <!--</th>-->
+                                    <!--<th class="hidden-xs">-->
+                                        <!--<div class="th">-->
+                                            <!--处理进度-->
                                             <!--<span class="fa fa-angle-up"-->
-                                            <!--data-ng-click=" orderBy('river') "-->
-                                            <!--data-ng-class="{active: pagObj.sort == 'river'}"></span>-->
+                                                  <!--data-ng-click=" orderBy('status') "-->
+                                                  <!--data-ng-class="{active: pagObj.sort == 'status'}"></span>-->
                                             <!--<span class="fa fa-angle-down"-->
-                                            <!--data-ng-click=" orderBy('-river') "-->
-                                            <!--data-ng-class="{active: pagObj.sort == '-river'}"></span>-->
-                                        </div>
-                                    </th>
-                                    <th>
-                                        <div class="th">
-                                            操作
-                                        </div>
-                                    </th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr ng-repeat="list in listObj.data">
-                                    <!--<td>{{list.id}}</td>-->
-                                    <td>{{list.title}}</td>
-                                    <td class="hidden-xs">{{list.status}}
-                                        <!--<span ng-class="{'text-primary':list.status=='已上报','text-info':list.status=='正在处理','text-success':list.status=='处理完成'}">{{list.status}}</span>-->
-                                    </td>
-                                    <td class="hidden-xs">
-                                        {{list.groupName}}
-                                        <!--<span ng-repeat="user in list.users" style="margin:0 3px;">{{user.user}}</span>-->
-                                    </td>
-                                    <td>{{list.type}}</td>
-                                    <td>{{list.riverName}}</td>
-                                    <td>
-                                        <!--<span class="fa fa-eye text-primary" ng-click="toTaskDetails(list)"></span>-->
-                                        <!--<span class="fa fa-edit text-info" ng-click="editTask(list)"></span>-->
-                                        <span class="fa fa-trash text-danger" ng-click="listObj.del(list)"></span>
+                                                  <!--data-ng-click=" orderBy('status,desc') "-->
+                                                  <!--data-ng-class="{active: pagObj.sort == 'status,desc'}"></span>-->
+                                        <!--</div>-->
+                                    <!--</th>-->
+                                    <!--<th class="hidden-xs">-->
+                                        <!--<div class="th">-->
+                                            <!--&lt;!&ndash;处理员&ndash;&gt;-->
+                                            <!--组织名称-->
+                                        <!--</div>-->
+                                    <!--</th>-->
+                                    <!--<th>-->
+                                        <!--<div class="th">-->
+                                            <!--任务源-->
+                                            <!--&lt;!&ndash;<span class="fa fa-angle-up"&ndash;&gt;-->
+                                            <!--&lt;!&ndash;data-ng-click=" orderBy('origin') "&ndash;&gt;-->
+                                            <!--&lt;!&ndash;data-ng-class="{active: pagObj.sort == 'origin'}"></span>&ndash;&gt;-->
+                                            <!--&lt;!&ndash;<span class="fa fa-angle-down"&ndash;&gt;-->
+                                            <!--&lt;!&ndash;data-ng-click=" orderBy('-origin') "&ndash;&gt;-->
+                                            <!--&lt;!&ndash;data-ng-class="{active: pagObj.sort == '-origin'}"></span>&ndash;&gt;-->
+                                        <!--</div>-->
+                                    <!--</th>-->
+                                    <!--<th>-->
+                                        <!--<div class="th">-->
+                                            <!--河道-->
+                                            <!--&lt;!&ndash;<span class="fa fa-angle-up"&ndash;&gt;-->
+                                            <!--&lt;!&ndash;data-ng-click=" orderBy('river') "&ndash;&gt;-->
+                                            <!--&lt;!&ndash;data-ng-class="{active: pagObj.sort == 'river'}"></span>&ndash;&gt;-->
+                                            <!--&lt;!&ndash;<span class="fa fa-angle-down"&ndash;&gt;-->
+                                            <!--&lt;!&ndash;data-ng-click=" orderBy('-river') "&ndash;&gt;-->
+                                            <!--&lt;!&ndash;data-ng-class="{active: pagObj.sort == '-river'}"></span>&ndash;&gt;-->
+                                        <!--</div>-->
+                                    <!--</th>-->
+                                    <!--<th>-->
+                                        <!--<div class="th">-->
+                                            <!--操作-->
+                                        <!--</div>-->
+                                    <!--</th>-->
+                                <!--</tr>-->
+                                <!--</thead>-->
+                                <!--<tbody>-->
+                                <!--<tr ng-repeat="list in listObj.data">-->
+                                    <!--&lt;!&ndash;<td>{{list.id}}</td>&ndash;&gt;-->
+                                    <!--<td>{{list.title}}</td>-->
+                                    <!--<td class="hidden-xs">{{list.status}}-->
+                                        <!--&lt;!&ndash;<span ng-class="{'text-primary':list.status=='已上报','text-info':list.status=='正在处理','text-success':list.status=='处理完成'}">{{list.status}}</span>&ndash;&gt;-->
+                                    <!--</td>-->
+                                    <!--<td class="hidden-xs">-->
+                                        <!--{{list.groupName}}-->
+                                        <!--&lt;!&ndash;<span ng-repeat="user in list.users" style="margin:0 3px;">{{user.user}}</span>&ndash;&gt;-->
+                                    <!--</td>-->
+                                    <!--<td>{{list.type}}</td>-->
+                                    <!--<td>{{list.riverName}}</td>-->
+                                    <!--<td>-->
+                                        <!--&lt;!&ndash;<span class="fa fa-eye text-primary" ng-click="toTaskDetails(list)"></span>&ndash;&gt;-->
+                                        <!--&lt;!&ndash;<span class="fa fa-edit text-info" ng-click="editTask(list)"></span>&ndash;&gt;-->
+                                        <!--<span class="fa fa-trash text-danger" ng-click="listObj.del(list)"></span>-->
+                                        <!--<span class="fa fa-user text-success" ng-click="edit(list)"></span>-->
+                                    <!--</td>-->
+                                <!--</tr>-->
+                                <!--</tbody>-->
+                            <!--</table>-->
+                        <!--</div>-->
+                        <md-list>
+                            <md-list-item>
+                                <p class="col-xs-4">任务标题</p>
+                                <p class="col-xs-3" >任务源</p>
+                                <p class="col-xs-3" >河道</p>
+                                <p class="col-xs-2" >操作</p>
+                            </md-list-item>
+                        </md-list>
+                        <md-divider></md-divider>
+                        <div infinite-scroll="loadMore()"  infinite-scroll-disabled="pagObj.busy">
+                            <md-list>
+                                <md-list-item ng-repeat="list in listObj.data">
+                                    <p class="col-xs-4">{{list.title}}</p>
+                                    <p class="col-xs-3" >{{list.type}}</p>
+                                    <p class="col-xs-3" >{{list.riverName}}</p>
+                                    <p class="col-xs-2" >
+                                        <span class="fa fa-eye text-primary" ng-click="toTaskDetails2(list)"></span>
                                         <span class="fa fa-user text-success" ng-click="edit(list)"></span>
-                                    </td>
-                                </tr>
-                                </tbody>
-                            </table>
-                            <footer class="table-footer">
-                                <div class="pagObj.sort">
-                                    <div class="col-md-6 col-xs-12 page-num-info">
-                <span>
-                展示
-                <select data-ng-model="pagObj.numPerPage"
-                        data-ng-options="num for num in pagObj.numPerPageOpt"
-                        data-ng-change="pagObj.onNumPerPageChange()">
-                </select>
-                条记录
-                </span>
-                                    </div>
-                                    <div class="col-md-6 col-xs-12 pagination-container">
-                                        <div uib-pagination class="pagination-sm"
-                                             ng-model="pagObj.currentPage"
-                                             total-items="pagObj.totalElements"
-                                             max-size="1"
-                                             ng-change="pagObj.select(pagObj.currentPage)"
-                                             items-per-page="pagObj.numPerPage"
-                                             rotate="false"
-                                             previous-text="上一页" next-text="下一页"
-                                             first-text="首页" last-text="尾页"
-                                             boundary-links="true"></div>
-                                    </div>
-                                </div>
-                            </footer>
+                                    </p>
+                                </md-list-item>
+                            </md-list>
                         </div>
                     </md-tab-body>
                 </md-tab>

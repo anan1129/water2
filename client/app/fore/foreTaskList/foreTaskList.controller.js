@@ -11,6 +11,7 @@
     function ForeTaskListCtrl($scope, $state, $mdToast,RestangularService,$filter,$rootScope,$window) {
         var toast;
         $scope.toTaskDetails = toTaskDetails;
+        $scope.loadMore = loadMore;
         $scope.editTask = editTask;
         $scope.edit = edit;
         $scope.orderBy=orderBy;
@@ -26,26 +27,30 @@
         var pagObj=$scope.pagObj={
             numPerPageOpt:[5,10,15],
             numPerPage:10,
-            sort:'',
+            sort:'issueDate,desc',
             onNumPerPageChange:function(){
                 $scope.pagObj.select(1);
                 return $scope.pagObj.currentPage = 1;
             },
             currentPage:1,
             totalElements:'',
+            busy:false,
             select:function(page){
                 $scope.pagObj.currentPage =page;
                 getJobs();
             }
         }
 
-        initData();
+        // initData();
 
         function initData(){
+            $scope.listObj.data=[];
+            $scope.pagObj.currentPage=1;
            getJobs();
         }
 
         function getJobs(){
+            $scope.pagObj.busy=true;
             var data={
                 size:pagObj.numPerPage,
                 page:pagObj.currentPage-1,
@@ -54,8 +59,14 @@
             RestangularService.all('api/group-jobs-status/page?status=已下发').customGET('',data).then(function(result){
                 if(result.status==200){
                     console.log(result);
-                    $scope.listObj.data=result.data.content;
+                    $scope.listObj.data=$scope.listObj.data.concat(result.data.content);
                     $scope.pagObj.totalElements=result.data.totalElements;
+                    $scope.pagObj.totalPages=result.data.totalPages;
+                    $scope.pagObj.busy=false;
+                    if($scope.pagObj.currentPage>=$scope.pagObj.totalPages){
+                        $scope.pagObj.busy=true;
+                    }
+                    $scope.pagObj.currentPage++;
                 }
             });
         }
@@ -65,6 +76,11 @@
         //     $scope.row=name;
         //     $scope.listObj.data=$filter('orderBy')($scope.listObj.data,name);
         // }
+
+        function loadMore(){
+            getJobs();
+        }
+
         function orderBy(name){
             if(name.indexOf('-')>-1){
                 name=name.slice(1)+',desc';
@@ -119,7 +135,8 @@
             console.log(data);
             RestangularService.all('api/jobs-receive').customPOST(data).then(function(res){
                 if(res.status==201){
-                    getJobs();
+                    initData();
+                    // getJobs();
                 }
             })
         }

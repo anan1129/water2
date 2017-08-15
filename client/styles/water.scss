@@ -34,12 +34,12 @@
 }
 
 .m-login{
-    //top: 0;
-    //left: 0;
-    //right:0;
-    //bottom: 0;
-    //position: absolute;
-    //background:url(../assets/images/login-bg2.jpg) no-repeat 0 0;
+    top: 0;
+    left: 0;
+    right:0;
+    bottom: 0;
+    position: absolute;
+    background:url(../assets/images/login-bg2.jpg) repeat-x 0 0;
     //background-size:auto 100%;
     .bg{
         position: absolute;
@@ -47,10 +47,10 @@
         bottom:0;
         right:-10px;
         left:0;
-        -webkit-filter: blur(2px); /* Chrome, Opera */
-        -moz-filter: blur(2px);
-        -ms-filter: blur(2px);
-        filter: blur(2px);
+        //-webkit-filter: blur(2px); /* Chrome, Opera */
+        //-moz-filter: blur(2px);
+        //-ms-filter: blur(2px);
+        //filter: blur(2px);
         //height:100%;
     }
     .card{
@@ -462,6 +462,19 @@ md-tabs-canvas.md-paginated{
         }
     }
 }
+.fore-task-list-manage{
+    md-list{
+        md-list-item{
+            &>p{
+                padding:0;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+                overflow: hidden;
+            }
+        }
+    }
+}
+
 
 
 
