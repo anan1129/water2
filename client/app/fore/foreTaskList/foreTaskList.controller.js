@@ -65,6 +65,7 @@
                     $scope.pagObj.busy=false;
                     if($scope.pagObj.currentPage>=$scope.pagObj.totalPages){
                         $scope.pagObj.busy=true;
+                        $scope.noData='没有数据了!';
                     }
                     $scope.pagObj.currentPage++;
                 }

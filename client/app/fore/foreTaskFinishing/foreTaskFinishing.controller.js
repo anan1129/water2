@@ -62,6 +62,7 @@
                     $scope.pageObj.finishing.busy=false;
                     if($scope.pageObj.finishing.currentPage>=$scope.pageObj.finishing.totalPages){
                         $scope.pageObj.finishing.busy=true;
+                        $scope.finishingNoData='没有数据了!';
                     }
                     $scope.pageObj.finishing.currentPage++;
                 }
@@ -84,6 +85,7 @@
                     $scope.pageObj.finished.busy=false;
                     if($scope.pageObj.finished.currentPage>=$scope.pageObj.finished.totalPages){
                         $scope.pageObj.finished.busy=true;
+                        $scope.finishedNoData='没有数据了!';
                     }
                     $scope.pageObj.finished.currentPage++;
                 }
