@@ -39,6 +39,20 @@
 
             </span>
             </li>
+            <li class="list-group-item files" ng-show="job.images.length>0">
+                <div class="row">
+                                        <span class="col-xs-4 file-item" ng-repeat="file in job.images" >
+                                            <img ng-src="{{host}}/api/file-show/path?filepath={{file.filePath}}" style="width:100%;" alt="">
+                                        </span>
+                </div>
+            </li>
+            <li class="list-group-item files" ng-show="job.audios.length>0">
+                <div class="row">
+                                        <span class="col-xs-12 file-item" ng-repeat="file in job.audios" >
+                                            <audio ng-src="{{host}}/api/file-show/path?filepath={{file.filePath}}" style="width:100%;" controls="controls"></audio>
+                                        </span>
+                </div>
+            </li>
             <li class="list-group-item text-center">
                 <button class="btn btn-primary " ng-click="toTaskFinishing(job)">接受任务</button>
             </li>

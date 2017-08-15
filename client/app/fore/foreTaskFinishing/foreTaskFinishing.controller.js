@@ -24,7 +24,7 @@
         var pageObj=$scope.pageObj={
             finishing:{
                 numPerPage:5,
-                sort:'',
+                sort:'issueDate,desc',
                 currentPage:0,
                 totalElements:'',
                 totalPages:0,
@@ -32,7 +32,7 @@
             },
             finished:{
                 numPerPage:5,
-                sort:'',
+                sort:'issueDate,desc',
                 currentPage:0,
                 totalElements:'',
                 totalPages:0,
@@ -53,6 +53,7 @@
             var data={
                 size:pageObj.finishing.numPerPage,
                 page:pageObj.finishing.currentPage,
+                sort:pageObj.finishing.sort,
             };
             RestangularService.all('api/my-jobs?isOver=false').customGET('',data).then(function(result){
                 if(result.status==200){

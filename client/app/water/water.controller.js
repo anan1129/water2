@@ -38,7 +38,7 @@
         var pageObj=$scope.pageObj={
             zlgs:{
                 numPerPage:5,
-                sort:'',
+                sort:'createdDate,desc',
                 currentPage:0,
                 totalElements:'',
                 totalPages:0,
