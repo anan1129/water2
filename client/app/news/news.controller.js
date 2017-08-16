@@ -21,7 +21,7 @@
         var pageObj=$scope.pageObj={
             '重要活动':{
                 numPerPage:3,
-                sort:'',
+                sort:'createdDate,desc',
                 currentPage:0,
                 totalElements:'',
                 totalPages:0,
@@ -33,7 +33,7 @@
             },
             '工作进展':{
                 numPerPage:3,
-                sort:'',
+                sort:'createdDate,desc',
                 currentPage:0,
                 totalElements:'',
                 totalPages:0,
@@ -44,7 +44,7 @@
             },
             '街镇动态':{
                 numPerPage:3,
-                sort:'',
+                sort:'createdDate,desc',
                 currentPage:0,
                 totalElements:'',
                 totalPages:0,
@@ -55,7 +55,7 @@
             },
             '媒体精选':{
                 numPerPage:3,
-                sort:'',
+                sort:'createdDate,desc',
                 currentPage:0,
                 totalElements:'',
                 totalPages:0,
@@ -88,11 +88,16 @@
             })
         }
 
-        $scope.getData=function(name,index){
+        $scope.getData=function(name,index,isInit){
+            if(isInit){
+                $scope.listObj.types[index].content=[];
+
+            }
             $scope.pageObj[name].busy=true;
             var data={
                 // size:$scope.pageObj[name].numPerPage,
                 // page:$scope.pageObj[name].currentPage,
+                sort:$scope.pageObj[name].sort,
             };
             RestangularService.all('api/news-show-second?newsType=新闻动态&newsType2='+name).customGET('',data).then(function(result){
                 if(result.status==200){

@@ -145,9 +145,9 @@
             var groupObj=angular.fromJson($scope.pidArr[$scope.pidArr.length-1]);
             if(groupObj.id) data.groupId=groupObj.id;
             if(groupObj.name) data.groupName=groupObj.name;
-            delete data.password;
             console.log(data);
             if(stateParams.login){
+                delete data.password;
                 RestangularService.all('api/users').customPUT(data).then(function(result){
                     console.log(result);
                 }).then(function(){
@@ -172,7 +172,7 @@
                     })
                 })
             }else{
-                RestangularService.all('api/register').customPOST($scope.formObj.password).then(function(result){
+                RestangularService.all('api/register').customPOST(data).then(function(result){
                     console.log(result);
                     if(result.status==201){
                         $mdToast.show(
@@ -182,6 +182,7 @@
                                 .hideDelay(2000)
                         );
                         initData();
+                        $state.go('user-list');
                     }else{
                         $mdToast.show(
                             $mdToast.simple()
