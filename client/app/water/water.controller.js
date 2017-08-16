@@ -45,6 +45,7 @@
                 busy:false
             },
         };
+        $scope.toTaskDetails=toTaskDetails;
         initData();
 
         function initData(){
@@ -276,5 +277,13 @@
             console.log('111');
             getJobs();
         };
+
+        function toTaskDetails(obj) {
+            if($scope.isPC){
+                $state.go('task-details', obj);
+            }else{
+                $state.go('fore-task-details-manage', obj);
+            }
+        }
     }
 })();

@@ -26,6 +26,9 @@
             case 'fore-task-details-manage':
                 $scope.title='任务详情';
                 break;
+            case 'fore-task-details-manage2':
+                $scope.title='任务详情';
+                break;
             case 'fore-add-task-manage':
                 $scope.title='新建任务';
                 break;
