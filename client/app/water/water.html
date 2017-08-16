@@ -181,7 +181,7 @@
                                         <div class="row">
                                             <div class="col-xs-12">
                                                 <span class="pull-left label"
-                                                      ng-class="{'label-danger':job.type=='投诉','label-success':job.type=='建议','label-info':job.type=='随手拍'}">{{job.type}}</span>
+                                                      ng-class="{'label-danger':job.source=='投诉','label-success':job.source=='建议','label-info':job.source=='随手拍'}">{{job.source}}</span>
                                                 <span class="pull-right"
                                                       ng-class="{'text-success':job.status=='已处理','text-danger':job.status=='未处理',}">{{job.status}}</span>
                                             </div>
@@ -204,7 +204,7 @@
                                     <li class="list-group-item">
                                         <div class="row">
                                             <div class="col-xs-12">
-                                                <span class="text-primary pull-left">{{job.endDate}}</span>
+                                                <span class="text-primary pull-left">{{job.issueDate|editDate}}</span>
                                                 <span class="text-primary pull-right">{{job.riverName}}</span>
                                             </div>
                                         </div>

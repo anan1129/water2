@@ -38,7 +38,7 @@
         var pageObj=$scope.pageObj={
             zlgs:{
                 numPerPage:5,
-                sort:'createdDate,desc',
+                sort:'issueDate,desc',
                 currentPage:0,
                 totalElements:'',
                 totalPages:0,
@@ -243,8 +243,9 @@
                 size:pageObj.zlgs.numPerPage,
                 page:pageObj.zlgs.currentPage,
                 sort:pageObj.zlgs.sort,
+                riverId:stateParams.id,
             };
-            RestangularService.all('/api/readily-jobs/page').customGET('',data).then(function(result){
+            RestangularService.all('/api/jobs/page').customGET('',data).then(function(result){
                 if(result.status==200){
                     console.log(result);
                     $scope.listObj.data=$scope.listObj.data.concat(result.data.content);
@@ -261,6 +262,8 @@
         }
 
         function zhzl(){
+            pageObj.zlgs.currentPage=0;
+            $scope.listObj.data=[];
             getJobs();
         }
 
