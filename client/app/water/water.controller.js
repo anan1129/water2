@@ -279,11 +279,7 @@
         };
 
         function toTaskDetails(obj) {
-            if($scope.isPC){
-                $state.go('task-details', obj);
-            }else{
-                $state.go('fore-task-details-manage', obj);
-            }
+            $state.go('fore-task-details-manage', obj);
         }
     }
 })();

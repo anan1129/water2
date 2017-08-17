@@ -11,6 +11,7 @@
     function JobListCtrl($scope, $state, $mdToast,RestangularService,$filter) {
         var toast;
         $scope.toTaskDetails = toTaskDetails;
+        $scope.toForeTaskDetails = toForeTaskDetails;
         $scope.editTask = editTask;
         $scope.edit = edit;
         $scope.orderBy=orderBy;
@@ -123,6 +124,9 @@
                 $state.go('fore-task-details-manage', obj);
             }
 
+        }
+        function toForeTaskDetails(obj) {
+            $state.go('fore-task-details-manage', obj);
         }
         function editTask(obj){
             $state.go('edit-task', obj);
