@@ -58,9 +58,17 @@
                                             <input ng-model="formObj.endAddress">
                                         </md-input-container>
                                     </div>
-                                    <md-input-container md-no-float class="md-block">
-                                        <input ng-model="formObj.content" placeholder="河道描述">
-                                    </md-input-container>
+                                    <!--<md-input-container md-no-float class="md-block">-->
+                                        <!--<input ng-model="formObj.content" placeholder="河道描述">-->
+                                    <!--</md-input-container>-->
+
+                                    <div class="row">
+                                        <label  class="col-sm-2">信息内容</label>
+                                        <div class="col-sm-10">
+                                            <div   ta-paste="aaa($html)" text-angular ng-model="formObj.content" ></div>
+                                        </div>
+
+                                    </div>
 
                                     <!--多选-->
                                     <div class="divider divider-dashed divider-lg pull-in"></div>

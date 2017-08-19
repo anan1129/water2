@@ -5,10 +5,10 @@
     'use strict';
 
     angular.module('app.waterInfo.controller',[])
-        .controller('WaterInfoCtrl',['$scope','RestangularService','$mdToast','$stateParams',WaterInfoCtrl])
+        .controller('WaterInfoCtrl',['$scope','RestangularService','$mdToast','$stateParams','$state',WaterInfoCtrl])
     ;
 
-    function WaterInfoCtrl($scope,RestangularService,$mdToast,$stateParams){
+    function WaterInfoCtrl($scope,RestangularService,$mdToast,$stateParams,$state){
 
         $scope.getLevel=getLevel;
         $scope.getUsers=getUsers;
@@ -143,6 +143,7 @@
                             .hideDelay(2000)
                     );
                     initData();
+                    $state.go('water-table');
                 }else{
                     $mdToast.show(
                         $mdToast.simple()

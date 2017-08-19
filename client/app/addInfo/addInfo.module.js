@@ -142,14 +142,8 @@
                     };
                     taRegisterTool('selectImage', {
                         iconclass: 'fa fa-picture-o',
-                        tooltiptext: 'selectImage',
-                        // display:'<input type="file" style="overflow:hidden;" ng-model="img" onchange="angular.element(this).scope().action(this)"/>',
+                        tooltiptext: '选择图片',
                         action: function(){
-                           // var confirm=$mdDialog.confirm()
-                           //     .title('select')
-                           //     .content('<input type="file">')
-                           //     .ok('ok')
-                           //     .cancel('cancel');
                             $mdDialog.show({
                                 controller: ['$scope','$mdDialog','RestangularService',function($scope,$mdDialog,RestangularService){
                                     var host='http://106.15.48.81:8080';
@@ -190,19 +184,8 @@
                                     // block javascript here
                                     if (!blockJavascript(imageLink)) {
                                         if (taSelection.getSelectionElement().tagName && taSelection.getSelectionElement().tagName.toLowerCase() === 'a') {
-                                            // due to differences in implementation between FireFox and Chrome, we must move the
-                                            // insertion point past the <a> element, otherwise FireFox inserts inside the <a>
-                                            // With this change, both FireFox and Chrome behave the same way!
                                             taSelection.setSelectionAfterElement(taSelection.getSelectionElement());
                                         }
-                                        // In the past we used the simple statement:
-                                        //return this.$editor().wrapSelection('insertImage', imageLink, true);
-                                        //
-                                        // However on Firefox only, when the content is empty this is a problem
-                                        // See Issue #1201
-                                        // Investigation reveals that Firefox only inserts a <p> only!!!!
-                                        // So now we use insertHTML here and all is fine.
-                                        // NOTE: this is what 'insertImage' is supposed to do anyway!
                                         var embed = '<img src="' + imageLink + '">';
                                         return me.$editor().wrapSelection('insertHTML', embed, true);
                                     }
@@ -219,6 +202,32 @@
                         }
                     });
 
+                    var videoId=null;
+                    taRegisterTool('selectVideo', {
+                        iconclass: 'fa fa-youtube-play',
+                        tooltiptext: '选择视频',
+                        action: function(){
+                            var urlPrompt;
+                            console.dir(this.$editor());
+                            urlPrompt = $window.prompt(taTranslations.insertVideo.dialogPrompt, 'https://');
+                            // block javascript here
+                            /* istanbul ignore else: if it's javascript don't worry - though probably should show some kind of error message */
+                            if (!blockJavascript(urlPrompt)) {
+                                if (taSelection.getSelectionElement().tagName && taSelection.getSelectionElement().tagName.toLowerCase() === 'a') {
+                                    taSelection.setSelectionAfterElement(taSelection.getSelectionElement());
+                                }
+                                var embed = '<video src="' + urlPrompt + '">';
+                                return me.$editor().wrapSelection('insertHTML', embed, true);
+                            }
+                            var me=this;
+                        },
+                        onElementSelect: {
+                            element: 'video',
+                            // onlyWithAttrs: ['ta-insert-video'],
+                            action: taToolFunctions.imgOnSelectAction
+                        }
+                    });
+
                     function setOptions(start,end){
                         var arr=[];
                         for(var i=start;i<=end;i++){
@@ -230,7 +239,7 @@
 
                     // add the button to the default toolbar definition
                     // taOptions.toolbar[1].push('backgroundColor', 'fontColor', 'fontName', 'fontSize');
-                    taOptions.toolbar[3]=['fontSize','lineHeight','selectImage'];
+                    taOptions.toolbar[3]=['fontSize','lineHeight','selectImage','selectVideo'];
                     // taOptions.toolbar[3].push('fontSize','lineHeight','selectImage');
                     return taOptions;
                 }]);

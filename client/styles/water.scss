@@ -142,6 +142,12 @@
             }
         }
     }
+    .textangular-content{
+        &>p::before{
+            content:'&nbsp;';
+            opacity:0;
+        }
+    }
 }
 
 .home{
