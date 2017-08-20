@@ -14,6 +14,8 @@
         $scope.getUsers=getUsers;
         $scope.getGroups=getGroups;
         $scope.getSubGroups=getSubGroups;
+        $scope.addGsp=addGsp;//添加公示牌
+        $scope.clearGsp=clearGsp;//添加公示牌
         initData();
         if($stateParams.id){
             $scope.stateParams=$stateParams;
@@ -34,12 +36,36 @@
         }
 
         function initData(){
-            $scope.formObj={};
+            $scope.formObj={
+                announcements:[]
+            };
             getMaxL();
             getUsers();
             $scope.pidArr=[];
             $scope.groups=[];
             getGroups();
+        }
+
+        function addGsp(){
+            var inputs=angular.element('#gsp-file')[0].files;
+            for(var i=0,len=inputs.length;i<len;i++){
+                addFile(inputs[i]);
+            }
+        }
+
+        function clearGsp(){
+            angular.element('#gsp-file').val('');
+            $scope.formObj.announcements=[];
+        }
+
+        function addFile(input){
+            var f=new FormData();
+            f.append('file',input);
+            RestangularService.all('api/files').withHttpConfig({transformRequest: angular.identity}).customPOST(f,undefined,undefined,{'Content-Type':undefined}).then(function(res){
+                if(res.status==201){
+                    $scope.formObj.announcements.push({title:'',url:res.data.filePath});
+                }
+            })
         }
 
         function getMaxL(){

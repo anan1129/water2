@@ -5,7 +5,7 @@
     'use strict';
 
     angular.module('app.water.directive',[])
-        .directive('baiduMap',function(){
+        .directive('baiduMap',['$timeout','$mdDialog',function($timeout,$mdDialog){
             return {
                 restrict:'A',
                 link:function(scope,ele,attr){
@@ -15,10 +15,9 @@
 
                     function init(){
                         scope.map=map=new BMap.Map(ele[0]);
+
+
                         pos();
-                        // point = new BMap.Point(121.500757,31.3884);
-                        // map.centerAndZoom(point,13);
-                        // map.addControl(new BMap.MapTypeControl());
                         map.setCurrentCity('上海');
                         map.enableScrollWheelZoom(true);
                     }
@@ -31,6 +30,7 @@
                         setStyle();
                         pos();
                         setPolyline();
+
                     });
 
                     scope.$on('clickMapAddPos',function(){
@@ -51,25 +51,22 @@
                     });
 
                     scope.$on('addMarker',function(e,data){
-                        console.log(data);
+                        if(attr.mapType=='基础信息'){
+                            $timeout(function(){
+                                console.log(scope.map);
+                                map.addOverlay(data);
+                                scope.$apply();
+                            },5000);
+
+                        }
                     })
 
 
                     function pos(){
                         var len=Math.ceil(scope.dataObj.addresses.length/2);
                         var centerP=scope.dataObj.addresses[len];
-
                         var point=new BMap.Point(centerP.longitude,centerP.latitude);
                         map.centerAndZoom(point, 14);
-                        // var maker=new BMap.Marker(point);
-                        // map.addOverlay(maker);
-                        // p="上海市杨浦区"+scope.dataObj.riverName;
-                        // myGeo.getPoint(p, function(point){
-                        //     if (point) {
-                        //         map.centerAndZoom(point, 13);
-                        //         // map.addOverlay(new BMap.Marker(point));
-                        //     }
-                        // }, "上海市");
                     }
 
                     function setPolyline(){
@@ -80,6 +77,46 @@
                         });
                         var polyline=new BMap.Polyline(pointArr,{strokeColor:'#3f2ce6'});
                         map.addOverlay(polyline);
+
+                        var moNum=Math.floor(scope.dataObj.addresses.length/scope.dataObj.announcements.length)?Math.floor(scope.dataObj.addresses.length/scope.dataObj.announcements.length):1;
+                        console.log(moNum);
+                        for(var i=0,len=scope.dataObj.announcements.length;i<len;i++){
+                            scope.gspPiontArr.push(scope.dataObj.addresses[i*moNum]);
+                        }
+
+                        // if(attr.mapType=='基础信息'){
+                        for(var i=0,len=scope.gspPiontArr.length;i<len;i++){
+                            var pt={
+                                longitude:scope.gspPiontArr[i].longitude,
+                                latitude:scope.gspPiontArr[i].latitude
+                            }
+                            var icon=new BMap.Icon('../assets/images/water/gsp.png',new BMap.Size(16,16));
+                            var marker=new BMap.Marker(new BMap.Point(pt.longitude,pt.latitude),{icon:icon});
+                            marker.gspData=scope.dataObj.announcements[i];
+                            marker.addEventListener('click',function(val){
+                                console.log(marker);
+                                $mdDialog.show({
+                                    controller: ['$scope','$mdDialog','RestangularService',function($scope,$mdDialog,RestangularService){
+                                        $scope.gspObj=marker.gspData;
+                                        console.log($scope.gspObj);
+                                        $scope.host='http://106.15.48.81:8080';
+                                        $scope.cancel=function(){
+                                            console.log($mdDialog);
+                                            $mdDialog.cancel();
+                                        }
+                                        $scope.save=function(){
+                                            $mdDialog.hide();
+                                        }
+                                    }],
+                                    templateUrl: 'app/water/dialog/gsp.html',
+                                    parent: angular.element(document.body),
+                                    // targetEvent: ev,
+                                    clickOutsideToClose:false
+                                })
+                            })
+                            map.addOverlay(marker);
+                        }
+                        // }
                     }
 
                     function setStyle(){
@@ -178,14 +215,9 @@
                             ]
                         });
                     }
-
-
-
-
-
                 }
             }
-        })
+        }])
         .directive('aaa',function(){
             return {
                 restrict:'A',

@@ -51,6 +51,7 @@
 
         function initData(){
             getRivers();
+
         }
 
         function getRivers(){
@@ -67,10 +68,9 @@
                     $timeout(function(){
                         $scope.$broadcast('map');
                     },100);
-                    // init();
                 }
             }).then(function(){
-
+                // getGspPoint();
             })
         }
 
@@ -197,6 +197,19 @@
                 ]
             };
             // getRiverPoints();
+        }
+
+        $scope.gspPiontArr=[];
+
+
+        function setGspMarker(marker){
+            console.log(marker);
+            $timeout(function(){
+                console.log($scope.map);
+                // $scope.map.addOverlay(marker);
+            },5000)
+
+            // $scope.$broadcast('addMarker',marker);
         }
 
         function getRiverPoints(){

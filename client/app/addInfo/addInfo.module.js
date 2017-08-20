@@ -205,20 +205,51 @@
                         tooltiptext: '选择视频',
                         action: function(){
                             var urlPrompt;
-                            console.dir(this.$editor());
-                            urlPrompt = $window.prompt(taTranslations.insertVideo.dialogPrompt, 'https://');
-                            // block javascript here
-                            /* istanbul ignore else: if it's javascript don't worry - though probably should show some kind of error message */
-                            if (true) {
-                                if(!urlPrompt||urlPrompt==''||urlPrompt=='https://') return;
-                                console.log(taSelection.getSelectionElement().tagName);
-                                if (taSelection.getSelectionElement().tagName && taSelection.getSelectionElement().tagName.toLowerCase() === 'a') {
-                                    taSelection.setSelectionAfterElement(taSelection.getSelectionElement());
+                            var me=this;
+                            $mdDialog.show({
+                                controller: ['$scope','$mdDialog','RestangularService',function($scope,$mdDialog,RestangularService){
+                                    var host='http://106.15.48.81:8080';
+                                    $scope.cancel=function(){
+                                        console.log($mdDialog);
+                                        $mdDialog.cancel();
+                                    }
+                                    $scope.save=function(){
+                                        if(angular.element('#img')[0].files[0]){
+                                            var f=new FormData();
+                                            var data=angular.element('#img')[0].files[0];
+                                            f.append('file',data);
+                                            RestangularService.all('api/files').withHttpConfig({transformRequest: angular.identity}).customPOST(f,undefined,undefined,{'Content-Type':undefined}).then(function(res){
+                                                if(res.status==201){
+                                                    console.log(res.data);
+                                                    var  imgSrc=host+'/api/file-show/path?filepath='+res.data.filePath;
+                                                    $mdDialog.hide(imgSrc);
+                                                }
+                                            })
+                                        }else{
+                                            $mdDialog.hide('aaa');
+                                        }
+                                    }
+
+
+                                }],
+                                templateUrl: 'app/addInfo/insertImgDialog.html',
+                                parent: angular.element(document.body),
+                                // targetEvent: ev,
+                                clickOutsideToClose:true
+                            }).then(function(src){
+                                urlPrompt=src;
+                                if (true) {
+                                    if(!urlPrompt||urlPrompt==''||urlPrompt=='https://') return;
+                                    console.log(taSelection.getSelectionElement().tagName);
+                                    if (taSelection.getSelectionElement().tagName && taSelection.getSelectionElement().tagName.toLowerCase() === 'a') {
+                                        taSelection.setSelectionAfterElement(taSelection.getSelectionElement());
+                                    }
+                                    // var embed = '<div src="' + urlPrompt + '" controls="controls"></div>';
+                                    var embed = '<div id="controls" class="ta-insert-video" ta-insert-video src="' + urlPrompt + '" allowfullscreen="true" width="100%" frameborder="0"></div>'+'<video src="' + urlPrompt + '" controls="controls" width="100%"></video>';
+                                    return me.$editor().wrapSelection('insertHTML', embed, true);
                                 }
-                                // var embed = '<div src="' + urlPrompt + '" controls="controls"></div>';
-                                var embed = '<div id="controls" class="ta-insert-video" ta-insert-video src="' + urlPrompt + '" allowfullscreen="true" width="100%" frameborder="0"></div>'+'<video src="' + urlPrompt + '" controls="controls" width="100%"></video>';
-                                return this.$editor().wrapSelection('insertHTML', embed, true);
-                            }
+                            })
+
                         },
                         onElementSelect: {
                             element: 'img',
