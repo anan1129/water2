@@ -22,13 +22,13 @@
             RestangularService.all('api/rivers').customGET($scope.stateParams.id).then(function(result){
                 console.log(result.data);
                 if(result.status==200){
-                    var divVideoStart=result.data.content.indexOf('<div');
-                    var divVideoEnd=result.data.content.indexOf('</div>');
-                    var divVideo=result.data.content.slice(divVideoStart,divVideoEnd+6);
-                    console.log(divVideo);
-                    result.data.content=result.data.content.replace('id','controls');
+                    // var divVideoStart=result.data.content.indexOf('<div');
+                    // var divVideoEnd=result.data.content.indexOf('</div>');
+                    // var divVideo=result.data.content.slice(divVideoStart,divVideoEnd+6);
+                    // console.log(divVideo);
+                    // result.data.content=result.data.content.replace('id','controls');
                     // angular.element(result.data.content).filter('video').before(divVideo);
-                    result.data.content=result.data.content.split('<div').join(divVideo+'<div');
+                    // result.data.content=result.data.content.split('<div').join(divVideo+'<div');
                     console.log(result.data.content);
                     $scope.formObj=result.data;
                 }

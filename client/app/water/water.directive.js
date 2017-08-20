@@ -90,7 +90,7 @@
                                 longitude:scope.gspPiontArr[i].longitude,
                                 latitude:scope.gspPiontArr[i].latitude
                             }
-                            var icon=new BMap.Icon('../assets/images/water/gsp.png',new BMap.Size(16,16));
+                            var icon=new BMap.Icon('../assets/images/water/gsp.png',new BMap.Size(32,32));
                             var marker=new BMap.Marker(new BMap.Point(pt.longitude,pt.latitude),{icon:icon});
                             marker.gspData=scope.dataObj.announcements[i];
                             marker.addEventListener('click',function(val){
