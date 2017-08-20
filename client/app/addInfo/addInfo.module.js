@@ -190,8 +190,6 @@
                                         return me.$editor().wrapSelection('insertHTML', embed, true);
                                     }
                                 }
-                            },function(){
-                                console.log(22);
                             });
                             var  me=this;
 
@@ -202,7 +200,6 @@
                         }
                     });
 
-                    var videoId=null;
                     taRegisterTool('selectVideo', {
                         iconclass: 'fa fa-youtube-play',
                         tooltiptext: '选择视频',
@@ -212,18 +209,20 @@
                             urlPrompt = $window.prompt(taTranslations.insertVideo.dialogPrompt, 'https://');
                             // block javascript here
                             /* istanbul ignore else: if it's javascript don't worry - though probably should show some kind of error message */
-                            if (!blockJavascript(urlPrompt)) {
+                            if (true) {
+                                if(!urlPrompt||urlPrompt==''||urlPrompt=='https://') return;
+                                console.log(taSelection.getSelectionElement().tagName);
                                 if (taSelection.getSelectionElement().tagName && taSelection.getSelectionElement().tagName.toLowerCase() === 'a') {
                                     taSelection.setSelectionAfterElement(taSelection.getSelectionElement());
                                 }
-                                var embed = '<video src="' + urlPrompt + '">';
-                                return me.$editor().wrapSelection('insertHTML', embed, true);
+                                // var embed = '<div src="' + urlPrompt + '" controls="controls"></div>';
+                                var embed = '<div id="controls" class="ta-insert-video" ta-insert-video src="' + urlPrompt + '" allowfullscreen="true" width="100%" frameborder="0"></div>'+'<video src="' + urlPrompt + '" controls="controls" width="100%"></video>';
+                                return this.$editor().wrapSelection('insertHTML', embed, true);
                             }
-                            var me=this;
                         },
                         onElementSelect: {
-                            element: 'video',
-                            // onlyWithAttrs: ['ta-insert-video'],
+                            element: 'img',
+                            onlyWithAttrs: ['ta-insert-video'],
                             action: taToolFunctions.imgOnSelectAction
                         }
                     });

@@ -5,10 +5,11 @@
     'use strict';
 
     angular.module('app.water.controller',[])
-        .controller('WaterCtrl',['$scope','$stateParams','RestangularService','$state','$timeout','$filter',WaterCtrl])
+        .controller('WaterCtrl',['$scope','$stateParams','RestangularService','$state','$timeout','$filter','$sce',WaterCtrl])
     ;
 
-    function WaterCtrl($scope,$stateParams,RestangularService,$state,$timeout,$filter){
+    function WaterCtrl($scope,$stateParams,RestangularService,$state,$timeout,$filter,$sce){
+
 
         var stateParams=$scope.stateParams=$stateParams;
         var map=$scope.map;
@@ -55,7 +56,11 @@
         function getRivers(){
             return RestangularService.all('api/rivers').customGET(stateParams.id).then(function(result){
                 if(result.status==200){
+                    result.data.content=result.data.content.replace(/id=/g,'controls=').replace(/div/g,'video');
+                    result.data.content=$sce.trustAsHtml( result.data.content);
+                    console.log(result.data.content);
                     $scope.dataObj=result.data;
+
                     $scope.dataObj.addresses=$scope.dataObj.addresses.replace(/\'/g,'\"');
                     $scope.dataObj.addresses=angular.fromJson($scope.dataObj.addresses);
                     // $scope.$broadcast('map');
