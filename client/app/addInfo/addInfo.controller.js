@@ -98,6 +98,12 @@
             var data = $scope.formObj;
             if (angular.isArray(data.newsType2)) data.newsType2 = data.newsType2.join(',');
             data.content=$scope.htmlVariable;
+            angular.forEach($scope.rivers,function(val){
+                if(val.id==data.riverId){
+                    data.riverName=val.riverName;
+                    return ;
+                }
+            })
             console.log(data);
             RestangularService.all('api/news').customPOST(data).then(function (result) {
                 if (result.status == 201) {

@@ -15,7 +15,12 @@
         $scope.getGroups=getGroups;
         $scope.getSubGroups=getSubGroups;
         $scope.addGsp=addGsp;//添加公示牌
+        $scope.addImage=addImage;
+        $scope.addVideo=addVideo;
         $scope.clearGsp=clearGsp;//添加公示牌
+        $scope.clearRiverImages=clearRiverImages;
+        $scope.clearRiverVideo=clearRiverVideo;
+
         initData();
         if($stateParams.id){
             $scope.stateParams=$stateParams;
@@ -37,7 +42,9 @@
 
         function initData(){
             $scope.formObj={
-                announcements:[]
+                announcements:[],
+                images:[],
+                videos:[],
             };
             getMaxL();
             getUsers();
@@ -46,10 +53,26 @@
             getGroups();
         }
 
+
         function addGsp(){
             var inputs=angular.element('#gsp-file')[0].files;
             for(var i=0,len=inputs.length;i<len;i++){
                 addFile(inputs[i]);
+                // $scope.formObj.announcements.push(addFile(inputs[i]));
+            }
+        }
+        function addImage(){
+            var inputs=angular.element('#riverImage')[0].files;
+            for(var i=0,len=inputs.length;i<len;i++){
+                addFile(inputs[i],'riverImage');
+                // $scope.formObj.images.push(addFile(inputs[i]));
+            }
+        }
+        function addVideo(){
+            var inputs=angular.element('#riverVideo')[0].files;
+            for(var i=0,len=inputs.length;i<len;i++){
+                addFile(inputs[i],'riverVideo');
+                // $scope.formObj.videos.push(addFile(inputs[i]));
             }
         }
 
@@ -58,12 +81,30 @@
             $scope.formObj.announcements=[];
         }
 
-        function addFile(input){
+
+        function clearRiverImages(){
+            angular.element('#riverImage').val('');
+            $scope.formObj.images=[];
+        }
+        function clearRiverVideo(){
+            angular.element('#riverVideo').val('');
+            $scope.formObj.videos=[];
+        }
+
+        function addFile(input,type){
             var f=new FormData();
             f.append('file',input);
             RestangularService.all('api/files').withHttpConfig({transformRequest: angular.identity}).customPOST(f,undefined,undefined,{'Content-Type':undefined}).then(function(res){
                 if(res.status==201){
-                    $scope.formObj.announcements.push({title:'',url:res.data.filePath});
+                    if(type=='riverImage'){
+                        $scope.formObj.images.push({title:'',url:res.data.filePath});
+                    }else if(type=='riverVideo'){
+                        $scope.formObj.videos.push({title:'',url:res.data.filePath});
+                    }else{
+                        $scope.formObj.announcements.push({title:'',url:res.data.filePath});
+                    }
+                    // $scope.formObj.announcements.push({title:'',url:res.data.filePath});
+                    // return {title:'',url:res.data.filePath};
                 }
             })
         }
@@ -146,7 +187,6 @@
         $scope.save=function(){
             console.log($scope.formObj);
             var data=$scope.formObj;
-            // if(!$scope.stateParams.id){
                 angular.forEach(data.secondManagers,function(val,key){
                     if(val&&angular.isString(val)){
                         var json=angular.fromJson(val)
@@ -165,8 +205,6 @@
                 }
             }
 
-            // }
-            // data.content='';
             console.log(data);
             RestangularService.all('api/rivers').customPOST(data).then(function(result){
                 console.log(result);

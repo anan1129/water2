@@ -6,6 +6,8 @@
 
     angular.module('app.water.controller',[])
         .controller('WaterCtrl',['$scope','$stateParams','RestangularService','$state','$timeout','$filter','$sce',WaterCtrl])
+        .controller('WaterImagesCtrl',['$scope','$stateParams','RestangularService','$state','$timeout','$filter','$sce',WaterImagesCtrl])
+        .controller('WaterVideosCtrl',['$scope','$stateParams','RestangularService','$state','$timeout','$filter','$sce',WaterVideosCtrl])
     ;
 
     function WaterCtrl($scope,$stateParams,RestangularService,$state,$timeout,$filter,$sce){
@@ -33,6 +35,8 @@
         $scope.getJobs=getJobs;//获取任务
         $scope.zhzl=zhzl;//综合治理点击
         $scope.download=download;//综合治理点击
+        $scope.toWaterImages=toWaterImages;
+        $scope.toWaterVideos=toWaterVideos;
         $scope.listObj={
             data:[]
         };
@@ -52,6 +56,17 @@
         function initData(){
             getRivers();
 
+        }
+
+
+        function toWaterImages(obj){
+            var data=angular.toJson(obj);
+            $state.go('waterImages',{images:data});
+        }
+
+        function toWaterVideos(obj){
+            var data=angular.toJson(obj);
+            $state.go('waterVideos',{videos:data});
         }
 
         function getRivers(){
@@ -283,7 +298,8 @@
         function zhzl(){
             pageObj.zlgs.currentPage=0;
             $scope.listObj.data=[];
-            getJobs();
+            // getJobs();
+            getNewsType('一河一策');
         }
 
         function download(filePath){
@@ -299,5 +315,19 @@
         function toTaskDetails(obj) {
             $state.go('fore-task-details-manage', obj);
         }
+    }
+
+    function WaterImagesCtrl($scope,$stateParams,RestangularService,$state,$timeout,$filter,$sce){
+        console.log($stateParams);
+
+        $scope.images=angular.fromJson($stateParams.images);
+        console.log($scope.images);
+    }
+
+    function WaterVideosCtrl($scope,$stateParams,RestangularService,$state,$timeout,$filter,$sce){
+        console.log($stateParams);
+
+        $scope.videos=angular.fromJson($stateParams.videos);
+        console.log($scope.videos);
     }
 })();

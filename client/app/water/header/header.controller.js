@@ -32,6 +32,12 @@
             case 'fore-add-task-manage':
                 $scope.title='新建任务';
                 break;
+            case 'waterVideos':
+                $scope.title='河道视频';
+                break;
+            case 'waterImages':
+                $scope.title='河道图片';
+                break;
             // case 'fore-task-finishing':
             //     $scope.title='任务处置';
             //     break;

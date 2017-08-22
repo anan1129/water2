@@ -72,6 +72,12 @@
         $scope.save=function(){
             console.log($scope.formObj.id);
             var data=$scope.formObj;
+            angular.forEach($scope.rivers,function(val){
+                if(val.id==data.riverId){
+                    data.riverName=val.riverName;
+                    return ;
+                }
+            })
             console.log(data);
 
             RestangularService.all('api/news').customPOST(data).then(function(result){

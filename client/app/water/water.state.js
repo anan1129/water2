@@ -11,5 +11,13 @@
                     url:'/water/:id',
                     templateUrl:'app/water/water.html'
                 })
+                .state('waterImages',{
+                    url:'/waterImages/:images',
+                    templateUrl:'app/water/images/images.html'
+                })
+                .state('waterVideos',{
+                    url:'/waterVideos/:videos',
+                    templateUrl:'app/water/videos/videos.html'
+                })
         }])
 })();

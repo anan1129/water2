@@ -58,23 +58,59 @@
                                             <input ng-model="formObj.endAddress">
                                         </md-input-container>
                                     </div>
+                                    <div class="divider divider-dashed divider-lg pull-in"></div>
                                     <div class="row">
-                                       <div class="col-sm-2">添加公示牌</div>
+                                        <div class="col-sm-2">添加公示牌</div>
                                         <div class="col-sm-8">
                                             <input type="file" class="form-control" id="gsp-file" name="gsp" multiple>
                                         </div>
                                         <div class="col-sm-2"><a class="btn btn-primary" ng-click="addGsp()">添加</a></div>
                                     </div>
-                                    <br>
                                     <div class="row" ng-show="formObj.announcements&&formObj.announcements.length>0">
                                         <div class="col-sm-2"></div>
                                         <div class="col-sm-8">
-                                            <div class="col-sm-4" ng-repeat="img in formObj.announcements">
+                                            <div class="col-sm-4" ng-repeat="img in formObj.announcements track by $index">
                                                 <img ng-src="{{host}}/api/file-show/path?filepath={{img.url}}" alt="" style="width:100%;" >
                                             </div>
 
                                         </div>
-                                        <div class="col-sm-2"><a class="btn btn-danger" ng-click="clearGsp()">清除图片</a></div>
+                                        <div class="col-sm-2"><a class="btn btn-danger" ng-click="clearGsp()">清除</a></div>
+                                    </div>
+                                    <div class="divider divider-dashed divider-lg pull-in"></div>
+                                    <div class="row">
+                                        <div class="col-sm-2">添加河道图片</div>
+                                        <div class="col-sm-8">
+                                            <input type="file" class="form-control" id="riverImage" name="images" multiple>
+                                        </div>
+                                        <div class="col-sm-2"><a class="btn btn-primary" ng-click="addImage()">添加</a></div>
+                                    </div>
+                                    <div class="row" ng-show="formObj.images&&formObj.images.length>0">
+                                        <div class="col-sm-2"></div>
+                                        <div class="col-sm-8">
+                                            <div class="col-sm-4" ng-repeat="img in formObj.images track by $index">
+                                                <img ng-src="{{host}}/api/file-show/path?filepath={{img.url}}" alt="" style="width:100%;" >
+                                            </div>
+
+                                        </div>
+                                        <div class="col-sm-2"><a class="btn btn-danger" ng-click="clearRiverImage()">清除</a></div>
+                                    </div>
+                                    <div class="divider divider-dashed divider-lg pull-in"></div>
+                                    <div class="row">
+                                        <div class="col-sm-2">添加河道视频</div>
+                                        <div class="col-sm-8">
+                                            <input type="file" class="form-control" id="riverVideo" name="videos" multiple>
+                                        </div>
+                                        <div class="col-sm-2"><a class="btn btn-primary" ng-click="addVideo()">添加</a></div>
+                                    </div>
+                                    <br>
+                                    <div class="row" ng-show="formObj.videos&&formObj.videos.length>0">
+                                        <div class="col-sm-2"></div>
+                                        <div class="col-sm-8">
+                                            <div class="col-sm-4" ng-repeat="video in formObj.videos track by $index">
+                                                <video ng-src="{{host}}/api/file-show/path?filepath={{video.url}}" controls="controls" style="width:100%;" ></video>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-2"><a class="btn btn-danger" ng-click="clearRiverVideo()">清除</a></div>
                                     </div>
                                     <br>
                                     <div class="row">
