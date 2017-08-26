@@ -34,6 +34,7 @@
         $scope.getRiverPoints=getRiverPoints;//水质数据
         $scope.getJobs=getJobs;//获取任务
         $scope.zhzl=zhzl;//综合治理点击
+        $scope.hzrz=hzrz;//河长日志点击
         $scope.download=download;//综合治理点击
         $scope.toWaterImages=toWaterImages;
         $scope.toWaterVideos=toWaterVideos;
@@ -300,6 +301,10 @@
             $scope.listObj.data=[];
             // getJobs();
             getNewsType('一河一策');
+        }
+
+        function hzrz(){
+            $scope.$broadcast('getHzrzData');
         }
 
         function download(filePath){

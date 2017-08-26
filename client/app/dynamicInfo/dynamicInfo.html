@@ -35,6 +35,17 @@
                                                       data-ng-class="{active: pagObj.sort == 'title,desc'}"></span>
                                             </div>
                                         </th>
+                                        <th>
+                                            <div class="th">
+                                                河道
+                                                <span class="fa fa-angle-up"
+                                                      data-ng-click=" orderBy('riverName') "
+                                                      data-ng-class="{active: pagObj.sort == 'riverName'}"></span>
+                                                <span class="fa fa-angle-down"
+                                                      data-ng-click=" orderBy('riverName,desc') "
+                                                      data-ng-class="{active: pagObj.sort == 'riverName,desc'}"></span>
+                                            </div>
+                                        </th>
                                         <!--<th>内容</th>-->
                                         <!--<th>河道id</th>-->
                                         <th>
@@ -58,8 +69,9 @@
                                     <tbody>
                                     <tr ng-repeat="list in listObj.data" >
                                         <!--<td>{{list.id}}</td>-->
-                                        <td>{{list.title}}</td>
+                                        <td width="50%">{{list.title}}</td>
                                         <!--<td>{{list.content}}</td>-->
+                                        <td>{{list.riverName}}</td>
                                         <!--<td>{{list.riverId}}</td>-->
                                         <td>{{list.newsType2?list.newsType2:list.newsType}}</td>
                                         <td>
