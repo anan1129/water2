@@ -154,30 +154,30 @@
         <!-- inject:js -->
         <script src="app/app.module.js"></script>
         <script src="app/addGroup/addGroup.module.js"></script>
-        <script src="app/addStaff/addStaff.module.js"></script>
         <script src="app/addInfo/addInfo.module.js"></script>
+        <script src="app/addStaff/addStaff.module.js"></script>
         <script src="app/addTask/addTask.module.js"></script>
         <script src="app/baiduMap/map.module.js"></script>
         <script src="app/chart/chart.module.js"></script>
         <script src="app/core/core.module.js"></script>
         <script src="app/compControl/compControl.module.js"></script>
         <script src="app/dynamicInfo/dynamicInfo.module.js"></script>
+        <script src="app/editInfo/editInfo.module.js"></script>
         <script src="app/form/form.module.js"></script>
         <script src="app/form/formValidation.module.js"></script>
         <script src="app/groupList/groupList.module.js"></script>
         <script src="app/home/home.module.js"></script>
         <script src="app/layout/layout.module.js"></script>
         <script src="app/login/login.module.js"></script>
-        <script src="app/editInfo/editInfo.module.js"></script>
         <script src="app/newDetail/newDetail.module.js"></script>
         <script src="app/news/news.module.js"></script>
         <script src="app/page/page.module.js"></script>
         <script src="app/table/table.module.js"></script>
         <script src="app/taskDetails/taskDetails.module.js"></script>
         <script src="app/taskList/taskList.module.js"></script>
-        <script src="app/user/user.module.js"></script>
         <script src="app/ui/ui.module.js"></script>
         <script src="app/userList/userList.module.js"></script>
+        <script src="app/user/user.module.js"></script>
         <script src="app/water/water.module.js"></script>
         <script src="app/waterInfo/waterInfo.module.js"></script>
         <script src="app/waterList/waterList.module.js"></script>
@@ -186,8 +186,8 @@
         <script src="app/fore/foreTaskList/foreTaskList.module.js"></script>
         <script src="app/fore/jobsExecute/jobsExecute.module.js"></script>
         <script src="app/groupList/editGroup/editGroup.module.js"></script>
-        <script src="app/taskList/jobList/jobList.module.js"></script>
         <script src="app/taskList/editTask/editTask.module.js"></script>
+        <script src="app/taskList/jobList/jobList.module.js"></script>
         <script src="app/water/logDetail/logDetail.module.js"></script>
         <script src="app/water/managerLog/managerLog.module.js"></script>
         <script src="app/waterTable/pointDetail/pointDetail.module.js"></script>
@@ -197,11 +197,11 @@
         <script src="app/waterTable/waterData/waterDataDetail/waterDataDetail.module.js"></script>
         <script src="app/addGroup/addGroup.controller.js"></script>
         <script src="app/addGroup/addGroup.state.js"></script>
-        <script src="app/addStaff/addStaff.controller.js"></script>
-        <script src="app/addStaff/addStaff.state.js"></script>
         <script src="app/addInfo/addInfo.controller.js"></script>
         <script src="app/addInfo/addInfo.directive.js"></script>
         <script src="app/addInfo/addInfo.state.js"></script>
+        <script src="app/addStaff/addStaff.controller.js"></script>
+        <script src="app/addStaff/addStaff.state.js"></script>
         <script src="app/addTask/addTask.controller.js"></script>
         <script src="app/addTask/addTask.state.js"></script>
         <script src="app/baiduMap/map.controller.js"></script>
@@ -215,9 +215,12 @@
         <script src="app/compControl/compControl.controller.js"></script>
         <script src="app/compControl/compControl.directive.js"></script>
         <script src="app/compControl/compControl.state.js"></script>
+        <script src="app/dashboard/dashboard.controller.js"></script>
         <script src="app/data/data.service.js"></script>
         <script src="app/dynamicInfo/dynamicInfo.controller.js"></script>
         <script src="app/dynamicInfo/dynamicInfo.state.js"></script>
+        <script src="app/editInfo/editInfo.controller.js"></script>
+        <script src="app/editInfo/editInfo.state.js"></script>
         <script src="app/form/form.controller.js"></script>
         <script src="app/form/formValidation.controller.js"></script>
         <script src="app/form/wizard.controller.js"></script>
@@ -230,11 +233,8 @@
         <script src="app/layout/layout.diretive.js"></script>
         <script src="app/layout/loader.js"></script>
         <script src="app/layout/sidebar.directive.js"></script>
-        <script src="app/dashboard/dashboard.controller.js"></script>
         <script src="app/login/login.controller.js"></script>
         <script src="app/login/login.state.js"></script>
-        <script src="app/editInfo/editInfo.controller.js"></script>
-        <script src="app/editInfo/editInfo.state.js"></script>
         <script src="app/newDetail/newDetail.controller.js"></script>
         <script src="app/newDetail/newDetail.directive.js"></script>
         <script src="app/newDetail/newDetail.state.js"></script>
@@ -248,15 +248,15 @@
         <script src="app/taskDetails/taskDetails.state.js"></script>
         <script src="app/taskList/taskList.controller.js"></script>
         <script src="app/taskList/taskList.state.js"></script>
-        <script src="app/user/user.controller.js"></script>
-        <script src="app/user/user.service.js"></script>
-        <script src="app/user/user.state.js"></script>
         <script src="app/ui/material.controller.js"></script>
         <script src="app/ui/ui.controller.js"></script>
         <script src="app/ui/ui.directive.js"></script>
         <script src="app/userList/userList.controller.js"></script>
         <script src="app/userList/userList.filter.js"></script>
         <script src="app/userList/userList.state.js"></script>
+        <script src="app/user/user.controller.js"></script>
+        <script src="app/user/user.service.js"></script>
+        <script src="app/user/user.state.js"></script>
         <script src="app/water/water.controller.js"></script>
         <script src="app/water/water.directive.js"></script>
         <script src="app/water/water.filter.js"></script>
@@ -275,10 +275,10 @@
         <script src="app/fore/jobsExecute/jobsExecute.state.js"></script>
         <script src="app/groupList/editGroup/editGroup.controller.js"></script>
         <script src="app/groupList/editGroup/editGroup.state.js"></script>
-        <script src="app/taskList/jobList/jobList.controller.js"></script>
-        <script src="app/taskList/jobList/jobList.state.js"></script>
         <script src="app/taskList/editTask/editTask.controller.js"></script>
         <script src="app/taskList/editTask/editTask.state.js"></script>
+        <script src="app/taskList/jobList/jobList.controller.js"></script>
+        <script src="app/taskList/jobList/jobList.state.js"></script>
         <script src="app/water/header/header.controller.js"></script>
         <script src="app/water/logDetail/logDetail.controller.js"></script>
         <script src="app/water/logDetail/logDetail.state.js"></script>
@@ -296,7 +296,21 @@
         <!-- endinject -->
         <!-- endbuild -->
 
-        <script src="http://api.map.baidu.com/api?v=2.0&ak=daGGpUQFoA5uW36vmK0xMhCVu38YrXtO&s=1" type="text/javascript" charset="utf-8"></script>
+        <!--<script src="http://api.map.baidu.com/api?v=2.0&ak=daGGpUQFoA5uW36vmK0xMhCVu38YrXtO&s=1" type="text/javascript" charset="utf-8"></script>-->
+        <!--<script src="http://api.map.baidu.com/api?v=2.0&ak=daGGpUQFoA5uW36vmK0xMhCVu38YrXtO&services=&t=20170517145936-->
+<!--1" type="text/javascript" charset="utf-8"></script>-->
+        <script>
+            var script = document.createElement("script");
+            script.type = "text/javascript";
+            script.id='bmap';
+            script.src = "http://api.map.baidu.com/api?v=2.0&ak=daGGpUQFoA5uW36vmK0xMhCVu38YrXtO&callback=init";
+            document.body.appendChild(script);
+            console.log(script);
 
+            window.init=function(){
+                console.log(BMap);
+                window.bmapLoaded=true;
+            }
+        </script>
     </body>
 </html>
