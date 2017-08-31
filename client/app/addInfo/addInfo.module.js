@@ -269,7 +269,7 @@
 
                     // add the button to the default toolbar definition
                     // taOptions.toolbar[1].push('backgroundColor', 'fontColor', 'fontName', 'fontSize');
-                    taOptions.toolbar[3]=['fontSize','lineHeight','selectImage','selectVideo'];
+                    taOptions.toolbar[3]=['fontSize','lineHeight','selectImage'];
                     // taOptions.toolbar[3].push('fontSize','lineHeight','selectImage');
                     return taOptions;
                 }]);
