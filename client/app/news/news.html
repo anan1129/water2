@@ -66,10 +66,10 @@
                                             <img ng-src="{{body.imageUrl}}" class="news-img" width="100%" alt="">
                                         </div>
                                         <div class="col-xs-7">
-                                            <h5 class="news-title">{{body.title}}</h5>
+                                            <h5 class="news-title" style="overflow:hidden;text-overflow:ellipsis;display: -webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;">{{body.title}}</h5>
 
                                         </div>
-                                        <div style="position:absolute;left:0;right:0;bottom:0;">
+                                        <div style="position:absolute;left:0;right:0;bottom:-8px;">
                                             <div class="col-xs-5"></div>
                                             <div class="col-xs-7">
                                                 <div class="pull-left" style="color:#ccc;">{{body.createdDate|editDate}}</div>
