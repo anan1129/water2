@@ -45,6 +45,11 @@
             }
         }
 
+        function initObj(){
+            $scope.pagObj.currentPage=1;
+            $scope.listObj.data=[];
+        }
+
         function getJobs(){
             $scope.pagObj.busy=true;
             var data={
@@ -95,7 +100,8 @@
 
 
         function del(obj) {
-            if(!toast){
+            console.log(obj);
+            if(true){
                 toast = $mdToast.simple()
                     .content('确定要删除该任务？')
                     .action('确定')
@@ -110,6 +116,9 @@
                                initData();
                                toast=null;
                            }
+                        }).then(function(){
+                            initObj();
+                            getJobs();
                         });
                     }
 

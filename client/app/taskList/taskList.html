@@ -18,13 +18,13 @@
                                         <!--<th>#</th>-->
                                         <th>
                                             <div class="th">
-                                                任务标题
+                                                任务内容
                                                 <span class="fa fa-angle-up"
-                                                      data-ng-click=" orderBy('name') "
-                                                      data-ng-class="{active: pagObj.sort == 'name'}"></span>
+                                                      data-ng-click=" orderBy('content') "
+                                                      data-ng-class="{active: pagObj.sort == 'content'}"></span>
                                                 <span class="fa fa-angle-down"
-                                                      data-ng-click=" orderBy('name,desc') "
-                                                      data-ng-class="{active: pagObj.sort == 'name,desc'}"></span>
+                                                      data-ng-click=" orderBy('content,desc') "
+                                                      data-ng-class="{active: pagObj.sort == 'content,desc'}"></span>
                                             </div>
                                         </th>
                                         <th>
@@ -76,7 +76,7 @@
                                     <tbody>
                                     <tr ng-repeat="list in listObj.data">
                                         <!--<td>{{list.id}}</td>-->
-                                        <td>{{list.title}}</td>
+                                        <td>{{list.content}}</td>
                                         <td>{{list.status}}
                                             <!--<span ng-class="{'text-primary':list.status=='已上报','text-info':list.status=='正在处理','text-success':list.status=='处理完成'}">{{list.status}}</span>-->
                                         </td>
