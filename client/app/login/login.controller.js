@@ -10,6 +10,8 @@
     ;
 
     function LoginCtrl($scope,$rootScope,$state,RestangularService,$window) {
+        $window.sessionStorage.removeItem('id_token');
+        $window.sessionStorage.removeItem('username');
         $scope.user={};
         $scope.login=login;
         $scope.cancel=cancel;

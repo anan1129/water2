@@ -5,7 +5,11 @@
         // quickview
         .directive('toggleQuickview', toggleQuickview)
 
-        .directive('uiPreloader', ['$rootScope', uiPreloader]);
+        .directive('uiPreloader', ['$rootScope', uiPreloader])
+
+        .directive('ngMaxPic',['$mdDialog',ngMaxPic])
+    ;
+
 
     function toggleQuickview() {
         var directive = {
@@ -40,7 +44,7 @@
         return {
             restrict: 'A',
             template:'<span class="bar"></span>',
-            link: function(scope, el, attrs) {        
+            link: function(scope, el, attrs) {
                 el.addClass('preloaderbar hide');
                 scope.$on('$stateChangeStart', function(event) {
                     el.removeClass('hide').addClass('active');
@@ -56,9 +60,31 @@
                 });
                 scope.$on('preloader:hide', function(event) {
                     el.addClass('hide').removeClass('active');
-                });                
+                });
             }
-        };        
+        };
     }
-})(); 
+
+    function ngMaxPic($mdDialog){
+        return {
+            restrict:'A',
+            link:function(scope,ele,attrs){
+                ele.click('image',function(e){
+                    if(e.target.nodeName=='IMG'){
+                        var target=e.target;
+                        var div=document.createElement('div');
+                        var ele=angular.element(div).append(angular.copy(angular.element(target)));
+                        console.log(ele.html());
+                        $mdDialog.show({
+                            template:ele.html(),
+                            clickOutsideToClose:true,
+                            parent:angular.element(document.body),
+                            targetEvent:e
+                        });
+                    }
+                })
+            }
+        }
+    }
+})();
 

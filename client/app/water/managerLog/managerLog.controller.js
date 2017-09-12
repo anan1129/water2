@@ -32,13 +32,13 @@
 
         function hzrz(){
             console.log(stateParams);
-            RestangularService.all('/api/news').customGET().then(function(result){
+            var data={
+                riverId:stateParams.id
+            };
+            RestangularService.all('api/news-by-river').customGET('',data).then(function(result){
                 if(result.status==200){
-                    var hzrzData=result.data.filter(function(val){
-                        return val.riverId==stateParams.id;
-                    });
-                    $scope.data=hzrzData;
-                    console.log(hzrzData);
+                    $scope.data=result.data.content;
+                    console.log(result);
                 }
             })
         }

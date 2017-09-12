@@ -10,6 +10,7 @@
 
     function ForeTaskListCtrl($scope, $state, $mdToast,RestangularService,$filter,$rootScope,$window) {
         var toast;
+        $scope.host=$rootScope.host;
         $scope.toTaskDetails = toTaskDetails;
         $scope.loadMore = loadMore;
         $scope.editTask = editTask;

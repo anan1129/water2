@@ -155,6 +155,26 @@
                                     </div>
 
                                 </li>
+                                <div ng-repeat="executeJob in job.executes" ng-if="job.executes.length>0">
+                                    <li class="list-group-item">
+                                        <div class="row">
+                                            <div class="col-sm-4"><span class="text-primary">处理人</span> {{executeJob.userName}}</div>
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <div class="row">
+                                            <div class="col-sm-4"><span class="text-primary">处理内容</span> {{executeJob.content}}</div>
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item files" ng-show="executeJob.images.length>0">
+                                        <div class="row">
+                                            <div class="col-xs-4 text-primary">处理图片</div>
+                                        <span class="col-xs-6 file-item" ng-repeat="execute in executeJob.images" >
+                                            <img ng-src="{{host}}/api/file-show/path?filepath={{execute.filePath}}" style="width:100%;" alt="">
+                                        </span>
+                                        </div>
+                                    </li>
+                                </div>
                             </ul>
                         </div>
                         <div class="text-center" style="margin-bottom:10px;">{{finishedNoData}}</div>
