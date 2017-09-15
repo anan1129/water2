@@ -46,14 +46,40 @@
         }
 
         function getSubGroups(id,index){
-            id=angular.fromJson(id).id;
+            if(angular.isArray(id)&&id.length==0){
+                $scope.groups.length=index+1;
+                $scope.pidArr.length=index+1;
+                getUsers(id);
+                return ;
+            }
+            if(angular.isString(id)){
+                var isHasSubGroup=0;
+                if(angular.fromJson(id).id){
+                    id=angular.fromJson(id).id;
+                }else{
+                    $scope.groups.length=index+1;
+                    $scope.pidArr.length=index+1;
+                    getUsers(id);
+                }
+            }else{
+                if(id){
+                    var isHasSubGroup=id.join(',').indexOf('杨浦建交委');
+                    if(angular.fromJson(id[id.length-1])){
+                        id=angular.fromJson(id[id.length-1]).id;
+                    }else{
+                        $scope.groups.length=index+1;
+                        $scope.pidArr.length=index+1;
+                        getUsers(id);
+                    }
+                }
+            }
             if(id){
                 RestangularService.all('api/groups-childs').customGET(id).then(function(result){
                     if(result.status==200){
-                        if(result.data.length>0){
+                        if(result.data.length>0&&isHasSubGroup>-1){
                             $scope.groups=$scope.groups.slice(0,index+1);
                             $scope.groups[index+1]=result.data;
-                        }else{
+                        }else if(result.data.length==0&&isHasSubGroup==-1){
                             $scope.groups.length=index+1;
                             $scope.pidArr.length=index+1;
                             getUsers(id);
@@ -81,9 +107,21 @@
                    }
                })
             });
-            var pid=angular.fromJson($scope.pidArr[$scope.pidArr.length-1]);
-            data.groupId=pid.id;
-            data.groupName=pid.name;
+            if($scope.pidArr.length==3){
+                var pid=angular.fromJson($scope.pidArr[1].filter(function(val){
+                    return val.indexOf('"name":"杨浦建交委",')==-1;
+                })).concat(angular.fromJson($scope.pidArr[2]));
+            }else{
+                var pid=angular.fromJson($scope.pidArr[$scope.pidArr.length-1]);
+            }
+
+            // var pid=angular.fromJson($scope.pidArr[$scope.pidArr.length-1]);
+            data.groupId=pid.map(function(val){
+                return angular.fromJson(val).id;
+            }).join(',');
+            data.groupName=pid.map(function(val){
+                return angular.fromJson(val).name;
+            }).join(',');
             data.status='已下发';
             // data.mangeuser=localStorage.mangeuser||'';
             // data.status="已上报";
@@ -99,7 +137,7 @@
                     );
                     // initData();
                     uploader.clearQueue();
-                    if($scope.isdPC){
+                    if($scope.isPC){
                         $state.go('job-list');
                     }else{
                         $state.go('fore-task-list-manage');

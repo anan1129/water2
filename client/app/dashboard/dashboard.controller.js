@@ -2,9 +2,13 @@
     'use strict';
 
     angular.module('app')
-        .controller('DashboardCtrl', ['$scope', DashboardCtrl])
+        .controller('DashboardCtrl', ['$scope','RestangularService', DashboardCtrl])
 
-    function DashboardCtrl($scope) {
+    function DashboardCtrl($scope,RestangularService) {
+        $scope.data={};
+        $scope.filterNewsDateCount=filterNewsDateCount;//每日新闻发布数量
+        $scope.filterGroupTypeCount=filterGroupTypeCount;//任务类型数量
+        $scope.filterGroupStatusCount=filterGroupStatusCount;//任务状态数量
         // success: #8BC34A 139,195,74
         // info: #00BCD4 0,188,212
         // gray: #EDF0F1 237,240,241
@@ -334,6 +338,154 @@
                 }
             ]
         };
+
+        init();
+
+        function init(){
+            groupTypeCount();
+            groupStatusCount ();
+            newsDateCount();
+        }
+
+        function initEchart(){
+            $scope.barEchart = {
+                title : {
+                    text: '处理数据',
+                    x:'center'
+                },
+                tooltip : {
+                    trigger: 'item',
+                    formatter: "{a} <br/>{b} : {c} ({d}%)"
+                },
+                legend: {
+                    x : 'center',
+                    y : 'bottom',
+                    data:['rose1','rose2','rose3','rose4','rose5','rose6','rose7','rose8']
+                },
+                toolbox: {
+                    show : true,
+                    feature : {
+                        mark : {show: true},
+                        dataView : {show: true, readOnly: false},
+                        magicType : {
+                            show: true,
+                            type: ['pie', 'funnel']
+                        },
+                        restore : {show: true},
+                        saveAsImage : {show: true}
+                    }
+                },
+                calculable : true,
+                series : [
+                    {
+                        name:'半径模式',
+                        type:'pie',
+                        radius : [20, 110],
+                        center : ['50%', '50%'],
+                        roseType : 'radius',
+                        label: {
+                            normal: {
+                                show: false
+                            },
+                            emphasis: {
+                                show: true
+                            }
+                        },
+                        lableLine: {
+                            normal: {
+                                show: false
+                            },
+                            emphasis: {
+                                show: true
+                            }
+                        },
+                        data:[
+                            {value:10, name:'rose1'},
+                            {value:5, name:'rose2'},
+                            {value:15, name:'rose3'},
+                            {value:25, name:'rose4'},
+                            {value:20, name:'rose5'},
+                            {value:35, name:'rose6'},
+                            {value:30, name:'rose7'},
+                            {value:40, name:'rose8'}
+                        ]
+                    }
+                ]
+            };
+
+        }
+
+        function groupTypeCount(){
+            // [ [ "投诉", 1 ], [ "随手拍", 3 ] ]
+            RestangularService.all('api/readily-jobs/groupTypeCount').customGET().then(function(res){
+                if(res.status==200){
+                    $scope.data.groupTypeCount=res.data;
+                }
+            })
+        }
+
+        function groupStatusCount(){
+            // [ [ null, 1 ], [ "已下发", 2 ], [ "已评价", 1 ] ]
+            RestangularService.all('api/readily-jobs/groupStatusCount ').customGET().then(function(res){
+                if(res.status==200){
+                    initEchart();
+
+                    $scope.data.groupStatusCount=res.data;
+                    $scope.barEchart.legend.data=filterGroupStatusCount($scope.data.groupStatusCount);
+                    var xAxisData=[];
+                    $scope.data.groupStatusCount.forEach(function(val){
+                        if(val[0]==null){
+                            xAxisData.push({name:'未处理',value:val[1]});
+                        }else{
+                            xAxisData.push({name:val[0],value:val[1]});
+                        }
+                    })
+                    $scope.barEchart.series[0].data=xAxisData;
+                    console.log($scope.barEchart.series[0].data);
+                }
+            })
+        }
+
+        function newsDateCount(){
+          // [
+          //     [ "2017-06-01", 4 ],
+          //     [ "2017-06-10", 18 ],
+          //     [ "2017-07-24", 3 ],
+          //     [ "2017-08-16", 3 ],
+          //     [ "2017-08-23", 2 ],
+          //     [ "2017-08-28", 1 ]
+          // ]
+            RestangularService.all('api/news-date-count').customGET().then(function(res){
+                if(res.status==200){
+                    $scope.data.newsDateCount=res.data;
+                }
+            })
+        }
+
+        function filterGroupTypeCount(data){
+
+        }
+
+        function filterGroupStatusCount(data){
+            var newArr=[];
+            data.forEach(function(val){
+                if(val[0]==null){
+                    newArr.push('未处理');
+                }else{
+                    newArr.push(val[0]);
+                }
+            })
+            return newArr;
+        }
+
+        function filterNewsDateCount(data){
+            if(data){
+                return data.reduce(function(initNum,val){
+                    return initNum+val[1];
+                },0);
+            }
+
+        }
 
 
 

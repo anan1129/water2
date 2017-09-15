@@ -40,6 +40,8 @@
         initData();
 
         function initData(){
+            $scope.listObj.data=[];
+            $scope.pagObj.currentPage=1;
            getJobs();
         }
 
