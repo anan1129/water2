@@ -25,10 +25,15 @@
                                         <label class="col-sm-2">选择组织</label>
                                         <div class="col-sm-10">
                                             <div class="row">
-                                                <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12"  ng-repeat="group in groups">
-                                                    <select class="form-control" ng-model="pidArr[$index]" ng-change="getSubGroups(pidArr[$index],$index)">
+                                                <div class="col-xs-12"  ng-repeat="group in groups">
+                                                    <select class="form-control" ng-model="pidArr[$index]" ng-change="getSubGroups(pidArr[$index],$index)" ng-required="$last" ng-hide="!$first&&groups.length>1">
                                                         <option ng-repeat="g in group" value="{{g}}">{{g.name}}</option>
                                                     </select>
+                                                    <md-input-container ng-if="!$first&&groups.length>1">
+                                                        <md-select ng-model="pidArr[$index]" ng-change="getSubGroups(pidArr[$index],$index)" ng-required="$last" multiple flex="100">
+                                                            <md-option ng-repeat="g in group" value="{{g}}">{{g.name}}</md-option>
+                                                        </md-select>
+                                                    </md-input-container>
                                                 </div>
                                             </div>
                                         </div>
